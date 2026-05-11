@@ -1,75 +1,11 @@
-{% extends "base.html" %}
-
-{% block title %}TAU Online Study — Sign Up{% endblock %}
-
-{% block content %}
-<div class="auth-page">
-    <div class="auth-container">
-        <div class="auth-box">
-            <a href="{{ url_for('home') }}" class="auth-back">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
-                Back to Home
-            </a>
-
-            <div class="auth-logo">
-                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
-                    <rect width="48" height="48" rx="12" fill="#137a13"/>
-                    <text x="24" y="33" font-size="26" fill="white" text-anchor="middle" font-weight="bold" font-family="Arial">τ</text>
-                </svg>
-            </div>
-            <h1 class="auth-title">Create your account</h1>
-            <p class="auth-subtitle">Join TAU Online Study and start learning today</p>
-
-            {% if error %}
-            <div class="auth-error">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                {{ error }}
-            </div>
-            {% endif %}
-
-            <form method="POST" action="{{ url_for('signup') }}" class="auth-form">
-                <div class="auth-field">
-                    <label for="full_name">Full Name</label>
-                    <div class="input-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        <input type="text" id="full_name" name="full_name" class="auth-input" placeholder="Your full name" required autocomplete="name">
-                    </div>
-                </div>
-
-                <div class="auth-field">
-                    <label for="email">Email Address</label>
-                    <div class="input-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        <input type="email" id="email" name="email" class="auth-input" placeholder="you@example.com" required autocomplete="email">
-                    </div>
-                </div>
-
-                <div class="auth-field">
-                    <label for="password">Password</label>
-                    <div class="input-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        <input type="password" id="password" name="password" class="auth-input" placeholder="Min. 6 characters" required autocomplete="new-password" minlength="6">
-                    </div>
-                </div>
-
-                <div class="auth-field">
-                    <label for="confirm_password">Confirm Password</label>
-                    <div class="input-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        <input type="password" id="confirm_password" name="confirm_password" class="auth-input" placeholder="Repeat your password" required autocomplete="new-password">
-                    </div>
-                </div>
-
-                <button type="submit" class="auth-submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-                    Create Account
-                </button>
-            </form>
-
-            <p class="auth-switch">
-                Already have an account? <a href="{{ url_for('login') }}">Sign in</a>
-            </p>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="refresh" content="0; url=/login?tab=signup"/>
+  <title>Redirecting...</title>
+</head>
+<body>
+  <script>window.location.href = '/login?tab=signup';</script>
+</body>
+</html>

@@ -7,6 +7,8 @@ import os
 from datetime import datetime
 import sqlite3
 import bcrypt
+import urllib.request
+import urllib.error
 
 app = Flask(__name__)
 app.secret_key = 'tau-online-study-secret-key-2025'
@@ -152,51 +154,61 @@ def home():
     return render_template('home.html', user=session.get('user'))
 
 # ── Auth ───────────────────────────────────────────────────────────────────────
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET'])
 def login():
     if logged_in():
         return redirect(url_for('home'))
-    error = None
-    if request.method == 'POST':
-        email = request.form.get('email', '').strip().lower()
-        password = request.form.get('password', '')
-        user = find_user_by_email(email)
-        if user and check_password(password, user['password_hash']):
-            session['user'] = {
-                'full_name': user['full_name'],
-                'email': user['email']
-            }
-            return redirect(url_for('home'))
-        error = 'Invalid email or password. Please try again.'
-    return render_template('login.html', error=error)
+    tab = request.args.get('tab', 'login')
+    return render_template('login.html', tab=tab)
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET'])
 def signup():
-    if logged_in():
-        return redirect(url_for('home'))
-    error = None
-    if request.method == 'POST':
-        full_name = request.form.get('full_name', '').strip()
-        email = request.form.get('email', '').strip().lower()
-        password = request.form.get('password', '')
-        confirm = request.form.get('confirm_password', '')
-        if not full_name or not email or not password:
-            error = 'All fields are required.'
-        elif len(password) < 6:
-            error = 'Password must be at least 6 characters.'
-        elif password != confirm:
-            error = 'Passwords do not match.'
-        else:
-            ok, msg = create_user(full_name, email, password)
-            if ok:
-                return render_template('login.html', success='Account created! Please sign in.')
-            error = msg
-    return render_template('signup.html', error=error)
+    return redirect(url_for('login', tab='signup'))
 
 @app.route('/logout')
 def logout():
     session.pop('user', None)
     return redirect(url_for('home'))
+
+# ── API Proxy → Node.js backend on port 8000 ──────────────────────────────────
+@app.route('/api/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+def api_proxy(path):
+    target_url = f'http://localhost:8000/api/{path}'
+    method = request.method
+    body = request.get_data()
+    headers = {k: v for k, v in request.headers if k.lower() not in ('host', 'content-length')}
+    if request.args:
+        from urllib.parse import urlencode
+        target_url += '?' + urlencode(request.args)
+    try:
+        req = urllib.request.Request(target_url, data=body if body else None, headers=headers, method=method)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            content = resp.read()
+            status = resp.status
+            resp_headers = dict(resp.headers)
+    except urllib.error.HTTPError as e:
+        content = e.read()
+        status = e.code
+        resp_headers = {}
+    except Exception as e:
+        return jsonify({'success': False, 'message': 'Auth service unavailable. Please try again shortly.'}), 503
+    from flask import Response
+    excluded = {'transfer-encoding', 'connection', 'content-encoding'}
+    clean_headers = {k: v for k, v in resp_headers.items() if k.lower() not in excluded}
+    return Response(content, status=status, headers=clean_headers)
+
+# ── Auth sync: JS calls this after JWT login to set Flask session ──────────────
+@app.route('/auth/sync', methods=['POST'])
+def auth_sync():
+    data = request.get_json(silent=True) or {}
+    user = data.get('user', {})
+    if user:
+        session['user'] = {
+            'full_name': user.get('name', ''),
+            'email': user.get('email', '')
+        }
+        return jsonify({'success': True})
+    return jsonify({'success': False, 'message': 'No user data'}), 400
 
 # ── Exam registration ──────────────────────────────────────────────────────────
 @app.route('/register-exam')
