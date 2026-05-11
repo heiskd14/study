@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}JAMB CBT Registration{% endblock %}
+{% block title %}TAU Online Study — Exam Registration{% endblock %}
 
 {% block content %}
 <div class="registration-container">
     <div class="registration-box">
-        <h1 class="registration-title">JAMB CBT Registration</h1>
+        <div class="reg-logo">
+            <a href="{{ url_for('home') }}" class="reg-back">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+                Back
+            </a>
+            <span class="reg-brand">TAU Online Study</span>
+        </div>
+        <h1 class="registration-title">Exam Registration</h1>
         
         {% if error %}
         <div class="error-message">{{ error }}</div>

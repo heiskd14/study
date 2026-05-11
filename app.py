@@ -62,7 +62,16 @@ def float_safe(val):
         return str(val).strip()
 
 @app.route('/')
-def index():
+def home():
+    return render_template('home.html')
+
+@app.route('/register-exam')
+def register_page():
+    session.clear()
+    return render_template('registration.html')
+
+@app.route('/practice')
+def subject_selection_home():
     session.clear()
     return render_template('registration.html')
 
@@ -81,7 +90,7 @@ def register():
 @app.route('/subject_selection')
 def subject_selection():
     if 'student_info' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     all_subjects = [
         "Use of English", "Mathematics", "Literature in English",
@@ -94,7 +103,7 @@ def subject_selection():
 @app.route('/select_subjects', methods=['POST'])
 def select_subjects():
     if 'student_info' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     selected_subjects = request.form.getlist('subjects')
     
@@ -149,7 +158,7 @@ def select_subjects():
 @app.route('/exam')
 def exam():
     if 'student_info' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     current_subject = session.get('current_subject', 'Use of English')
     current_question = session.get('current_question', 0)
@@ -193,7 +202,7 @@ def answer():
 @app.route('/navigate', methods=['POST'])
 def navigate():
     if 'student_info' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     action = request.form.get('action')
     current_subject = session['current_subject']
@@ -230,7 +239,7 @@ def navigate():
 @app.route('/submit', methods=['POST'])
 def submit():
     if 'student_info' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     init_db()
     conn = get_db()
@@ -290,7 +299,7 @@ def submit():
 @app.route('/results')
 def results():
     if 'student_info' not in session or 'results' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     return render_template('results.html',
                          student_info=session['student_info'],
@@ -299,7 +308,7 @@ def results():
 @app.route('/correction')
 def correction():
     if 'student_info' not in session or 'results' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     current_subject = request.args.get('subject', 'Use of English')
     subjects_list = list(session['subject_questions'].keys())
@@ -345,7 +354,7 @@ def correction():
 @app.route('/my_results')
 def my_results():
     if 'student_info' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     init_db()
     conn = get_db()

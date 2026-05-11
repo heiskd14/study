@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}TAU Online Study{% endblock %}
+
+{% block content %}
+<div class="home-page">
+
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <div class="brand-logo">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="#137a13"/>
+                    <text x="20" y="27" font-size="18" fill="white" text-anchor="middle" font-weight="bold" font-family="Arial">τ</text>
+                </svg>
+            </div>
+            <span class="brand-name">TAU Online Study</span>
+        </div>
+        <div class="navbar-actions">
+            <a href="#" class="auth-btn login-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                    <polyline points="10 17 15 12 10 7"/>
+                    <line x1="15" y1="12" x2="3" y2="12"/>
+                </svg>
+                <span>Login</span>
+            </a>
+            <a href="#" class="auth-btn signup-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <line x1="19" y1="8" x2="19" y2="14"/>
+                    <line x1="22" y1="11" x2="16" y2="11"/>
+                </svg>
+                <span>Sign Up</span>
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to <span>TAU Online Study</span></h1>
+            <p class="hero-subtitle">Your complete platform for exam preparation, group learning, and academic excellence.</p>
+            <a href="{{ url_for('subject_selection_home') }}" class="hero-cta">Get Started</a>
+        </div>
+        <div class="hero-illustration">
+            <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="30" width="240" height="180" rx="16" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <rect x="50" y="55" width="100" height="12" rx="6" fill="rgba(255,255,255,0.5)"/>
+                <rect x="50" y="76" width="160" height="8" rx="4" fill="rgba(255,255,255,0.3)"/>
+                <rect x="50" y="92" width="140" height="8" rx="4" fill="rgba(255,255,255,0.3)"/>
+                <rect x="50" y="108" width="150" height="8" rx="4" fill="rgba(255,255,255,0.3)"/>
+                <rect x="50" y="135" width="60" height="28" rx="6" fill="rgba(255,255,255,0.85)"/>
+                <text x="80" y="154" font-size="11" fill="#137a13" text-anchor="middle" font-weight="bold" font-family="Arial">Start</text>
+                <circle cx="230" cy="55" r="22" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <text x="230" y="61" font-size="18" fill="white" text-anchor="middle" font-family="Arial">📚</text>
+                <circle cx="40" cy="210" r="18" fill="rgba(255,255,255,0.15)"/>
+                <text x="40" y="216" font-size="14" fill="white" text-anchor="middle" font-family="Arial">✓</text>
+                <circle cx="270" cy="200" r="14" fill="rgba(255,255,255,0.15)"/>
+                <text x="270" y="206" font-size="11" fill="white" text-anchor="middle" font-family="Arial">★</text>
+            </svg>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">What do you want to do today?</h2>
+        <div class="features-grid">
+
+            <a href="#" class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #137a13, #0e5c0e);">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Past Questions</h3>
+                <p class="feature-desc">Access years of past examination questions across all subjects to sharpen your preparation.</p>
+                <span class="feature-link">Browse Questions →</span>
+            </a>
+
+            <a href="#" class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #1565c0, #0d47a1);">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Group Study</h3>
+                <p class="feature-desc">Collaborate with classmates and study partners in real-time group study sessions.</p>
+                <span class="feature-link">Join a Group →</span>
+            </a>
+
+            <a href="{{ url_for('subject_selection_home') }}" class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #e65100, #bf360c);">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Practice</h3>
+                <p class="feature-desc">Take timed practice sessions subject by subject and track your improvement over time.</p>
+                <span class="feature-link">Start Practicing →</span>
+            </a>
+
+            <a href="{{ url_for('register_page') }}" class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #6a1b9a, #4a148c);">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Exams</h3>
+                <p class="feature-desc">Simulate full CBT examinations under real conditions with instant scoring and corrections.</p>
+                <span class="feature-link">Take an Exam →</span>
+            </a>
+
+        </div>
+    </section>
+
+    <footer class="home-footer">
+        <p>&copy; 2026 TAU Online Study. All rights reserved.</p>
+    </footer>
+
+</div>
+{% endblock %}
