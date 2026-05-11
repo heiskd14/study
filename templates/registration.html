@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}JAMB CBT Registration{% endblock %}
+
+{% block content %}
+<div class="registration-container">
+    <div class="registration-box">
+        <h1 class="registration-title">JAMB CBT Registration</h1>
+        
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" class="form-input" required autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label for="regno">Registration Number:</label>
+                <input type="text" id="regno" name="regno" class="form-input" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Start Exam</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

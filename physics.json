@@ -1,0 +1,3002 @@
+[
+  {
+    "Question": "What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "An ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "According to What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about what is the si unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "In context, The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, An ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about what does newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "According to What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "According to What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about the frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "In context, The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about what is the si unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about what is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about what is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about what does newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "Which statement about what does newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "In context, The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "In context, The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "According to An ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "Which statement about the frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about what does newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about what is the si unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about what is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to An ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about the frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "According to The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about the frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about what is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about what does newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about what is the si unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about what does newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "Which statement about what is the si unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to An ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about what is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about what is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about what does newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, An ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "Which statement about the frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "According to The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about the frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "According to The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "In context, An ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "Which statement about pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "Which statement about the frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about the frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about what is the si unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "In context, What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "In context, The angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "In context, The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "In context, What does Newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "Which statement about the speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "According to Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "Which statement about the angle of incidence equals the angle of?",
+    "Options": [
+      "refraction",
+      "reflection",
+      "diffraction",
+      "absorption"
+    ],
+    "Answer": "reflection"
+  },
+  {
+    "Question": "According to What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "According to Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "In context, What is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "Which statement about what is the si unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about what is the temperature at absolute zero?",
+    "Options": [
+      "0°C",
+      "0°F",
+      "-273.15°C",
+      "100°C"
+    ],
+    "Answer": "-273.15°C"
+  },
+  {
+    "Question": "In context, The speed of light in vacuum is?",
+    "Options": [
+      "3 × 10⁶ m/s",
+      "3 × 10⁷ m/s",
+      "3 × 10⁸ m/s",
+      "3 × 10⁹ m/s"
+    ],
+    "Answer": "3 × 10⁸ m/s"
+  },
+  {
+    "Question": "In context, Velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "According to An ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "Which statement about what does newton's first law state?",
+    "Options": [
+      "F = ma",
+      "Action equals reaction",
+      "Object stays at rest unless acted upon",
+      "Energy is conserved"
+    ],
+    "Answer": "Object stays at rest unless acted upon"
+  },
+  {
+    "Question": "In context, What is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "According to The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "According to What is the SI unit of force?",
+    "Options": [
+      "Pascal",
+      "Newton",
+      "Joule",
+      "Watt"
+    ],
+    "Answer": "Newton"
+  },
+  {
+    "Question": "Which statement about an ohm is the unit of?",
+    "Options": [
+      "current",
+      "resistance",
+      "voltage",
+      "power"
+    ],
+    "Answer": "resistance"
+  },
+  {
+    "Question": "According to The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  },
+  {
+    "Question": "Which statement about what is the formula for kinetic energy?",
+    "Options": [
+      "mgh",
+      "½mv²",
+      "Fd",
+      "qV"
+    ],
+    "Answer": "½mv²"
+  },
+  {
+    "Question": "Which statement about velocity is?",
+    "Options": [
+      "speed",
+      "distance/time",
+      "displacement/time",
+      "acceleration"
+    ],
+    "Answer": "displacement/time"
+  },
+  {
+    "Question": "In context, Pressure is defined as?",
+    "Options": [
+      "force × area",
+      "force/area",
+      "mass × area",
+      "volume/area"
+    ],
+    "Answer": "force/area"
+  },
+  {
+    "Question": "According to The frequency of a wave is inversely proportional to?",
+    "Options": [
+      "amplitude",
+      "speed",
+      "wavelength",
+      "intensity"
+    ],
+    "Answer": "wavelength"
+  }
+]

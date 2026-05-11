@@ -1,0 +1,3002 @@
+[
+  {
+    "Question": "If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "Which statement about if a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "Which statement about what is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "In context, If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "According to Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "According to Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about what is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "Which statement about what is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "According to What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about what is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "Which statement about if a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "According to In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "Which statement about what is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about what is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about what is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "According to Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about if a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about if a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about what is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about if a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about what is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "Which statement about what is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "In context, The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "According to The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about what is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "In context, sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "In context, If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about if a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about if a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "According to What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "In context, What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to What is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "According to What is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about what is the circumference of a circle with radius 7?",
+    "Options": [
+      "14π",
+      "49π",
+      "28π",
+      "7π"
+    ],
+    "Answer": "14π"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "In context, sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "Which statement about if x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "In context, Solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "According to If a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about what is the value of log₁₀(100)?",
+    "Options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "Answer": "2"
+  },
+  {
+    "Question": "Which statement about the sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "Which statement about the derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "Which statement about sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "Which statement about what is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "Which statement about in a geometric sequence, a₁ = 2 and r = 3. what is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "In context, The derivative of 3x⁴ + 2x² is?",
+    "Options": [
+      "12x³ + 4x",
+      "12x³ + 4x + c",
+      "3x³ + 2x",
+      "x³ + x"
+    ],
+    "Answer": "12x³ + 4x"
+  },
+  {
+    "Question": "According to If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "According to The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to The sum of interior angles of a pentagon is?",
+    "Options": [
+      "540°",
+      "720°",
+      "360°",
+      "900°"
+    ],
+    "Answer": "540°"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  },
+  {
+    "Question": "Which statement about if a triangle has sides 3, 4, and 5, it is?",
+    "Options": [
+      "acute",
+      "obtuse",
+      "right",
+      "equilateral"
+    ],
+    "Answer": "right"
+  },
+  {
+    "Question": "Which statement about solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "Which statement about solve: 2y + 8 = 20",
+    "Options": [
+      "y = 4",
+      "y = 6",
+      "y = 12",
+      "y = 14"
+    ],
+    "Answer": "y = 6"
+  },
+  {
+    "Question": "According to If x² + 5x + 6 = 0, find x",
+    "Options": [
+      "-2, -3",
+      "2, 3",
+      "-2, 3",
+      "2, -3"
+    ],
+    "Answer": "-2, -3"
+  },
+  {
+    "Question": "According to In a geometric sequence, a₁ = 2 and r = 3. What is a₄?",
+    "Options": [
+      "54",
+      "8",
+      "6",
+      "27"
+    ],
+    "Answer": "54"
+  },
+  {
+    "Question": "According to What is 15% of 200?",
+    "Options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "Answer": "30"
+  },
+  {
+    "Question": "According to sin(90°) equals?",
+    "Options": [
+      "0",
+      "1",
+      "-1",
+      "undefined"
+    ],
+    "Answer": "1"
+  }
+]

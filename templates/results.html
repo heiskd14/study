@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Exam Results{% endblock %}
+
+{% block content %}
+<div class="results-header">
+    <h1>JAMB CBT Examination</h1>
+</div>
+
+<div class="results-body">
+    <h2 class="results-title">Examination Results</h2>
+    <p class="student-name">{{ student_info.name }} ({{ student_info.regno }})</p>
+    
+    <div class="results-list">
+        {% for subject, score, total, percent in results %}
+        <div class="result-item">
+            <span class="subject-name">{{ subject }}:</span>
+            <span class="score">{{ score }} / {{ total }}</span>
+            <span class="percentage">({{ "%.2f"|format(percent) }}%)</span>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="results-actions">
+        <a href="{{ url_for('correction', subject=results[0][0] if results else 'Use of English') }}" class="btn btn-secondary">View Correction</a>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Registration</a>
+    </div>
+</div>
+{% endblock %}

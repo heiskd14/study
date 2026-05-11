@@ -1,0 +1,3002 @@
+[
+  {
+    "Question": "Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "In context, Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "According to Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "According to Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "In context, Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "According to Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "In context, Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "In context, Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "Which statement about supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about gdp measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "Which statement about economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "Which statement about unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "In context, Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "In context, Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "Which statement about economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "According to Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "According to GDP measures?",
+    "Options": [
+      "total investment",
+      "total consumption",
+      "total output",
+      "total import"
+    ],
+    "Answer": "total output"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, Elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about what is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "Which statement about unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "According to Supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "In context, Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "According to Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about supply and demand intersect at?",
+    "Options": [
+      "maximum price",
+      "minimum price",
+      "equilibrium price",
+      "market failure"
+    ],
+    "Answer": "equilibrium price"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, What is a recession?",
+    "Options": [
+      "economic growth",
+      "economic decline",
+      "stable economy",
+      "inflation"
+    ],
+    "Answer": "economic decline"
+  },
+  {
+    "Question": "In context, Inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "In context, The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "Which statement about elasticity of demand measures?",
+    "Options": [
+      "price changes",
+      "income changes",
+      "responsiveness of quantity to price",
+      "quality"
+    ],
+    "Answer": "responsiveness of quantity to price"
+  },
+  {
+    "Question": "Which statement about economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "Which statement about the central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "According to Economics is the study of?",
+    "Options": [
+      "money",
+      "business",
+      "scarcity and resources",
+      "politics"
+    ],
+    "Answer": "scarcity and resources"
+  },
+  {
+    "Question": "According to Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "Which statement about trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "Which statement about inflation is?",
+    "Options": [
+      "decrease in prices",
+      "increase in prices",
+      "stable prices",
+      "deflation"
+    ],
+    "Answer": "increase in prices"
+  },
+  {
+    "Question": "Which statement about interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  },
+  {
+    "Question": "In context, Interest rate is charged on??",
+    "Options": [
+      "deposits",
+      "loans",
+      "investments",
+      "savings"
+    ],
+    "Answer": "loans"
+  },
+  {
+    "Question": "In context, Unemployment is when?",
+    "Options": [
+      "people work part-time",
+      "people are willing but unable to find jobs",
+      "people retire",
+      "people study"
+    ],
+    "Answer": "people are willing but unable to find jobs"
+  },
+  {
+    "Question": "In context, Trade surplus means?",
+    "Options": [
+      "imports > exports",
+      "exports > imports",
+      "imports = exports",
+      "no trade"
+    ],
+    "Answer": "exports > imports"
+  },
+  {
+    "Question": "According to The central bank controls??",
+    "Options": [
+      "government",
+      "inflation",
+      "imports",
+      "unemployment"
+    ],
+    "Answer": "inflation"
+  }
+]

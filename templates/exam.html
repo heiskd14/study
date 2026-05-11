@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}JAMB CBT Exam{% endblock %}
+
+{% block content %}
+<div class="exam-header">
+    <div class="subject-navigation">
+        <form method="POST" action="{{ url_for('navigate') }}" style="display: inline;">
+            <input type="hidden" name="action" value="prev_subject">
+            <button type="submit" class="subject-nav-btn" id="prev-subject-btn" {% if subjects[0] == current_subject %}disabled{% endif %}>
+                ← Previous Subject
+            </button>
+        </form>
+    </div>
+    
+    <div class="subject-tabs" id="subject-tabs">
+        {% for subject in subjects %}
+        <form method="POST" action="{{ url_for('navigate') }}" style="display: inline; margin: 0;">
+            <input type="hidden" name="action" value="switch_subject">
+            <input type="hidden" name="subject" value="{{ subject }}">
+            <button type="submit" class="subject-tab {% if subject == current_subject %}active{% endif %}">
+                {{ subject }}
+            </button>
+        </form>
+        {% endfor %}
+    </div>
+    
+    <div class="subject-navigation">
+        <form method="POST" action="{{ url_for('navigate') }}" style="display: inline;">
+            <input type="hidden" name="action" value="next_subject">
+            <button type="submit" class="subject-nav-btn" id="next-subject-btn" {% if subjects[-1] == current_subject %}disabled{% endif %}>
+                Next Subject →
+            </button>
+        </form>
+    </div>
+    
+    <div class="exam-info">
+        <span class="timer" id="timer">Time Left: --:--</span>
+        <span class="question-info">Answered: {{ answered_count }} / {{ total_questions }}</span>
+        <button type="button" class="calculator-btn" onclick="toggleCalculator()" title="Calculator">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                <line x1="8" y1="6" x2="16" y2="6"></line>
+                <line x1="8" y1="10" x2="16" y2="10"></line>
+                <line x1="8" y1="14" x2="16" y2="14"></line>
+                <line x1="8" y1="18" x2="16" y2="18"></line>
+            </svg>
+        </button>
+        <span class="student-info">{{ student_info.name }} ({{ student_info.regno }})</span>
+    </div>
+</div>
+
+<div class="exam-body">
+    <div class="question-section">
+        <h2 class="question-number">Question {{ current_question + 1 }} of {{ total_questions }}</h2>
+        <p class="question-text">{{ question.Question }}</p>
+        
+        <form id="answer-form">
+            <div class="options">
+                {% for option in question.Options %}
+                {% set idx = loop.index0 %}
+                <label class="option {% if answers[current_question] == idx %}selected{% endif %}">
+                    <input type="radio" 
+                           name="option" 
+                           value="{{ idx }}" 
+                           {% if answers[current_question] == idx %}checked{% endif %}
+                           onchange="submitAnswer({{ idx }})">
+                    <span class="option-text">{{ 'ABCD'[idx] }}. {{ option }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </form>
+        
+        <div class="navigation-buttons">
+            <form method="POST" action="{{ url_for('navigate') }}" style="display: inline;" id="prev-form">
+                <input type="hidden" name="action" value="prev">
+                <button type="submit" class="btn btn-nav" id="prev-btn" {% if current_question == 0 %}disabled{% endif %}>
+                    Previous
+                </button>
+            </form>
+            
+            <form method="POST" action="{{ url_for('navigate') }}" style="display: inline;" id="next-form">
+                <input type="hidden" name="action" value="next">
+                <button type="submit" class="btn btn-nav" id="next-btn" {% if current_question >= total_questions - 1 %}disabled{% endif %}>
+                    Next
+                </button>
+            </form>
+        </div>
+        
+        <div class="question-grid">
+            {% for i in range(total_questions) %}
+            <form method="POST" action="{{ url_for('navigate') }}" style="display: inline;">
+                <input type="hidden" name="action" value="goto">
+                <input type="hidden" name="question_num" value="{{ i }}">
+                <button type="submit" class="question-number-btn {% if answers[i] is not none %}answered{% endif %}{% if i == current_question %} current{% endif %}">
+                    {{ i + 1 }}
+                </button>
+            </form>
+            {% endfor %}
+        </div>
+        
+        <form method="POST" action="{{ url_for('submit') }}" id="submit-form" onsubmit="return confirm('Do you want to submit all subjects and continue?')">
+            <button type="submit" class="btn btn-submit" id="submit-btn">Submit All Subjects</button>
+        </form>
+    </div>
+</div>
+
+<div id="calculator" class="calculator" style="display: none;">
+    <div class="calculator-header">
+        <span>Calculator</span>
+        <button onclick="toggleCalculator()" class="close-btn">×</button>
+    </div>
+    <input type="text" id="calc-display" class="calc-display" readonly>
+    <div class="calc-buttons">
+        <button onclick="calcBtn('7')">7</button>
+        <button onclick="calcBtn('8')">8</button>
+        <button onclick="calcBtn('9')">9</button>
+        <button onclick="calcBtn('/')">÷</button>
+        <button onclick="calcBtn('4')">4</button>
+        <button onclick="calcBtn('5')">5</button>
+        <button onclick="calcBtn('6')">6</button>
+        <button onclick="calcBtn('*')">×</button>
+        <button onclick="calcBtn('1')">1</button>
+        <button onclick="calcBtn('2')">2</button>
+        <button onclick="calcBtn('3')">3</button>
+        <button onclick="calcBtn('-')">-</button>
+        <button onclick="calcClear()">C</button>
+        <button onclick="calcBtn('0')">0</button>
+        <button onclick="calcBtn('.')">.</button>
+        <button onclick="calcBtn('+')">+</button>
+        <button onclick="calcBackspace()">⌫</button>
+        <button onclick="calcEquals()" class="calc-equals" style="grid-column: span 3;">=</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/exam.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,3002 @@
+[
+  {
+    "Question": "Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about a trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "In context, Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about a trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "Which statement about balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about a trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about a trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about a trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "In context, Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "Which statement about a trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "Which statement about capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "According to Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "According to Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "In context, An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "According to Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "According to Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "According to Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "In context, An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "Which statement about accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "In context, Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "According to A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "Which statement about capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "Which statement about double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "Which statement about balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "In context, Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "In context, Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "According to A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "Which statement about an asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "According to Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "According to Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "According to Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "In context, Accounting is the art of??",
+    "Options": [
+      "recording",
+      "recording, classifying and summarizing",
+      "reporting",
+      "auditing"
+    ],
+    "Answer": "recording, classifying and summarizing"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "According to Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "In context, A trial balance is prepared to??",
+    "Options": [
+      "check profit",
+      "verify posting accuracy",
+      "find loss",
+      "prepare statements"
+    ],
+    "Answer": "verify posting accuracy"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to Ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "Which statement about ledger is??",
+    "Options": [
+      "a book of accounts",
+      "source document",
+      "journal",
+      "statement"
+    ],
+    "Answer": "a book of accounts"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "According to Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "In context, Profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "According to An asset is??",
+    "Options": [
+      "a debt",
+      "something owed",
+      "something owned",
+      "an expense"
+    ],
+    "Answer": "something owned"
+  },
+  {
+    "Question": "In context, Balance sheet shows??",
+    "Options": [
+      "profit",
+      "cash",
+      "financial position",
+      "income"
+    ],
+    "Answer": "financial position"
+  },
+  {
+    "Question": "According to Depreciation is??",
+    "Options": [
+      "appreciation",
+      "decrease in asset value",
+      "increase in liability",
+      "expense"
+    ],
+    "Answer": "decrease in asset value"
+  },
+  {
+    "Question": "In context, Journal is??",
+    "Options": [
+      "ledger",
+      "statement",
+      "book of original entry",
+      "balance sheet"
+    ],
+    "Answer": "book of original entry"
+  },
+  {
+    "Question": "Which statement about profit is when??",
+    "Options": [
+      "revenue > expense",
+      "revenue < expense",
+      "revenue = expense",
+      "no transactions"
+    ],
+    "Answer": "revenue > expense"
+  },
+  {
+    "Question": "In context, Capital is??",
+    "Options": [
+      "debt",
+      "investment by owner",
+      "liability",
+      "income"
+    ],
+    "Answer": "investment by owner"
+  },
+  {
+    "Question": "According to Double entry bookkeeping records??",
+    "Options": [
+      "one side only",
+      "both debit and credit",
+      "triple entry",
+      "quadruple entry"
+    ],
+    "Answer": "both debit and credit"
+  }
+]
