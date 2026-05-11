@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beyond The ClassRoom</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon"><i class="fa-solid fa-shield-halved"></i></span>
+      <span class="logo-text">Beyond</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link active" data-page="login">Login</a>
+      <a href="#" class="nav-link" data-page="signup">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- LOGIN PAGE -->
+    <section class="page active" id="page-login">
+      <div class="auth-card">
+        <div class="card-header">
+          <div class="header-icon"><i class="fa-solid fa-lock"></i></div>
+          <h1>Welcome Back</h1>
+          <p>Sign in to your account to continue</p>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label for="login-email">Gmail Address</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input type="email" id="login-email" placeholder="you@gmail.com" autocomplete="email"/>
+              <div class="input-status"></div>
+            </div>
+            <span class="field-error" id="login-email-err"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-key input-icon"></i>
+              <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password"/>
+              <button type="button" class="toggle-pw" data-target="login-password">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <span class="field-error" id="login-pw-err"></span>
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" id="remember-me"/>
+              <span class="custom-check"></span>
+              Remember me
+            </label>
+            <a href="#" class="forgot-link" id="show-forgot">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary" id="login-btn">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+          </button>
+        </form>
+
+        <div class="auth-divider"><span>or</span></div>
+        <p class="switch-auth">Don't have an account? <a href="#" data-page="signup">Create one →</a></p>
+      </div>
+    </section>
+
+    <!-- SIGN UP PAGE -->
+    <section class="page" id="page-signup">
+      <div class="auth-card">
+        <div class="card-header">
+          <div class="header-icon"><i class="fa-solid fa-user-plus"></i></div>
+          <h1>Create Account</h1>
+          <p>Ready To Step Beyong The Classroom?</p>
+        </div>
+
+        <form id="signup-form" novalidate>
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input type="text" id="signup-name" placeholder="Jane Doe" autocomplete="name"/>
+              <div class="input-status"></div>
+            </div>
+            <span class="field-error" id="signup-name-err"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-email">Gmail Address</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input type="email" id="signup-email" placeholder="you@gmail.com" autocomplete="email"/>
+              <div class="input-status"></div>
+            </div>
+            <span class="field-error" id="signup-email-err"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="signup-password" placeholder="Min 8 characters" autocomplete="new-password"/>
+              <button type="button" class="toggle-pw" data-target="signup-password">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <span class="field-error" id="signup-pw-err"></span>
+            <!-- Password Strength Bar -->
+            <div class="pw-strength">
+              <div class="pw-bar">
+                <div class="pw-fill" id="pw-fill"></div>
+              </div>
+              <span class="pw-label" id="pw-label">Enter a password</span>
+            </div>
+          </div>
+
+          <div class="pw-rules" id="pw-rules">
+            <div class="rule" id="rule-len"><i class="fa-solid fa-circle-xmark"></i> At least 8 characters</div>
+            <div class="rule" id="rule-upper"><i class="fa-solid fa-circle-xmark"></i> One uppercase letter</div>
+            <div class="rule" id="rule-num"><i class="fa-solid fa-circle-xmark"></i> One number</div>
+            <div class="rule" id="rule-special"><i class="fa-solid fa-circle-xmark"></i> One special character</div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="signup-btn">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+          </button>
+        </form>
+
+        <div class="auth-divider"><span>or</span></div>
+        <p class="switch-auth">Already have an account? <a href="#" data-page="login">Sign in →</a></p>
+      </div>
+    </section>
+
+    <!-- DASHBOARD PAGE -->
+    <section class="page" id="page-dashboard">
+      <div class="dashboard-wrapper">
+        <header class="dash-header">
+          <div class="dash-logo">
+            <i class="fa-solid fa-shield-halved"></i> NexAuth
+          </div>
+          <div class="dash-user-chip">
+            <div class="avatar" id="dash-avatar">J</div>
+            <span id="dash-name-chip">Jane</span>
+            <button class="logout-btn" id="logout-btn">
+              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+          </div>
+        </header>
+
+        <div class="dash-content">
+          <div class="dash-welcome">
+            <h1>Welcome back, <span id="dash-fullname">Jane Doe</span> 👋</h1>
+            <p class="dash-subtitle">You're securely logged into your NexAuth dashboard.</p>
+          </div>
+
+          <div class="dash-cards">
+            <div class="dash-card card-profile">
+              <div class="card-icon-wrap"><i class="fa-solid fa-id-card"></i></div>
+              <h3>Your Profile</h3>
+              <div class="profile-info">
+                <div class="info-row">
+                  <span class="info-label"><i class="fa-solid fa-user"></i> Name</span>
+                  <span class="info-val" id="dash-name-val">Jane Doe</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label"><i class="fa-solid fa-envelope"></i> Email</span>
+                  <span class="info-val" id="dash-email-val">jane@gmail.com</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label"><i class="fa-solid fa-calendar"></i> Joined</span>
+                  <span class="info-val" id="dash-joined-val">—</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card card-security">
+              <div class="card-icon-wrap"><i class="fa-solid fa-shield-check"></i></div>
+              <h3>Security Status</h3>
+              <div class="security-items">
+                <div class="sec-item ok"><i class="fa-solid fa-circle-check"></i> Password hashed (bcrypt)</div>
+                <div class="sec-item ok"><i class="fa-solid fa-circle-check"></i> JWT session active</div>
+                <div class="sec-item ok"><i class="fa-solid fa-circle-check"></i> Input validation enabled</div>
+                <div class="sec-item warn"><i class="fa-solid fa-circle-exclamation"></i> 2FA not enabled</div>
+              </div>
+            </div>
+
+            <div class="dash-card card-activity">
+              <div class="card-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+              <h3>Session Info</h3>
+              <div class="activity-items">
+                <div class="act-row">
+                  <span>Status</span>
+                  <span class="badge-active">● Active</span>
+                </div>
+                <div class="act-row">
+                  <span>Auth Method</span>
+                  <span>JWT Bearer</span>
+                </div>
+                <div class="act-row">
+                  <span>Login Time</span>
+                  <span id="dash-login-time">—</span>
+                </div>
+                <div class="act-row">
+                  <span>Token Expires</span>
+                  <span>7 days</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card card-actions">
+              <div class="card-icon-wrap"><i class="fa-solid fa-gear"></i></div>
+              <h3>Quick Actions</h3>
+              <div class="action-btns">
+                <button class="action-btn" onclick="showToast('Feature coming soon!', 'info')">
+                  <i class="fa-solid fa-key"></i> Change Password
+                </button>
+                <button class="action-btn" onclick="showToast('Email verification sent!', 'success')">
+                  <i class="fa-solid fa-envelope-circle-check"></i> Verify Email
+                </button>
+                <button class="action-btn danger" id="dash-logout-btn2">
+                  <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORGOT PASSWORD MODAL -->
+    <div class="modal-overlay" id="forgot-modal">
+      <div class="modal-card">
+        <button class="modal-close" id="close-forgot"><i class="fa-solid fa-xmark"></i></button>
+        <div class="header-icon"><i class="fa-solid fa-paper-plane"></i></div>
+        <h2>Reset Password</h2>
+        <p>Enter your Gmail address and we'll send you a reset link.</p>
+        <div class="form-group" style="margin-top:1.5rem">
+          <div class="input-wrapper">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input type="email" id="forgot-email" placeholder="you@gmail.com"/>
+          </div>
+        </div>
+        <button class="btn-primary" id="forgot-submit-btn" style="margin-top:1rem" onclick="handleForgot()">
+          <span class="btn-text">Send Reset Link</span>
+          <i class="fa-solid fa-arrow-right btn-arrow"></i>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
