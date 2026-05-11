@@ -1,29 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}Exam Results{% endblock %}
+{% block title %}Exam Results — TAU Online Study{% endblock %}
 
 {% block content %}
+<div class="page-wrapper">
 <div class="results-header">
     <h1>TAU Online Study</h1>
 </div>
 
 <div class="results-body">
     <h2 class="results-title">Examination Results</h2>
-    <p class="student-name">{{ student_info.name }} ({{ student_info.regno }})</p>
-    
+    <p class="student-name">{{ student_info.name }} &nbsp;·&nbsp; {{ student_info.regno }}</p>
+
     <div class="results-list">
         {% for subject, score, total, percent in results %}
         <div class="result-item">
-            <span class="subject-name">{{ subject }}:</span>
+            <span class="subject-name">{{ subject }}</span>
             <span class="score">{{ score }} / {{ total }}</span>
-            <span class="percentage">({{ "%.2f"|format(percent) }}%)</span>
+            <span class="percentage">{{ "%.1f"|format(percent) }}%</span>
         </div>
         {% endfor %}
     </div>
-    
+
     <div class="results-actions">
         <a href="{{ url_for('correction', subject=results[0][0] if results else 'Use of English') }}" class="btn btn-secondary">View Correction</a>
-        <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Registration</a>
+        <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
     </div>
+</div>
 </div>
 {% endblock %}

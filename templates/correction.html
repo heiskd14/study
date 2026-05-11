@@ -1,86 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}Answer Correction{% endblock %}
+{% block title %}Answer Correction — TAU Online Study{% endblock %}
 
 {% block content %}
+<div class="page-wrapper">
 <div class="exam-header">
-    <div style="display: flex; align-items: center; gap: 10px; justify-content: space-between;">
+    <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;width:100%;">
         {% if current_subject_idx > 0 %}
-        <a href="{{ url_for('correction', subject=subjects[current_subject_idx - 1]) }}" class="btn-nav-subject" title="Previous Subject">
-            ← Previous
-        </a>
+        <a href="{{ url_for('correction', subject=subjects[current_subject_idx - 1]) }}" class="btn-nav-subject">← Previous</a>
         {% else %}
         <div class="btn-nav-subject disabled"></div>
         {% endif %}
-        
-        <div class="subject-tabs" style="flex: 1; overflow-x: auto;">
+
+        <div class="subject-tabs">
             {% for subject in subjects %}
-            <a href="{{ url_for('correction', subject=subject) }}" 
-               class="subject-tab {% if subject == current_subject %}active{% endif %}">
-                {{ subject }}
-            </a>
+            <a href="{{ url_for('correction', subject=subject) }}"
+               class="subject-tab {% if subject == current_subject %}active{% endif %}">{{ subject }}</a>
             {% endfor %}
         </div>
-        
+
         {% if current_subject_idx < subjects|length - 1 %}
-        <a href="{{ url_for('correction', subject=subjects[current_subject_idx + 1]) }}" class="btn-nav-subject" title="Next Subject">
-            Next →
-        </a>
+        <a href="{{ url_for('correction', subject=subjects[current_subject_idx + 1]) }}" class="btn-nav-subject">Next →</a>
         {% else %}
         <div class="btn-nav-subject disabled"></div>
         {% endif %}
     </div>
-    
+
     <div class="exam-info">
-        <span class="student-info">{{ student_info.name }} ({{ student_info.regno }})</span>
+        <span class="student-info">{{ student_info.name }} &nbsp;·&nbsp; {{ student_info.regno }}</span>
     </div>
 </div>
-
-<style>
-.btn-nav-subject {
-    background-color: #27ae60;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    min-width: 100px;
-    text-align: center;
-}
-
-.btn-nav-subject:hover {
-    background-color: #229954;
-    transform: translateY(-2px);
-}
-
-.btn-nav-subject.disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
-    opacity: 0.5;
-    min-width: 100px;
-}
-
-@media (max-width: 768px) {
-    .btn-nav-subject {
-        padding: 6px 10px;
-        font-size: 12px;
-        min-width: auto;
-    }
-}
-</style>
 
 <div class="correction-body">
     {% for q in questions %}
     <div class="correction-question">
         <h3 class="correction-question-title">Q{{ q.number }}: {{ q.question }}</h3>
-        
         <div class="correction-options">
             {% for opt in q.options %}
             <div class="correction-option {% if opt.is_correct %}correct{% elif opt.is_user_choice %}wrong{% endif %}">
-                {{ 'ABCD'[loop.index0] }}. {{ opt.text }}
+                <span>{{ 'ABCD'[loop.index0] }}. {{ opt.text }}</span>
                 {% if opt.is_correct %}
                 <span class="badge correct-badge">✓ Correct</span>
                 {% elif opt.is_user_choice %}
@@ -91,10 +49,11 @@
         </div>
     </div>
     {% endfor %}
-    
+
     <div class="correction-actions">
         <a href="{{ url_for('results') }}" class="btn btn-secondary">Back to Results</a>
-        <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Registration</a>
+        <a href="{{ url_for('home') }}" class="btn btn-primary">Home</a>
     </div>
+</div>
 </div>
 {% endblock %}
