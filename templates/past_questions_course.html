@@ -5,7 +5,7 @@
 <div class="pq-container page-wrapper">
     <div class="pq-box pq-box-wide">
         <div class="pq-nav">
-            <a href="{{ url_for('past_questions_department', school=school, level=level) }}" class="pq-back">
+            <a href="{{ url_for('past_questions_department', school=school, level=level, mode=mode) }}" class="pq-back">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
                 Back
             </a>
@@ -16,6 +16,11 @@
         </div>
 
         <div class="pq-header">
+            {% if mode == 'upload' %}
+            <div class="pq-mode-badge pq-mode-upload">↑ Upload Mode</div>
+            {% else %}
+            <div class="pq-mode-badge pq-mode-access">↓ Access Mode</div>
+            {% endif %}
             <div class="pq-step-indicator">
                 <span class="pq-step done">✓</span>
                 <span class="pq-step-line pq-step-line-done"></span>
@@ -24,6 +29,10 @@
                 <span class="pq-step done">✓</span>
                 <span class="pq-step-line pq-step-line-done"></span>
                 <span class="pq-step active">4</span>
+                {% if mode == 'upload' %}
+                <span class="pq-step-line"></span>
+                <span class="pq-step">5</span>
+                {% endif %}
             </div>
             <div class="pq-breadcrumb">{{ school }} &rsaquo; {{ level }} &rsaquo; {{ department }}</div>
             <h1 class="pq-title">Select Course</h1>
@@ -32,33 +41,19 @@
 
         <div class="pq-grid pq-grid-multi">
             {% for course in courses %}
-            <a href="#" class="pq-card pq-card-sm pq-icon-course" onclick="showComingSoon(event, '{{ course }}')">
-                <div class="pq-card-icon pq-icon-course">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </div>
-                <span class="pq-card-label">{{ course }}</span>
-                <span class="pq-card-arrow">→</span>
-            </a>
+                {% if mode == 'upload' %}
+                <a href="{{ url_for('past_questions_upload_submit', school=school, level=level, department=department, course=course) }}" class="pq-card pq-card-sm">
+                {% else %}
+                <a href="{{ url_for('past_questions_view', school=school, level=level, department=department, course=course) }}" class="pq-card pq-card-sm">
+                {% endif %}
+                    <div class="pq-card-icon pq-icon-course">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <span class="pq-card-label">{{ course }}</span>
+                    <span class="pq-card-arrow">→</span>
+                </a>
             {% endfor %}
-        </div>
-
-        <div id="coming-soon-banner" class="pq-coming-soon" style="display:none;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Past questions for <strong id="coming-soon-course"></strong> — <span id="coming-soon-level-text"></span> are coming soon! We're uploading content regularly.
         </div>
     </div>
 </div>
-
-<script>
-function showComingSoon(e, course) {
-    e.preventDefault();
-    document.querySelectorAll('.pq-card').forEach(c => c.classList.remove('selected'));
-    e.currentTarget.classList.add('selected');
-    var banner = document.getElementById('coming-soon-banner');
-    document.getElementById('coming-soon-course').textContent = course;
-    document.getElementById('coming-soon-level-text').textContent = '{{ level }}';
-    banner.style.display = 'flex';
-    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-</script>
 {% endblock %}

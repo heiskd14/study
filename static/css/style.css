@@ -1345,6 +1345,31 @@ html[data-theme="light"] body { background: var(--bg); color: var(--text); }
 }
 .pq-coming-soon strong { color: var(--text); }
 
+.pq-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.pq-mode-upload {
+  background: rgba(76,175,80,0.12);
+  color: #2e7d32;
+  border: 1px solid rgba(76,175,80,0.3);
+}
+.pq-mode-access {
+  background: rgba(25,118,210,0.10);
+  color: #1565c0;
+  border: 1px solid rgba(25,118,210,0.25);
+}
+[data-theme="dark"] .pq-mode-upload { background: rgba(76,175,80,0.15); color: #81c784; border-color: rgba(76,175,80,0.25); }
+[data-theme="dark"] .pq-mode-access { background: rgba(25,118,210,0.15); color: #64b5f6; border-color: rgba(25,118,210,0.25); }
+
 @media (max-width: 600px) {
   .pq-box { padding: 24px 18px; }
   .pq-grid-multi { grid-template-columns: 1fr 1fr; }

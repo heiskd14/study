@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash, send_from_directory
+from werkzeug.utils import secure_filename
+import uuid
 from flask_session import Session
 import json
 import random
@@ -617,26 +619,34 @@ def get_levels_for_course(course):
 
 
 @app.route('/past-questions')
+def past_questions_home():
+    return render_template('past_questions_home.html')
+
+
+@app.route('/past-questions/school')
 def past_questions_school():
-    return render_template('past_questions_school.html', schools=PAST_QUESTIONS_SCHOOLS)
+    mode = request.args.get('mode', 'access')
+    return render_template('past_questions_school.html', schools=PAST_QUESTIONS_SCHOOLS, mode=mode)
 
 
 @app.route('/past-questions/level')
 def past_questions_level():
     school = request.args.get('school', '')
+    mode = request.args.get('mode', 'access')
     if not school or school not in PAST_QUESTIONS_SCHOOLS:
-        return redirect(url_for('past_questions_school'))
-    return render_template('past_questions_level.html', school=school, levels=LEVELS_7)
+        return redirect(url_for('past_questions_home'))
+    return render_template('past_questions_level.html', school=school, levels=LEVELS_7, mode=mode)
 
 
 @app.route('/past-questions/department')
 def past_questions_department():
     school = request.args.get('school', '')
     level = request.args.get('level', '')
+    mode = request.args.get('mode', 'access')
     if not school or school not in PAST_QUESTIONS_SCHOOLS or not level:
-        return redirect(url_for('past_questions_school'))
+        return redirect(url_for('past_questions_home'))
     departments = PAST_QUESTIONS_DEPARTMENTS.get(school, [])
-    return render_template('past_questions_department.html', school=school, level=level, departments=departments)
+    return render_template('past_questions_department.html', school=school, level=level, departments=departments, mode=mode)
 
 
 @app.route('/past-questions/course')
@@ -644,10 +654,76 @@ def past_questions_course():
     school = request.args.get('school', '')
     level = request.args.get('level', '')
     department = request.args.get('department', '')
+    mode = request.args.get('mode', 'access')
     if not school or not level or not department:
-        return redirect(url_for('past_questions_school'))
+        return redirect(url_for('past_questions_home'))
     courses = PAST_QUESTIONS_COURSES.get(department, [])
-    return render_template('past_questions_course.html', school=school, level=level, department=department, courses=courses)
+    return render_template('past_questions_course.html', school=school, level=level, department=department, courses=courses, mode=mode)
+
+
+@app.route('/past-questions/upload-submit', methods=['GET', 'POST'])
+def past_questions_upload_submit():
+    school = request.args.get('school', '') or request.form.get('school', '')
+    level = request.args.get('level', '') or request.form.get('level', '')
+    department = request.args.get('department', '') or request.form.get('department', '')
+    course = request.args.get('course', '') or request.form.get('course', '')
+    if not school or not level or not department or not course:
+        return redirect(url_for('past_questions_home'))
+
+    if request.method == 'POST':
+        file = request.files.get('file')
+        if file and file.filename:
+            ext = os.path.splitext(secure_filename(file.filename))[1].lower()
+            unique_name = f"{uuid.uuid4().hex}{ext}"
+            upload_dir = os.path.join(app.root_path, 'static', 'uploads', 'pq')
+            os.makedirs(upload_dir, exist_ok=True)
+            file.save(os.path.join(upload_dir, unique_name))
+            db = get_mongo()
+            if db is not None:
+                db['past_question_files'].insert_one({
+                    'school': school,
+                    'level': level,
+                    'department': department,
+                    'course': course,
+                    'filename': unique_name,
+                    'original_name': file.filename,
+                    'upload_date': datetime.utcnow().isoformat(),
+                    'file_type': file.content_type or 'application/octet-stream'
+                })
+            flash('File uploaded successfully!', 'success')
+        else:
+            flash('Please select a file to upload.', 'error')
+        return redirect(url_for('past_questions_upload_submit',
+                                school=school, level=level, department=department, course=course))
+
+    return render_template('past_questions_upload_submit.html',
+                           school=school, level=level, department=department, course=course)
+
+
+@app.route('/past-questions/view')
+def past_questions_view():
+    school = request.args.get('school', '')
+    level = request.args.get('level', '')
+    department = request.args.get('department', '')
+    course = request.args.get('course', '')
+    if not school or not level or not department or not course:
+        return redirect(url_for('past_questions_home'))
+    files = []
+    db = get_mongo()
+    if db is not None:
+        results = db['past_question_files'].find(
+            {'school': school, 'level': level, 'department': department, 'course': course},
+            {'_id': 0}
+        )
+        files = list(results)
+    return render_template('past_questions_view.html',
+                           school=school, level=level, department=department, course=course, files=files)
+
+
+@app.route('/past-questions/files/<path:filename>')
+def past_questions_file(filename):
+    upload_dir = os.path.join(app.root_path, 'static', 'uploads', 'pq')
+    return send_from_directory(upload_dir, filename)
 
 
 init_db()
