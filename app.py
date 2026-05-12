@@ -246,18 +246,36 @@ def subject_selection():
 def select_subjects():
     if 'student_info' not in session:
         return redirect(url_for('home'))
+
+    all_subjects = [
+        "Use of English", "Mathematics", "Literature in English",
+        "Government", "Economics", "Commerce",
+        "Physics", "Chemistry", "Biology",
+        "Principles of Accounts", "Christian Religious Studies"
+    ]
+
     selected_subjects = request.form.getlist('subjects')
     if "Use of English" not in selected_subjects:
-        selected_subjects.append("Use of English")
+        selected_subjects.insert(0, "Use of English")
     if len(selected_subjects) < 1:
-        all_subjects = [
-            "Use of English", "Mathematics", "Literature in English",
-            "Government", "Economics", "Commerce",
-            "Physics", "Chemistry", "Biology",
-            "Principles of Accounts", "Christian Religious Studies"
-        ]
         return render_template('subject_selection.html', subjects=all_subjects,
                                error="Please select at least 1 subject")
+
+    # Read user selections with safe fallbacks
+    try:
+        time_limit_min = int(request.form.get('time_limit', 60))
+        if time_limit_min not in (15, 30, 60):
+            time_limit_min = 60
+    except (ValueError, TypeError):
+        time_limit_min = 60
+
+    try:
+        num_questions = int(request.form.get('num_questions', 30))
+        if num_questions not in (20, 30, 45, 60):
+            num_questions = 30
+    except (ValueError, TypeError):
+        num_questions = 30
+
     subject_files = {
         "Use of English": "use_of_english.json",
         "Mathematics": "mathematics.json",
@@ -271,19 +289,22 @@ def select_subjects():
         "Principles of Accounts": "principles_of_accounts.json",
         "Christian Religious Studies": "christian_religious_studies.json"
     }
+
     subject_questions = {}
     subject_answers = {}
     for subj in selected_subjects:
         file = subject_files.get(subj)
         if file and os.path.exists(file):
             qs = load_questions(file)
-            num_questions = 60 if subj == "Use of English" else 40
-            subject_questions[subj] = random.sample(qs, min(num_questions, len(qs)))
-            subject_answers[subj] = [None] * len(subject_questions[subj])
+            count = min(num_questions, len(qs))
+            subject_questions[subj] = random.sample(qs, count)
+            subject_answers[subj] = [None] * count
+
     session['subject_questions'] = subject_questions
     session['subject_answers'] = subject_answers
     session['start_time'] = time.time()
-    session['exam_duration'] = 7200
+    session['exam_duration'] = time_limit_min * 60
+    session['exam_settings'] = {'time_limit_min': time_limit_min, 'num_questions': num_questions}
     session['current_subject'] = selected_subjects[0]
     session['current_question'] = 0
     return redirect(url_for('exam'))
