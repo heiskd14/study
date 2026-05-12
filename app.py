@@ -532,6 +532,7 @@ PAST_QUESTIONS_DEPARTMENTS = {
         "Faculty of Business Administration",
         "Faculty of Agriculture",
         "Faculty of Environmental Sciences",
+        "Faculty of Computing and Applied Science",
     ]
 }
 
@@ -590,6 +591,12 @@ PAST_QUESTIONS_COURSES = {
         "Architecture", "Urban and Regional Planning",
         "Estate Management", "Quantity Surveying",
         "Building Technology", "Surveying and Geoinformatics",
+    ],
+    "Faculty of Computing and Applied Science": [
+        "Computer Science", "Information Technology",
+        "Software Engineering", "Cyber Security",
+        "Data Science and Analytics", "Artificial Intelligence",
+        "Information Systems", "Computer Applications",
     ],
 }
 
