@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}TAU Online Study{% endblock %}
+{% block title %}Beyond The Classroom{% endblock %}
 
 {% block content %}
 <div class="home-page page-wrapper">
@@ -10,7 +10,7 @@
             <div class="brand-logo">
                 <img src="{{ url_for('static', filename='img/tau_logo.jpeg') }}" alt="TAU Logo" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
             </div>
-            <span class="brand-name">TAU Online Study</span>
+            <span class="brand-name">Beyond The Classroom</span>
         </div>
         <div class="navbar-actions">
             {% if user %}
@@ -37,7 +37,7 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Welcome to <span>TAU Online Study</span></h1>
+            <h1 class="hero-title">Welcome to <span>Beyond The Classroom</span></h1>
             <p class="hero-subtitle">Your complete platform for exam preparation, group learning, and academic excellence.</p>
             <a href="{{ url_for('subject_selection_home') }}" class="hero-cta">Get Started</a>
         </div>
@@ -64,7 +64,7 @@
         <h2 class="section-title">What do you want to do today?</h2>
         <div class="features-grid">
 
-            <a href="#" class="feature-card">
+            <a href="{{ url_for('past_questions_school') }}" class="feature-card">
                 <div class="feature-icon" style="background: linear-gradient(135deg, #137a13, #0e5c0e);">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -120,7 +120,7 @@
     </section>
 
     <footer class="home-footer">
-        <p>&copy; 2026 TAU Online Study. All rights reserved.</p>
+        <p>&copy; 2026 Beyond The Classroom. All rights reserved.</p>
     </footer>
 
 </div>

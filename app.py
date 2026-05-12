@@ -512,6 +512,139 @@ def time_check():
     remaining = max(0, session['exam_duration'] - elapsed)
     return jsonify({'remaining': remaining})
 
+# ══════════════════════════════════════════════════════════════════════════════
+# PAST QUESTIONS ROUTES
+# ══════════════════════════════════════════════════════════════════════════════
+
+PAST_QUESTIONS_SCHOOLS = [
+    "Thomas Adewunmi University",
+]
+
+PAST_QUESTIONS_DEPARTMENTS = {
+    "Thomas Adewunmi University": [
+        "Faculty of Sciences",
+        "Faculty of Engineering",
+        "Faculty of Arts",
+        "Faculty of Social Sciences",
+        "Faculty of Law",
+        "Faculty of Medicine and Health Sciences",
+        "Faculty of Education",
+        "Faculty of Business Administration",
+        "Faculty of Agriculture",
+        "Faculty of Environmental Sciences",
+    ]
+}
+
+PAST_QUESTIONS_COURSES = {
+    "Faculty of Sciences": [
+        "Physics", "Chemistry", "Biology", "Mathematics",
+        "Computer Science", "Statistics", "Biochemistry",
+        "Microbiology", "Geology", "Industrial Chemistry",
+    ],
+    "Faculty of Engineering": [
+        "Civil Engineering", "Electrical/Electronic Engineering",
+        "Mechanical Engineering", "Chemical Engineering",
+        "Computer Engineering", "Agricultural Engineering",
+        "Petroleum Engineering", "Mechatronics Engineering",
+    ],
+    "Faculty of Arts": [
+        "English and Literary Studies", "History and International Studies",
+        "Philosophy", "Fine and Applied Arts", "Theatre Arts",
+        "Music", "Religious Studies", "Linguistics",
+        "French", "Arabic Studies",
+    ],
+    "Faculty of Social Sciences": [
+        "Economics", "Political Science", "Sociology",
+        "Psychology", "Mass Communication", "Geography",
+        "International Relations", "Criminology and Security Studies",
+    ],
+    "Faculty of Law": [
+        "Law",
+    ],
+    "Faculty of Medicine and Health Sciences": [
+        "Medicine and Surgery", "Nursing Science",
+        "Medical Laboratory Science", "Physiotherapy",
+        "Pharmacy", "Radiography", "Public Health",
+        "Optometry", "Dentistry",
+    ],
+    "Faculty of Education": [
+        "Education / Mathematics", "Education / English",
+        "Education / Biology", "Education / Chemistry",
+        "Education / Physics", "Education / Economics",
+        "Adult Education", "Educational Administration",
+        "Guidance and Counselling", "Library Science",
+    ],
+    "Faculty of Business Administration": [
+        "Business Administration", "Accounting",
+        "Banking and Finance", "Marketing",
+        "Public Administration", "Entrepreneurship",
+        "Insurance", "Office and Information Management",
+    ],
+    "Faculty of Agriculture": [
+        "Agronomy", "Animal Science",
+        "Fisheries and Aquaculture", "Forestry and Wood Technology",
+        "Agricultural Economics", "Food Science and Technology",
+        "Soil Science", "Agricultural Extension",
+    ],
+    "Faculty of Environmental Sciences": [
+        "Architecture", "Urban and Regional Planning",
+        "Estate Management", "Quantity Surveying",
+        "Building Technology", "Surveying and Geoinformatics",
+    ],
+}
+
+LEVELS_6 = ["100 Level", "200 Level", "300 Level", "400 Level", "500 Level", "600 Level"]
+LEVELS_7 = ["100 Level", "200 Level", "300 Level", "400 Level", "500 Level", "600 Level", "700 Level"]
+LEVELS_STD = ["100 Level", "200 Level", "300 Level", "400 Level", "500 Level"]
+
+SIX_LEVEL_COURSES = {"Law", "Physiotherapy"}
+SEVEN_LEVEL_COURSES = {"Medicine and Surgery", "Dentistry", "Optometry"}
+
+
+def get_levels_for_course(course):
+    if course in SEVEN_LEVEL_COURSES:
+        return LEVELS_7
+    if course in SIX_LEVEL_COURSES:
+        return LEVELS_6
+    return LEVELS_STD
+
+
+@app.route('/past-questions')
+def past_questions_school():
+    return render_template('past_questions_school.html', schools=PAST_QUESTIONS_SCHOOLS)
+
+
+@app.route('/past-questions/department')
+def past_questions_department():
+    school = request.args.get('school', '')
+    if not school or school not in PAST_QUESTIONS_SCHOOLS:
+        return redirect(url_for('past_questions_school'))
+    departments = PAST_QUESTIONS_DEPARTMENTS.get(school, [])
+    return render_template('past_questions_department.html', school=school, departments=departments)
+
+
+@app.route('/past-questions/course')
+def past_questions_course():
+    school = request.args.get('school', '')
+    department = request.args.get('department', '')
+    if not school or not department:
+        return redirect(url_for('past_questions_school'))
+    courses = PAST_QUESTIONS_COURSES.get(department, [])
+    return render_template('past_questions_course.html', school=school, department=department, courses=courses)
+
+
+@app.route('/past-questions/level')
+def past_questions_level():
+    school = request.args.get('school', '')
+    department = request.args.get('department', '')
+    course = request.args.get('course', '')
+    if not school or not department or not course:
+        return redirect(url_for('past_questions_school'))
+    levels = get_levels_for_course(course)
+    return render_template('past_questions_level.html', school=school, department=department,
+                           course=course, levels=levels)
+
+
 if __name__ == '__main__':
     init_db()
     get_mongo()

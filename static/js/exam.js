@@ -1,5 +1,6 @@
 let calcDisplay = '';
 let examEnded = false;
+let isExamNavigation = false;
 
 /* ── Timer ─────────────────────────────────────────────────────── */
 function updateTimer() {
@@ -78,7 +79,6 @@ function showEndModal(reason) {
 
 function hideEndModal() {
     document.getElementById('end-exam-modal').classList.remove('active');
-    // Re-push state so back button is caught again
     history.pushState({ examPage: true }, '', window.location.href);
 }
 
@@ -89,37 +89,54 @@ function confirmEndExam() {
 }
 
 /* ── Back-button / popstate trap ────────────────────────────────── */
-// Push an extra history entry so the first "back" is caught here
 history.pushState({ examPage: true }, '', window.location.href);
 
 window.addEventListener('popstate', function(e) {
     if (examEnded) return;
-    // Re-push so another back press is also caught
     history.pushState({ examPage: true }, '', window.location.href);
     showEndModal('back');
 });
 
-/* ── Page refresh / tab close warning ──────────────────────────── */
+/* ── Page refresh / tab close warning (NOT exam navigation) ─────── */
 window.addEventListener('beforeunload', function(e) {
-    if (examEnded) return;
+    if (examEnded || isExamNavigation) return;
     e.preventDefault();
     e.returnValue = 'Your exam is still in progress. Leaving will end the exam.';
     return e.returnValue;
 });
 
+/* ── Mark exam navigation forms so beforeunload doesn't fire ────── */
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('form').forEach(function(form) {
+        var action = form.getAttribute('action') || '';
+        if (action.indexOf('navigate') !== -1 || form.id === 'prev-form' || form.id === 'next-form') {
+            form.addEventListener('submit', function() {
+                isExamNavigation = true;
+            });
+        }
+    });
+    // Also catch question-grid goto forms and subject tab forms
+    document.querySelectorAll('input[name="action"]').forEach(function(inp) {
+        var val = inp.value;
+        if (val === 'prev' || val === 'next' || val === 'goto' || val === 'prev_subject' || val === 'next_subject' || val === 'switch_subject') {
+            var f = inp.closest('form');
+            if (f) f.addEventListener('submit', function() { isExamNavigation = true; });
+        }
+    });
+});
+
 /* ── Keyboard shortcuts ─────────────────────────────────────────── */
 document.addEventListener('keydown', function(e) {
-    // Don't fire if modal is open
     if (document.getElementById('end-exam-modal').classList.contains('active')) {
         if (e.key === 'Escape') hideEndModal();
         return;
     }
     if (e.key === 'ArrowLeft') {
         const b = document.getElementById('prev-btn');
-        if (b && !b.disabled) document.getElementById('prev-form').submit();
+        if (b && !b.disabled) { isExamNavigation = true; document.getElementById('prev-form').submit(); }
     } else if (e.key === 'ArrowRight') {
         const b = document.getElementById('next-btn');
-        if (b && !b.disabled) document.getElementById('next-form').submit();
+        if (b && !b.disabled) { isExamNavigation = true; document.getElementById('next-form').submit(); }
     } else if (['a','A'].includes(e.key)) {
         const o = document.querySelector('input[name="option"][value="0"]');
         if (o) { o.checked = true; submitAnswer(0); }
