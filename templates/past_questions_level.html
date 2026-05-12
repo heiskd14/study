@@ -5,7 +5,7 @@
 <div class="pq-container page-wrapper">
     <div class="pq-box">
         <div class="pq-nav">
-            <a href="{{ url_for('past_questions_course', school=school, department=department) }}" class="pq-back">
+            <a href="{{ url_for('past_questions_school') }}" class="pq-back">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
                 Back
             </a>
@@ -19,43 +19,26 @@
             <div class="pq-step-indicator">
                 <span class="pq-step done">✓</span>
                 <span class="pq-step-line pq-step-line-done"></span>
-                <span class="pq-step done">✓</span>
-                <span class="pq-step-line pq-step-line-done"></span>
-                <span class="pq-step done">✓</span>
-                <span class="pq-step-line pq-step-line-done"></span>
-                <span class="pq-step active">4</span>
+                <span class="pq-step active">2</span>
+                <span class="pq-step-line"></span>
+                <span class="pq-step">3</span>
+                <span class="pq-step-line"></span>
+                <span class="pq-step">4</span>
             </div>
-            <div class="pq-breadcrumb">{{ school }} &rsaquo; {{ department }} &rsaquo; {{ course }}</div>
+            <div class="pq-breadcrumb">{{ school }}</div>
             <h1 class="pq-title">Select Level</h1>
             <p class="pq-subtitle">Choose the academic level for your past questions.</p>
         </div>
 
         <div class="pq-level-grid">
             {% for level in levels %}
-            <a href="#" class="pq-level-card" onclick="showComingSoon(event, '{{ level }}')">
+            <a href="{{ url_for('past_questions_department', school=school, level=level) }}" class="pq-level-card">
                 <div class="pq-level-num">{{ level.split()[0] }}</div>
                 <div class="pq-level-label">{{ level }}</div>
-                <div class="pq-level-sub">View past questions</div>
+                <div class="pq-level-sub">Browse past questions</div>
             </a>
             {% endfor %}
         </div>
-
-        <div id="coming-soon-banner" class="pq-coming-soon" style="display:none;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Past questions for <strong id="coming-soon-level"></strong> are coming soon! We're uploading content regularly.
-        </div>
     </div>
 </div>
-
-<script>
-function showComingSoon(e, level) {
-    e.preventDefault();
-    document.querySelectorAll('.pq-level-card').forEach(c => c.classList.remove('selected'));
-    e.currentTarget.classList.add('selected');
-    var banner = document.getElementById('coming-soon-banner');
-    document.getElementById('coming-soon-level').textContent = level;
-    banner.style.display = 'flex';
-    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-</script>
 {% endblock %}

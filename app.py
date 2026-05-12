@@ -621,35 +621,33 @@ def past_questions_school():
     return render_template('past_questions_school.html', schools=PAST_QUESTIONS_SCHOOLS)
 
 
-@app.route('/past-questions/department')
-def past_questions_department():
+@app.route('/past-questions/level')
+def past_questions_level():
     school = request.args.get('school', '')
     if not school or school not in PAST_QUESTIONS_SCHOOLS:
         return redirect(url_for('past_questions_school'))
+    return render_template('past_questions_level.html', school=school, levels=LEVELS_7)
+
+
+@app.route('/past-questions/department')
+def past_questions_department():
+    school = request.args.get('school', '')
+    level = request.args.get('level', '')
+    if not school or school not in PAST_QUESTIONS_SCHOOLS or not level:
+        return redirect(url_for('past_questions_school'))
     departments = PAST_QUESTIONS_DEPARTMENTS.get(school, [])
-    return render_template('past_questions_department.html', school=school, departments=departments)
+    return render_template('past_questions_department.html', school=school, level=level, departments=departments)
 
 
 @app.route('/past-questions/course')
 def past_questions_course():
     school = request.args.get('school', '')
+    level = request.args.get('level', '')
     department = request.args.get('department', '')
-    if not school or not department:
+    if not school or not level or not department:
         return redirect(url_for('past_questions_school'))
     courses = PAST_QUESTIONS_COURSES.get(department, [])
-    return render_template('past_questions_course.html', school=school, department=department, courses=courses)
-
-
-@app.route('/past-questions/level')
-def past_questions_level():
-    school = request.args.get('school', '')
-    department = request.args.get('department', '')
-    course = request.args.get('course', '')
-    if not school or not department or not course:
-        return redirect(url_for('past_questions_school'))
-    levels = get_levels_for_course(course)
-    return render_template('past_questions_level.html', school=school, department=department,
-                           course=course, levels=levels)
+    return render_template('past_questions_course.html', school=school, level=level, department=department, courses=courses)
 
 
 init_db()

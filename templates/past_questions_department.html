@@ -5,7 +5,7 @@
 <div class="pq-container page-wrapper">
     <div class="pq-box pq-box-wide">
         <div class="pq-nav">
-            <a href="{{ url_for('past_questions_school') }}" class="pq-back">
+            <a href="{{ url_for('past_questions_level', school=school) }}" class="pq-back">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
                 Back
             </a>
@@ -19,20 +19,20 @@
             <div class="pq-step-indicator">
                 <span class="pq-step done">✓</span>
                 <span class="pq-step-line pq-step-line-done"></span>
-                <span class="pq-step active">2</span>
-                <span class="pq-step-line"></span>
-                <span class="pq-step">3</span>
+                <span class="pq-step done">✓</span>
+                <span class="pq-step-line pq-step-line-done"></span>
+                <span class="pq-step active">3</span>
                 <span class="pq-step-line"></span>
                 <span class="pq-step">4</span>
             </div>
-            <div class="pq-breadcrumb">{{ school }}</div>
+            <div class="pq-breadcrumb">{{ school }} &rsaquo; {{ level }}</div>
             <h1 class="pq-title">Select Department</h1>
             <p class="pq-subtitle">Choose the department or faculty you belong to.</p>
         </div>
 
         <div class="pq-grid pq-grid-multi">
             {% for dept in departments %}
-            <a href="{{ url_for('past_questions_course', school=school, department=dept) }}" class="pq-card pq-card-sm">
+            <a href="{{ url_for('past_questions_course', school=school, level=level, department=dept) }}" class="pq-card pq-card-sm">
                 <div class="pq-card-icon pq-icon-dept">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                 </div>
