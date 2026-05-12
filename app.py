@@ -255,8 +255,6 @@ def select_subjects():
     ]
 
     selected_subjects = request.form.getlist('subjects')
-    if "Use of English" not in selected_subjects:
-        selected_subjects.insert(0, "Use of English")
     if len(selected_subjects) < 1:
         return render_template('subject_selection.html', subjects=all_subjects,
                                error="Please select at least 1 subject")
