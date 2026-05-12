@@ -7,7 +7,11 @@ async function connectMongo() {
   const { MongoClient, ObjectId } = require('mongodb');
   const uri = process.env.MONGODB_URI;
   if (!uri) throw new Error('MONGODB_URI is not set.');
-  const client = new MongoClient(uri);
+  const client = new MongoClient(uri, {
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
+    socketTimeoutMS: 5000,
+  });
   await client.connect();
   const db = client.db(process.env.DB_NAME || 'tau_study');
   const users = db.collection('users');
@@ -39,31 +43,32 @@ async function connectSQLite() {
   const Database = require('better-sqlite3');
   const path = require('path');
   const db = new Database(path.join(__dirname, '../..', 'exam_results.db'));
+  // Create table using existing schema (full_name, password_hash) if it doesn't exist
   db.prepare(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
+    full_name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    created_at TEXT DEFAULT (datetime('now'))
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`).run();
   console.log('Using SQLite fallback database');
   return {
     findUserByEmail: (email) => {
       const row = db.prepare('SELECT * FROM users WHERE email = ? LIMIT 1').get(email);
       if (!row) return null;
-      return { ...row, id: String(row.id), password: row.password };
+      return { id: String(row.id), name: row.full_name, email: row.email, password: row.password_hash, created_at: row.created_at };
     },
     findUserById: (id) => {
       const row = db.prepare('SELECT * FROM users WHERE id = ? LIMIT 1').get(Number(id));
       if (!row) return null;
-      return { ...row, id: String(row.id) };
+      return { id: String(row.id), name: row.full_name, email: row.email, password: row.password_hash, created_at: row.created_at };
     },
     createUser: ({ name, email, password }) => {
-      const info = db.prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)').run(name, email, password);
+      const info = db.prepare('INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)').run(name, email, password);
       return { id: String(info.lastInsertRowid), name, email, password, created_at: new Date().toISOString() };
     },
     getAllUsers: () => {
-      return db.prepare('SELECT id, password FROM users').all();
+      return db.prepare('SELECT id, password_hash AS password FROM users').all();
     },
   };
 }
@@ -91,6 +96,10 @@ function getDb() {
   return dbInstance;
 }
 
-connectDb();
+const dbReadyPromise = connectDb();
 
-module.exports = { connectDb, getDb };
+function waitForDb() {
+  return dbReadyPromise;
+}
+
+module.exports = { connectDb, getDb, waitForDb };

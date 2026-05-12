@@ -52,9 +52,16 @@ app.use((err, req, res, _next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`TAU Auth API running on port ${PORT}`);
-  console.log(`DB Type: ${process.env.DB_TYPE || 'mongodb'}`);
+const { waitForDb } = require('./config/db');
+
+waitForDb().then(() => {
+  app.listen(PORT, () => {
+    console.log(`TAU Auth API running on port ${PORT}`);
+    console.log(`DB Type: ${process.env.DB_TYPE || 'mongodb'}`);
+  });
+}).catch(err => {
+  console.error('Fatal: could not initialize database:', err.message);
+  process.exit(1);
 });
 
 module.exports = app;
