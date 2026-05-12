@@ -914,46 +914,132 @@ html, body {
 .action-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 
 /* ==============================================================
+   HERO SVG ILLUSTRATION — THEME-ADAPTIVE
+   ============================================================== */
+.hi-card   { fill: rgba(255,255,255,0.06); stroke: rgba(255,255,255,0.18); }
+.hi-title  { fill: rgba(255,255,255,0.40); }
+.hi-line   { fill: rgba(255,255,255,0.16); }
+.hi-star-bg   { fill: rgba(255,255,255,0.07); }
+.hi-star-text { fill: rgba(255,255,255,0.70); }
+
+[data-theme="light"] .hi-card   { fill: rgba(0,0,0,0.06); stroke: rgba(0,0,0,0.18); }
+[data-theme="light"] .hi-title  { fill: rgba(0,0,0,0.35); }
+[data-theme="light"] .hi-line   { fill: rgba(0,0,0,0.14); }
+[data-theme="light"] .hi-star-bg   { fill: rgba(0,0,0,0.07); }
+[data-theme="light"] .hi-star-text { fill: rgba(0,0,0,0.55); }
+
+/* ==============================================================
    LIGHT THEME
    ============================================================== */
 [data-theme="light"] {
-  --bg:            #f4f6fb;
+  --bg:            #f0f4f0;
   --surface:       rgba(0,0,0,0.04);
   --surface-hover: rgba(0,0,0,0.07);
-  --glass:         rgba(255,255,255,0.80);
+  --glass:         rgba(255,255,255,0.82);
   --glass-border:  rgba(0,0,0,0.10);
-  --glass-shadow:  0 8px 32px rgba(0,0,0,0.12);
-  --text:          #12131f;
-  --text-muted:    #5a5a7a;
-  --text-dim:      #9999bb;
+  --glass-shadow:  0 8px 32px rgba(0,0,0,0.10);
+  --text:          #0d120d;
+  --text-muted:    #4a5a4a;
+  --text-dim:      #8a9a8a;
+  --success:       #0a8a52;
+  --error:         #d0263c;
+  --warning:       #c07000;
+  --info:          #1a7ab0;
 }
-[data-theme="light"] html,
-[data-theme="light"] body,
+
 html[data-theme="light"],
-body[data-theme="light"] { background: var(--bg); color: var(--text); }
-[data-theme="light"] .page-bg { filter: brightness(1.6) saturate(0.5); opacity: 0.3; }
-[data-theme="light"] .navbar { background: rgba(244,246,251,0.88); border-bottom-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .exam-header { background: rgba(244,246,251,0.92); border-bottom-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .exam-modal { background: #f0f2f8; border-color: rgba(0,0,0,0.12); }
-[data-theme="light"] .calculator { background: #eef0f8; border-color: rgba(0,0,0,0.12); }
+html[data-theme="light"] body { background: var(--bg); color: var(--text); }
+
+/* Background orbs — tone down for light */
+[data-theme="light"] .page-bg { opacity: 0.18; }
+[data-theme="light"] .grid-overlay { opacity: 0.5; }
+
+/* Navbar */
+[data-theme="light"] .navbar { background: rgba(240,244,240,0.90); border-bottom-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .brand-name { color: var(--text); }
+[data-theme="light"] .login-btn { color: var(--text-muted); border-color: rgba(0,0,0,0.14) !important; }
+[data-theme="light"] .login-btn:hover { background: rgba(0,0,0,0.05); color: var(--text); }
+
+/* Cards & boxes */
 [data-theme="light"] .registration-box,
-[data-theme="light"] .tau-card,
-[data-theme="light"] .pq-box { background: rgba(255,255,255,0.85); border-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .form-input,
-[data-theme="light"] .tau-input-wrapper input { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.12); color: var(--text); }
-[data-theme="light"] .feature-card { background: rgba(255,255,255,0.75); border-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .pq-card { background: rgba(255,255,255,0.80); border-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .pq-level-card { background: rgba(255,255,255,0.80); border-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .subject-tab { background: rgba(0,0,0,0.04); color: var(--text-muted); }
+[data-theme="light"] .glass-card,
+[data-theme="light"] .pq-box { background: rgba(255,255,255,0.88); border-color: rgba(0,0,0,0.10); }
+
+/* Form inputs */
+[data-theme="light"] .form-input { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.12); color: var(--text); }
+[data-theme="light"] .form-input::placeholder { color: var(--text-dim); }
+[data-theme="light"] .form-input:focus { background: rgba(19,122,19,0.05); border-color: var(--accent); }
+
+/* Feature cards */
+[data-theme="light"] .feature-card { background: rgba(255,255,255,0.80); border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .feature-card:hover { background: rgba(255,255,255,0.96); border-color: rgba(19,122,19,0.3); box-shadow: 0 16px 40px rgba(0,0,0,0.10), 0 0 0 1px rgba(19,122,19,0.15); }
+[data-theme="light"] .feature-title { color: var(--text); }
+[data-theme="light"] .feature-desc { color: var(--text-muted); }
+
+/* Past questions cards */
+[data-theme="light"] .pq-card { background: rgba(255,255,255,0.82); border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .pq-card:hover { background: rgba(255,255,255,0.98); box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
+[data-theme="light"] .pq-card-label { color: var(--text); }
+[data-theme="light"] .pq-level-card { background: rgba(255,255,255,0.82); border-color: rgba(0,0,0,0.10); }
+
+/* Exam */
+[data-theme="light"] .exam-header { background: rgba(240,244,240,0.94); border-bottom-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .subject-tab { background: rgba(0,0,0,0.04); color: var(--text-muted); border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .subject-tab:hover { background: rgba(19,122,19,0.08); }
+[data-theme="light"] .subject-nav-btn { background: rgba(19,122,19,0.10); border-color: rgba(19,122,19,0.25); }
+[data-theme="light"] .question-section { background: rgba(255,255,255,0.82); border-color: rgba(0,0,0,0.10); }
 [data-theme="light"] .option { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .question-section { background: rgba(255,255,255,0.75); }
+[data-theme="light"] .option:hover { background: rgba(19,122,19,0.07); }
+[data-theme="light"] .option-text { color: var(--text); }
+[data-theme="light"] .question-text { color: var(--text); }
+[data-theme="light"] .question-number-btn { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.10); color: var(--text-muted); }
+[data-theme="light"] .question-number-btn:hover { background: rgba(0,0,0,0.10); color: var(--text); }
+[data-theme="light"] .btn-nav { background: rgba(0,0,0,0.05); color: var(--text); border-color: rgba(0,0,0,0.12); }
+[data-theme="light"] .btn-nav:hover:not(:disabled) { background: rgba(0,0,0,0.10); }
+[data-theme="light"] .calculator-btn { background: rgba(0,0,0,0.05); color: var(--text-muted); border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .timer { color: #b05800; }
+
+/* Calculator */
+[data-theme="light"] .calculator { background: #f4f6f4; border-color: rgba(0,0,0,0.12); }
+[data-theme="light"] .calc-display { background: rgba(0,0,0,0.06); color: var(--text); }
+[data-theme="light"] .calc-buttons { background: rgba(0,0,0,0.08); }
+[data-theme="light"] .calc-buttons button { background: #f4f6f4; color: var(--text-muted); }
+[data-theme="light"] .calc-buttons button:hover { background: rgba(0,0,0,0.07); color: var(--text); }
+
+/* Results */
+[data-theme="light"] .results-header { background: rgba(240,244,240,0.92); border-bottom-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .results-header h1 { color: var(--text); }
 [data-theme="light"] .results-body,
-[data-theme="light"] .results-container { background: rgba(255,255,255,0.82); border-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .theme-toggle-btn { background: rgba(255,255,255,0.85); border-color: rgba(0,0,0,0.12); color: var(--text); }
-[data-theme="light"] .theme-dropdown { background: rgba(255,255,255,0.97); border-color: rgba(0,0,0,0.12); }
-[data-theme="light"] .theme-option { color: var(--text); }
-[data-theme="light"] .theme-option:hover { background: rgba(0,0,0,0.05); }
-[data-theme="light"] .correction-body { background: transparent; }
+[data-theme="light"] .results-container { background: rgba(255,255,255,0.85); border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .result-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .results-table td { border-bottom-color: rgba(0,0,0,0.08); color: var(--text-muted); }
+[data-theme="light"] .results-table tr:hover td { background: rgba(0,0,0,0.04); color: var(--text); }
+
+/* Corrections */
+[data-theme="light"] .correction-question { background: rgba(255,255,255,0.82); border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .correction-option { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.10); color: var(--text-muted); }
+
+/* Buttons */
+[data-theme="light"] .btn-secondary { background: rgba(0,0,0,0.06); color: var(--text); border-color: rgba(0,0,0,0.12); }
+[data-theme="light"] .btn-secondary:hover { background: rgba(0,0,0,0.10); }
+[data-theme="light"] .btn-nav-subject { background: rgba(19,122,19,0.10); border-color: rgba(19,122,19,0.25); }
+
+/* Subjects */
+[data-theme="light"] .subject-checkbox { background: rgba(255,255,255,0.80); border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .subject-checkbox:hover { background: rgba(19,122,19,0.06); }
+
+/* Theme toggle */
+[data-theme="light"] .theme-toggle-btn { background: rgba(255,255,255,0.90); border-color: rgba(0,0,0,0.14); color: var(--text-muted); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+[data-theme="light"] .theme-dropdown { background: rgba(255,255,255,0.98); border-color: rgba(0,0,0,0.12); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+[data-theme="light"] .theme-option { color: var(--text-muted); }
+[data-theme="light"] .theme-option:hover { background: rgba(0,0,0,0.05); color: var(--text); }
+[data-theme="light"] .theme-option.active { color: var(--accent); background: rgba(19,122,19,0.08); }
+
+/* Misc */
+[data-theme="light"] .home-footer { color: var(--text-dim); border-top-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .error-message { background: rgba(208,38,60,0.08); border-color: rgba(208,38,60,0.25); color: #d0263c; }
+[data-theme="light"] .pq-coming-soon { background: rgba(26,122,176,0.08); border-color: rgba(26,122,176,0.20); }
+[data-theme="light"] .pq-coming-soon strong { color: var(--text); }
 
 /* ==============================================================
    THEME TOGGLE WIDGET

@@ -166,6 +166,49 @@
       .pw-rules { grid-template-columns: 1fr; }
       .tau-form-options { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
     }
+
+    /* ── Light Theme ─────────────────────────────────────────── */
+    [data-theme="light"] {
+      --bg: #f0f4f0;
+      --surface: rgba(0,0,0,0.04);
+      --surface-hover: rgba(0,0,0,0.07);
+      --glass: rgba(255,255,255,0.82);
+      --glass-border: rgba(0,0,0,0.10);
+      --glass-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --text: #0d120d;
+      --text-muted: #4a5a4a;
+      --text-dim: #8a9a8a;
+      --success: #0a8a52;
+      --error: #d0263c;
+    }
+    html[data-theme="light"], html[data-theme="light"] body { background: var(--bg); color: var(--text); }
+    [data-theme="light"] .bg-canvas { opacity: 0.18; }
+    [data-theme="light"] .tau-nav { background: rgba(240,244,240,0.92); border-bottom-color: rgba(0,0,0,0.10); }
+    [data-theme="light"] .tau-nav-logo { color: var(--text); }
+    [data-theme="light"] .tau-home-btn { color: var(--text-muted); border-color: rgba(0,0,0,0.14); }
+    [data-theme="light"] .tau-home-btn:hover { color: var(--text); border-color: rgba(0,0,0,0.25); }
+    [data-theme="light"] .tau-tab-btn { color: var(--text-muted); }
+    [data-theme="light"] .tau-tab-btn:hover { background: rgba(0,0,0,0.05); color: var(--text); }
+    [data-theme="light"] .tau-card { background: rgba(255,255,255,0.88); border-color: rgba(0,0,0,0.10); box-shadow: 0 8px 32px rgba(0,0,0,0.10); }
+    [data-theme="light"] .tau-card-header p { color: var(--text-muted); }
+    [data-theme="light"] .tau-input-wrapper input[type="text"],
+    [data-theme="light"] .tau-input-wrapper input[type="email"],
+    [data-theme="light"] .tau-input-wrapper input[type="password"] { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.12); color: var(--text); }
+    [data-theme="light"] .tau-input-wrapper input::placeholder { color: var(--text-dim); }
+    [data-theme="light"] .tau-input-wrapper input:focus { background: rgba(19,122,19,0.05); border-color: var(--accent); box-shadow: 0 0 0 3px rgba(19,122,19,0.12); }
+    [data-theme="light"] .pw-bar { background: rgba(0,0,0,0.10); }
+    [data-theme="light"] .pw-rules { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.10); }
+    [data-theme="light"] .rule { color: var(--text-dim); }
+    [data-theme="light"] .custom-check { border-color: rgba(0,0,0,0.25); }
+    [data-theme="light"] .tau-divider { color: var(--text-dim); }
+    [data-theme="light"] .tau-divider::before,
+    [data-theme="light"] .tau-divider::after { background: rgba(0,0,0,0.12); }
+    [data-theme="light"] .tau-toast { border-color: rgba(0,0,0,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    [data-theme="light"] .tau-toast.success { background: rgba(10,138,82,0.10); border-color: rgba(10,138,82,0.25); }
+    [data-theme="light"] .tau-toast.error { background: rgba(208,38,60,0.10); border-color: rgba(208,38,60,0.25); }
+    [data-theme="light"] .tau-toast.info { background: rgba(26,122,176,0.10); border-color: rgba(26,122,176,0.25); }
+    [data-theme="light"] .tau-modal { background: rgba(0,0,0,0.35); }
+    [data-theme="light"] .tau-modal-card { background: #f4f6f4; border-color: rgba(0,0,0,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.20); }
   </style>
 </head>
 <body data-tab="{{ tab or 'login' }}">
@@ -330,5 +373,18 @@
   </div>
 
   <script src="/static/js/tau-auth.js"></script>
+  <script>
+  (function(){
+    var THEME_KEY = 'btc-theme';
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function applyTheme(t) {
+      var effective = t === 'system' ? (mq.matches ? 'dark' : 'light') : t;
+      document.documentElement.setAttribute('data-theme', effective);
+    }
+    function saved() { return localStorage.getItem(THEME_KEY) || 'system'; }
+    applyTheme(saved());
+    mq.addEventListener('change', function(){ if(saved()==='system') applyTheme('system'); });
+  })();
+  </script>
 </body>
 </html>
