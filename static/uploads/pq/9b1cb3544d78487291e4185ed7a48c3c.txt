@@ -1,0 +1,34 @@
+ICT 305 — Data Communication System and Network
+Time: 2½ Hours | Course Unit: 3 Units
+Instruction: Answer Question ONE and any other THREE (3) Questions
+
+Question 1
+(a) A bank is designing a secure data communication network. Recommend suitable communication channels and data flow modes, justifying your choices.
+(b) A telecommunications company plans to upgrade its network to support high-speed internet services. Explain how bandwidth, transmission impairments, and transmission type influence the design decision.
+(c) Discuss transmission impairments and their effects on signal quality.
+(d) Explain the OSI model and compare it with the TCP/IP model.
+
+Question 2
+(a) Explain the concept of data flow. (4 marks)
+(b) Explain the three modes of data flow (simplex, half-duplex, full-duplex) with examples. (15 marks)
+(c) Differentiate between analog transmission and digital transmission. (6 marks)
+
+Question 3
+(a) Describe Pulse Code Modulation (PCM) and explain its stages. (15 marks)
+(b) Compare line coding techniques and explain their importance in data communication. (15 marks)
+(c) Define guided and unguided transmission media. (4 marks)
+
+Question 4
+(a) Define encapsulation in networking. (3 marks)
+(b) What is MAC addressing? (3 marks)
+(c) State two differences between TCP and UDP. (4 marks)
+
+Question 5
+(a) What is a port number? (2 marks)
+(b) Define QoS. (3 marks)
+(c) A video streaming service requires low latency and high reliability. Which transport protocol should be used and why? (10 marks)
+
+Question 6
+(a) Given IP address 192.168.10.0/24, create four equal subnets and state their ranges. (10 marks)
+(b) A video streaming service requires low latency and high reliability. Which transport protocol should be used and why? (10 marks)
+(c) Describe layered architecture and the process of encapsulation with examples. (15 marks)

@@ -1,0 +1,94 @@
+TAU-CSC 208 — Desktop Publishing (DTP)
+Time: 2 Hours | Course Unit: 2 Units
+Instruction: Answer ALL Questions in Section A and any other Two (2) Questions in Section B
+
+SECTION A (30 Marks)
+
+Q1. Which component of DTP helps in applying consistent styles across a document?
+A. Page Navigator  B. Tool Palette  C. Layers Panel  D. Templates and Styles
+
+Q2. Which of the following best describes the main difference between DTP and word processing software?
+A. DTP focuses more on high-end gaming graphics
+B. Word processors provide better typography tools
+C. DTP offers advanced layout and graphics integration features
+D. DTP is only for newspapers
+
+Q3. One major contribution of DTP to marketing is:
+A. Design of promotional materials  B. Data encryption  C. Software engineering  D. Programming websites
+
+Q4. Which of the following is a free, open-source desktop publishing software?
+A. Adobe InDesign  B. Microsoft Publisher  C. Scribus  D. CorelDraw
+
+Q5. What does the 'Properties Palette' in desktop publishing software do?
+A. Stores document files  B. Exports PDFs  C. Print pages  D. Shows properties of selected objects
+
+Q6. Canvas is best described as:
+A. A hardware printer  B. A code editor  C. A type of graphic design tool  D. A cloud-based graphic design tool
+
+Q7. Which of the following software supports EPUB export?
+A. Notepad  B. Adobe InDesign
+
+Q8. The tool in MS Word used to allow text to flow around an object frames:
+A. Word Wrap  B. Image Frame  C. Style Manager  D. PDF Optimizer
+
+Q9. What is the size of an A4 paper in millimetres?
+A. 148 x 210 mm  B. 216 x 356 mm  C. 210 x 297 mm  D. 279 x 432 mm
+
+Q10. The orientation best suited for certificates and charts is:
+A. Vertical  B. Portrait  C. Landscape  D. Grid-based
+
+Q11. In CRAP design principles, which element refers to grouping related items together?
+A. Repetition  B. Contrast  C. Proximity  D. Alignment
+
+Q12. What is a gutter in desktop publishing?
+A. Alignment  B. Proximity  C. Contrast  D. The space between columns
+
+Q13. Which principle improves consistency by using the same fonts, colours, or icons repeatedly?
+A. The border of the page  B. The space between lines of text  C. The space between columns  D. The header margins
+
+Q14. Which image format supports transparency and is ideal for web graphics?
+A. BMP  B. JPEG  C. PNG  D. TIFF
+
+Q15. What is the ideal resolution for professional printing?
+A. 72 dpi  B. 100 dpi  C. 150 dpi  D. 300 dpi
+
+Q16. Which text wrapping option places text strictly above and below the image?
+A. Tight  B. Through  C. Top and Bottom  D. Square
+
+Q17. Which image type scales without losing quality?
+A. Raster  B. Bitmap  C. Vector  D. JPEG
+
+Q18. What is the function of cropping an image in DTP?
+A. To change the resolution  B. To remove unwanted parts of an image  C. To wrap text  D. To increase file size
+
+Q19. Which colour model is best for printing?
+A. RGB  B. CMYK  C. HSV  D. HEX
+
+Q20. What does the term 'bleed' mean in print layout?
+A. The white margin inside the page  B. The space for folding a document
+C. Content that extends beyond the trim area  D. The DPI of an image
+
+Q21. What colour scheme includes three colours evenly spaced on the colour wheel?
+A. Monochromatic  B. Analogous  C. Complementary  D. Triadic
+
+Q22. Which file format is most preferred for print-ready output?
+A. DOCX  B. JPEG  C. PDF/X  D. SVG
+
+Q23. Which of the following is a primary colour in the RGB model?
+A. Cyan  B. Magenta  C. Red  D. Yellow
+
+Q24. Which of the following is NOT an application area of Desktop Publishing?
+A. Creating software compilers  B. Designing brochures and flyers  C. School newsletters  D. Business cards
+
+Q25. What year is widely regarded as the beginning of desktop publishing as a mainstream activity?
+A. 1970  B. 1985  C. 1995  D. 2005
+
+SECTION B (20 Marks each)
+
+Q1. Design a two-page layout of a magazine article using text boxes, linked text frames, paragraph styles, and character styles. Describe the process and tools used.
+
+Q2. Discuss the CRAP design principles and explain how each contributes to an effective DTP layout. Provide one example for each.
+
+Q3. Differentiate between JPEG and PNG image formats. Explain how to maintain the quality of an image while resizing it. List and briefly explain three text wrap options in DTP software.
+
+Q4. Define the term 'Margins' and explain one of its uses in layout design. List and explain any two types of page layout columns and their typical use cases. Briefly describe how the principle of Contrast enhances document design.

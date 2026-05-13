@@ -1,0 +1,43 @@
+TAU-CSC 301 — Object Oriented Programming with Java
+Time: 2 Hours 30 Minutes | Course Unit: 3 Units
+Instruction: Answer question one (1) and any other two Questions. Answer Three (3) Questions only.
+
+QUESTION ONE
+(a) Define the following OOP concepts and give one Java-based example for each: (12 marks)
+    - Encapsulation
+    - Inheritance
+    - Polymorphism
+    - Class
+    - Object
+    - Abstraction
+
+(b) Write a complete Java program to accept three (3) integer values and add those accepted values, print the values entered and the result. (8 marks)
+
+(c) Differentiate in tabular form the difference between Abstraction and Encapsulation in Java. (5 marks)
+
+QUESTION TWO
+(a) Describe how Java works, including the process from source code to machine code. Mention the roles of JDK and JRE. (5 marks)
+
+(b) Outline the basic structure of a Java program, including the purpose of the 'package' statement and the main method. (5 marks)
+
+(c) What will happen if you attempt to instantiate an abstract class directly? Explain. (5 marks)
+
+QUESTION THREE
+(a) Using a suitable example, demonstrate method overriding in Java. (5 marks)
+
+(b) Consider the following code and answer what will happen if you attempt to instantiate an abstract class directly. Explain. (5 marks)
+
+    class Animal {
+      void sound() { System.out.println("Animal sound"); }
+    }
+    class Dog extends Animal {
+      void sound() { System.out.println("Dog barking"); }
+    }
+    class Test {
+      public static void main(String[] args) {
+        Animal a = new Dog();
+        a.sound();
+      }
+    }
+
+(c) Consider the following code and state what will happen. (5 marks)

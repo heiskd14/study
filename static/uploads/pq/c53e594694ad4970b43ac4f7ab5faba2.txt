@@ -1,0 +1,66 @@
+CSC 309 — Artificial Intelligence (Machine Learning)
+Time: 2 Hours 30 Minutes | Course Unit: 3 Units
+Instruction: Answer 4 questions in all. Question 1 is compulsory (25 marks); other questions are 15 marks each.
+
+QUESTION 1 (25 marks)
+(a) Draw a Venn diagram to illustrate the relationship between artificial intelligence and its subfields. (3 marks)
+(b) Explain the trade-off between data, algorithmic depth and performance. (2 marks)
+(c) A video provider keeps all records of viewers to provide better services. Using the data table below, build a decision tree based on viewer history. Content denotes the genre of a video, Time is the length, Premium indicates if a paid membership is required, and Like indicates if the video was liked. (5 marks)
+
+  | Video # | Content     | Time  | Premium | Like |
+  |---------|-------------|-------|---------|------|
+  | #0      | Animal      | Short | Yes     | T    |
+  | #1      | Cook        | Long  | No      | T    |
+  | #2      | Documentary | Short | Yes     | T    |
+  | #3      | Documentary | Long  | No      | F    |
+  | #4      | Cook        | Short | No      | T    |
+  | #5      | Animal      | Long  | No      | T    |
+  | #6      | Cook        | Short | Yes     | F    |
+  | #7      | Documentary | Short | No      | F    |
+  | #8      | Documentary | Long  | Yes     | F    |
+  | #9      | Cook        | Long  | Yes     | F    |
+
+(d) What is the entropy of LIKE, H(Like)? (3 marks)
+(e) What is the entropy of Like conditioned on each Content, Time, and Premium — H(Like|Content), H(Like|Time), and H(Like|Premium)? (5 marks)
+
+QUESTION 2 (15 marks)
+(a) What is the entropy of Like conditioned on each Content, Time, and Premium — IG(Like|Content), IG(Like|Time), and IG(Like|Premium)? (5 marks)
+(b) Build a decision tree by greedily maximizing the information gain. (2 marks)
+(c) What is the difference between generative artificial intelligence and discriminative artificial intelligence? (5 marks)
+(d) What is the difference between generative AI and discriminative AI? (3 marks)
+
+QUESTION 3 (15 marks)
+(a) Explain in detail the concept of standardization in feature scaling. Contrast with min-max scaling and tell why standardization is desired. Buttress your point with equations. (3 marks)
+(b) You are consulted as a data scientist to build a forecasting model. What are two performance metrics you will use to benchmark your result? Write the equation and explain in detail the reason for your choice. (5 marks)
+(c) In hyperparameter search, what are the differences between GridSearch and Randomized search? Name two merits and demerits. (5 marks)
+(d) Give 4 machine learning algorithms. (2 marks)
+
+QUESTION 4 (15 marks)
+(a) Solve the cost function J(theta) = (1/2n) * sum(h_theta(x^i) - y^i)^2 using normal equation. (5 marks)
+(b) Write the equation of sigmoid function and explain it with a graph representation. (5 marks)
+(c) Give three examples of commercial AI applications. (3 marks)
+(d) What can go wrong if you tune hyperparameters using the test set? (2 marks)
+
+QUESTION 5 (15 marks)
+(a) Given data in the table below. Use K-Nearest Neighbour, assuming K is 1, state if it is red or blue class.
+
+  | X | Y | Class of ball |
+  |---|---|---------------|
+  | 1 | 1 | Red           |
+  | 3 | 3 | Red           |
+  | 3 | 2 | Red           |
+  | 7 | 1 | Blue          |
+  | 8 | 2 | Blue          |
+  | 8 | 3 | Blue          |
+  | 5 | 3 | ?             |
+
+(b) What will the class be if you use Euclidean distance as measure? (5 marks)
+(c) What will the class be if you use Manhattan distance as measure? (5 marks)
+(d) What is the difference between a model parameter and a learning algorithm's hyperparameter? (2 marks)
+(e) Explain in detail the term overfitting. (3 marks)
+
+QUESTION 6 (15 marks)
+(a) Highlight four (4) of the main challenges in Machine Learning. (2 marks)
+(b) Explain in detail K-fold cross validation. (3 marks)
+(c) Use the chain rule to simplify the gradient descent function. (5 marks)
+(d) As a machine learning engineer, interpret the contour figure provided. (5 marks)

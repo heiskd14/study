@@ -1,0 +1,37 @@
+CSC 301 — Data Structures
+Time: 2½ Hours | Course Unit: 3 Units
+Instruction: Answer Question ONE and any other THREE (3) Questions
+
+Question 1 (25 marks)
+(a) Define a data structure and explain why it is important in software development. (5 marks)
+(b) List and briefly describe four primitive data types. (5 marks)
+(c) Explain the difference between primitive data types and non-primitive data types. (5 marks)
+(d) What is memory allocation? Distinguish between static and dynamic allocation. (5 marks)
+(e) Using a simple diagram, illustrate how an integer variable is stored in memory. (5 marks)
+
+Question 2 (15 marks)
+(a) Discuss the role of primitive data types in building complex data structures. Provide examples. (7½ marks)
+(b) Write a structure to represent a student with ID, name, and GPA. (7½ marks)
+
+Question 3 (15 marks)
+(a) Banking System (Customer Account Management) is a real-world system that can be modelled using data structures. Describe the data types involved and how memory might be organized. (7½ marks)
+(b) Explain the time complexity of string length computation. (7½ marks)
+
+Question 4 (15 marks)
+(a) Analyze the following recursive function: (7½ marks)
+    int sum(int n) {
+      if (n == 0) return 0;
+      return n + sum(n - 1);
+    }
+(b) Define the following asymptotic notations: (7½ marks)
+    - Big-O
+    - Omega
+    - Theta
+
+Question 5 (15 marks)
+(a) Differentiate between worst-case, best-case, and average-case performance. (7½ marks)
+(b) What is space complexity? (7½ marks)
+
+Question 6 (15 marks)
+(a) Explain how memory visualization helps programmers. (7½ marks)
+(b) Describe the concept of data abstraction in relation to data structures. (7½ marks)

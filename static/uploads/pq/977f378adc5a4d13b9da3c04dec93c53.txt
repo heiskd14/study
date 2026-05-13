@@ -1,0 +1,35 @@
+TAU-CSC 309 — Troubleshooting and Repairs of Computers
+Time: 2.5 Hours | Course Unit: 3 Units
+Instruction: Answer Question ONE and any other THREE (3) Questions
+
+QUESTION ONE (30 marks)
+(a) Explain the procedure for activating the Windows operating system and Microsoft Office applications. (5 marks)
+(b) Outline the steps in installing Windows 10 on a new SSD. (5 marks)
+(c) Explain how to check for and install missing drivers after OS installation. (5 marks)
+(d) Explain the 3-2-1 backup rule. (5 marks)
+(e) Define backup and list three methods of performing data backup. (5 marks)
+(f) Outline the steps involved in the troubleshooting process. (5 marks)
+
+QUESTION TWO (20 marks)
+(a) Explain the function of a POST card. (5 marks)
+(b) Describe how airflow and cooling affect PC performance and longevity. (5 marks)
+(c) What is the CMOS battery, and what issues can arise if it becomes faulty? (5 marks)
+(d) Identify four tools used in cleaning computer systems and explain how each tool is used. (5 marks)
+
+QUESTION THREE (20 marks)
+(a) Discuss the difference between volatile and non-volatile memory, giving examples. (5 marks)
+(b) List five common hardware faults and state the possible solutions to each. (5 marks)
+(c) Describe the steps involved in installing a new RAM module in a desktop PC. (5 marks)
+(d) Mention four causes of software faults and state the possible solutions to each. (5 marks)
+
+QUESTION FOUR (20 marks)
+(a) Describe the function of BIOS/UEFI during system startup. (5 marks)
+(b) Explain the role of POST and what might happen if it fails. (5 marks)
+(c) Explain how beep codes can help identify hardware issues. (5 marks)
+(d) Define preventive maintenance and give two examples specific to PC care. (5 marks)
+
+QUESTION FIVE (20 marks)
+(a) State three differences between preventive and corrective maintenance. (5 marks)
+(b) Identify five components of a Hard Disk Drive (HDD) and explain the function of each component. (5 marks)
+(c) Describe three safety precautions that must be taken during disassembly. (5 marks)
+(d) Discuss how airflow and cooling affect PC performance and longevity. (5 marks)

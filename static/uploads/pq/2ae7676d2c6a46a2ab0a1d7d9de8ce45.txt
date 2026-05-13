@@ -1,0 +1,43 @@
+CYB 201 — Introduction to Cyber Security & Strategy
+Time: 2 Hours | Course Unit: 2 Units
+Instruction: Answer question one (1) and any other two Questions; Answer Three (3) Questions ONLY
+
+QUESTION ONE
+(a) Define security risk assessment. (5 marks)
+(b) Explain how threats are identified within an organization. (5 marks)
+(c) Using the expression Risk = Likelihood x Impact, explain risk calculation. (6 marks)
+(d) Outline the following risk assessment approaches (ISO 13335): (4 marks)
+    - Baseline approach
+    - Informal approach
+    - Detailed approach
+    - Combined approach
+(e) State how risk assessment results support implementation of security controls such as firewalls and security awareness training. (10 marks)
+
+QUESTION TWO
+(a) Define cybersecurity. (5 marks)
+(b) State the three core principles of information security and identify security mechanisms that support these principles. (10 marks)
+(c) List and explain with examples common cyber-attacks. (5 marks)
+
+QUESTION THREE
+(a) Describe the following software vulnerabilities: (6 marks)
+    - SQL Injection
+    - Cross-Site Scripting (XSS)
+    - Buffer Overflow
+(b) Explain how software vulnerabilities can lead to cybercrime. (6 marks)
+(c) State the legal and ethical responsibilities of cybersecurity professionals in relation to regulations such as GDPR and NDPR. (8 marks)
+
+QUESTION FOUR
+(a) With the aid of an example, differentiate between symmetric and asymmetric cryptography. (8 marks)
+(b) Explain the following relative to cyber security: (6 marks)
+    - Confidentiality
+    - Integrity
+    - Authentication
+(c) State how Intrusion Detection Systems (IDS) and Multi-Factor Authentication (MFA) help reduce cyber threats. (6 marks)
+
+QUESTION FIVE
+(a) Identify state and non-state cyberspace actors with examples. (4 marks)
+(b) Define the following: (12 marks)
+    - Offensive cyber operations
+    - Defensive cyber operations
+    - Exploitative cyber operations
+(c) State how emerging technologies such as Artificial Intelligence (AI) and the Internet of Things (IoT) can be exploited in cyberspace. (4 marks)

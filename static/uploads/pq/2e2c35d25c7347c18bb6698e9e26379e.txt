@@ -1,0 +1,32 @@
+TAU-CSC 307 — Introduction to Mobile App Development (Flutter)
+Time: 3 Hours | Course Unit: 3 Units
+Instruction: Answer Question Three (3) and any other three questions.
+
+QUESTION ONE
+(a) Explain the philosophy 'Everything is a widget' in Flutter. How does this approach differ from traditional UI development on platforms like Android (XML) or iOS (Storyboards)? (8 marks)
+(b) In Flutter, we build complex UIs by nesting small widgets inside larger ones. Provide a code example of how you would nest a Text widget inside a Container that has 20px of padding and a blue background. (7 marks)
+
+QUESTION TWO
+(a) Differentiate between a StatelessWidget and a StatefulWidget. In which specific scenario would a StatelessWidget be insufficient for a UI component? (7 marks)
+(b) Compare the Expanded and Flexible widgets. Provide a specific UI scenario where using a StatelessWidget would be more appropriate than Expanded. (8 marks)
+
+QUESTION THREE
+(a) Compare and contrast Native, Hybrid, and Cross-Platform mobile development. Why is Flutter considered a 'natively compiled' cross-platform framework? (8 marks)
+(b) In Flutter, asynchronous programming uses async and await in Dart. Why is asynchronous programming essential for maintaining a smooth user interface in mobile applications? (7 marks)
+(c) Imagine you are building a Todo App: (6 marks)
+    i. Which widget would you use to display the scrollable list of tasks? (2 marks)
+    ii. Which widget is best suited for the individual task rows (containing a title and a checkbox)? (2 marks)
+    iii. Explain in detail why the main screen of a Todo app must be a StatefulWidget rather than a StatelessWidget. (2 marks)
+
+QUESTION FOUR
+(a) Explain the distinct roles of MaterialApp and Scaffold. Why can't we simply start building UI components directly inside the main() function without these two widgets? (8 marks)
+(b) Identify the specific property of a scaffold used to display a persistent navigation bar at the top of the screen. How does the scaffold handle the layout when a FloatingActionButton is added? (7 marks)
+
+QUESTION FIVE
+(a) Define Main Axis and Cross Axis. How do these axes flip when switching from a Row to a Column? Which alignment property would you use to center a button horizontally inside a Column? (8 marks)
+(b) Describe the visual difference between MainAxisAlignment.spaceAround and MainAxisAlignment.spaceEvenly. Focus specifically on the spacing at the very edges of the screen. (7 marks)
+
+QUESTION SIX
+(a) What is the purpose of the pubspec.yaml file? What happens to the application if you add an image to your project folder but forget to declare it in this file? (5 marks)
+(b) Outline the step-by-step process for adding a custom font (e.g., Roboto) to a Flutter project. Why is indentation so critical in the pubspec.yaml file? (6 marks)
+(c) Why is it essential to use a version control system like Git and a hosting service like GitHub when working on a mobile app? Briefly define what a commit and a pull request are. (4 marks)
