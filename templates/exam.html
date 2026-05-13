@@ -471,6 +471,7 @@
     </div>
 </div>
 
+{% if mode == 'practice' %}
 <!-- ── Floating AI Button ── -->
 <button id="ai-fab" title="AI Study Assistant" aria-label="Open AI Assistant">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -523,10 +524,12 @@
         </button>
     </div>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/exam.js') }}"></script>
+{% if mode == 'practice' %}
 <script>
 (function () {
     const fab = document.getElementById('ai-fab');
@@ -672,4 +675,5 @@
     };
 })();
 </script>
+{% endif %}
 {% endblock %}

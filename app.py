@@ -256,11 +256,13 @@ def auth_sync():
 @app.route('/register-exam')
 def register_page():
     session.pop('student_info', None)
+    session['mode'] = 'exam'
     return render_template('registration.html')
 
 @app.route('/practice')
 def subject_selection_home():
     session.pop('student_info', None)
+    session['mode'] = 'practice'
     return render_template('registration.html')
 
 @app.route('/register', methods=['POST'])
@@ -371,7 +373,8 @@ def exam():
                            total_questions=len(questions),
                            answers=answers,
                            answered_count=answered_count,
-                           time_remaining=remaining)
+                           time_remaining=remaining,
+                           mode=session.get('mode', 'exam'))
 
 @app.route('/answer', methods=['POST'])
 def answer():
