@@ -1,8 +1,13 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "MbAY5xaL-oDDlVx-3h98W"
 uri = "file://static/img/btc_logo.png"
 type = "image"
 title = "online classroom logo"
+
+[[outputs]]
+id = "fYsaqyeJa3DvkPVIg4dhA"
+uri = "file://static/img/btc_logo.png"
+type = "image"
+title = "btc_logo.png"
