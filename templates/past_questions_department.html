@@ -9,10 +9,16 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
                 Back
             </a>
-            <span class="pq-brand">
-                <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="Logo" style="width:26px;height:26px;border-radius:6px;object-fit:cover;">
-                Beyond The Classroom
-            </span>
+            <div class="pq-nav-right">
+                <a href="{{ url_for('home') }}" class="pq-home-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Home
+                </a>
+                <span class="pq-brand">
+                    <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="Logo" style="width:26px;height:26px;border-radius:6px;object-fit:cover;">
+                    Beyond The Classroom
+                </span>
+            </div>
         </div>
 
         <div class="pq-header">

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard — Beyond The Classroom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #07080f; color: #e8e8f0; min-height: 100vh; }
+    a { text-decoration: none; }
+
+    /* Header */
+    .adm-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
+    .adm-logo { display: flex; align-items: center; gap: 0.7rem; }
+    .adm-logo img { width: 34px; height: 34px; border-radius: 8px; }
+    .adm-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; }
+    .adm-badge { font-size: 0.7rem; font-weight: 700; background: rgba(21,101,192,0.2); color: #64b5f6; border: 1px solid rgba(21,101,192,0.3); padding: 2px 8px; border-radius: 20px; }
+    .adm-header-right { display: flex; align-items: center; gap: 1rem; }
+    .adm-email { font-size: 0.82rem; color: #8888aa; }
+    .adm-logout { font-size: 0.82rem; background: rgba(255,80,104,0.12); color: #ff8095; border: 1px solid rgba(255,80,104,0.25); padding: 0.35rem 0.8rem; border-radius: 8px; transition: background 0.15s; }
+    .adm-logout:hover { background: rgba(255,80,104,0.2); }
+    .adm-home-link { font-size: 0.82rem; color: #8888aa; border: 1px solid rgba(255,255,255,0.1); padding: 0.35rem 0.8rem; border-radius: 8px; transition: color 0.15s, border-color 0.15s; }
+    .adm-home-link:hover { color: #e8e8f0; border-color: rgba(255,255,255,0.2); }
+
+    /* Main */
+    .adm-main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .adm-page-title { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .adm-page-sub { color: #8888aa; font-size: 0.88rem; margin-bottom: 2rem; }
+
+    /* Stats */
+    .adm-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+    .adm-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.3rem 1.5rem; }
+    .adm-stat-val { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; }
+    .adm-stat-label { font-size: 0.8rem; color: #8888aa; margin-top: 0.2rem; }
+    .adm-stat-val.green { color: #81c784; }
+    .adm-stat-val.blue { color: #64b5f6; }
+
+    /* Flash */
+    .adm-flash { display: flex; align-items: center; gap: 8px; padding: 0.8rem 1rem; border-radius: 10px; font-size: 0.88rem; margin-bottom: 1.5rem; }
+    .adm-flash-success { background: rgba(62,255,160,0.08); border: 1px solid rgba(62,255,160,0.2); color: #3effa0; }
+
+    /* Section */
+    .adm-section-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .adm-count-pill { font-size: 0.75rem; background: rgba(255,255,255,0.08); color: #8888aa; padding: 2px 8px; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+
+    /* Filter bar */
+    .adm-filters { display: flex; gap: 0.7rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .adm-filter-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); border-radius: 8px; padding: 0.5rem 0.8rem; color: #e8e8f0; font-family: inherit; font-size: 0.85rem; outline: none; min-width: 160px; }
+    .adm-filter-input:focus { border-color: #1565c0; }
+    .adm-filter-input::placeholder { color: #4a4a6a; }
+
+    /* Table */
+    .adm-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    thead { background: rgba(255,255,255,0.04); }
+    th { padding: 0.8rem 1rem; text-align: left; font-weight: 600; color: #8888aa; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+    td { padding: 0.85rem 1rem; border-top: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+    tbody tr:hover { background: rgba(255,255,255,0.025); }
+    .adm-fname { font-weight: 500; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+    .adm-tag { display: inline-block; font-size: 0.72rem; padding: 2px 7px; border-radius: 6px; font-weight: 500; }
+    .adm-tag-school { background: rgba(19,122,19,0.15); color: #81c784; }
+    .adm-tag-level  { background: rgba(21,101,192,0.15); color: #64b5f6; }
+    .adm-date { color: #8888aa; font-size: 0.78rem; white-space: nowrap; }
+    .adm-del-btn { display: inline-flex; align-items: center; gap: 4px; padding: 0.35rem 0.7rem; background: rgba(255,80,104,0.10); color: #ff8095; border: 1px solid rgba(255,80,104,0.2); border-radius: 7px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .adm-del-btn:hover { background: rgba(255,80,104,0.2); }
+    .adm-view-btn { display: inline-flex; align-items: center; gap: 4px; padding: 0.35rem 0.7rem; background: rgba(21,101,192,0.10); color: #64b5f6; border: 1px solid rgba(21,101,192,0.2); border-radius: 7px; font-size: 0.78rem; font-weight: 600; text-decoration: none; transition: background 0.15s; margin-right: 4px; }
+    .adm-view-btn:hover { background: rgba(21,101,192,0.2); }
+    .adm-empty { text-align: center; padding: 3rem; color: #8888aa; font-size: 0.9rem; }
+
+    /* Confirm modal */
+    .adm-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); display: none; place-items: center; z-index: 100; padding: 1rem; }
+    .adm-modal.open { display: grid; }
+    .adm-modal-card { background: #0e0f1f; border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 2rem; max-width: 380px; width: 100%; text-align: center; }
+    .adm-modal-card h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .adm-modal-card p { color: #8888aa; font-size: 0.88rem; margin-bottom: 1.5rem; }
+    .adm-modal-actions { display: flex; gap: 0.8rem; }
+    .adm-modal-cancel { flex: 1; padding: 0.7rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #e8e8f0; font-family: inherit; font-size: 0.9rem; cursor: pointer; }
+    .adm-modal-confirm { flex: 1; padding: 0.7rem; border-radius: 10px; background: rgba(255,80,104,0.15); border: 1px solid rgba(255,80,104,0.3); color: #ff8095; font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .adm-modal-confirm:hover { background: rgba(255,80,104,0.25); }
+
+    @media (max-width: 700px) {
+      .adm-header { padding: 0.8rem 1rem; }
+      .adm-email { display: none; }
+      .adm-main { padding: 1.2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="adm-header">
+  <div class="adm-logo">
+    <img src="/static/img/btc_logo.png" alt="Logo">
+    <div>
+      <div class="adm-logo-text">Beyond The Classroom</div>
+    </div>
+    <span class="adm-badge">Admin</span>
+  </div>
+  <div class="adm-header-right">
+    <span class="adm-email">{{ admin_email }}</span>
+    <a href="/" class="adm-home-link">← Site</a>
+    <a href="{{ url_for('admin_logout') }}" class="adm-logout">Logout</a>
+  </div>
+</header>
+
+<main class="adm-main">
+  <div class="adm-page-title">Admin Dashboard</div>
+  <div class="adm-page-sub">Manage past questions and platform content.</div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for cat, msg in messages %}
+    <div class="adm-flash adm-flash-{{ cat }}">✓ {{ msg }}</div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <div class="adm-stats">
+    <div class="adm-stat">
+      <div class="adm-stat-val green">{{ file_count }}</div>
+      <div class="adm-stat-label">Past Questions Uploaded</div>
+    </div>
+    <div class="adm-stat">
+      <div class="adm-stat-val blue">{{ user_count }}</div>
+      <div class="adm-stat-label">Registered Users</div>
+    </div>
+  </div>
+
+  <div class="adm-section-title">
+    Past Questions
+    <span class="adm-count-pill">{{ file_count }} total</span>
+  </div>
+
+  <div class="adm-filters">
+    <input class="adm-filter-input" type="text" id="filter-school" placeholder="Filter by school…" oninput="applyFilter()">
+    <input class="adm-filter-input" type="text" id="filter-level"  placeholder="Filter by level…"  oninput="applyFilter()">
+    <input class="adm-filter-input" type="text" id="filter-course" placeholder="Filter by course…" oninput="applyFilter()">
+  </div>
+
+  <div class="adm-table-wrap">
+    {% if files %}
+    <table id="files-table">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>School</th>
+          <th>Level</th>
+          <th>Faculty</th>
+          <th>Course</th>
+          <th>Uploaded</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for f in files %}
+        <tr data-school="{{ f.school|lower }}" data-level="{{ f.level|lower }}" data-course="{{ f.course|lower }}">
+          <td><span class="adm-fname" title="{{ f.original_name }}">{{ f.original_name }}</span></td>
+          <td><span class="adm-tag adm-tag-school">{{ f.school }}</span></td>
+          <td><span class="adm-tag adm-tag-level">{{ f.level }}</span></td>
+          <td style="max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ f.department }}</td>
+          <td>{{ f.course }}</td>
+          <td class="adm-date">{{ f.upload_date[:10] if f.upload_date else '—' }}</td>
+          <td style="white-space:nowrap;">
+            <a href="/past-questions/files/{{ f.filename }}" target="_blank" class="adm-view-btn">↗ View</a>
+            <button class="adm-del-btn" onclick="confirmDelete('{{ f._id }}', '{{ f.filename }}', '{{ f.original_name|replace("'","") }}')">✕ Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="adm-empty">No past questions have been uploaded yet.</div>
+    {% endif %}
+  </div>
+</main>
+
+<!-- Delete confirm modal -->
+<div class="adm-modal" id="del-modal">
+  <div class="adm-modal-card">
+    <h3>Delete File?</h3>
+    <p id="del-modal-name" style="word-break:break-all;"></p>
+    <p>This action cannot be undone.</p>
+    <form method="POST" action="{{ url_for('admin_delete_file') }}" id="del-form">
+      <input type="hidden" name="file_id" id="del-file-id">
+      <input type="hidden" name="filename" id="del-filename">
+      <div class="adm-modal-actions">
+        <button type="button" class="adm-modal-cancel" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="adm-modal-confirm">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function confirmDelete(id, filename, name) {
+  document.getElementById('del-file-id').value = id;
+  document.getElementById('del-filename').value = filename;
+  document.getElementById('del-modal-name').textContent = '"' + name + '"';
+  document.getElementById('del-modal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('del-modal').classList.remove('open');
+}
+document.getElementById('del-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+function applyFilter() {
+  var school = document.getElementById('filter-school').value.toLowerCase();
+  var level  = document.getElementById('filter-level').value.toLowerCase();
+  var course = document.getElementById('filter-course').value.toLowerCase();
+  document.querySelectorAll('#files-table tbody tr').forEach(function(row) {
+    var show = row.dataset.school.includes(school) &&
+               row.dataset.level.includes(level) &&
+               row.dataset.course.includes(course);
+    row.style.display = show ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash, send_from_directory
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash, send_from_directory, Response
 from werkzeug.utils import secure_filename
+from functools import wraps
 import uuid
 from flask_session import Session
 import json
@@ -17,6 +18,7 @@ app.secret_key = 'tau-online-study-secret-key-2025'
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = '/tmp/flask_session'
 app.config['SESSION_PERMANENT'] = False
+app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 Session(app)
 
 # ── MongoDB Setup ──────────────────────────────────────────────────────────────
@@ -146,6 +148,27 @@ def float_safe(val):
 
 def logged_in():
     return 'user' in session
+
+def login_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if not logged_in():
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated
+
+ADMIN_CREDENTIALS = {
+    'okeyodekingdavid@gmail.com': '@King2024',
+    'calebodusolu@gmail.com': 'qFVj8nvsaZfTFa6@@'
+}
+
+def admin_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if not session.get('admin_logged_in'):
+            return redirect(url_for('admin_login'))
+        return f(*args, **kwargs)
+    return decorated
 
 # ══════════════════════════════════════════════════════════════════════════════
 # PUBLIC ROUTES
@@ -619,17 +642,20 @@ def get_levels_for_course(course):
 
 
 @app.route('/past-questions')
+@login_required
 def past_questions_home():
     return render_template('past_questions_home.html')
 
 
 @app.route('/past-questions/school')
+@login_required
 def past_questions_school():
     mode = request.args.get('mode', 'access')
     return render_template('past_questions_school.html', schools=PAST_QUESTIONS_SCHOOLS, mode=mode)
 
 
 @app.route('/past-questions/level')
+@login_required
 def past_questions_level():
     school = request.args.get('school', '')
     mode = request.args.get('mode', 'access')
@@ -639,6 +665,7 @@ def past_questions_level():
 
 
 @app.route('/past-questions/department')
+@login_required
 def past_questions_department():
     school = request.args.get('school', '')
     level = request.args.get('level', '')
@@ -650,6 +677,7 @@ def past_questions_department():
 
 
 @app.route('/past-questions/course')
+@login_required
 def past_questions_course():
     school = request.args.get('school', '')
     level = request.args.get('level', '')
@@ -662,6 +690,7 @@ def past_questions_course():
 
 
 @app.route('/past-questions/upload-submit', methods=['GET', 'POST'])
+@login_required
 def past_questions_upload_submit():
     school = request.args.get('school', '') or request.form.get('school', '')
     level = request.args.get('level', '') or request.form.get('level', '')
@@ -669,6 +698,8 @@ def past_questions_upload_submit():
     course = request.args.get('course', '') or request.form.get('course', '')
     if not school or not level or not department or not course:
         return redirect(url_for('past_questions_home'))
+
+    is_xhr = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
 
     if request.method == 'POST':
         file = request.files.get('file')
@@ -690,8 +721,12 @@ def past_questions_upload_submit():
                     'upload_date': datetime.utcnow().isoformat(),
                     'file_type': file.content_type or 'application/octet-stream'
                 })
+            if is_xhr:
+                return jsonify({'success': True, 'message': 'File uploaded successfully!'})
             flash('File uploaded successfully!', 'success')
         else:
+            if is_xhr:
+                return jsonify({'success': False, 'error': 'Please select a file to upload.'}), 400
             flash('Please select a file to upload.', 'error')
         return redirect(url_for('past_questions_upload_submit',
                                 school=school, level=level, department=department, course=course))
@@ -701,6 +736,7 @@ def past_questions_upload_submit():
 
 
 @app.route('/past-questions/view')
+@login_required
 def past_questions_view():
     school = request.args.get('school', '')
     level = request.args.get('level', '')
@@ -721,9 +757,74 @@ def past_questions_view():
 
 
 @app.route('/past-questions/files/<path:filename>')
+@login_required
 def past_questions_file(filename):
     upload_dir = os.path.join(app.root_path, 'static', 'uploads', 'pq')
     return send_from_directory(upload_dir, filename)
+
+
+# ── Admin ──────────────────────────────────────────────────────────────────────
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if session.get('admin_logged_in'):
+        return redirect(url_for('admin_dashboard'))
+    error = None
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip().lower()
+        password = request.form.get('password', '')
+        if email in ADMIN_CREDENTIALS and ADMIN_CREDENTIALS[email] == password:
+            session['admin_logged_in'] = True
+            session['admin_email'] = email
+            return redirect(url_for('admin_dashboard'))
+        error = 'Invalid email or password. Please try again.'
+    return render_template('admin_login.html', error=error)
+
+
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('admin_logged_in', None)
+    session.pop('admin_email', None)
+    return redirect(url_for('admin_login'))
+
+
+@app.route('/admin')
+@admin_required
+def admin_dashboard():
+    db = get_mongo()
+    files = []
+    user_count = 0
+    file_count = 0
+    if db is not None:
+        raw = list(db['past_question_files'].find({}))
+        for f in raw:
+            f['_id'] = str(f['_id'])
+        files = raw
+        file_count = len(files)
+        user_count = db['users'].count_documents({})
+    return render_template('admin_dashboard.html',
+                           files=files, file_count=file_count,
+                           user_count=user_count,
+                           admin_email=session.get('admin_email', ''))
+
+
+@app.route('/admin/delete-file', methods=['POST'])
+@admin_required
+def admin_delete_file():
+    from bson import ObjectId
+    file_id = request.form.get('file_id', '')
+    filename = request.form.get('filename', '')
+    db = get_mongo()
+    if db is not None and file_id:
+        try:
+            db['past_question_files'].delete_one({'_id': ObjectId(file_id)})
+        except Exception:
+            pass
+    if filename:
+        fpath = os.path.join(app.root_path, 'static', 'uploads', 'pq', filename)
+        if os.path.exists(fpath):
+            os.remove(fpath)
+    flash('File deleted.', 'success')
+    return redirect(url_for('admin_dashboard'))
 
 
 init_db()

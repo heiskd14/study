@@ -9,10 +9,16 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
                 Home
             </a>
-            <span class="pq-brand">
-                <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="Logo" style="width:26px;height:26px;border-radius:6px;object-fit:cover;">
-                Beyond The Classroom
-            </span>
+            <div class="pq-nav-right">
+                <a href="{{ url_for('home') }}" class="pq-home-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Home
+                </a>
+                <span class="pq-brand">
+                    <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="Logo" style="width:26px;height:26px;border-radius:6px;object-fit:cover;">
+                    Beyond The Classroom
+                </span>
+            </div>
         </div>
 
         <div class="pq-header" style="margin-bottom:2rem;">
@@ -47,43 +53,19 @@
 </div>
 
 <style>
-.pqh-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-}
-.pqh-card {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 1.5rem 1.6rem;
-    border-radius: 14px;
-    border: 2px solid transparent;
-    text-decoration: none;
-    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
-    cursor: pointer;
-}
-.pqh-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
-}
-.pqh-card-upload {
-    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
-    border-color: #a5d6a7;
-}
+.pqh-options { display: flex; flex-direction: column; gap: 1.1rem; }
+.pqh-card { display: flex; align-items: center; gap: 1.2rem; padding: 1.5rem 1.6rem; border-radius: 14px; border: 2px solid transparent; text-decoration: none; transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; cursor: pointer; }
+.pqh-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.10); }
+.pqh-card-upload { background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-color: #a5d6a7; }
 .pqh-card-upload:hover { border-color: #4caf50; }
 .pqh-card-upload .pqh-icon { color: #2e7d32; background: #c8e6c9; border-radius: 12px; padding: 14px; display:flex; }
-.pqh-card-access {
-    background: linear-gradient(135deg, #e3f2fd 0%, #ede7f6 100%);
-    border-color: #90caf9;
-}
+.pqh-card-access { background: linear-gradient(135deg, #e3f2fd 0%, #ede7f6 100%); border-color: #90caf9; }
 .pqh-card-access:hover { border-color: #1976d2; }
 .pqh-card-access .pqh-icon { color: #1565c0; background: #bbdefb; border-radius: 12px; padding: 14px; display:flex; }
 .pqh-text { flex: 1; display: flex; flex-direction: column; gap: 3px; }
 .pqh-label { font-size: 1.1rem; font-weight: 700; color: var(--text-primary, #1a1a2e); }
 .pqh-desc  { font-size: 0.875rem; color: var(--text-secondary, #666); }
 .pqh-arrow { font-size: 1.4rem; color: var(--text-secondary, #888); }
-
 [data-theme="dark"] .pqh-card-upload { background: linear-gradient(135deg, #1b3a1e 0%, #1e3320 100%); border-color: #2e5c32; }
 [data-theme="dark"] .pqh-card-upload .pqh-icon { background: #1b3a1e; color: #81c784; }
 [data-theme="dark"] .pqh-card-access { background: linear-gradient(135deg, #0d2137 0%, #1a1a3e 100%); border-color: #1e4976; }

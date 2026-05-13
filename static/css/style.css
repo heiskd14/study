@@ -1370,6 +1370,40 @@ html[data-theme="light"] body { background: var(--bg); color: var(--text); }
 [data-theme="dark"] .pq-mode-upload { background: rgba(76,175,80,0.15); color: #81c784; border-color: rgba(76,175,80,0.25); }
 [data-theme="dark"] .pq-mode-access { background: rgba(25,118,210,0.15); color: #64b5f6; border-color: rgba(25,118,210,0.25); }
 
+.pq-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.pq-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary, #888);
+  text-decoration: none;
+  padding: 0.3rem 0.65rem;
+  border-radius: 7px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.pq-home-btn:hover {
+  color: #137a13;
+  border-color: #137a13;
+  background: rgba(19,122,19,0.05);
+}
+[data-theme="dark"] .pq-home-btn {
+  border-color: #2a2a3e;
+  color: #8888aa;
+}
+[data-theme="dark"] .pq-home-btn:hover {
+  color: #81c784;
+  border-color: #2e5c32;
+  background: rgba(76,175,80,0.08);
+}
+
 @media (max-width: 600px) {
   .pq-box { padding: 24px 18px; }
   .pq-grid-multi { grid-template-columns: 1fr 1fr; }

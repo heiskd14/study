@@ -9,10 +9,16 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
                 Back
             </a>
-            <span class="pq-brand">
-                <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="Logo" style="width:26px;height:26px;border-radius:6px;object-fit:cover;">
-                Beyond The Classroom
-            </span>
+            <div class="pq-nav-right">
+                <a href="{{ url_for('home') }}" class="pq-home-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Home
+                </a>
+                <span class="pq-brand">
+                    <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="Logo" style="width:26px;height:26px;border-radius:6px;object-fit:cover;">
+                    Beyond The Classroom
+                </span>
+            </div>
         </div>
 
         <div class="pq-header">
@@ -67,64 +73,19 @@
 </div>
 
 <style>
-.pqv-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-.pqv-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.2rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color, #e5e7eb);
-    background: var(--card-bg, #fff);
-    transition: box-shadow 0.15s;
-}
+.pqv-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.pqv-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border-radius: 12px; border: 1px solid var(--border-color, #e5e7eb); background: var(--card-bg, #fff); transition: box-shadow 0.15s; }
 .pqv-item:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-.pqv-icon {
-    flex-shrink: 0;
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    background: #f0f4ff;
-    color: #3a5bd9;
-    display: flex; align-items: center; justify-content: center;
-}
+.pqv-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: #f0f4ff; color: #3a5bd9; display: flex; align-items: center; justify-content: center; }
 .pqv-info { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .pqv-name { font-weight: 600; font-size: 0.9rem; color: var(--text-primary, #1a1a2e); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pqv-meta { font-size: 0.75rem; color: var(--text-secondary, #888); }
-.pqv-btn {
-    display: flex; align-items: center; gap: 5px;
-    padding: 0.45rem 0.9rem;
-    border-radius: 8px;
-    background: #4caf50;
-    color: #fff;
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background 0.15s;
-}
+.pqv-btn { display: flex; align-items: center; gap: 5px; padding: 0.45rem 0.9rem; border-radius: 8px; background: #4caf50; color: #fff; font-size: 0.82rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: background 0.15s; }
 .pqv-btn:hover { background: #388e3c; }
-.pqv-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 3rem 1rem;
-    text-align: center;
-    color: var(--text-secondary, #888);
-}
+.pqv-empty { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; padding: 3rem 1rem; text-align: center; color: var(--text-secondary, #888); }
 .pqv-empty p { font-size: 0.95rem; margin: 0; }
-.pqv-upload-link {
-    color: #4caf50;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
+.pqv-upload-link { color: #4caf50; font-weight: 600; text-decoration: none; font-size: 0.9rem; }
 .pqv-upload-link:hover { text-decoration: underline; }
-
 [data-theme="dark"] .pqv-item { border-color: #2a2a3e; background: #1a1a2e; }
 [data-theme="dark"] .pqv-icon { background: #1e2a4a; color: #7b9ef0; }
 </style>

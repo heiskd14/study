@@ -5,14 +5,20 @@
 <div class="pq-container page-wrapper">
     <div class="pq-box">
         <div class="pq-nav">
-            <a href="{{ url_for('past_questions_course', school=school, level=level, department=department, mode='upload') }}" class="pq-back">
+            <a href="{{ url_for('past_questions_course', school=school, level=level, department=department, mode='upload') }}" class="pq-back" id="back-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
                 Back
             </a>
-            <span class="pq-brand">
-                <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="Logo" style="width:26px;height:26px;border-radius:6px;object-fit:cover;">
-                Beyond The Classroom
-            </span>
+            <div class="pq-nav-right">
+                <a href="{{ url_for('home') }}" class="pq-home-btn" id="home-nav-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Home
+                </a>
+                <span class="pq-brand">
+                    <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="Logo" style="width:26px;height:26px;border-radius:6px;object-fit:cover;">
+                    Beyond The Classroom
+                </span>
+            </div>
         </div>
 
         <div class="pq-header">
@@ -33,6 +39,8 @@
             <p class="pq-subtitle">Choose how you'd like to add this past question.</p>
         </div>
 
+        <!-- Flash messages -->
+        <div id="flash-area">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -47,9 +55,11 @@
             {% endfor %}
         {% endif %}
         {% endwith %}
+        </div>
 
-        <div class="pqup-options">
-            <div class="pqup-card" onclick="document.getElementById('file-upload').click()">
+        <!-- Option cards (initial state) -->
+        <div class="pqup-options" id="option-cards">
+            <div class="pqup-card" id="btn-file" onclick="triggerFile()">
                 <div class="pqup-icon pqup-icon-file">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
                 </div>
@@ -57,7 +67,7 @@
                 <span class="pqup-desc">PDF, Word, or image from your device</span>
             </div>
 
-            <div class="pqup-card" onclick="document.getElementById('scan-upload').click()">
+            <div class="pqup-card" id="btn-scan" onclick="triggerScan()">
                 <div class="pqup-icon pqup-icon-scan">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
                 </div>
@@ -66,122 +76,279 @@
             </div>
         </div>
 
+        <!-- File preview panel (shown after file selection, before upload) -->
+        <div id="preview-panel" style="display:none;">
+            <div id="scan-preview-wrap" style="display:none; text-align:center; margin-bottom:1rem;">
+                <img id="scan-preview-img" src="" alt="Scanned document preview"
+                     style="max-width:100%; max-height:300px; border-radius:10px; border:2px solid var(--border-color,#ddd); object-fit:contain;">
+            </div>
+            <div class="pqup-file-info" id="file-info-row">
+                <div class="pqup-file-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div class="pqup-file-details">
+                    <span id="file-name-display" class="pqup-fname"></span>
+                    <span id="file-size-display" class="pqup-fsize"></span>
+                </div>
+            </div>
+            <div class="pqup-preview-actions">
+                <button class="pqup-btn pqup-btn-upload" onclick="startUpload()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Upload
+                </button>
+                <button class="pqup-btn pqup-btn-cancel" onclick="resetState()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+        <!-- Upload progress (shown while uploading) -->
+        <div id="progress-panel" style="display:none;">
+            <div class="pqup-progress-label">
+                <span>Uploading…</span>
+                <span id="progress-pct">0%</span>
+            </div>
+            <div class="pqup-progress-bar">
+                <div class="pqup-progress-fill" id="progress-fill"></div>
+            </div>
+            <div style="text-align:center; margin-top:1rem;">
+                <button class="pqup-btn pqup-btn-cancel" onclick="cancelUpload()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    Cancel Upload
+                </button>
+            </div>
+        </div>
+
+        <!-- Hidden form -->
         <form id="upload-form" method="POST" enctype="multipart/form-data" style="display:none;">
             <input type="hidden" name="school" value="{{ school }}">
             <input type="hidden" name="level" value="{{ level }}">
             <input type="hidden" name="department" value="{{ department }}">
             <input type="hidden" name="course" value="{{ course }}">
-            <input type="file" id="file-upload" name="file"
+            <input type="file" id="file-input" name="file"
                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.webp"
-                   onchange="submitUpload(this)">
-            <input type="file" id="scan-upload" name="file"
+                   onchange="onFileSelected(this, false)">
+            <input type="file" id="scan-input" name="file"
                    accept="image/*" capture="environment"
-                   onchange="submitUpload(this)">
+                   onchange="onFileSelected(this, true)">
         </form>
-
-        <div id="upload-progress" class="pqup-progress" style="display:none;">
-            <div class="pqup-spinner"></div>
-            <span>Uploading, please wait…</span>
-        </div>
 
         <div class="pqup-info">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Accepted formats: PDF, Word (.doc/.docx), JPG, PNG &nbsp;·&nbsp; Max size: 20 MB
+            Accepted: PDF, Word (.doc/.docx), JPG, PNG &nbsp;·&nbsp; Max size: 100 MB
         </div>
     </div>
 </div>
 
 <script>
-function submitUpload(input) {
-    if (input.files && input.files[0]) {
-        document.getElementById('upload-progress').style.display = 'flex';
-        document.querySelectorAll('.pqup-card').forEach(c => c.style.opacity = '0.5');
-        document.getElementById('upload-form').submit();
+var activeXhr = null;
+var selectedFile = null;
+var uploading = false;
+
+function triggerFile() { document.getElementById('file-input').click(); }
+function triggerScan() { document.getElementById('scan-input').click(); }
+
+function onFileSelected(input, isScan) {
+    if (!input.files || !input.files[0]) return;
+    var file = input.files[0];
+
+    if (file.size > 100 * 1024 * 1024) {
+        showFlash('error', 'File is too large. Maximum size is 100 MB.');
+        input.value = '';
+        return;
     }
+
+    selectedFile = { file: file, isScan: isScan };
+
+    document.getElementById('option-cards').style.display = 'none';
+    document.getElementById('preview-panel').style.display = 'block';
+    document.getElementById('file-name-display').textContent = file.name;
+    document.getElementById('file-size-display').textContent = formatSize(file.size);
+
+    if (isScan) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = document.getElementById('scan-preview-img');
+            img.src = e.target.result;
+            document.getElementById('scan-preview-wrap').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    } else {
+        document.getElementById('scan-preview-wrap').style.display = 'none';
+    }
+}
+
+function startUpload() {
+    if (!selectedFile) return;
+
+    var formData = new FormData(document.getElementById('upload-form'));
+
+    document.getElementById('preview-panel').style.display = 'none';
+    document.getElementById('progress-panel').style.display = 'block';
+    uploading = true;
+    blockNav(true);
+
+    activeXhr = new XMLHttpRequest();
+    activeXhr.open('POST', window.location.pathname + window.location.search, true);
+    activeXhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    activeXhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+            var pct = Math.round(e.loaded / e.total * 100);
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('progress-pct').textContent = pct + '%';
+        }
+    };
+
+    activeXhr.onload = function() {
+        uploading = false;
+        blockNav(false);
+        try {
+            var res = JSON.parse(activeXhr.responseText);
+            if (res.success) {
+                showFlash('success', res.message || 'File uploaded successfully!');
+                resetState();
+            } else {
+                showFlash('error', res.error || 'Upload failed. Please try again.');
+                resetState();
+            }
+        } catch(e) {
+            showFlash('success', 'File uploaded successfully!');
+            resetState();
+        }
+    };
+
+    activeXhr.onerror = function() {
+        uploading = false;
+        blockNav(false);
+        showFlash('error', 'Upload failed. Please check your connection and try again.');
+        resetState();
+    };
+
+    activeXhr.onabort = function() {
+        uploading = false;
+        blockNav(false);
+        document.getElementById('progress-panel').style.display = 'none';
+        document.getElementById('option-cards').style.display = 'flex';
+    };
+
+    activeXhr.send(formData);
+}
+
+function cancelUpload() {
+    if (activeXhr) {
+        activeXhr.abort();
+        activeXhr = null;
+    }
+    selectedFile = null;
+    document.getElementById('file-input').value = '';
+    document.getElementById('scan-input').value = '';
+}
+
+function resetState() {
+    selectedFile = null;
+    document.getElementById('file-input').value = '';
+    document.getElementById('scan-input').value = '';
+    document.getElementById('preview-panel').style.display = 'none';
+    document.getElementById('progress-panel').style.display = 'none';
+    document.getElementById('option-cards').style.display = 'flex';
+    document.getElementById('scan-preview-wrap').style.display = 'none';
+    document.getElementById('scan-preview-img').src = '';
+    document.getElementById('progress-fill').style.width = '0%';
+    document.getElementById('progress-pct').textContent = '0%';
+}
+
+function blockNav(on) {
+    if (on) {
+        window.onbeforeunload = function(e) {
+            e.preventDefault();
+            e.returnValue = '';
+            return '';
+        };
+        document.getElementById('back-btn').onclick = function(e) {
+            e.preventDefault();
+            if (confirm('Upload is in progress. Cancel the upload and leave?')) {
+                cancelUpload();
+                window.location.href = this.href;
+            }
+        };
+        document.getElementById('home-nav-btn').onclick = function(e) {
+            e.preventDefault();
+            if (confirm('Upload is in progress. Cancel the upload and leave?')) {
+                cancelUpload();
+                window.location.href = this.href;
+            }
+        };
+    } else {
+        window.onbeforeunload = null;
+        document.getElementById('back-btn').onclick = null;
+        document.getElementById('home-nav-btn').onclick = null;
+    }
+}
+
+function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/(1024*1024)).toFixed(1) + ' MB';
+}
+
+function showFlash(type, msg) {
+    var icon = type === 'success'
+        ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>'
+        : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    var div = document.createElement('div');
+    div.className = 'pq-flash pq-flash-' + type;
+    div.innerHTML = icon + ' ' + msg;
+    var area = document.getElementById('flash-area');
+    area.innerHTML = '';
+    area.appendChild(div);
+    area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 </script>
 
 <style>
-.pqup-options {
-    display: flex;
-    gap: 1.2rem;
-    margin-bottom: 1.5rem;
-}
-.pqup-card {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 2rem 1rem;
-    border-radius: 16px;
-    border: 2px dashed var(--border-color, #ddd);
-    cursor: pointer;
-    transition: border-color 0.18s, background 0.18s, transform 0.15s;
-    text-align: center;
-}
-.pqup-card:hover {
-    transform: translateY(-3px);
-    border-style: solid;
-}
-.pqup-icon {
-    border-radius: 14px;
-    padding: 16px;
-    display: flex;
-}
+.pqup-options { display: flex; gap: 1.2rem; margin-bottom: 1.5rem; }
+.pqup-card { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; padding: 2rem 1rem; border-radius: 16px; border: 2px dashed var(--border-color, #ddd); cursor: pointer; transition: border-color 0.18s, background 0.18s, transform 0.15s; text-align: center; }
+.pqup-card:hover { transform: translateY(-3px); border-style: solid; }
+.pqup-icon { border-radius: 14px; padding: 16px; display: flex; }
 .pqup-icon-file { background: #e8f5e9; color: #2e7d32; }
 .pqup-icon-scan { background: #e3f2fd; color: #1565c0; }
 .pqup-card:hover .pqup-icon-file { background: #c8e6c9; }
 .pqup-card:hover .pqup-icon-scan { background: #bbdefb; }
 .pqup-label { font-size: 1rem; font-weight: 700; color: var(--text-primary, #1a1a2e); }
 .pqup-desc  { font-size: 0.8rem; color: var(--text-secondary, #666); }
-.pqup-info {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.78rem;
-    color: var(--text-secondary, #888);
-    padding: 0.5rem 0.2rem;
-}
-.pqup-progress {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    padding: 1rem;
-    color: var(--text-secondary, #666);
-    font-size: 0.9rem;
-}
-.pqup-spinner {
-    width: 20px; height: 20px;
-    border: 3px solid #e0e0e0;
-    border-top-color: #4caf50;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.pq-flash {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0.8rem 1rem;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
+
+.pqup-file-info { display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1rem; border-radius: 10px; border: 1px solid var(--border-color, #e5e7eb); background: var(--card-bg, #f9f9f9); margin-bottom: 1rem; }
+.pqup-file-icon { flex-shrink:0; color: #4caf50; }
+.pqup-file-details { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pqup-fname { font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-primary, #1a1a2e); }
+.pqup-fsize { font-size: 0.75rem; color: var(--text-secondary, #888); }
+
+.pqup-preview-actions { display: flex; gap: 0.8rem; }
+.pqup-btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.65rem 1.2rem; border-radius: 10px; border: none; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.15s, transform 0.15s; }
+.pqup-btn:hover { transform: translateY(-1px); }
+.pqup-btn-upload { background: #4caf50; color: #fff; flex: 1; justify-content: center; }
+.pqup-btn-upload:hover { background: #388e3c; }
+.pqup-btn-cancel { background: var(--border-color, #e5e7eb); color: var(--text-primary, #333); }
+.pqup-btn-cancel:hover { background: #ffcdd2; color: #b71c1c; }
+
+.pqup-progress-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary, #666); margin-bottom: 0.5rem; font-weight: 500; }
+.pqup-progress-bar { height: 10px; background: var(--border-color, #e5e7eb); border-radius: 99px; overflow: hidden; margin-bottom: 0.3rem; }
+.pqup-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #4caf50, #81c784); border-radius: 99px; transition: width 0.2s ease; }
+
+.pqup-info { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text-secondary, #888); padding: 0.5rem 0.2rem; margin-top: 1rem; }
+.pq-flash { display: flex; align-items: center; gap: 8px; padding: 0.8rem 1rem; border-radius: 10px; font-size: 0.9rem; margin-bottom: 1rem; }
 .pq-flash-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
 .pq-flash-error   { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
 
 [data-theme="dark"] .pqup-card { border-color: #333; }
 [data-theme="dark"] .pqup-icon-file { background: #1b3a1e; color: #81c784; }
 [data-theme="dark"] .pqup-icon-scan { background: #0d2137; color: #64b5f6; }
-[data-theme="dark"] .pqup-card:hover .pqup-icon-file { background: #1e4a22; }
-[data-theme="dark"] .pqup-card:hover .pqup-icon-scan { background: #0d2b47; }
+[data-theme="dark"] .pqup-file-info { background: #1a1a2e; border-color: #2a2a3e; }
 [data-theme="dark"] .pq-flash-success { background: #1b3a1e; color: #81c784; border-color: #2e5c32; }
 [data-theme="dark"] .pq-flash-error   { background: #3b0d0d; color: #ef9a9a; border-color: #7f1d1d; }
 
-@media (max-width: 500px) {
-    .pqup-options { flex-direction: column; }
-}
+@media (max-width: 500px) { .pqup-options { flex-direction: column; } }
 </style>
 {% endblock %}

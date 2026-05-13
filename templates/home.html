@@ -27,7 +27,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
                 <span>Login</span>
             </a>
-            <a href="{{ url_for('signup') }}" class="auth-btn signup-btn">
+            <a href="{{ url_for('login', tab='signup') }}" class="auth-btn signup-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
                 <span>Sign Up</span>
             </a>
@@ -39,7 +39,11 @@
         <div class="hero-content">
             <h1 class="hero-title">Welcome to <span>Beyond The Classroom</span></h1>
             <p class="hero-subtitle">Your complete platform for exam preparation, group learning, and academic excellence.</p>
+            {% if user %}
             <a href="{{ url_for('subject_selection_home') }}" class="hero-cta">Get Started</a>
+            {% else %}
+            <a href="{{ url_for('login', tab='signup') }}" class="hero-cta">Get Started</a>
+            {% endif %}
         </div>
         <div class="hero-illustration">
             <svg class="hero-svg" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +68,7 @@
         <h2 class="section-title">What do you want to do today?</h2>
         <div class="features-grid">
 
-            <a href="{{ url_for('past_questions_school') }}" class="feature-card">
+            <a href="{% if user %}{{ url_for('past_questions_home') }}{% else %}{{ url_for('login') }}{% endif %}" class="feature-card">
                 <div class="feature-icon" style="background: linear-gradient(135deg, #137a13, #0e5c0e);">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -78,7 +82,7 @@
                 <span class="feature-link">Browse Questions →</span>
             </a>
 
-            <a href="#" class="feature-card">
+            <a href="{% if user %}#{% else %}{{ url_for('login') }}{% endif %}" class="feature-card">
                 <div class="feature-icon" style="background: linear-gradient(135deg, #1565c0, #0d47a1);">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -92,7 +96,7 @@
                 <span class="feature-link">Join a Group →</span>
             </a>
 
-            <a href="{{ url_for('subject_selection_home') }}" class="feature-card">
+            <a href="{% if user %}{{ url_for('subject_selection_home') }}{% else %}{{ url_for('login') }}{% endif %}" class="feature-card">
                 <div class="feature-icon" style="background: linear-gradient(135deg, #e65100, #bf360c);">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
@@ -103,7 +107,7 @@
                 <span class="feature-link">Start Practicing →</span>
             </a>
 
-            <a href="{{ url_for('register_page') }}" class="feature-card">
+            <a href="{% if user %}{{ url_for('register_page') }}{% else %}{{ url_for('login') }}{% endif %}" class="feature-card">
                 <div class="feature-icon" style="background: linear-gradient(135deg, #6a1b9a, #4a148c);">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
