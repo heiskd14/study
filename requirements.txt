@@ -4,3 +4,11 @@ requests==2.31.0
 bcrypt
 openai
 werkzeug
+bcrypt
+flask
+flask-session
+openai
+pymongo
+requests
+werkzeug
+gunicorn
