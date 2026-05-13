@@ -190,7 +190,7 @@ def admin_required(f):
 
 @app.route('/')
 def home():
-    resp = make_response(render_template('home.html', user=session.get('user')))
+    resp = make_response(render_template('home.html', user=session.get('user'), is_admin=session.get('admin_logged_in', False)))
     resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     resp.headers['Pragma'] = 'no-cache'
     return resp
@@ -245,10 +245,14 @@ def auth_sync():
     data = request.get_json(silent=True) or {}
     user = data.get('user', {})
     if user:
+        email = user.get('email', '')
         session['user'] = {
             'full_name': user.get('name', ''),
-            'email': user.get('email', '')
+            'email': email
         }
+        if email.lower() in ADMIN_CREDENTIALS:
+            session['admin_logged_in'] = True
+            session['admin_email'] = email.lower()
         return jsonify({'success': True})
     return jsonify({'success': False, 'message': 'No user data'}), 400
 
