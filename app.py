@@ -12,6 +12,14 @@ import sqlite3
 import bcrypt
 import urllib.request
 import urllib.error
+from openai import OpenAI
+
+# the newest OpenAI model is "gpt-5" which was released August 7, 2025.
+# do not change this unless explicitly requested by the user
+_ai_client = OpenAI(
+    api_key=os.environ.get("AI_INTEGRATIONS_OPENAI_API_KEY"),
+    base_url=os.environ.get("AI_INTEGRATIONS_OPENAI_BASE_URL"),
+)
 
 app = Flask(__name__)
 app.secret_key = 'tau-online-study-secret-key-2025'
@@ -874,6 +882,42 @@ def admin_delete_file():
             os.remove(fpath)
     flash('File deleted.', 'success')
     return redirect(url_for('admin_dashboard'))
+
+
+@app.route('/api/ai-chat', methods=['POST'])
+@login_required
+def ai_chat():
+    data = request.get_json(silent=True) or {}
+    messages = data.get('messages', [])
+    if not messages:
+        return jsonify({'error': 'No messages provided'}), 400
+    safe_messages = [
+        {'role': m['role'], 'content': m['content']}
+        for m in messages
+        if m.get('role') in ('user', 'assistant') and m.get('content')
+    ]
+    system_msg = {
+        'role': 'system',
+        'content': (
+            'You are a helpful AI study assistant for TAU (Thomas Adewunmi University) students. '
+            'You answer academic questions clearly and thoroughly, help explain concepts, '
+            'solve problems step by step, and assist with JAMB practice questions. '
+            'Be concise yet thorough, and use a friendly, encouraging tone.'
+        )
+    }
+    try:
+        response = _ai_client.chat.completions.create(
+            model='gpt-5',
+            messages=[system_msg] + safe_messages,
+            max_completion_tokens=8192,
+        )
+        reply = response.choices[0].message.content or ''
+        return jsonify({'reply': reply})
+    except Exception as e:
+        err = str(e)
+        if 'FREE_CLOUD_BUDGET_EXCEEDED' in err:
+            return jsonify({'error': 'FREE_CLOUD_BUDGET_EXCEEDED'}), 429
+        return jsonify({'error': 'AI service error. Please try again.'}), 500
 
 
 init_db()
