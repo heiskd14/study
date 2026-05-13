@@ -43,7 +43,7 @@ def get_mongo():
     global mongo_client, mongo_db
     if mongo_db is not None:
         return mongo_db
-    uri = os.environ.get('MONGODB_URI', 'mongodb+srv://beyondtheclassroom04_db_user:G2ss3tg4Sb3FL0oU@beyond.jszyqdj.mongodb.net/?appName=Beyond')
+    uri = os.environ.get('MONGODB_URI')
     if not uri:
         return None
     try:

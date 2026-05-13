@@ -69,11 +69,13 @@ process.on('uncaughtException', (err) => {
 
 const { waitForDb } = require('./config/db');
 
+app.listen(PORT, 'localhost', () => {
+  console.log(`TAU Auth API running on port ${PORT}`);
+  console.log(`DB Type: ${process.env.DB_TYPE || 'mongodb'}`);
+});
+
 waitForDb().then(() => {
-  app.listen(PORT, 'localhost', () => {
-    console.log(`TAU Auth API running on port ${PORT}`);
-    console.log(`DB Type: ${process.env.DB_TYPE || 'mongodb'}`);
-  });
+  console.log('Database ready.');
 }).catch(err => {
   console.error('Fatal: could not initialize database:', err.message);
   process.exit(1);
