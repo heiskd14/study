@@ -70,7 +70,7 @@ process.on('uncaughtException', (err) => {
 const { waitForDb } = require('./config/db');
 
 waitForDb().then(() => {
-  app.listen(PORT, '0.0.0.0', () => {
+  app.listen(PORT, 'localhost', () => {
     console.log(`TAU Auth API running on port ${PORT}`);
     console.log(`DB Type: ${process.env.DB_TYPE || 'mongodb'}`);
   });
