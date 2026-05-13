@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from functools import wraps
 import uuid
 from flask_session import Session
+from flask_socketio import SocketIO, emit, join_room as sio_join, leave_room as sio_leave
 import json
 import random
 import time
@@ -38,6 +39,7 @@ app.config['SESSION_FILE_DIR'] = '/tmp/flask_session'
 app.config['SESSION_PERMANENT'] = False
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 Session(app)
+socketio = SocketIO(app, cors_allowed_origins='*', async_mode='threading', logger=False, engineio_logger=False)
 
 # ── MongoDB Setup ──────────────────────────────────────────────────────────────
 mongo_client = None
@@ -95,6 +97,22 @@ def init_db():
                   full_name TEXT NOT NULL,
                   email TEXT NOT NULL UNIQUE,
                   password_hash TEXT NOT NULL,
+                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
+    # Group study rooms
+    c.execute('''CREATE TABLE IF NOT EXISTS rooms
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  code TEXT NOT NULL UNIQUE,
+                  creator_email TEXT,
+                  creator_name TEXT,
+                  password_hash TEXT,
+                  has_password INTEGER DEFAULT 0,
+                  members TEXT DEFAULT '[]',
+                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
+    c.execute('''CREATE TABLE IF NOT EXISTS room_messages
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  msg_id TEXT NOT NULL UNIQUE,
+                  room_code TEXT NOT NULL,
+                  data TEXT NOT NULL,
                   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     # Password reset tokens
     c.execute('''CREATE TABLE IF NOT EXISTS password_reset_tokens
@@ -1085,5 +1103,219 @@ def ai_chat():
 init_db()
 get_mongo()
 
+# ── Group Study ────────────────────────────────────────────────────────────────
+def generate_room_code():
+    return str(random.randint(100000, 999999))
+
+def get_room(code):
+    db = get_mongo()
+    if db is not None:
+        r = db.rooms.find_one({'code': code})
+        if r: r['_id'] = str(r['_id'])
+        return r
+    conn = get_db()
+    row = conn.execute('SELECT * FROM rooms WHERE code = ?', (code,)).fetchone()
+    conn.close()
+    if not row: return None
+    d = dict(row)
+    d['members'] = json.loads(d.get('members', '[]'))
+    return d
+
+def save_room_message(msg):
+    db = get_mongo()
+    if db is not None:
+        db.messages.insert_one({**msg})
+    else:
+        conn = get_db()
+        conn.execute('INSERT OR IGNORE INTO room_messages (msg_id, room_code, data) VALUES (?,?,?)',
+                     (msg['id'], msg['room_code'], json.dumps(msg)))
+        conn.commit(); conn.close()
+
+def get_room_messages(code):
+    db = get_mongo()
+    if db is not None:
+        msgs = list(db.messages.find({'room_code': code}).sort('timestamp', 1).limit(300))
+        for m in msgs: m['_id'] = str(m.get('_id', ''))
+        return msgs
+    conn = get_db()
+    rows = conn.execute('SELECT data FROM room_messages WHERE room_code=? ORDER BY created_at LIMIT 300', (code,)).fetchall()
+    conn.close()
+    return [json.loads(r['data']) for r in rows]
+
+@app.route('/group-study')
+@login_required
+def group_study():
+    return render_template('group_study.html')
+
+@app.route('/group-study/new')
+@login_required
+def group_study_create_page():
+    return render_template('create_room.html')
+
+@app.route('/group-study/join-room')
+@login_required
+def group_study_join_page():
+    return render_template('join_room.html')
+
+@app.route('/group-study/create', methods=['POST'])
+@login_required
+def create_room_api():
+    data = request.get_json(silent=True) or {}
+    code = generate_room_code()
+    db = get_mongo()
+    if db is not None:
+        while db.rooms.find_one({'code': code}): code = generate_room_code()
+    password = data.get('password', '').strip()
+    password_hash = hash_password(password) if password else None
+    user = session.get('user', {})
+    member = {'email': user.get('email',''), 'name': user.get('full_name',''), 'joined_at': datetime.utcnow().isoformat()}
+    room = {'code': code, 'creator_email': user.get('email',''), 'creator_name': user.get('full_name',''),
+            'password_hash': password_hash, 'has_password': bool(password),
+            'members': [member], 'created_at': datetime.utcnow()}
+    if db is not None:
+        db.rooms.insert_one(room)
+    else:
+        conn = get_db()
+        conn.execute('INSERT INTO rooms (code,creator_email,creator_name,password_hash,has_password,members) VALUES (?,?,?,?,?,?)',
+                     (code, user.get('email',''), user.get('full_name',''), password_hash, int(bool(password)), json.dumps([member])))
+        conn.commit(); conn.close()
+    return jsonify({'success': True, 'code': code})
+
+@app.route('/group-study/join', methods=['POST'])
+@login_required
+def join_room_api():
+    data = request.get_json(silent=True) or {}
+    code = data.get('code', '').strip()
+    password = data.get('password', '').strip()
+    room = get_room(code)
+    if not room: return jsonify({'success': False, 'message': 'Room not found. Check the code and try again.'}), 404
+    if room.get('has_password'):
+        ph = room.get('password_hash', '')
+        if not password or not bcrypt.checkpw(password.encode(), ph.encode()):
+            return jsonify({'success': False, 'message': 'Incorrect password.'}), 401
+    return jsonify({'success': True, 'code': code})
+
+@app.route('/group-study/room/<code>')
+@login_required
+def room_page(code):
+    room = get_room(code)
+    if not room: return redirect(url_for('group_study'))
+    user = session.get('user', {})
+    db = get_mongo()
+    member = {'email': user.get('email',''), 'name': user.get('full_name',''), 'joined_at': datetime.utcnow().isoformat()}
+    if db is not None:
+        emails = [m.get('email') for m in room.get('members', [])]
+        if user.get('email') not in emails:
+            db.rooms.update_one({'code': code}, {'$push': {'members': member}})
+    messages = get_room_messages(code)
+    room_members = room.get('members', [])
+    return render_template('room.html', room=room, user=user, messages=messages, room_members=room_members)
+
+# ── Group Study SocketIO handlers ───────────────────────────────────────────────
+@socketio.on('join')
+def on_join(data):
+    code = data.get('code'); name = data.get('name'); email = data.get('email')
+    sio_join(code)
+    emit('user_joined', {'name': name, 'email': email}, to=code, include_self=False)
+
+@socketio.on('leave')
+def on_leave(data):
+    code = data.get('code'); name = data.get('name')
+    sio_leave(code)
+    emit('user_left', {'name': name}, to=code, include_self=False)
+
+@socketio.on('message')
+def on_message(data):
+    code = data.get('code', '')
+    text = data.get('text', '').strip()
+    if not text: return
+    msg = {'id': str(uuid.uuid4()), 'room_code': code, 'text': text,
+           'sender': data.get('sender'), 'sender_email': data.get('sender_email'),
+           'timestamp': datetime.utcnow().isoformat(), 'type': data.get('type', 'text'),
+           'reply_to': data.get('reply_to'), 'reactions': {}, 'pinned': False,
+           'starred_by': [], 'deleted': False, 'forwarded': data.get('forwarded', False)}
+    save_room_message(msg)
+    emit('message', msg, to=code)
+    if text.strip().lower().startswith('@ai '):
+        question = text[4:].strip()
+        try:
+            ai_resp = get_ai_client().chat.completions.create(
+                model='gpt-5',
+                messages=[{'role':'system','content':'You are BTC AI, a helpful study assistant in a group study room. Be concise and helpful.'},
+                          {'role':'user','content': question}],
+                max_completion_tokens=1024)
+            ai_text = ai_resp.choices[0].message.content or 'I could not generate a response.'
+        except Exception as e:
+            ai_text = 'AI service unavailable right now.'
+        ai_msg = {'id': str(uuid.uuid4()), 'room_code': code, 'text': ai_text,
+                  'sender': 'BTC AI', 'sender_email': 'ai@btc',
+                  'timestamp': datetime.utcnow().isoformat(), 'type': 'ai',
+                  'reply_to': {'id': msg['id'], 'text': text, 'sender': data.get('sender')},
+                  'reactions': {}, 'pinned': False, 'starred_by': [], 'deleted': False, 'forwarded': False}
+        save_room_message(ai_msg)
+        emit('message', ai_msg, to=code)
+
+@socketio.on('typing')
+def on_typing(data): emit('typing', {'name': data.get('name')}, to=data.get('code'), include_self=False)
+
+@socketio.on('stop_typing')
+def on_stop_typing(data): emit('stop_typing', {'name': data.get('name')}, to=data.get('code'), include_self=False)
+
+@socketio.on('react')
+def on_react(data):
+    code = data.get('code'); msg_id = data.get('msg_id'); emoji = data.get('emoji'); uemail = data.get('email')
+    db = get_mongo()
+    if db is not None:
+        msg = db.messages.find_one({'id': msg_id, 'room_code': code})
+        if msg:
+            reactions = msg.get('reactions', {})
+            if emoji not in reactions: reactions[emoji] = []
+            if uemail in reactions[emoji]: reactions[emoji].remove(uemail)
+            else: reactions[emoji].append(uemail)
+            if not reactions[emoji]: del reactions[emoji]
+            db.messages.update_one({'id': msg_id}, {'$set': {'reactions': reactions}})
+            emit('reaction_updated', {'msg_id': msg_id, 'reactions': reactions}, to=code)
+
+@socketio.on('pin_message')
+def on_pin(data):
+    code = data.get('code'); msg_id = data.get('msg_id')
+    db = get_mongo()
+    if db is not None:
+        db.messages.update_one({'id': msg_id}, {'$set': {'pinned': True}})
+        emit('message_pinned', {'msg_id': msg_id}, to=code)
+
+@socketio.on('delete_message')
+def on_delete(data):
+    code = data.get('code'); msg_id = data.get('msg_id'); uemail = data.get('email')
+    db = get_mongo()
+    if db is not None:
+        msg = db.messages.find_one({'id': msg_id})
+        if msg and msg.get('sender_email') == uemail:
+            db.messages.update_one({'id': msg_id}, {'$set': {'deleted': True, 'text': 'This message was deleted'}})
+            emit('message_deleted', {'msg_id': msg_id}, to=code)
+
+@socketio.on('star_message')
+def on_star(data):
+    code = data.get('code'); msg_id = data.get('msg_id'); uemail = data.get('email')
+    db = get_mongo()
+    if db is not None:
+        msg = db.messages.find_one({'id': msg_id})
+        if msg:
+            starred = msg.get('starred_by', [])
+            if uemail in starred: starred.remove(uemail); is_starred = False
+            else: starred.append(uemail); is_starred = True
+            db.messages.update_one({'id': msg_id}, {'$set': {'starred_by': starred}})
+            emit('message_starred', {'msg_id': msg_id, 'starred': is_starred, 'email': uemail}, to=code)
+
+@socketio.on('get_members')
+def on_get_members(data):
+    room = get_room(data.get('code', ''))
+    members = room.get('members', []) if room else []
+    emit('room_members', {'members': members})
+
+
+init_db()
+get_mongo()
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=False, allow_unsafe_werkzeug=True)

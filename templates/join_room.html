@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Study Room — BTC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{--bg:#05060f;--glass:rgba(255,255,255,0.06);--glass-border:rgba(255,255,255,0.10);--accent:#1565c0;--accent-light:#1976d2;--accent-glow:rgba(21,101,192,0.35);--text:#f0f0f8;--text-muted:#8888aa;--text-dim:#4a4a6a;--error:#ff5068;--radius:20px;--radius-sm:12px;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--spring:0.5s cubic-bezier(0.34,1.56,0.64,1);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden;}
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.4;}
+    .orb-1{width:500px;height:500px;background:radial-gradient(circle,#1565c088,transparent 70%);top:-150px;left:-100px;}
+    .orb-2{width:400px;height:400px;background:radial-gradient(circle,#0d47a166,transparent 70%);bottom:-100px;right:-80px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2.5rem;background:rgba(5,6,15,0.7);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);}
+    .nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--font-display);font-weight:700;font-size:1.1rem;color:var(--text);text-decoration:none;}
+    .nav-logo img{width:32px;height:32px;border-radius:8px;}
+    .nav-back{font-size:0.85rem;color:var(--text-muted);text-decoration:none;padding:0.45rem 1rem;border-radius:50px;border:1px solid var(--glass-border);transition:0.2s;}
+    .nav-back:hover{color:var(--text);}
+    main{position:relative;z-index:1;width:100%;max-width:480px;padding:7rem 1.5rem 3rem;}
+    .card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:2.5rem 2.2rem;box-shadow:0 8px 32px rgba(0,0,0,0.5),0 0 60px rgba(21,101,192,0.06);backdrop-filter:blur(24px);animation:fadeUp 0.5s var(--spring);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px) scale(0.97);}to{opacity:1;transform:none;}}
+    .card-header{text-align:center;margin-bottom:2rem;}
+    .card-icon{width:64px;height:64px;margin:0 auto 1rem;background:linear-gradient(135deg,var(--accent),var(--accent-light));border-radius:18px;display:grid;place-items:center;font-size:1.5rem;box-shadow:0 8px 24px var(--accent-glow);animation:popIn 0.6s var(--spring);}
+    @keyframes popIn{from{transform:scale(0) rotate(-20deg);}to{transform:scale(1) rotate(0);}}
+    .card-header h1{font-family:var(--font-display);font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--text) 40%,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .card-header p{color:var(--text-muted);font-size:0.9rem;margin-top:0.3rem;}
+    .form-group{margin-bottom:1.2rem;}
+    .form-group label{display:block;font-size:0.78rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.45rem;}
+    .input-wrap{position:relative;}
+    .input-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:0.85rem;pointer-events:none;}
+    input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm);padding:0.85rem 1rem 0.85rem 2.7rem;color:var(--text);font-family:var(--font-body);font-size:0.95rem;outline:none;transition:0.3s;letter-spacing:0.05em;}
+    input:focus{border-color:var(--accent);background:rgba(21,101,192,0.06);box-shadow:0 0 0 3px rgba(21,101,192,0.15);}
+    input::placeholder{color:var(--text-dim);}
+    #room-code{font-size:1.3rem;font-family:var(--font-display);text-align:center;letter-spacing:0.25em;}
+    .toggle-pw{position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:0.9rem;}
+    .optional-label{font-size:0.75rem;color:var(--text-dim);margin-left:0.3rem;font-style:italic;}
+    .field-err{font-size:0.78rem;color:var(--error);margin-top:0.3rem;min-height:1rem;}
+    .btn{width:100%;padding:0.95rem;background:linear-gradient(135deg,var(--accent),var(--accent-light));border:none;border-radius:var(--radius-sm);color:white;font-family:var(--font-display);font-size:1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;transition:transform var(--spring),box-shadow 0.3s;box-shadow:0 6px 24px rgba(21,101,192,0.4);margin-top:1.5rem;}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(21,101,192,0.55);}
+    .btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+    #toast-container{position:fixed;top:1.5rem;right:1.5rem;z-index:9999;display:flex;flex-direction:column;gap:0.6rem;}
+    .tau-toast{display:flex;align-items:center;gap:0.75rem;padding:0.85rem 1.2rem;border-radius:var(--radius-sm);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);box-shadow:0 8px 24px rgba(0,0,0,0.4);min-width:260px;font-size:0.88rem;animation:toastIn 0.4s var(--spring);}
+    @keyframes toastIn{from{opacity:0;transform:translateX(100%);}to{opacity:1;transform:none;}}
+    .tau-toast.error{background:rgba(255,80,104,0.12);border-color:rgba(255,80,104,0.25);color:var(--error);}
+  </style>
+</head>
+<body>
+  <div class="bg-canvas"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+  <div id="toast-container"></div>
+  <nav>
+    <a href="/" class="nav-logo"><img src="/static/img/btc_logo.png" alt="BTC"><span>Beyond The Classroom</span></a>
+    <a href="/group-study" class="nav-back"><i class="fa-solid fa-arrow-left" style="margin-right:0.3rem;"></i>Back</a>
+  </nav>
+  <main>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon"><i class="fa-solid fa-right-to-bracket"></i></div>
+        <h1>Join a Room</h1>
+        <p>Enter the room code shared by your classmate</p>
+      </div>
+      <div class="form-group">
+        <label>Room Code</label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-hashtag input-icon"></i>
+          <input type="text" id="room-code" maxlength="6" placeholder="000000" autocomplete="off" oninput="this.value=this.value.replace(/\D/g,'')"/>
+        </div>
+        <div class="field-err" id="code-err"></div>
+      </div>
+      <div class="form-group">
+        <label>Password <span class="optional-label">if required</span></label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-lock input-icon"></i>
+          <input type="password" id="room-password" placeholder="Leave blank if no password"/>
+          <button type="button" class="toggle-pw" onclick="togglePw()"><i class="fa-regular fa-eye" id="pw-eye"></i></button>
+        </div>
+        <div class="field-err" id="pw-err"></div>
+      </div>
+      <button class="btn" id="join-btn" onclick="joinRoom()">
+        <i class="fa-solid fa-right-to-bracket"></i> Join Room
+      </button>
+    </div>
+  </main>
+  <script>
+    function togglePw(){
+      const inp=document.getElementById('room-password'),eye=document.getElementById('pw-eye');
+      if(inp.type==='password'){inp.type='text';eye.className='fa-regular fa-eye-slash';}
+      else{inp.type='password';eye.className='fa-regular fa-eye';}
+    }
+    async function joinRoom(){
+      const code=document.getElementById('room-code').value.trim();
+      const password=document.getElementById('room-password').value;
+      const btn=document.getElementById('join-btn');
+      document.getElementById('code-err').textContent='';
+      document.getElementById('pw-err').textContent='';
+      if(code.length!==6){document.getElementById('code-err').textContent='Please enter a valid 6-digit code.';return;}
+      btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Joining…';
+      try{
+        const res=await fetch('/group-study/join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code,password})});
+        const data=await res.json();
+        if(data.success){window.location.href='/group-study/room/'+data.code;}
+        else{
+          if(data.message&&data.message.toLowerCase().includes('password'))document.getElementById('pw-err').textContent=data.message;
+          else document.getElementById('code-err').textContent=data.message||'Failed to join room.';
+          btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-right-to-bracket"></i> Join Room';
+        }
+      }catch(e){showToast('Server error.');btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-right-to-bracket"></i> Join Room';}
+    }
+    function showToast(msg){
+      const t=document.createElement('div');t.className='tau-toast error';
+      t.innerHTML='<i class="fa-solid fa-circle-xmark"></i> '+msg;
+      document.getElementById('toast-container').appendChild(t);setTimeout(()=>t.remove(),4000);
+    }
+    document.getElementById('room-code').addEventListener('keydown',e=>{if(e.key==='Enter')joinRoom();});
+  </script>
+</body>
+</html>

@@ -12,3 +12,5 @@ pymongo
 requests
 werkzeug
 gunicorn
+eventlet
+flask-socketio

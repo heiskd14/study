@@ -86,7 +86,7 @@
                 <span class="feature-link">Browse Questions →</span>
             </a>
 
-            <a href="{% if user %}#{% else %}{{ url_for('login') }}{% endif %}" class="feature-card">
+            <a href="{% if user %}{{ url_for('group_study') }}{% else %}{{ url_for('login') }}{% endif %}" class="feature-card">
                 <div class="feature-icon" style="background: linear-gradient(135deg, #1565c0, #0d47a1);">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
