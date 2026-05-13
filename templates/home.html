@@ -39,9 +39,7 @@
         <div class="hero-content">
             <h1 class="hero-title">Welcome to <span>Beyond The Classroom</span></h1>
             <p class="hero-subtitle">Your complete platform for exam preparation, group learning, and academic excellence.</p>
-            {% if user %}
-            <a href="{{ url_for('subject_selection_home') }}" class="hero-cta">Get Started</a>
-            {% else %}
+            {% if not user %}
             <a href="{{ url_for('login', tab='signup') }}" class="hero-cta">Get Started</a>
             {% endif %}
         </div>
