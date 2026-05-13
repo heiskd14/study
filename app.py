@@ -620,8 +620,12 @@ PAST_QUESTIONS_COURSES = {
         "Estate Management", "Quantity Surveying",
         "Building Technology", "Surveying and Geoinformatics",
     ],
-    "Faculty of Computing and Applied Science": [
-        # 200 Level — Harmattan Semester
+    "Faculty of Computing and Applied Science": [],
+}
+
+LEVEL_SPECIFIC_COURSES = {
+    ("Faculty of Computing and Applied Science", "200 Level"): [
+        # Harmattan Semester
         "COS 201 - Computer Programming I",
         "SEN 201 - Introduction to Software Engineering",
         "MTH 201 - Mathematical Methods I",
@@ -632,16 +636,18 @@ PAST_QUESTIONS_COURSES = {
         "IFT 211 - Digital Logic Design",
         "CSC 299 - SIWES I",
         "TAU 201 - Saylor Academy: Upper-Intermediate English (ESL 003)",
-        # 200 Level — Rain Semester
+        # Rain Semester
         "COS 202 - Computer Programming II",
         "IFT 212 - Computer Architecture and Organization",
         "MTH 202 - Elementary Differential Equations",
         "GST 212 - Philosophy, Logic and Human Existence",
         "TAU-CSC 208 - Desktop Publishing",
         "TAU-CSC 210 - Multimedia Creation and Editing",
-        "DSA 108 - Photography (200L)",
+        "DSA 108 - Photography",
         "TAU 202 - Saylor Academy: Advanced English (ESL 004)",
-        # 300 Level — Harmattan Semester
+    ],
+    ("Faculty of Computing and Applied Science", "300 Level"): [
+        # Harmattan Semester
         "CSC 301 - Data Structures",
         "CSC 309 - Artificial Intelligence",
         "CYB 201 - Introduction to Cyber Security and Strategy",
@@ -651,7 +657,7 @@ PAST_QUESTIONS_COURSES = {
         "TAU-CSC 313 - Troubleshooting and Repairs of Computer Systems and Mobile Devices",
         "TAU-EDX 301 - Saylor Academy: Business-Proficient English (ESL 005)",
         "TAU-EDX 303 - Creative Innovative Teams with Design Thinking",
-        # 300 Level — Rain Semester
+        # Rain Semester
         "CSC 308 - Operating Systems",
         "CSC 322 - Computer Science Innovation and New Technology",
         "CSC 399 - SIWES II",
@@ -659,7 +665,7 @@ PAST_QUESTIONS_COURSES = {
         "ENT 312 - Venture Creation",
         "GST 312 - Peace and Conflict Resolution",
         "TAU-SEN 306 - Advanced Web Development",
-        "TAU-ENT 108 - Photography (300L)",
+        "TAU-ENT 108 - Photography",
         "TAU-EDX 302 - Resuming, Networking and Interviewing Skills",
         "TAU-EDX 306 - Innovation and Entrepreneurship",
     ],
@@ -725,7 +731,10 @@ def past_questions_course():
     mode = request.args.get('mode', 'access')
     if not school or not level or not department:
         return redirect(url_for('past_questions_home'))
-    courses = PAST_QUESTIONS_COURSES.get(department, [])
+    courses = LEVEL_SPECIFIC_COURSES.get(
+        (department, level),
+        PAST_QUESTIONS_COURSES.get(department, [])
+    )
     return render_template('past_questions_course.html', school=school, level=level, department=department, courses=courses, mode=mode)
 
 
