@@ -162,7 +162,7 @@
           <td class="adm-date">{{ f.upload_date[:10] if f.upload_date else '—' }}</td>
           <td style="white-space:nowrap;">
             <a href="/past-questions/files/{{ f.filename }}" target="_blank" class="adm-view-btn">↗ View</a>
-            <button class="adm-del-btn" onclick="confirmDelete('{{ f._id }}', '{{ f.filename }}', '{{ f.original_name|replace("'","") }}')">✕ Delete</button>
+            <button class="adm-del-btn" onclick="confirmDelete(this);" data-id="{{ f._id }}" data-filename="{{ f.filename }}" data-name="{{ f.original_name }}">✕ Delete</button>
           </td>
         </tr>
         {% endfor %}
@@ -192,10 +192,10 @@
 </div>
 
 <script>
-function confirmDelete(id, filename, name) {
-  document.getElementById('del-file-id').value = id;
-  document.getElementById('del-filename').value = filename;
-  document.getElementById('del-modal-name').textContent = '"' + name + '"';
+function confirmDelete(btn) {
+  document.getElementById('del-file-id').value = btn.dataset.id;
+  document.getElementById('del-filename').value = btn.dataset.filename;
+  document.getElementById('del-modal-name').textContent = '"' + btn.dataset.name + '"';
   document.getElementById('del-modal').classList.add('open');
 }
 function closeModal() {

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash, send_from_directory, Response
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash, send_from_directory, Response, make_response
 from werkzeug.utils import secure_filename
 from functools import wraps
 import uuid
@@ -176,7 +176,10 @@ def admin_required(f):
 
 @app.route('/')
 def home():
-    return render_template('home.html', user=session.get('user'))
+    resp = make_response(render_template('home.html', user=session.get('user')))
+    resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    resp.headers['Pragma'] = 'no-cache'
+    return resp
 
 # ── Auth ───────────────────────────────────────────────────────────────────────
 @app.route('/login', methods=['GET'])
