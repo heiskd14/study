@@ -7,7 +7,11 @@ import json
 import random
 import time
 import os
-from datetime import datetime
+import secrets
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from datetime import datetime, timedelta
 import sqlite3
 import bcrypt
 import urllib.request
@@ -92,6 +96,14 @@ def init_db():
                   email TEXT NOT NULL UNIQUE,
                   password_hash TEXT NOT NULL,
                   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
+    # Password reset tokens
+    c.execute('''CREATE TABLE IF NOT EXISTS password_reset_tokens
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  email TEXT NOT NULL,
+                  token TEXT NOT NULL UNIQUE,
+                  expires_at TEXT NOT NULL,
+                  used INTEGER DEFAULT 0,
+                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     conn.commit()
     conn.close()
 
@@ -106,6 +118,50 @@ def hash_password(password):
 
 def check_password(password, hashed):
     return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
+
+def send_reset_email(to_email, reset_url):
+    smtp_server = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
+    smtp_port = int(os.environ.get('SMTP_PORT', '587'))
+    smtp_user = os.environ.get('SMTP_USER', '')
+    smtp_password = os.environ.get('SMTP_PASSWORD', '')
+
+    if not smtp_user or not smtp_password:
+        print(f'⚠️  Email not configured. Reset URL for {to_email}: {reset_url}')
+        return False
+
+    subject = 'Reset your Beyond The Classroom password'
+    html_body = f"""
+    <div style="font-family:sans-serif;max-width:520px;margin:0 auto;background:#05060f;color:#f0f0f8;padding:40px;border-radius:16px;">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div style="display:inline-block;background:linear-gradient(135deg,#137a13,#1aaa1a);padding:14px 22px;border-radius:12px;font-size:1.3rem;font-weight:700;color:white;letter-spacing:1px;">BTC</div>
+        <h2 style="margin:18px 0 6px;font-size:1.5rem;">Reset Your Password</h2>
+        <p style="color:#8888aa;font-size:0.9rem;">Beyond The Classroom</p>
+      </div>
+      <p style="color:#ccc;line-height:1.6;">We received a request to reset the password for your account. Click the button below to choose a new password.</p>
+      <div style="text-align:center;margin:32px 0;">
+        <a href="{reset_url}" style="background:linear-gradient(135deg,#137a13,#1aaa1a);color:white;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:600;font-size:1rem;display:inline-block;">Reset Password</a>
+      </div>
+      <p style="color:#8888aa;font-size:0.82rem;line-height:1.6;">This link will expire in <strong style="color:#f0f0f8;">1 hour</strong>. If you didn't request a password reset, you can safely ignore this email.</p>
+      <hr style="border:none;border-top:1px solid rgba(255,255,255,0.1);margin:24px 0;">
+      <p style="color:#4a4a6a;font-size:0.75rem;text-align:center;">If the button doesn't work, copy and paste this link:<br><span style="color:#1aaa1a;word-break:break-all;">{reset_url}</span></p>
+    </div>
+    """
+    try:
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = subject
+        msg['From'] = f'Beyond The Classroom <{smtp_user}>'
+        msg['To'] = to_email
+        msg.attach(MIMEText(html_body, 'html'))
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.ehlo()
+            server.starttls()
+            server.login(smtp_user, smtp_password)
+            server.sendmail(smtp_user, to_email, msg.as_string())
+        print(f'✅ Reset email sent to {to_email}')
+        return True
+    except Exception as e:
+        print(f'⚠️  Failed to send reset email: {e}')
+        return False
 
 def create_user(full_name, email, password):
     hashed = hash_password(password)
@@ -238,6 +294,99 @@ def api_proxy(path):
     excluded = {'transfer-encoding', 'connection', 'content-encoding'}
     clean_headers = {k: v for k, v in resp_headers.items() if k.lower() not in excluded}
     return Response(content, status=status, headers=clean_headers)
+
+# ── Password Reset ─────────────────────────────────────────────────────────────
+@app.route('/forgot-password', methods=['POST'])
+def forgot_password():
+    data = request.get_json(silent=True) or {}
+    email = data.get('email', '').strip().lower()
+    if not email:
+        return jsonify({'success': False, 'message': 'Email is required.'}), 400
+
+    token = secrets.token_urlsafe(32)
+    expires_at = datetime.utcnow() + timedelta(hours=1)
+    user_found = False
+
+    db = get_mongo()
+    if db is not None:
+        user = db.users.find_one({'email': email})
+        if user:
+            user_found = True
+            db.password_reset_tokens.delete_many({'email': email})
+            db.password_reset_tokens.create_index('expires_at', expireAfterSeconds=0)
+            db.password_reset_tokens.insert_one({
+                'email': email,
+                'token': token,
+                'expires_at': expires_at,
+                'used': False
+            })
+    else:
+        conn = get_db()
+        c = conn.cursor()
+        user = c.execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
+        if user:
+            user_found = True
+            c.execute('DELETE FROM password_reset_tokens WHERE email = ?', (email,))
+            c.execute('INSERT INTO password_reset_tokens (email, token, expires_at) VALUES (?, ?, ?)',
+                      (email, token, expires_at.isoformat()))
+        conn.commit()
+        conn.close()
+
+    if user_found:
+        reset_url = request.host_url.rstrip('/') + f'/reset-password/{token}'
+        send_reset_email(email, reset_url)
+
+    return jsonify({'success': True, 'message': 'If that email is registered, a reset link has been sent.'})
+
+
+@app.route('/reset-password/<token>', methods=['GET'])
+def reset_password_page(token):
+    return render_template('reset_password.html', token=token)
+
+
+@app.route('/reset-password', methods=['POST'])
+def reset_password():
+    data = request.get_json(silent=True) or {}
+    token = data.get('token', '').strip()
+    new_password = data.get('password', '')
+
+    if not token or not new_password or len(new_password) < 8:
+        return jsonify({'success': False, 'message': 'Invalid request.'}), 400
+
+    new_hash = hash_password(new_password)
+    now = datetime.utcnow()
+
+    db = get_mongo()
+    if db is not None:
+        record = db.password_reset_tokens.find_one({
+            'token': token,
+            'used': False,
+            'expires_at': {'$gt': now}
+        })
+        if not record:
+            return jsonify({'success': False, 'message': 'This reset link is invalid or has expired.'}), 400
+        db.users.update_one(
+            {'email': record['email']},
+            {'$set': {'password': new_hash, 'password_hash': new_hash}}
+        )
+        db.password_reset_tokens.update_one({'token': token}, {'$set': {'used': True}})
+    else:
+        conn = get_db()
+        c = conn.cursor()
+        record = c.execute(
+            'SELECT * FROM password_reset_tokens WHERE token = ? AND used = 0 AND expires_at > ?',
+            (token, now.isoformat())
+        ).fetchone()
+        if not record:
+            conn.close()
+            return jsonify({'success': False, 'message': 'This reset link is invalid or has expired.'}), 400
+        c.execute('UPDATE users SET password_hash = ? WHERE email = ?', (new_hash, record['email']))
+        c.execute('UPDATE password_reset_tokens SET used = 1 WHERE token = ?', (token,))
+        conn.commit()
+        conn.close()
+
+    return jsonify({'success': True, 'message': 'Password updated successfully. You can now log in.'})
+
 
 # ── Auth sync: JS calls this after JWT login to set Flask session ──────────────
 @app.route('/auth/sync', methods=['POST'])

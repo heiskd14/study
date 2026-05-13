@@ -282,12 +282,27 @@ $('forgot-modal')?.addEventListener('click', e => {
   if (e.target === $('forgot-modal')) $('forgot-modal').classList.remove('open');
 });
 
-window.handleForgot = function () {
+window.handleForgot = async function () {
   const email = $('forgot-email')?.value.trim();
   if (!validateEmail(email)) {
     showToast('Enter a valid email address.', 'error');
     return;
   }
-  showToast('Reset link sent! Check your inbox.', 'success', 4000);
-  $('forgot-modal').classList.remove('open');
+  const btn = document.querySelector('#forgot-modal .tau-btn');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending…'; }
+  try {
+    const res = await fetch('/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    $('forgot-modal').classList.remove('open');
+    showToast(data.message || 'If that email is registered, a reset link has been sent.', 'success', 5000);
+    if ($('forgot-email')) $('forgot-email').value = '';
+  } catch (err) {
+    showToast('Cannot reach server. Please try again.', 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = '<span class="btn-text">Send Reset Link</span>'; }
+  }
 };
