@@ -16,10 +16,16 @@ from openai import OpenAI
 
 # the newest OpenAI model is "gpt-5" which was released August 7, 2025.
 # do not change this unless explicitly requested by the user
-_ai_client = OpenAI(
-    api_key=os.environ.get("AI_INTEGRATIONS_OPENAI_API_KEY"),
-    base_url=os.environ.get("AI_INTEGRATIONS_OPENAI_BASE_URL"),
-)
+_ai_client = None
+
+def get_ai_client():
+    global _ai_client
+    if _ai_client is None:
+        _ai_client = OpenAI(
+            api_key=os.environ.get("AI_INTEGRATIONS_OPENAI_API_KEY"),
+            base_url=os.environ.get("AI_INTEGRATIONS_OPENAI_BASE_URL"),
+        )
+    return _ai_client
 
 app = Flask(__name__)
 app.secret_key = 'tau-online-study-secret-key-2025'
@@ -906,7 +912,7 @@ def ai_chat():
         )
     }
     try:
-        response = _ai_client.chat.completions.create(
+        response = get_ai_client().chat.completions.create(
             model='gpt-5',
             messages=[system_msg] + safe_messages,
             max_completion_tokens=8192,
