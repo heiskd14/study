@@ -1,6 +1,5 @@
-const CACHE_NAME = 'jamb-cbt-v1';
-const urlsToCache = [
-  '/',
+const CACHE_NAME = 'btc-static-v2';
+const STATIC_ASSETS = [
   '/static/css/style.css',
   '/static/js/exam.js'
 ];
@@ -8,9 +7,7 @@ const urlsToCache = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+      .then(cache => cache.addAll(STATIC_ASSETS))
       .catch(err => console.log('Cache add error:', err))
   );
   self.skipWaiting();
@@ -18,42 +15,33 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
+    caches.keys().then(cacheNames =>
+      Promise.all(
+        cacheNames.map(name => {
+          if (name !== CACHE_NAME) return caches.delete(name);
         })
-      );
-    })
+      )
+    )
   );
   self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') {
-    return;
-  }
+  if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response;
-        }
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME)
-          .then(cache => {
-            cache.put(event.request, responseToCache);
-          });
-        return response;
+  const url = new URL(event.request.url);
+
+  if (url.pathname.startsWith('/static/')) {
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        return cached || fetch(event.request).then(resp => {
+          if (resp && resp.status === 200) {
+            const clone = resp.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return resp;
+        });
       })
-      .catch(() => {
-        return caches.match(event.request)
-          .then(response => {
-            return response || caches.match('/');
-          });
-      })
-  );
+    );
+  }
 });
