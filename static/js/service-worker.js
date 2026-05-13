@@ -1,4 +1,4 @@
-const CACHE_NAME = 'btc-static-v2';
+const CACHE_NAME = 'btc-static-v3';
 const STATIC_ASSETS = [
   '/static/css/style.css',
   '/static/js/exam.js'
