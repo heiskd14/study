@@ -314,6 +314,8 @@ def api_proxy(path):
     return Response(content, status=status, headers=clean_headers)
 
 # ── Password Reset ─────────────────────────────────────────────────────────────
+RESET_COOLDOWN_SECONDS = 120  # 2-minute cooldown between reset email requests
+
 @app.route('/forgot-password', methods=['POST'])
 def forgot_password():
     data = request.get_json(silent=True) or {}
@@ -323,6 +325,8 @@ def forgot_password():
 
     token = secrets.token_urlsafe(32)
     expires_at = datetime.utcnow() + timedelta(hours=1)
+    now = datetime.utcnow()
+    cooldown_cutoff = now - timedelta(seconds=RESET_COOLDOWN_SECONDS)
     user_found = False
 
     db = get_mongo()
@@ -330,13 +334,21 @@ def forgot_password():
         user = db.users.find_one({'email': email})
         if user:
             user_found = True
+            recent = db.password_reset_tokens.find_one({
+                'email': email,
+                'created_at': {'$gt': cooldown_cutoff}
+            })
+            if recent:
+                seconds_left = RESET_COOLDOWN_SECONDS - int((now - recent['created_at']).total_seconds())
+                return jsonify({'success': False, 'message': f'Please wait {seconds_left} seconds before requesting another reset email.'}), 429
             db.password_reset_tokens.delete_many({'email': email})
             db.password_reset_tokens.create_index('expires_at', expireAfterSeconds=0)
             db.password_reset_tokens.insert_one({
                 'email': email,
                 'token': token,
                 'expires_at': expires_at,
-                'used': False
+                'used': False,
+                'created_at': now
             })
     else:
         conn = get_db()
@@ -344,6 +356,17 @@ def forgot_password():
         user = c.execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
         if user:
             user_found = True
+            recent = c.execute(
+                'SELECT created_at FROM password_reset_tokens WHERE email = ? AND used = 0 ORDER BY created_at DESC LIMIT 1',
+                (email,)
+            ).fetchone()
+            if recent:
+                created_at = datetime.fromisoformat(recent['created_at'])
+                elapsed = (now - created_at).total_seconds()
+                if elapsed < RESET_COOLDOWN_SECONDS:
+                    seconds_left = int(RESET_COOLDOWN_SECONDS - elapsed)
+                    conn.close()
+                    return jsonify({'success': False, 'message': f'Please wait {seconds_left} seconds before requesting another reset email.'}), 429
             c.execute('DELETE FROM password_reset_tokens WHERE email = ?', (email,))
             c.execute('INSERT INTO password_reset_tokens (email, token, expires_at) VALUES (?, ?, ?)',
                       (email, token, expires_at.isoformat()))
