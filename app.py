@@ -1236,6 +1236,8 @@ def on_message(data):
            'starred_by': [], 'deleted': False, 'forwarded': data.get('forwarded', False)}
     save_room_message(msg)
     emit('message', msg, to=code)
+    if '@all' in text.lower():
+        emit('mention_all', {'sender': data.get('sender'), 'room_code': code, 'msg_id': msg['id']}, to=code, include_self=False)
     if text.strip().lower().startswith('@ai '):
         question = text[4:].strip()
         try:
@@ -1246,7 +1248,14 @@ def on_message(data):
                 max_completion_tokens=1024)
             ai_text = ai_resp.choices[0].message.content or 'I could not generate a response.'
         except Exception as e:
-            ai_text = 'AI service unavailable right now.'
+            print(f'[BTC AI Error] {type(e).__name__}: {e}')
+            err_str = str(e)
+            if 'api_key' in err_str.lower() or 'authentication' in err_str.lower() or 'unauthorized' in err_str.lower():
+                ai_text = '⚠️ BTC AI needs the OpenAI integration configured. Please ask the admin to add the OpenAI integration in the project settings.'
+            elif 'budget' in err_str.lower() or 'quota' in err_str.lower() or 'limit' in err_str.lower():
+                ai_text = '⚠️ BTC AI usage limit reached. Please try again later.'
+            else:
+                ai_text = f'⚠️ BTC AI error: {err_str[:120]}'
         ai_msg = {'id': str(uuid.uuid4()), 'room_code': code, 'text': ai_text,
                   'sender': 'BTC AI', 'sender_email': 'ai@btc',
                   'timestamp': datetime.utcnow().isoformat(), 'type': 'ai',
@@ -1312,6 +1321,23 @@ def on_get_members(data):
     room = get_room(data.get('code', ''))
     members = room.get('members', []) if room else []
     emit('room_members', {'members': members})
+
+# ── WebRTC call relay ──────────────────────────────────────────────────────────
+@socketio.on('call_offer')
+def on_call_offer(data):
+    emit('call_offer', data, to=data.get('code'), include_self=False)
+
+@socketio.on('call_answer')
+def on_call_answer(data):
+    emit('call_answer', data, to=data.get('code'), include_self=False)
+
+@socketio.on('ice_candidate')
+def on_ice_candidate(data):
+    emit('ice_candidate', data, to=data.get('code'), include_self=False)
+
+@socketio.on('call_ended')
+def on_call_ended(data):
+    emit('call_ended', data, to=data.get('code'), include_self=False)
 
 
 init_db()

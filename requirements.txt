@@ -14,3 +14,4 @@ werkzeug
 gunicorn
 eventlet
 flask-socketio
+openai
