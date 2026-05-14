@@ -455,6 +455,10 @@ def register_page():
 
 @app.route('/practice')
 def subject_selection_home():
+    return render_template('practice_home.html')
+
+@app.route('/practice/register')
+def practice_register():
     session.pop('student_info', None)
     session['mode'] = 'practice'
     return render_template('registration.html')
@@ -478,7 +482,8 @@ def subject_selection():
         "Physics", "Chemistry", "Biology",
         "Principles of Accounts", "Christian Religious Studies"
     ]
-    return render_template('subject_selection.html', subjects=all_subjects)
+    return render_template('subject_selection.html', subjects=all_subjects,
+                           mode=session.get('mode', 'exam'))
 
 @app.route('/select_subjects', methods=['POST'])
 def select_subjects():
@@ -539,7 +544,11 @@ def select_subjects():
     session['subject_questions'] = subject_questions
     session['subject_answers'] = subject_answers
     session['start_time'] = time.time()
-    session['exam_duration'] = time_limit_min * 60
+    # Practice mode has no timer — set duration to 99 hours
+    if session.get('mode') == 'practice':
+        session['exam_duration'] = 99 * 3600
+    else:
+        session['exam_duration'] = time_limit_min * 60
     session['exam_settings'] = {'time_limit_min': time_limit_min, 'num_questions': num_questions}
     session['current_subject'] = selected_subjects[0]
     session['current_question'] = 0
@@ -581,6 +590,65 @@ def answer():
     session.modified = True
     return jsonify({'success': True})
 
+@app.route('/practice/feedback', methods=['POST'])
+def practice_feedback():
+    if 'student_info' not in session:
+        return jsonify({'error': 'Session expired'}), 401
+    current_subject = session['current_subject']
+    current_question = session['current_question']
+    option_index = int(request.form.get('option'))
+    # Store answer in session so final score can be computed
+    session['subject_answers'][current_subject][current_question] = option_index
+    session.modified = True
+    qs = session['subject_questions'][current_subject]
+    q = qs[current_question]
+    correct_answer = q.get('Answer', '')
+    selected_option = q['Options'][option_index]
+    # Determine if answer is correct
+    is_correct = False
+    try:
+        if float_safe(selected_option) == float_safe(correct_answer):
+            is_correct = True
+    except:
+        if str(selected_option).strip() == str(correct_answer).strip():
+            is_correct = True
+    # Find index of correct option
+    correct_index = None
+    for idx, opt in enumerate(q.get('Options', [])):
+        try:
+            match = float_safe(opt) == float_safe(correct_answer)
+        except:
+            match = str(opt).strip() == str(correct_answer).strip()
+        if match:
+            correct_index = idx
+            break
+    # Get AI explanation
+    explanation = f"The correct answer is: {correct_answer}."
+    try:
+        client_obj = get_ai_client()
+        options_text = '\n'.join([f"{chr(65+i)}. {opt}" for i, opt in enumerate(q.get('Options', []))])
+        prompt = (
+            f"Question: {q['Question']}\n"
+            f"Options:\n{options_text}\n"
+            f"Correct Answer: {correct_answer}\n\n"
+            f"In 2-3 short sentences, explain why \"{correct_answer}\" is correct. Be concise and educational."
+        )
+        resp = client_obj.chat.completions.create(
+            model='gpt-4o-mini',
+            messages=[{'role': 'user', 'content': prompt}],
+            max_tokens=200
+        )
+        explanation = resp.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"AI explanation error: {e}")
+    return jsonify({
+        'success': True,
+        'is_correct': is_correct,
+        'correct_index': correct_index,
+        'selected_index': option_index,
+        'explanation': explanation
+    })
+
 @app.route('/navigate', methods=['POST'])
 def navigate():
     if 'student_info' not in session:
@@ -617,19 +685,9 @@ def navigate():
 def submit():
     if 'student_info' not in session:
         return redirect(url_for('home'))
-    init_db()
-    conn = get_db()
-    c = conn.cursor()
-    name = session['student_info']['name']
-    regno = session['student_info']['regno']
-    c.execute('INSERT OR IGNORE INTO students (name, regno) VALUES (?, ?)', (name, regno))
-    c.execute('SELECT id FROM students WHERE regno = ?', (regno,))
-    student_id = c.fetchone()[0]
     results = []
     total_score = 0
     total_questions = 0
-    c.execute('INSERT INTO exam_attempts (student_id) VALUES (?)', (student_id,))
-    attempt_id = c.lastrowid
     for subj in session['subject_questions']:
         qs = session['subject_questions'][subj]
         ans = session['subject_answers'][subj]
@@ -644,34 +702,43 @@ def submit():
                 except:
                     if str(selected).strip() == str(correct).strip():
                         score += 1
-        c.execute('INSERT INTO subject_scores (attempt_id, subject, score, total) VALUES (?, ?, ?, ?)',
-                  (attempt_id, subj, score, len(qs)))
         total_score += score
         total_questions += len(qs)
         percent = (score / len(qs) * 100) if qs else 0
         results.append((subj, score, len(qs), percent))
     percentage = (total_score / total_questions * 100) if total_questions > 0 else 0
-    c.execute('UPDATE exam_attempts SET total_score=?, total_questions=?, percentage=? WHERE id=?',
-              (total_score, total_questions, percentage, attempt_id))
-    conn.commit()
-    conn.close()
 
-    # Also save to MongoDB if available
-    db = get_mongo()
-    if db:
-        try:
-            db.exam_results.insert_one({
-                'name': name,
-                'regno': regno,
-                'results': [{'subject': s, 'score': sc, 'total': t, 'percent': p}
-                             for s, sc, t, p in results],
-                'total_score': total_score,
-                'total_questions': total_questions,
-                'percentage': percentage,
-                'exam_date': datetime.utcnow()
-            })
-        except Exception as e:
-            print(f"MongoDB save error: {e}")
+    # Only persist results for exam mode (not practice)
+    if session.get('mode') != 'practice':
+        name = session['student_info']['name']
+        regno = session['student_info']['regno']
+        init_db()
+        conn = get_db()
+        c = conn.cursor()
+        c.execute('INSERT OR IGNORE INTO students (name, regno) VALUES (?, ?)', (name, regno))
+        c.execute('SELECT id FROM students WHERE regno = ?', (regno,))
+        student_id = c.fetchone()[0]
+        c.execute('INSERT INTO exam_attempts (student_id) VALUES (?)', (student_id,))
+        attempt_id = c.lastrowid
+        for subj, score, total, percent in [(r[0], r[1], r[2], r[3]) for r in results]:
+            c.execute('INSERT INTO subject_scores (attempt_id, subject, score, total) VALUES (?, ?, ?, ?)',
+                      (attempt_id, subj, score, total))
+        c.execute('UPDATE exam_attempts SET total_score=?, total_questions=?, percentage=? WHERE id=?',
+                  (total_score, total_questions, percentage, attempt_id))
+        conn.commit()
+        conn.close()
+        db = get_mongo()
+        if db:
+            try:
+                db.exam_results.insert_one({
+                    'name': name, 'regno': regno,
+                    'results': [{'subject': s, 'score': sc, 'total': t, 'percent': p}
+                                 for s, sc, t, p in results],
+                    'total_score': total_score, 'total_questions': total_questions,
+                    'percentage': percentage, 'exam_date': datetime.utcnow()
+                })
+            except Exception as e:
+                print(f"MongoDB save error: {e}")
 
     session['results'] = results
     session['submitted'] = True
@@ -683,7 +750,8 @@ def results():
         return redirect(url_for('home'))
     return render_template('results.html',
                            student_info=session['student_info'],
-                           results=session['results'])
+                           results=session['results'],
+                           mode=session.get('mode', 'exam'))
 
 @app.route('/correction')
 def correction():

@@ -372,7 +372,9 @@
     </div>
 
     <div class="exam-info">
+        {% if mode != 'practice' %}
         <span class="timer" id="timer">Time Left: --:--</span>
+        {% endif %}
         <span class="question-info">Answered: {{ answered_count }} / {{ total_questions }}</span>
         <button type="button" class="calculator-btn" onclick="toggleCalculator()" title="Calculator">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -381,9 +383,11 @@
                 <line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/>
             </svg>
         </button>
+        {% if mode != 'practice' %}
         <button type="button" class="subject-nav-btn" style="background:rgba(255,80,104,0.15);border-color:rgba(255,80,104,0.3);color:#ff8099;" onclick="showEndModal('back')">
             End Exam
         </button>
+        {% endif %}
         <span class="student-info">{{ student_info.name }}</span>
     </div>
 </div>
@@ -394,10 +398,10 @@
         <p class="question-text">{{ question.Question }}</p>
 
         <form id="answer-form">
-            <div class="options">
+            <div class="options" id="options-container">
                 {% for option in question.Options %}
                 {% set idx = loop.index0 %}
-                <label class="option {% if answers[current_question] == idx %}selected{% endif %}">
+                <label class="option {% if answers[current_question] == idx %}selected{% endif %}" id="opt-{{ idx }}">
                     <input type="radio"
                            name="option"
                            value="{{ idx }}"
@@ -408,6 +412,14 @@
                 {% endfor %}
             </div>
         </form>
+
+        <!-- ── Practice feedback panel ── -->
+        {% if mode == 'practice' %}
+        <div id="practice-feedback" style="display:none;margin-top:18px;border-radius:14px;padding:16px 18px;line-height:1.6;">
+            <div id="pf-verdict" style="font-weight:700;font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:8px;"></div>
+            <div id="pf-explanation" style="font-size:13.5px;color:var(--text-muted);"></div>
+        </div>
+        {% endif %}
 
         <div class="navigation-buttons">
             <form method="POST" action="{{ url_for('navigate') }}" style="display:inline;" id="prev-form">
@@ -437,7 +449,9 @@
         </div>
 
         <form method="POST" action="{{ url_for('submit') }}" id="submit-form">
-            <button type="submit" class="btn btn-submit">Submit All Subjects</button>
+            <button type="submit" class="btn btn-submit">
+                {% if mode == 'practice' %}Finish Practice{% else %}Submit All Subjects{% endif %}
+            </button>
         </form>
     </div>
 </div>
@@ -528,6 +542,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script>window.EXAM_MODE = '{{ mode }}';</script>
 <script src="{{ url_for('static', filename='js/exam.js') }}"></script>
 {% if mode == 'practice' %}
 <script>

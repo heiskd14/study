@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Exam Results — Beyond The Classroom{% endblock %}
+{% block title %}{% if mode == 'practice' %}Practice Results{% else %}Exam Results{% endif %} — Beyond The Classroom{% endblock %}
 
 {% block content %}
 <div class="page-wrapper">
@@ -9,7 +9,7 @@
 </div>
 
 <div class="results-body">
-    <h2 class="results-title">Examination Results</h2>
+    <h2 class="results-title">{% if mode == 'practice' %}Practice Results{% else %}Examination Results{% endif %}</h2>
     <p class="student-name">{{ student_info.name }} &nbsp;·&nbsp; {{ student_info.regno }}</p>
 
     <div class="results-list">
@@ -23,8 +23,12 @@
     </div>
 
     <div class="results-actions">
+        {% if mode == 'practice' %}
+        <a href="{{ url_for('practice_register') }}" class="btn btn-primary">Back to Registration</a>
+        {% else %}
         <a href="{{ url_for('correction', subject=results[0][0] if results else 'Use of English') }}" class="btn btn-secondary">View Correction</a>
         <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+        {% endif %}
     </div>
 </div>
 </div>

@@ -16,7 +16,7 @@
             </span>
         </div>
 
-        <h1 class="registration-title">Set Up Your Exam</h1>
+        <h1 class="registration-title">{% if mode == 'practice' %}Set Up Your Practice{% else %}Set Up Your Exam{% endif %}</h1>
         <p style="text-align:center;margin-bottom:28px;color:var(--text-muted);font-size:14px;">
             Welcome, <strong style="color:var(--accent-light)">{{ session.student_info.name }}</strong>! Customise your session below.
         </p>
@@ -27,6 +27,7 @@
 
         <form method="POST" action="{{ url_for('select_subjects') }}">
 
+            {% if mode != 'practice' %}
             <!-- ── Time Limit ── -->
             <div class="setup-section">
                 <div class="setup-label">
@@ -48,6 +49,9 @@
                     </label>
                 </div>
             </div>
+            {% else %}
+            <input type="hidden" name="time_limit" value="60">
+            {% endif %}
 
             <!-- ── Questions per Subject ── -->
             <div class="setup-section">
@@ -97,7 +101,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary" id="submit-btn" disabled style="width:100%;">
-                Start Exam
+                {% if mode == 'practice' %}Start Practice{% else %}Start Exam{% endif %}
             </button>
         </form>
     </div>

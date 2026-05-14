@@ -39,6 +39,8 @@
     .hdr-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 1rem; transition: background var(--transition), color var(--transition); position: relative; }
     .hdr-btn:hover { background: rgba(255,255,255,0.08); color: var(--text); }
     .hdr-btn.active { color: var(--accent); }
+    .hdr-leave-btn { color: #ff8099 !important; }
+    .hdr-leave-btn:hover { background: rgba(255,80,104,0.15) !important; color: #ff5068 !important; }
 
     /* ── Dropdown menu ── */
     .dropdown { position: absolute; top: calc(100% + 4px); right: 0.5rem; background: var(--surface); border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); min-width: 180px; z-index: 200; display: none; overflow: hidden; }
@@ -364,6 +366,9 @@
       <button class="hdr-btn" title="Video Call" onclick="startCall('video')"><i class="fa-solid fa-video"></i></button>
       <button class="hdr-btn" title="Voice Call" onclick="startCall('voice')"><i class="fa-solid fa-phone"></i></button>
       <button class="hdr-btn" id="search-btn" title="Search" onclick="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="hdr-btn hdr-leave-btn" title="Leave Room" onclick="leaveRoom()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
       <div style="position:relative;">
         <button class="hdr-btn" id="more-btn" onclick="toggleDropdown()" title="More"><i class="fa-solid fa-ellipsis-vertical"></i></button>
         <div class="dropdown" id="main-dropdown">
@@ -662,6 +667,10 @@ socket.on('message', msg => {
   if (isMentioned) {
     const row = document.getElementById('msg-' + msg.id);
     if (row) { row.classList.add('mention-flash'); setTimeout(() => row.classList.remove('mention-flash'), 1200); }
+  }
+  // ── Push notification when tab is hidden and user hasn't left ──
+  if (!userHasLeft && msg.sender_email !== USER.email && document.hidden) {
+    sendRoomNotification(msg);
   }
 });
 
@@ -1330,9 +1339,33 @@ function clearChat() {
 }
 
 // ── Leave room ─────────────────────────────────────────────────────────────────
+let userHasLeft = false;
 function leaveRoom() {
+  userHasLeft = true;
   socket.emit('leave', { code: ROOM_CODE, name: USER.name });
   window.location.href = '/group-study';
+}
+
+// ── Push notifications ──────────────────────────────────────────────────────────
+(function initNotifications() {
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+})();
+
+function sendRoomNotification(msg) {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  const body = msg.text
+    ? (msg.text.length > 80 ? msg.text.slice(0, 80) + '…' : msg.text)
+    : (msg.file_name || 'Sent an attachment');
+  const n = new Notification(`${msg.sender} in ${ROOM_CODE}`, {
+    body,
+    icon: '/static/img/btc_logo.png',
+    tag: 'btc-room-' + ROOM_CODE,
+    renotify: true,
+  });
+  n.onclick = function () { window.focus(); n.close(); };
 }
 
 // ── Copy code ─────────────────────────────────────────────────────────────────
