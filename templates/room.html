@@ -332,10 +332,13 @@
     .room-toast { background: var(--surface); border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.85rem; color: var(--text); box-shadow: 0 4px 16px rgba(0,0,0,0.5); animation: toastIn 0.3s ease; white-space: nowrap; }
     @keyframes toastIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 
+    .msg-reply-btn { display: none; background: none; border: none; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; padding: 0.25rem 0.35rem; border-radius: 50%; align-self: center; flex-shrink: 0; transition: color 0.2s, background 0.2s; }
+    .msg-reply-btn:active { color: var(--accent); background: rgba(0,168,132,0.12); }
     @media (max-width: 600px) {
       .msg-bubble { max-width: 85%; }
       #group-info { width: 100%; }
       .call-remote { max-width: 98vw; }
+      .msg-reply-btn { display: grid; place-items: center; }
     }
   </style>
 </head>
@@ -785,9 +788,11 @@ function renderMessage(msg) {
     bodyHtml = `<div class="${textClass}">${formattedText}</div>`;
   }
 
+  const replyBtnHtml = `<button class="msg-reply-btn" title="Reply"><i class="fa-solid fa-reply"></i></button>`;
   row.innerHTML = `
     ${!isMine ? checkHtml : ''}
     ${avatarHtml}
+    ${isMine ? replyBtnHtml : ''}
     <div class="msg-bubble ${isAI ? 'ai-bubble' : ''}" data-id="${msg.id}">
       ${fwdHtml}${replyHtml}${senderHtml}
       ${bodyHtml}
@@ -798,8 +803,11 @@ function renderMessage(msg) {
         ${ticksHtml}
       </div>
     </div>
+    ${!isMine ? replyBtnHtml : ''}
     ${isMine ? checkHtml : ''}
   `;
+
+  row.querySelector('.msg-reply-btn').addEventListener('click', e => { e.stopPropagation(); setReply(msg.id); });
 
   const bubble = row.querySelector('.msg-bubble');
   bubble.addEventListener('contextmenu', e => { e.preventDefault(); openCtxMenu(e, msg.id, isMine); });
