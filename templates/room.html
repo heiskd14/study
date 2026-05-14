@@ -334,6 +334,11 @@
 
     .msg-reply-btn { display: none; background: none; border: none; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; padding: 0.25rem 0.35rem; border-radius: 50%; align-self: center; flex-shrink: 0; transition: color 0.2s, background 0.2s; }
     .msg-reply-btn:active { color: var(--accent); background: rgba(0,168,132,0.12); }
+    .swipe-reply-hint { position: absolute; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-size: 0.8rem; color: white; opacity: 0; transition: opacity 0.15s; pointer-events: none; z-index: 10; }
+    .msg-row:not(.outgoing) .swipe-reply-hint { left: -38px; }
+    .msg-row.outgoing .swipe-reply-hint { right: -38px; }
+    .swipe-reply-hint.visible { opacity: 1; }
+    .msg-bubble { transition: transform 0.2s ease, filter var(--transition); }
     @media (max-width: 600px) {
       .msg-bubble { max-width: 85%; }
       #group-info { width: 100%; }
@@ -794,6 +799,7 @@ function renderMessage(msg) {
     ${avatarHtml}
     ${isMine ? replyBtnHtml : ''}
     <div class="msg-bubble ${isAI ? 'ai-bubble' : ''}" data-id="${msg.id}">
+      <div class="swipe-reply-hint"><i class="fa-solid fa-reply"></i></div>
       ${fwdHtml}${replyHtml}${senderHtml}
       ${bodyHtml}
       <div class="msg-reactions" id="react-${msg.id}"></div>
@@ -810,6 +816,42 @@ function renderMessage(msg) {
   row.querySelector('.msg-reply-btn').addEventListener('click', e => { e.stopPropagation(); setReply(msg.id); });
 
   const bubble = row.querySelector('.msg-bubble');
+
+  // Swipe-to-reply (mobile)
+  const hint = row.querySelector('.swipe-reply-hint');
+  let swipeTouchStartX = 0, swipeTouchStartY = 0, swipeLocked = false, swipeTriggered = false;
+  const SWIPE_THRESHOLD = 60, SWIPE_MAX = 80;
+  bubble.addEventListener('touchstart', e => {
+    swipeTouchStartX = e.touches[0].clientX;
+    swipeTouchStartY = e.touches[0].clientY;
+    swipeLocked = false; swipeTriggered = false;
+    bubble.style.transition = 'none';
+  }, { passive: true });
+  bubble.addEventListener('touchmove', e => {
+    const dx = e.touches[0].clientX - swipeTouchStartX;
+    const dy = e.touches[0].clientY - swipeTouchStartY;
+    if (!swipeLocked) {
+      if (Math.abs(dy) > Math.abs(dx)) { swipeLocked = true; return; }
+      swipeLocked = true;
+    }
+    const dir = isMine ? -1 : 1;
+    const move = dx * dir;
+    if (move < 0) return;
+    const clamped = Math.min(move, SWIPE_MAX);
+    bubble.style.transform = `translateX(${clamped * dir}px)`;
+    hint.classList.toggle('visible', move >= SWIPE_THRESHOLD);
+    if (move >= SWIPE_THRESHOLD && !swipeTriggered) {
+      swipeTriggered = true;
+      if (navigator.vibrate) navigator.vibrate(30);
+    }
+  }, { passive: true });
+  bubble.addEventListener('touchend', () => {
+    bubble.style.transition = '';
+    bubble.style.transform = '';
+    hint.classList.remove('visible');
+    if (swipeTriggered) setReply(msg.id);
+  });
+
   bubble.addEventListener('contextmenu', e => { e.preventDefault(); openCtxMenu(e, msg.id, isMine); });
   bubble.addEventListener('click', e => {
     if (isSelectMode) { toggleSelect(msg.id); return; }
