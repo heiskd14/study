@@ -1195,6 +1195,43 @@ def join_room_api():
             return jsonify({'success': False, 'message': 'Incorrect password.'}), 401
     return jsonify({'success': True, 'code': code})
 
+ROOM_ALLOWED_EXT = {'jpg','jpeg','png','gif','webp','pdf','doc','docx','ppt','pptx','xls','xlsx','txt','zip'}
+ROOM_IMAGE_EXT   = {'jpg','jpeg','png','gif','webp'}
+
+@app.route('/group-study/room/<code>/upload', methods=['POST'])
+@login_required
+def room_upload(code):
+    room = get_room(code)
+    if not room:
+        return jsonify({'success': False, 'error': 'Room not found'}), 404
+    if 'file' not in request.files:
+        return jsonify({'success': False, 'error': 'No file provided'}), 400
+    f = request.files['file']
+    if not f or f.filename == '':
+        return jsonify({'success': False, 'error': 'Empty file'}), 400
+    ext = f.filename.rsplit('.', 1)[-1].lower() if '.' in f.filename else ''
+    if ext not in ROOM_ALLOWED_EXT:
+        return jsonify({'success': False, 'error': f'File type .{ext} not allowed'}), 400
+    from werkzeug.utils import secure_filename
+    safe = secure_filename(f.filename)
+    uid = str(uuid.uuid4())[:8]
+    unique_name = f"{uid}_{safe}"
+    upload_dir = os.path.join(app.root_path, 'static', 'uploads', 'rooms', code)
+    os.makedirs(upload_dir, exist_ok=True)
+    save_path = os.path.join(upload_dir, unique_name)
+    f.save(save_path)
+    file_size = os.path.getsize(save_path)
+    file_kind = 'image' if ext in ROOM_IMAGE_EXT else 'pdf' if ext == 'pdf' else 'doc'
+    file_url = url_for('static', filename=f'uploads/rooms/{code}/{unique_name}')
+    return jsonify({
+        'success': True,
+        'file_url': file_url,
+        'file_name': f.filename,
+        'file_size': file_size,
+        'file_kind': file_kind,
+        'ext': ext
+    })
+
 @app.route('/group-study/room/<code>')
 @login_required
 def room_page(code):
@@ -1228,12 +1265,18 @@ def on_leave(data):
 def on_message(data):
     code = data.get('code', '')
     text = data.get('text', '').strip()
-    if not text: return
+    msg_type = data.get('type', 'text')
+    # File messages may have empty text — allow them through
+    if not text and msg_type != 'file': return
     msg = {'id': str(uuid.uuid4()), 'room_code': code, 'text': text,
            'sender': data.get('sender'), 'sender_email': data.get('sender_email'),
-           'timestamp': datetime.utcnow().isoformat(), 'type': data.get('type', 'text'),
+           'timestamp': datetime.utcnow().isoformat(), 'type': msg_type,
            'reply_to': data.get('reply_to'), 'reactions': {}, 'pinned': False,
            'starred_by': [], 'deleted': False, 'forwarded': data.get('forwarded', False)}
+    # Pass through file metadata if present
+    if msg_type == 'file':
+        for field in ('file_url', 'file_name', 'file_size', 'file_kind', 'ext'):
+            if field in data: msg[field] = data[field]
     save_room_message(msg)
     emit('message', msg, to=code)
     if '@all' in text.lower():

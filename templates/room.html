@@ -216,6 +216,41 @@
     .call-ctrl.mute.active { background: rgba(255,255,255,0.3); }
     .call-ctrl.vid { background: rgba(255,255,255,0.15); color: white; }
 
+    /* ── File sharing ── */
+    .file-bubble-img { max-width: 260px; max-height: 200px; border-radius: 8px; display: block; cursor: pointer; object-fit: cover; transition: opacity 0.2s; }
+    .file-bubble-img:hover { opacity: 0.88; }
+    .file-card { display: flex; align-items: center; gap: 0.75rem; background: rgba(255,255,255,0.06); border-radius: 8px; padding: 0.65rem 0.9rem; min-width: 180px; max-width: 260px; text-decoration: none; color: var(--text); border: 1px solid var(--border); transition: background 0.2s; }
+    .file-card:hover { background: rgba(255,255,255,0.1); }
+    .file-card-icon { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; font-size: 1.3rem; flex-shrink: 0; }
+    .file-card-icon.pdf  { background: rgba(220,38,38,0.15); color: #f87171; }
+    .file-card-icon.doc  { background: rgba(37,99,235,0.15); color: #60a5fa; }
+    .file-card-icon.xls  { background: rgba(22,163,74,0.15); color: #4ade80; }
+    .file-card-icon.ppt  { background: rgba(234,88,12,0.15); color: #fb923c; }
+    .file-card-icon.txt  { background: rgba(100,116,139,0.15); color: #94a3b8; }
+    .file-card-icon.zip  { background: rgba(168,85,247,0.15); color: #c084fc; }
+    .file-card-icon.other { background: rgba(100,116,139,0.15); color: #94a3b8; }
+    .file-card-info { min-width: 0; }
+    .file-card-name { font-size: 0.85rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px; }
+    .file-card-size { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.1rem; }
+    /* Upload progress */
+    .upload-progress-wrap { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0; min-width: 180px; }
+    .upload-progress-bar { flex: 1; height: 4px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; }
+    .upload-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.2s; }
+    .upload-progress-txt { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
+    /* Lightbox */
+    #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1100; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 0.8rem; cursor: zoom-out; }
+    #lightbox.open { display: flex; animation: fadeIn 0.18s ease; }
+    #lightbox img { max-width: 92vw; max-height: 80vh; object-fit: contain; border-radius: 6px; box-shadow: 0 8px 40px rgba(0,0,0,0.6); cursor: default; }
+    #lightbox-name { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+    #lightbox-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.12); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; font-size: 1.1rem; transition: background 0.2s; }
+    #lightbox-close:hover { background: rgba(255,255,255,0.22); }
+    #lightbox-download { background: rgba(0,168,132,0.2); border: 1px solid rgba(0,168,132,0.4); color: var(--accent); padding: 0.4rem 1.1rem; border-radius: 20px; font-size: 0.82rem; text-decoration: none; cursor: pointer; }
+    #lightbox-download:hover { background: rgba(0,168,132,0.35); }
+    /* Attach btn */
+    #attach-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 1.05rem; flex-shrink: 0; transition: color 0.2s, background 0.2s; }
+    #attach-btn:hover { color: var(--accent); background: rgba(0,168,132,0.1); }
+    #attach-btn.uploading { color: var(--accent); animation: pulse 1s infinite; }
+
     /* ── Mention popup ── */
     #mention-popup { position: absolute; bottom: 62px; left: 0.5rem; right: 0.5rem; background: var(--surface); border-radius: 10px; box-shadow: 0 -4px 20px rgba(0,0,0,0.5); z-index: 400; display: none; overflow: hidden; max-height: 200px; overflow-y: auto; border: 1px solid var(--border); }
     #mention-popup.open { display: block; animation: dropIn 0.15s ease; }
@@ -336,6 +371,8 @@
   <!-- Input area -->
   <div class="input-area" id="input-area">
     <button class="inp-btn" id="emoji-toggle" title="Emoji" onclick="toggleEmojiPicker()"><i class="fa-regular fa-face-smile"></i></button>
+    <button id="attach-btn" title="Attach file" onclick="document.getElementById('file-input').click()"><i class="fa-solid fa-paperclip"></i></button>
+    <input type="file" id="file-input" style="display:none" accept="image/*,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" onchange="uploadFile(this)">
     <div class="input-wrapper">
       <textarea id="msg-input" placeholder="Message" rows="1"></textarea>
     </div>
@@ -347,6 +384,14 @@
 
   <!-- Mention popup -->
   <div id="mention-popup"></div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <button id="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+    <img id="lightbox-img" src="" alt="">
+    <div id="lightbox-name"></div>
+    <a id="lightbox-download" download onclick="event.stopPropagation()"><i class="fa-solid fa-download"></i> Download</a>
+  </div>
 
   <!-- Context menu -->
   <div id="ctx-menu">
@@ -594,20 +639,41 @@ function renderMessage(msg) {
   const fwdHtml = msg.forwarded ? `<div class="forwarded-label"><i class="fa-solid fa-share"></i> Forwarded</div>` : '';
   const senderHtml = !isMine ? `<div class="msg-sender ${isAI ? 'ai-name' : ''}">${escHtml(msg.sender || '')}</div>` : '';
   const textClass = msg.deleted ? 'msg-text deleted-text' : 'msg-text';
-  const formattedText = formatText(msg.text || '');
   const timeStr = formatTime(msg.timestamp);
   const starHtml = msg.starred_by && msg.starred_by.includes(USER.email) ? `<i class="fa-solid fa-star msg-star"></i>` : '';
   const pinHtml = msg.pinned ? `<i class="fa-solid fa-thumbtack msg-pin"></i>` : '';
   const ticksHtml = isMine ? `<span class="msg-ticks"><i class="fa-solid fa-check-double"></i></span>` : '';
-
   const checkHtml = `<div class="select-check" onclick="toggleSelect('${msg.id}')"><i class="fa-solid fa-check" style="display:none;font-size:0.6rem;"></i></div>`;
+
+  let bodyHtml = '';
+  if (msg.type === 'file' && msg.file_url) {
+    if (msg.file_kind === 'image') {
+      bodyHtml = `<img class="file-bubble-img" src="${escHtml(msg.file_url)}" alt="${escHtml(msg.file_name || 'image')}" onclick="openLightbox('${escHtml(msg.file_url)}','${escHtml(msg.file_name||'')}'); event.stopPropagation();" loading="lazy">`;
+    } else {
+      const iconClass = fileIconClass(msg.ext || '');
+      const iconGlyph = fileIconGlyph(msg.ext || '');
+      const sizeLabel = msg.file_size ? formatFileSize(msg.file_size) : '';
+      bodyHtml = `<a class="file-card" href="${escHtml(msg.file_url)}" download="${escHtml(msg.file_name||'file')}" onclick="event.stopPropagation()">
+        <div class="file-card-icon ${iconClass}">${iconGlyph}</div>
+        <div class="file-card-info">
+          <div class="file-card-name">${escHtml(msg.file_name || 'file')}</div>
+          <div class="file-card-size">${sizeLabel}</div>
+        </div>
+        <i class="fa-solid fa-download" style="color:var(--text-muted);font-size:0.85rem;margin-left:auto;"></i>
+      </a>`;
+    }
+    if (msg.text) bodyHtml += `<div class="${textClass}" style="margin-top:0.3rem;">${formatText(msg.text)}</div>`;
+  } else {
+    const formattedText = msg.deleted ? '<i>This message was deleted</i>' : formatText(msg.text || '');
+    bodyHtml = `<div class="${textClass}">${formattedText}</div>`;
+  }
 
   row.innerHTML = `
     ${!isMine ? checkHtml : ''}
     ${avatarHtml}
     <div class="msg-bubble ${isAI ? 'ai-bubble' : ''}" data-id="${msg.id}">
       ${fwdHtml}${replyHtml}${senderHtml}
-      <div class="${textClass}">${formattedText}</div>
+      ${bodyHtml}
       <div class="msg-reactions" id="react-${msg.id}"></div>
       <div class="msg-meta">
         ${pinHtml}${starHtml}
@@ -650,6 +716,125 @@ function formatText(text) {
 
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── File sharing ───────────────────────────────────────────────────────────────
+function fileIconClass(ext) {
+  if (['pdf'].includes(ext)) return 'pdf';
+  if (['doc','docx','txt'].includes(ext)) return 'doc';
+  if (['xls','xlsx'].includes(ext)) return 'xls';
+  if (['ppt','pptx'].includes(ext)) return 'ppt';
+  if (['zip'].includes(ext)) return 'zip';
+  return 'other';
+}
+function fileIconGlyph(ext) {
+  if (ext === 'pdf') return '<i class="fa-solid fa-file-pdf"></i>';
+  if (['doc','docx'].includes(ext)) return '<i class="fa-solid fa-file-word"></i>';
+  if (['xls','xlsx'].includes(ext)) return '<i class="fa-solid fa-file-excel"></i>';
+  if (['ppt','pptx'].includes(ext)) return '<i class="fa-solid fa-file-powerpoint"></i>';
+  if (ext === 'txt') return '<i class="fa-solid fa-file-lines"></i>';
+  if (ext === 'zip') return '<i class="fa-solid fa-file-zipper"></i>';
+  return '<i class="fa-solid fa-file"></i>';
+}
+function formatFileSize(bytes) {
+  if (!bytes) return '';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1048576).toFixed(1) + ' MB';
+}
+
+function uploadFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  input.value = '';
+  const MAX = 20 * 1024 * 1024;
+  if (file.size > MAX) { showToast('File too large (max 20 MB)'); return; }
+
+  const btn = document.getElementById('attach-btn');
+  btn.classList.add('uploading');
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+  // Show local uploading bubble
+  const tmpId = 'tmp-' + Date.now();
+  const area = document.getElementById('chat-area');
+  const typing = document.getElementById('typing-indicator');
+  const tmpRow = document.createElement('div');
+  tmpRow.className = 'msg-row outgoing';
+  tmpRow.id = tmpId;
+  tmpRow.innerHTML = `<div class="msg-bubble" data-id="${tmpId}">
+    <div class="upload-progress-wrap">
+      <i class="fa-solid fa-paperclip" style="color:var(--accent);"></i>
+      <div class="upload-progress-bar"><div class="upload-progress-fill" id="prog-${tmpId}" style="width:0%"></div></div>
+      <span class="upload-progress-txt" id="prog-txt-${tmpId}">0%</span>
+    </div>
+    <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem;">${escHtml(file.name)}</div>
+  </div>`;
+  area.insertBefore(tmpRow, typing);
+  scrollToBottom();
+
+  const fd = new FormData();
+  fd.append('file', file);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `/group-study/room/${ROOM_CODE}/upload`);
+  xhr.upload.onprogress = e => {
+    if (e.lengthComputable) {
+      const pct = Math.round(e.loaded / e.total * 100);
+      const fill = document.getElementById('prog-' + tmpId);
+      const txt  = document.getElementById('prog-txt-' + tmpId);
+      if (fill) fill.style.width = pct + '%';
+      if (txt)  txt.textContent = pct + '%';
+    }
+  };
+  xhr.onload = () => {
+    tmpRow.remove();
+    btn.classList.remove('uploading');
+    btn.innerHTML = '<i class="fa-solid fa-paperclip"></i>';
+    try {
+      const res = JSON.parse(xhr.responseText);
+      if (res.success) {
+        const msgData = {
+          code: ROOM_CODE,
+          text: '',
+          sender: USER.name,
+          sender_email: USER.email,
+          type: 'file',
+          file_url: res.file_url,
+          file_name: res.file_name,
+          file_size: res.file_size,
+          file_kind: res.file_kind,
+          ext: res.ext,
+          reply_to: replyTo
+        };
+        socket.emit('message', msgData);
+        cancelReply();
+      } else {
+        showToast('Upload failed: ' + (res.error || 'Unknown error'));
+      }
+    } catch(e) { showToast('Upload error'); }
+  };
+  xhr.onerror = () => {
+    tmpRow.remove();
+    btn.classList.remove('uploading');
+    btn.innerHTML = '<i class="fa-solid fa-paperclip"></i>';
+    showToast('Upload failed. Check your connection.');
+  };
+  xhr.send(fd);
+}
+
+function openLightbox(url, name) {
+  document.getElementById('lightbox-img').src = url;
+  document.getElementById('lightbox-name').textContent = name || '';
+  const dl = document.getElementById('lightbox-download');
+  dl.href = url;
+  dl.download = name || 'image';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('lightbox-img').src = '';
 }
 
 function formatTime(ts) {
