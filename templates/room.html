@@ -112,7 +112,8 @@
     .msg-time { font-size: 0.68rem; color: var(--text-muted); }
     .msg-star { font-size: 0.65rem; color: #f59e0b; }
     .msg-pin { font-size: 0.65rem; color: var(--accent); }
-    .msg-ticks { font-size: 0.7rem; color: var(--text-muted); }
+    .msg-ticks { font-size: 0.7rem; color: var(--text-muted); transition: color 0.3s; }
+    .msg-ticks.read { color: #53bdeb; }
 
     /* ── Reactions ── */
     .msg-reactions { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.3rem; }
@@ -150,6 +151,13 @@
     #send-btn { background: var(--accent); border: none; color: white; cursor: pointer; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 1rem; transition: transform 0.2s, background 0.2s; flex-shrink: 0; }
     #send-btn:hover { transform: scale(1.08); background: var(--accent2); }
 
+    /* ── Attach menu (WhatsApp-style) ── */
+    #attach-menu { position: absolute; bottom: 70px; left: 0.5rem; background: var(--surface); border-radius: 16px; padding: 0.6rem; box-shadow: 0 8px 32px rgba(0,0,0,0.55); z-index: 310; display: none; flex-direction: column; gap: 0.25rem; min-width: 180px; }
+    #attach-menu.open { display: flex; animation: dropIn 0.18s ease; }
+    .attach-opt { display: flex; align-items: center; gap: 0.85rem; background: none; border: none; color: var(--text); cursor: pointer; padding: 0.65rem 0.8rem; border-radius: 10px; font-size: 0.92rem; transition: background var(--transition); text-align: left; width: 100%; }
+    .attach-opt:hover { background: rgba(255,255,255,0.07); }
+    .att-icon { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 1rem; color: white; flex-shrink: 0; }
+
     /* ── Context menu ── */
     #ctx-menu { position: fixed; background: var(--surface); border-radius: 8px; box-shadow: 0 4px 24px rgba(0,0,0,0.6); padding: 0.4rem 0; z-index: 500; display: none; min-width: 180px; }
     #ctx-menu.open { display: block; animation: dropIn 0.12s ease; }
@@ -159,13 +167,19 @@
     .ctx-item.danger { color: var(--error); }
     .ctx-item.danger i { color: var(--error); }
 
-    /* ── Emoji picker ── */
-    #emoji-picker { position: absolute; bottom: 62px; left: 0.5rem; background: var(--surface); border-radius: 12px; padding: 0.8rem; box-shadow: 0 8px 32px rgba(0,0,0,0.6); z-index: 300; display: none; width: 280px; max-height: 300px; overflow-y: auto; }
-    #emoji-picker.open { display: block; animation: dropIn 0.15s ease; }
+    /* ── Emoji picker (WhatsApp-style) ── */
+    #emoji-picker { position: absolute; bottom: 62px; left: 0.5rem; background: var(--surface); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); z-index: 300; display: none; flex-direction: column; width: 320px; max-height: 400px; }
+    #emoji-picker.open { display: flex; animation: dropIn 0.15s ease; }
+    .emoji-search-wrap { padding: 0.6rem 0.7rem 0.4rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    #emoji-search { width: 100%; background: var(--surface2); border: none; border-radius: 8px; padding: 0.45rem 0.9rem; color: var(--text); font-size: 0.88rem; outline: none; }
+    #emoji-search::placeholder { color: var(--text-muted); }
+    #emoji-content { overflow-y: auto; padding: 0.6rem 0.7rem; flex: 1; }
+    #emoji-content::-webkit-scrollbar { width: 4px; }
+    #emoji-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
     .emoji-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; }
     .emoji-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; padding: 0.3rem; border-radius: 6px; transition: background var(--transition); }
     .emoji-btn:hover { background: rgba(255,255,255,0.1); }
-    .emoji-cat { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 0.5rem 0 0.3rem; font-weight: 600; }
+    .emoji-cat { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 0.6rem 0 0.3rem; font-weight: 600; padding-bottom: 0.2rem; border-bottom: 1px solid var(--border); }
 
     /* ── Reaction emoji picker ── */
     #react-picker { position: fixed; background: var(--surface); border-radius: 50px; padding: 0.4rem 0.6rem; box-shadow: 0 4px 20px rgba(0,0,0,0.6); z-index: 600; display: none; gap: 0.2rem; }
@@ -430,16 +444,34 @@
   <!-- Input area -->
   <div class="input-area" id="input-area">
     <button class="inp-btn" id="emoji-toggle" title="Emoji" onclick="toggleEmojiPicker()"><i class="fa-regular fa-face-smile"></i></button>
-    <button id="attach-btn" title="Attach file" onclick="document.getElementById('file-input').click()"><i class="fa-solid fa-paperclip"></i></button>
-    <input type="file" id="file-input" style="display:none" accept="image/*,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" onchange="uploadFile(this)">
+    <button class="inp-btn" id="attach-btn" title="Attach file" onclick="toggleAttachMenu()"><i class="fa-solid fa-paperclip"></i></button>
+    <input type="file" id="file-input-media" style="display:none" accept="image/*,video/*" onchange="uploadFile(this)">
+    <input type="file" id="file-input-doc" style="display:none" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" onchange="uploadFile(this)">
     <div class="input-wrapper">
       <textarea id="msg-input" placeholder="Message" rows="1"></textarea>
     </div>
     <button id="send-btn" onclick="sendMessage()" title="Send"><i class="fa-solid fa-paper-plane"></i></button>
   </div>
 
-  <!-- Emoji picker -->
-  <div id="emoji-picker"></div>
+  <!-- Attach menu (WhatsApp-style) -->
+  <div id="attach-menu">
+    <button class="attach-opt" onclick="chooseFile('media')">
+      <div class="att-icon" style="background:#bf59cf;"><i class="fa-solid fa-image"></i></div>
+      <span>Photos &amp; Videos</span>
+    </button>
+    <button class="attach-opt" onclick="chooseFile('doc')">
+      <div class="att-icon" style="background:#0084ff;"><i class="fa-solid fa-file-lines"></i></div>
+      <span>Document</span>
+    </button>
+  </div>
+
+  <!-- Emoji picker (WhatsApp-style) -->
+  <div id="emoji-picker">
+    <div class="emoji-search-wrap">
+      <input type="text" id="emoji-search" placeholder="🔍  Search emoji…" oninput="filterEmojis(this.value)">
+    </div>
+    <div id="emoji-content"></div>
+  </div>
 
   <!-- Mention popup -->
   <div id="mention-popup"></div>
@@ -725,6 +757,12 @@ socket.on('call_answer', handleCallAnswer);
 socket.on('ice_candidate', handleIceCandidate);
 socket.on('call_ended', () => endCall());
 
+// ── Read receipts ───────────────────────────────────────────────────────────────
+socket.on('message_seen', data => {
+  const el = document.getElementById('ticks-' + data.msg_id);
+  if (el) el.classList.add('read');
+});
+
 // ── Initial Render ──────────────────────────────────────────────────────────────
 function init() {
   buildEmojiPicker();
@@ -750,7 +788,7 @@ function renderMessage(msg) {
   let avatarHtml = '';
   if (!isMine) {
     const initials = (msg.sender || '?')[0].toUpperCase();
-    avatarHtml = `<div class="msg-avatar ${isAI ? 'ai' : ''}">${isAI ? '🤖' : initials}</div>`;
+    avatarHtml = `<div class="msg-avatar ${isAI ? 'ai' : ''}">${isAI ? '<img src="/static/img/btc_logo.png" alt="BTC AI" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">' : initials}</div>`;
   }
 
   let replyHtml = '';
@@ -767,7 +805,7 @@ function renderMessage(msg) {
   const timeStr = formatTime(msg.timestamp);
   const starHtml = msg.starred_by && msg.starred_by.includes(USER.email) ? `<i class="fa-solid fa-star msg-star"></i>` : '';
   const pinHtml = msg.pinned ? `<i class="fa-solid fa-thumbtack msg-pin"></i>` : '';
-  const ticksHtml = isMine ? `<span class="msg-ticks"><i class="fa-solid fa-check-double"></i></span>` : '';
+  const ticksHtml = isMine ? `<span class="msg-ticks" id="ticks-${msg.id}"><i class="fa-solid fa-check-double"></i></span>` : '';
   const checkHtml = `<div class="select-check" onclick="toggleSelect('${msg.id}')"><i class="fa-solid fa-check" style="display:none;font-size:0.6rem;"></i></div>`;
 
   let bodyHtml = '';
@@ -862,6 +900,17 @@ function renderMessage(msg) {
 
   area.insertBefore(row, typing);
   if (msg.reactions) renderReactions(row, msg);
+
+  // ── Read receipt: emit mark_seen when incoming message enters viewport ──
+  if (!isMine && !msg.deleted) {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        socket.emit('mark_seen', { code: ROOM_CODE, msg_id: msg.id, email: USER.email });
+        observer.disconnect();
+      }
+    }, { threshold: 0.5 });
+    observer.observe(row);
+  }
 }
 
 function formatText(text) {
@@ -917,6 +966,7 @@ function uploadFile(input) {
   const MAX = 20 * 1024 * 1024;
   if (file.size > MAX) { showToast('File too large (max 20 MB)'); return; }
 
+  closeAttachMenu();
   const btn = document.getElementById('attach-btn');
   btn.classList.add('uploading');
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
@@ -1094,6 +1144,8 @@ function setupInputEvents() {
     if (!document.getElementById('main-dropdown').contains(e.target) && !document.getElementById('more-btn').contains(e.target))
       document.getElementById('main-dropdown').classList.remove('open');
     if (!document.getElementById('react-picker').contains(e.target)) closeReactPicker();
+    if (!document.getElementById('attach-menu').contains(e.target) && !document.getElementById('attach-btn').contains(e.target))
+      closeAttachMenu();
     if (!document.getElementById('emoji-picker').contains(e.target) && !document.getElementById('emoji-toggle').contains(e.target))
       document.getElementById('emoji-picker').classList.remove('open');
     if (!document.getElementById('mention-popup').contains(e.target) && e.target !== document.getElementById('msg-input'))
@@ -1423,33 +1475,73 @@ function copyRoomCode() {
   navigator.clipboard.writeText(ROOM_CODE).then(() => showToast('Room code copied: ' + ROOM_CODE));
 }
 
-// ── Emoji picker ────────────────────────────────────────────────────────────────
+// ── Emoji picker (WhatsApp-style with search) ────────────────────────────────────
 const EMOJIS = {
-  'Smileys': ['😀','😃','😄','😁','😆','😅','🤣','😂','🙂','😊','😇','😍','🥰','😘','😗','😚','😙','😋','😛','😜','🤪','😝','🤑','🤗','🤔','🤭','🤫','🤥','😶','😐','😑','😬','🙄','😯','😦','😧','😮','😲','😴','🤤','😪','😵','🤯','🤠','🥳','😎','🤓','🧐','😕','😟','🙁','☹️','😣','😖','😫','😩','🥺','😢','😭','😤','😠','😡','🤬','😈','👿'],
-  'Gestures': ['👍','👎','👊','✊','🤛','🤜','🤞','✌️','🤟','🤘','🤙','👌','🤌','🤏','👈','👉','👆','👇','☝️','✋','🤚','🖐','🖖','👋','🤚','💪','🦵','🦶','👂','🦻','👃','🤜','🙌','👏','🤲','🤝','🙏'],
-  'Objects': ['📚','📖','📝','✏️','🖊️','🖋️','📌','📍','📎','🔗','📏','📐','✂️','🗂','📁','📂','📊','📈','📉','🗒','🗓','📅','📆','📇','💡','🔦','📱','💻','🖥','⌨️','🖱','🖨','📺','📷','📸','📹','🎥','📞','☎️','📟','📠'],
-  'Symbols': ['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','✨','⭐','🌟','💫','⚡','🔥','💥','🎉','🎊','🎈','🏆','🥇','💯','✅','❌','❓','❗','💬','🔔','🔕'],
-  'Nature': ['🌹','🌺','🌸','🌼','🌻','🌞','🌝','🌛','🌚','🌕','⭐','🌈','☁️','⛅','🌤','🌦','🌧','⛈','🌩','🌪','🌫','🌬','🌀','🌊','💧','💦','🔥','🌿','🍃','🍂','🍁','🌱','🌲','🌳','🌴','🌵','🌾']
+  'Smileys': ['😀','😃','😄','😁','😆','😅','🤣','😂','🙂','🙃','😉','😊','😇','🥰','😍','🤩','😘','😗','😚','😙','🥲','😋','😛','😜','🤪','😝','🤑','🤗','🤔','🤭','🤫','🤥','😶','😐','😑','😬','🙄','😯','😦','😧','😮','😲','🥱','😴','🤤','😪','😵','🤯','🤠','🥳','🥸','😎','🤓','🧐','😕','😟','🙁','☹️','😣','😖','😫','😩','🥺','😢','😭','😤','😠','😡','🤬','😈','👿','💀','☠️','💩','🤡','👹','👺','👻','👽','👾','🤖'],
+  'Gestures': ['👋','🤚','🖐','✋','🖖','👌','🤌','🤏','✌️','🤞','🤟','🤘','🤙','👈','👉','👆','🖕','👇','☝️','👍','👎','✊','👊','🤛','🤜','👏','🙌','🤲','🤝','🙏','💅','🤳','💪','🦵','🦶','👂','🦻','👃','🧠','🦷','🦴','👀','👁','👅','👄'],
+  'People': ['👶','🧒','👦','👧','🧑','👱','👨','🧔','👩','🧓','👴','👵','🙍','🙎','🙅','🙆','💁','🙋','🧏','🙇','🤦','🤷','💆','💇','🚶','🧍','🧎','🏃','💃','🕺','👫','👬','👭','🧑‍🤝‍🧑'],
+  'Objects': ['📚','📖','📝','✏️','🖊️','🖋️','📌','📍','📎','🔗','📏','📐','✂️','🗂','📁','📂','📊','📈','📉','🗒','🗓','📅','📆','📇','💡','🔦','📱','💻','🖥','⌨️','🖱','📺','📷','📸','📹','🎥','📞','☎️','📟','📠','🔋','🔌','💾','💿','📀','🎮','🕹','🖲','🖨','⌚','📡','🔭','🔬','💊','🩺','🩹','🩻','🧬','🔑','🗝','🔐','🔏','🔒','🔓','🔨','🪛','🔧','🪚','🔩','🪤','🗜','⚙️','🪝','🧲','🪜','🔮','🧿','🎯','🎲','♟','🧩','🪀','🪁','🎭','🎨','🖼','🧵','🪡','🧶','🪢'],
+  'Symbols': ['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟','☮️','✝️','☪️','🕉','☯️','✡️','🆕','🆒','🆓','🆙','🆗','🆘','🆚','🆛','✨','⭐','🌟','💫','⚡','🔥','💥','🎉','🎊','🎈','🏆','🥇','🥈','🥉','🎖','🏅','💯','✅','❌','❓','❗','⚠️','🔞','🚫','💬','💭','🗯','🔔','🔕','🔈','🔉','🔊','📣','📢'],
+  'Nature': ['🌹','🌺','🌸','🌼','🌻','🌞','🌝','🌛','🌚','🌕','🌖','🌗','🌘','🌑','🌒','🌓','🌔','🌙','🌈','☁️','⛅','🌤','🌦','🌧','⛈','🌩','🌪','🌫','🌬','🌀','🌊','💧','💦','🔥','🌿','🍃','🍂','🍁','🌱','🌲','🌳','🌴','🌵','🌾','🍀','🍄','🐚','🪸','🪨','🌍','🌎','🌏'],
+  'Animals': ['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🙈','🙉','🙊','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🪱','🐛','🦋','🐌','🐞','🐜','🪲','🦟','🦗','🪳','🦂','🐢','🦎','🐍','🦕','🦖','🦑','🐙','🦐','🦞','🦀','🐡','🐟','🐠','🐬','🦭','🐳','🐋','🦈','🐊','🐅','🐆','🦓','🦍','🦧','🦣','🐘','🦛','🦏','🐪','🐫','🦒','🦘','🦬','🐃','🐂','🐄','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🐩','🦮','🐈','🐓','🦃','🦤','🦚','🦜','🦢','🦩','🕊','🐇','🦝','🦨','🦡','🦦','🦥','🐁','🐀','🐿','🦔'],
+  'Food': ['🍏','🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍈','🍒','🍑','🥭','🍍','🥥','🥝','🍅','🫒','🥑','🍆','🥔','🥕','🌽','🌶','🫑','🥒','🥬','🥦','🧄','🧅','🥜','🌰','🍞','🥐','🥖','🫓','🥨','🧀','🥚','🍳','🧈','🥞','🧇','🥓','🥩','🍗','🍖','🌭','🍔','🍟','🍕','🫔','🌮','🌯','🥙','🧆','🥚','🍱','🍘','🍣','🍜','🍝','🍲','🍛','🍣','🍤','🦐','🦞','🦀','🦑','🍦','🍧','🍨','🍩','🍪','🎂','🍰','🧁','🥧','🍫','🍬','🍭','🍮','🍯','☕','🍵','🧃','🥤','🧋','🍶','🍾','🍷','🍸','🍹','🍺','🍻','🥂'],
+  'Travel': ['🚗','🚕','🚙','🚌','🚎','🏎','🚓','🚑','🚒','🚐','🛻','🚚','🚛','🚜','🛵','🦽','🦼','🛺','🚲','🛴','🛹','🛼','🚏','🛣','🛤','⛽','🚦','🚥','🛑','🚧','⚓','🪝','⛵','🚤','🛥','🛳','⛴','🚢','✈','🛩','🛫','🛬','🪂','💺','🚁','🚟','🚠','🚡','🛰','🚀','🛸','🏠','🏡','🏢','🏣','🏤','🏥','🏦','🏨','🏩','🏪','🏫','🏭','🗼','🗽','⛪','🕌','🕍','⛩','🕋','⛲','⛺','🌁','🌃','🏙','🌄','🌅','🌆','🌇','🌉','🎠','🎡','🎢','💈','🎪','🗺','🌐','🗾','🧭','🏔','⛰','🌋','🗻','🏕','🏖','🏜','🏝','🏞'],
+  'Activities': ['⚽','🏀','🏈','⚾','🥎','🏐','🏉','🥏','🎾','🪃','🏸','🏒','🏑','🥍','🏏','🪅','🎿','🛷','🥌','🎯','🪀','🪁','🎱','🔮','🪄','🧿','🎮','🕹','🎰','🎲','🧩','🪅','🎭','🎨','🖼','🎬','🎤','🎧','🎷','🎸','🎹','🥁','🎺','🎻','🪕','🎙','📻','📺','🎞','📽','🎦'],
 };
 
-function buildEmojiPicker() {
-  const picker = document.getElementById('emoji-picker');
+function renderEmojiGrid(entries) {
+  const content = document.getElementById('emoji-content');
   let html = '';
-  Object.entries(EMOJIS).forEach(([cat, emojis]) => {
+  entries.forEach(([cat, emojis]) => {
     html += `<div class="emoji-cat">${cat}</div><div class="emoji-grid">`;
     emojis.forEach(e => { html += `<button class="emoji-btn" onclick="insertEmoji('${e}')">${e}</button>`; });
     html += '</div>';
   });
-  picker.innerHTML = html;
+  if (!html) html = '<div style="text-align:center;color:var(--text-muted);padding:1.2rem;font-size:0.85rem;">No emoji found</div>';
+  content.innerHTML = html;
 }
 
-function toggleEmojiPicker() { document.getElementById('emoji-picker').classList.toggle('open'); }
+function buildEmojiPicker() { renderEmojiGrid(Object.entries(EMOJIS)); }
+
+function filterEmojis(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) { renderEmojiGrid(Object.entries(EMOJIS)); return; }
+  const catMatch = Object.entries(EMOJIS).filter(([cat]) => cat.toLowerCase().includes(q));
+  if (catMatch.length) { renderEmojiGrid(catMatch); return; }
+  const all = [];
+  Object.values(EMOJIS).forEach(arr => all.push(...arr));
+  renderEmojiGrid([['Results', all]]);
+}
+
+function toggleEmojiPicker() {
+  const p = document.getElementById('emoji-picker');
+  p.classList.toggle('open');
+  if (p.classList.contains('open')) {
+    document.getElementById('emoji-search').value = '';
+    renderEmojiGrid(Object.entries(EMOJIS));
+    setTimeout(() => document.getElementById('emoji-search').focus(), 50);
+  }
+  closeAttachMenu();
+}
+
 function insertEmoji(emoji) {
   const inp = document.getElementById('msg-input');
   const pos = inp.selectionStart;
   inp.value = inp.value.slice(0, pos) + emoji + inp.value.slice(pos);
   inp.selectionStart = inp.selectionEnd = pos + emoji.length;
   inp.focus();
+}
+
+// ── Attach menu (WhatsApp-style) ────────────────────────────────────────────────
+function toggleAttachMenu() {
+  document.getElementById('attach-menu').classList.toggle('open');
+  document.getElementById('emoji-picker').classList.remove('open');
+}
+function closeAttachMenu() { document.getElementById('attach-menu').classList.remove('open'); }
+function chooseFile(type) {
+  closeAttachMenu();
+  if (type === 'media') document.getElementById('file-input-media').click();
+  else document.getElementById('file-input-doc').click();
 }
 
 // ── Reaction picker ─────────────────────────────────────────────────────────────

@@ -41,6 +41,31 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 Session(app)
 socketio = SocketIO(app, cors_allowed_origins='*', async_mode='threading', logger=False, engineio_logger=False)
 
+# ── Socket room tracking (sid → room info) ─────────────────────────────────────
+socket_rooms = {}  # request.sid -> {code, name, email}
+
+def _maybe_expire_room(code):
+    """Auto-delete room + messages when the last member disconnects."""
+    if not code:
+        return
+    still_in = [s for s, info in socket_rooms.items() if info.get('code') == code]
+    if still_in:
+        return
+    try:
+        db = get_mongo()
+        if db is not None:
+            db.rooms.delete_one({'code': code})
+            db.messages.delete_many({'room_code': code})
+        else:
+            conn = get_db()
+            conn.execute('DELETE FROM rooms WHERE code = ?', (code,))
+            conn.execute('DELETE FROM room_messages WHERE room_code = ?', (code,))
+            conn.commit()
+            conn.close()
+        print(f'[Room] {code} auto-expired — all members left')
+    except Exception as e:
+        print(f'[Room] expire error for {code}: {e}')
+
 # ── MongoDB Setup ──────────────────────────────────────────────────────────────
 mongo_client = None
 mongo_db = None
@@ -472,17 +497,599 @@ def register():
     session['student_info'] = {'name': name, 'regno': regno}
     return redirect(url_for('subject_selection'))
 
+# ── University Course Catalogue ─────────────────────────────────────────────────
+UNIVERSITY_COURSES = {
+    'JAMB Preparation': {
+        'All Subjects': {
+            'UTME': [
+                {'name': 'Biology', 'file': 'biology.json'},
+                {'name': 'Chemistry', 'file': 'chemistry.json'},
+                {'name': 'Physics', 'file': 'physics.json'},
+                {'name': 'Mathematics', 'file': 'mathematics.json'},
+                {'name': 'Use of English', 'file': 'use_of_english.json'},
+                {'name': 'Government', 'file': 'government.json'},
+                {'name': 'Economics', 'file': 'economics.json'},
+                {'name': 'Commerce', 'file': 'commerce.json'},
+                {'name': 'Literature in English', 'file': 'literature_in_english.json'},
+                {'name': 'Christian Religious Studies', 'file': 'christian_religious_studies.json'},
+                {'name': 'Principles of Accounts', 'file': 'principles_of_accounts.json'},
+            ],
+        },
+    },
+    'Faculty of Science': {
+        'Computer Science': {
+            '100': [
+                {'name': 'Introduction to Programming', 'file': 'courses/cs_intro_programming.json'},
+                {'name': 'Computer Fundamentals', 'file': 'courses/cs_computer_fundamentals.json'},
+                {'name': 'Logic & Problem Solving', 'file': 'courses/cs_logic.json'},
+                {'name': 'Mathematics I (Calculus)', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Use of English', 'file': 'use_of_english.json'},
+            ],
+            '200': [
+                {'name': 'Data Structures & Algorithms', 'file': 'courses/cs_data_structures.json'},
+                {'name': 'Object-Oriented Programming', 'file': 'courses/cs_oop.json'},
+                {'name': 'Computer Architecture', 'file': 'courses/cs_computer_architecture.json'},
+                {'name': 'Discrete Mathematics', 'file': 'courses/cs_discrete_math.json'},
+                {'name': 'Statistics for Computing', 'file': 'courses/mth_intro_stats.json'},
+            ],
+            '300': [
+                {'name': 'Operating Systems', 'file': 'courses/cs_operating_systems.json'},
+                {'name': 'Database Management Systems', 'file': 'courses/cs_database.json'},
+                {'name': 'Computer Networks', 'file': 'courses/cs_networks.json'},
+                {'name': 'Software Engineering', 'file': 'courses/cs_software_engineering.json'},
+                {'name': 'Theory of Computation', 'file': 'courses/cs_theory_computation.json'},
+            ],
+            '400': [
+                {'name': 'Artificial Intelligence', 'file': 'courses/cs_artificial_intelligence.json'},
+                {'name': 'Machine Learning', 'file': 'courses/cs_machine_learning.json'},
+                {'name': 'Cybersecurity', 'file': 'courses/cs_cybersecurity.json'},
+                {'name': 'Compiler Design', 'file': 'courses/cs_compiler_design.json'},
+                {'name': 'Distributed Systems', 'file': 'courses/cs_distributed_systems.json'},
+            ],
+        },
+        'Mathematics': {
+            '100': [
+                {'name': 'Calculus I', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Algebra & Trigonometry', 'file': 'courses/mth_algebra.json'},
+                {'name': 'Introduction to Statistics', 'file': 'courses/mth_intro_stats.json'},
+                {'name': 'Logic & Set Theory', 'file': 'courses/cs_logic.json'},
+            ],
+            '200': [
+                {'name': 'Calculus II', 'file': 'courses/mth_calculus2.json'},
+                {'name': 'Linear Algebra', 'file': 'courses/mth_linear_algebra.json'},
+                {'name': 'Probability Theory', 'file': 'courses/mth_probability.json'},
+                {'name': 'Differential Equations', 'file': 'courses/mth_differential_eq.json'},
+            ],
+            '300': [
+                {'name': 'Real Analysis', 'file': 'courses/mth_real_analysis.json'},
+                {'name': 'Abstract Algebra', 'file': 'courses/mth_abstract_algebra.json'},
+                {'name': 'Numerical Methods', 'file': 'courses/mth_numerical.json'},
+                {'name': 'Mathematical Statistics', 'file': 'courses/mth_intro_stats.json'},
+            ],
+            '400': [
+                {'name': 'Operations Research', 'file': 'courses/mth_operations_research.json'},
+                {'name': 'Graph Theory', 'file': 'courses/cs_discrete_math.json'},
+                {'name': 'Functional Analysis', 'file': 'courses/mth_real_analysis.json'},
+            ],
+        },
+        'Physics': {
+            '100': [
+                {'name': 'Classical Mechanics', 'file': 'courses/phy_mechanics.json'},
+                {'name': 'Properties of Matter & Waves', 'file': 'courses/phy_waves.json'},
+                {'name': 'Mathematics I', 'file': 'courses/mth_calculus1.json'},
+            ],
+            '200': [
+                {'name': 'Electromagnetism', 'file': 'courses/phy_electromagnetism.json'},
+                {'name': 'Thermodynamics', 'file': 'courses/phy_thermodynamics.json'},
+                {'name': 'Modern Physics', 'file': 'courses/phy_modern.json'},
+            ],
+            '300': [
+                {'name': 'Quantum Mechanics', 'file': 'courses/phy_quantum.json'},
+                {'name': 'Solid State Physics', 'file': 'courses/phy_solid_state.json'},
+                {'name': 'Optics', 'file': 'courses/phy_waves.json'},
+            ],
+            '400': [
+                {'name': 'Nuclear Physics', 'file': 'courses/phy_nuclear.json'},
+                {'name': 'Electronics', 'file': 'courses/eee_electronics1.json'},
+                {'name': 'Statistical Mechanics', 'file': 'courses/phy_thermodynamics.json'},
+            ],
+        },
+        'Chemistry': {
+            '100': [
+                {'name': 'General Chemistry I', 'file': 'courses/chm_general1.json'},
+                {'name': 'Inorganic Chemistry I', 'file': 'courses/chm_inorganic1.json'},
+            ],
+            '200': [
+                {'name': 'Organic Chemistry I', 'file': 'courses/chm_organic1.json'},
+                {'name': 'Physical Chemistry I', 'file': 'courses/chm_physical1.json'},
+                {'name': 'Analytical Chemistry', 'file': 'courses/chm_analytical.json'},
+            ],
+            '300': [
+                {'name': 'Organic Chemistry II', 'file': 'courses/chm_organic2.json'},
+                {'name': 'Physical Chemistry II', 'file': 'courses/chm_physical1.json'},
+                {'name': 'Industrial Chemistry', 'file': 'courses/chm_general1.json'},
+            ],
+            '400': [
+                {'name': 'Spectroscopy', 'file': 'courses/chm_analytical.json'},
+                {'name': 'Environmental Chemistry', 'file': 'courses/chm_physical1.json'},
+            ],
+        },
+        'Biology': {
+            '100': [
+                {'name': 'Cell Biology & Genetics Intro', 'file': 'courses/bio_general1.json'},
+                {'name': 'Botany I', 'file': 'courses/bio_botany1.json'},
+                {'name': 'Zoology I', 'file': 'courses/bio_zoology1.json'},
+            ],
+            '200': [
+                {'name': 'Genetics', 'file': 'courses/bio_genetics.json'},
+                {'name': 'Ecology & Evolution', 'file': 'courses/bio_ecology.json'},
+                {'name': 'Microbiology Intro', 'file': 'courses/bio_microbiology.json'},
+            ],
+            '300': [
+                {'name': 'Microbiology', 'file': 'courses/bio_microbiology.json'},
+                {'name': 'Physiology', 'file': 'courses/med_physiology1.json'},
+                {'name': 'Molecular Biology', 'file': 'courses/bio_genetics.json'},
+            ],
+            '400': [
+                {'name': 'Immunology', 'file': 'courses/bio_microbiology.json'},
+                {'name': 'Biotechnology', 'file': 'courses/bio_genetics.json'},
+            ],
+        },
+    },
+    'Faculty of Engineering': {
+        'Electrical/Electronics Engineering': {
+            '100': [
+                {'name': 'Engineering Mathematics I', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Circuit Theory I', 'file': 'courses/eee_circuit_theory.json'},
+                {'name': 'Introduction to Engineering', 'file': 'courses/eng_intro.json'},
+            ],
+            '200': [
+                {'name': 'Circuit Theory II', 'file': 'courses/eee_circuit_theory.json'},
+                {'name': 'Electronics I', 'file': 'courses/eee_electronics1.json'},
+                {'name': 'Signals & Systems', 'file': 'courses/eee_signals.json'},
+            ],
+            '300': [
+                {'name': 'Control Systems', 'file': 'courses/eee_control_systems.json'},
+                {'name': 'Digital Electronics', 'file': 'courses/eee_digital.json'},
+                {'name': 'Power Systems I', 'file': 'courses/eee_power1.json'},
+            ],
+            '400': [
+                {'name': 'Telecommunications', 'file': 'courses/eee_telecoms.json'},
+                {'name': 'Power Electronics', 'file': 'courses/eee_power1.json'},
+                {'name': 'Embedded Systems', 'file': 'courses/cs_computer_architecture.json'},
+            ],
+        },
+        'Mechanical Engineering': {
+            '100': [
+                {'name': 'Engineering Mathematics I', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Engineering Statics', 'file': 'courses/mec_statics.json'},
+                {'name': 'Introduction to Engineering', 'file': 'courses/eng_intro.json'},
+            ],
+            '200': [
+                {'name': 'Thermodynamics I', 'file': 'courses/phy_thermodynamics.json'},
+                {'name': 'Dynamics', 'file': 'courses/phy_mechanics.json'},
+                {'name': 'Strength of Materials', 'file': 'courses/mec_statics.json'},
+            ],
+            '300': [
+                {'name': 'Fluid Mechanics', 'file': 'courses/mec_fluid.json'},
+                {'name': 'Heat Transfer', 'file': 'courses/phy_thermodynamics.json'},
+                {'name': 'Machine Design', 'file': 'courses/mec_statics.json'},
+            ],
+            '400': [
+                {'name': 'Manufacturing Engineering', 'file': 'courses/eng_intro.json'},
+                {'name': 'Robotics & Automation', 'file': 'courses/cs_artificial_intelligence.json'},
+            ],
+        },
+        'Civil Engineering': {
+            '100': [
+                {'name': 'Engineering Mathematics I', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Introduction to Civil Engineering', 'file': 'courses/eng_intro.json'},
+            ],
+            '200': [
+                {'name': 'Structural Mechanics', 'file': 'courses/mec_statics.json'},
+                {'name': 'Surveying', 'file': 'courses/eng_intro.json'},
+                {'name': 'Fluid Mechanics', 'file': 'courses/mec_fluid.json'},
+            ],
+            '300': [
+                {'name': 'Reinforced Concrete Design', 'file': 'courses/mec_statics.json'},
+                {'name': 'Soil Mechanics', 'file': 'courses/mec_fluid.json'},
+                {'name': 'Transportation Engineering', 'file': 'courses/eng_intro.json'},
+            ],
+            '400': [
+                {'name': 'Foundation Engineering', 'file': 'courses/mec_statics.json'},
+                {'name': 'Environmental Engineering', 'file': 'courses/chm_physical1.json'},
+            ],
+        },
+        'Computer Engineering': {
+            '100': [
+                {'name': 'Introduction to Programming', 'file': 'courses/cs_intro_programming.json'},
+                {'name': 'Circuit Theory I', 'file': 'courses/eee_circuit_theory.json'},
+                {'name': 'Engineering Mathematics I', 'file': 'courses/mth_calculus1.json'},
+            ],
+            '200': [
+                {'name': 'Data Structures', 'file': 'courses/cs_data_structures.json'},
+                {'name': 'Digital Electronics', 'file': 'courses/eee_digital.json'},
+                {'name': 'Computer Architecture', 'file': 'courses/cs_computer_architecture.json'},
+            ],
+            '300': [
+                {'name': 'Operating Systems', 'file': 'courses/cs_operating_systems.json'},
+                {'name': 'Computer Networks', 'file': 'courses/cs_networks.json'},
+                {'name': 'Microprocessors & Interfacing', 'file': 'courses/cs_computer_architecture.json'},
+            ],
+            '400': [
+                {'name': 'Software Engineering', 'file': 'courses/cs_software_engineering.json'},
+                {'name': 'VLSI Design', 'file': 'courses/eee_digital.json'},
+                {'name': 'Cybersecurity', 'file': 'courses/cs_cybersecurity.json'},
+            ],
+        },
+    },
+    'Faculty of Social Sciences': {
+        'Economics': {
+            '100': [
+                {'name': 'Principles of Economics', 'file': 'courses/eco_principles.json'},
+                {'name': 'Introduction to Statistics', 'file': 'courses/mth_intro_stats.json'},
+                {'name': 'History of Economic Thought', 'file': 'courses/eco_history.json'},
+            ],
+            '200': [
+                {'name': 'Microeconomics I', 'file': 'courses/eco_micro.json'},
+                {'name': 'Macroeconomics I', 'file': 'courses/eco_macro.json'},
+                {'name': 'Mathematical Economics', 'file': 'courses/mth_intro_stats.json'},
+            ],
+            '300': [
+                {'name': 'Microeconomics II', 'file': 'courses/eco_micro.json'},
+                {'name': 'International Economics', 'file': 'courses/eco_international.json'},
+                {'name': 'Public Finance', 'file': 'courses/eco_public_finance.json'},
+            ],
+            '400': [
+                {'name': 'Money & Banking', 'file': 'courses/eco_money_banking.json'},
+                {'name': 'Development Economics', 'file': 'courses/eco_development.json'},
+                {'name': 'Econometrics', 'file': 'courses/mth_intro_stats.json'},
+            ],
+        },
+        'Political Science': {
+            '100': [
+                {'name': 'Introduction to Political Science', 'file': 'courses/pol_intro.json'},
+                {'name': 'Nigerian Government & Politics', 'file': 'government.json'},
+            ],
+            '200': [
+                {'name': 'Comparative Politics', 'file': 'courses/pol_intro.json'},
+                {'name': 'Political Theory', 'file': 'courses/pol_intro.json'},
+            ],
+            '300': [
+                {'name': 'International Relations', 'file': 'courses/pol_intro.json'},
+                {'name': 'Public Administration', 'file': 'courses/pol_intro.json'},
+            ],
+            '400': [
+                {'name': 'Nigerian Foreign Policy', 'file': 'courses/pol_intro.json'},
+                {'name': 'Research Methods', 'file': 'courses/mth_intro_stats.json'},
+            ],
+        },
+        'Mass Communication': {
+            '100': [
+                {'name': 'Introduction to Mass Communication', 'file': 'courses/com_intro.json'},
+                {'name': 'Media Writing', 'file': 'courses/com_intro.json'},
+            ],
+            '200': [
+                {'name': 'Print Journalism', 'file': 'courses/com_intro.json'},
+                {'name': 'Broadcast Journalism', 'file': 'courses/com_intro.json'},
+            ],
+            '300': [
+                {'name': 'Public Relations', 'file': 'courses/com_intro.json'},
+                {'name': 'Advertising', 'file': 'courses/com_intro.json'},
+            ],
+            '400': [
+                {'name': 'Media Management', 'file': 'courses/com_intro.json'},
+                {'name': 'Digital Media & New Technologies', 'file': 'courses/com_intro.json'},
+            ],
+        },
+        'Sociology': {
+            '100': [
+                {'name': 'Introduction to Sociology', 'file': 'courses/soc_intro.json'},
+                {'name': 'Social Psychology', 'file': 'courses/soc_intro.json'},
+            ],
+            '200': [
+                {'name': 'Social Research Methods', 'file': 'courses/mth_intro_stats.json'},
+                {'name': 'Sociological Theory', 'file': 'courses/soc_intro.json'},
+            ],
+            '300': [
+                {'name': 'Sociology of Development', 'file': 'courses/eco_development.json'},
+                {'name': 'Urban Sociology', 'file': 'courses/soc_intro.json'},
+            ],
+            '400': [
+                {'name': 'Gender Studies', 'file': 'courses/soc_intro.json'},
+                {'name': 'Applied Sociology', 'file': 'courses/soc_intro.json'},
+            ],
+        },
+    },
+    'Faculty of Management Sciences': {
+        'Accounting': {
+            '100': [
+                {'name': 'Financial Accounting I', 'file': 'courses/acc_financial1.json'},
+                {'name': 'Business Mathematics', 'file': 'courses/mth_intro_stats.json'},
+                {'name': 'Principles of Economics', 'file': 'courses/eco_principles.json'},
+                {'name': 'Use of English', 'file': 'use_of_english.json'},
+            ],
+            '200': [
+                {'name': 'Financial Accounting II', 'file': 'courses/acc_financial2.json'},
+                {'name': 'Cost & Management Accounting', 'file': 'courses/acc_cost.json'},
+                {'name': 'Taxation I', 'file': 'courses/acc_tax.json'},
+                {'name': 'Business Law', 'file': 'courses/law_contract.json'},
+            ],
+            '300': [
+                {'name': 'Auditing & Assurance', 'file': 'courses/acc_auditing.json'},
+                {'name': 'Advanced Financial Accounting', 'file': 'courses/acc_financial2.json'},
+                {'name': 'Management Accounting', 'file': 'courses/acc_cost.json'},
+                {'name': 'Taxation II', 'file': 'courses/acc_tax.json'},
+            ],
+            '400': [
+                {'name': 'Financial Management', 'file': 'courses/acc_fin_mgmt.json'},
+                {'name': 'Advanced Auditing', 'file': 'courses/acc_auditing.json'},
+                {'name': 'Public Sector Accounting', 'file': 'courses/acc_financial1.json'},
+                {'name': 'Forensic Accounting', 'file': 'courses/acc_auditing.json'},
+            ],
+        },
+        'Business Administration': {
+            '100': [
+                {'name': 'Introduction to Business', 'file': 'courses/bus_intro.json'},
+                {'name': 'Business Mathematics', 'file': 'courses/mth_intro_stats.json'},
+                {'name': 'Principles of Economics', 'file': 'courses/eco_principles.json'},
+            ],
+            '200': [
+                {'name': 'Organisational Behaviour', 'file': 'courses/bus_org_behaviour.json'},
+                {'name': 'Business Statistics', 'file': 'courses/mth_intro_stats.json'},
+                {'name': 'Financial Accounting', 'file': 'courses/acc_financial1.json'},
+            ],
+            '300': [
+                {'name': 'Strategic Management', 'file': 'courses/bus_strategic.json'},
+                {'name': 'Human Resource Management', 'file': 'courses/bus_hrm.json'},
+                {'name': 'Marketing Management', 'file': 'courses/bus_marketing.json'},
+            ],
+            '400': [
+                {'name': 'Entrepreneurship', 'file': 'courses/bus_entrepreneurship.json'},
+                {'name': 'Corporate Finance', 'file': 'courses/acc_fin_mgmt.json'},
+                {'name': 'Operations Management', 'file': 'courses/bus_intro.json'},
+            ],
+        },
+        'Banking & Finance': {
+            '100': [
+                {'name': 'Principles of Economics', 'file': 'courses/eco_principles.json'},
+                {'name': 'Introduction to Banking', 'file': 'courses/eco_money_banking.json'},
+                {'name': 'Financial Mathematics', 'file': 'courses/mth_intro_stats.json'},
+            ],
+            '200': [
+                {'name': 'Money & Capital Markets', 'file': 'courses/eco_money_banking.json'},
+                {'name': 'Commercial Banking', 'file': 'courses/eco_money_banking.json'},
+                {'name': 'Financial Accounting', 'file': 'courses/acc_financial1.json'},
+            ],
+            '300': [
+                {'name': 'Investment & Portfolio Management', 'file': 'courses/acc_fin_mgmt.json'},
+                {'name': 'Bank Credit & Risk Management', 'file': 'courses/eco_money_banking.json'},
+                {'name': 'Public Finance', 'file': 'courses/eco_public_finance.json'},
+            ],
+            '400': [
+                {'name': 'International Finance', 'file': 'courses/eco_international.json'},
+                {'name': 'Central Banking & Monetary Policy', 'file': 'courses/eco_macro.json'},
+            ],
+        },
+        'Marketing': {
+            '100': [
+                {'name': 'Principles of Marketing', 'file': 'courses/bus_marketing.json'},
+                {'name': 'Introduction to Business', 'file': 'courses/bus_intro.json'},
+            ],
+            '200': [
+                {'name': 'Consumer Behaviour', 'file': 'courses/bus_marketing.json'},
+                {'name': 'Marketing Research', 'file': 'courses/mth_intro_stats.json'},
+            ],
+            '300': [
+                {'name': 'Advertising & Promotion', 'file': 'courses/bus_marketing.json'},
+                {'name': 'Sales Management', 'file': 'courses/bus_marketing.json'},
+            ],
+            '400': [
+                {'name': 'Digital Marketing', 'file': 'courses/bus_marketing.json'},
+                {'name': 'International Marketing', 'file': 'courses/eco_international.json'},
+            ],
+        },
+    },
+    'Faculty of Law': {
+        'Law': {
+            '100': [
+                {'name': 'Introduction to Law & Legal Method', 'file': 'courses/law_intro.json'},
+                {'name': 'Constitutional Law I', 'file': 'courses/law_constitutional.json'},
+                {'name': 'Nigerian Legal System', 'file': 'courses/law_intro.json'},
+                {'name': 'Use of English', 'file': 'use_of_english.json'},
+            ],
+            '200': [
+                {'name': 'Law of Contract', 'file': 'courses/law_contract.json'},
+                {'name': 'Law of Tort', 'file': 'courses/law_tort.json'},
+                {'name': 'Criminal Law I', 'file': 'courses/law_criminal.json'},
+                {'name': 'Administrative Law', 'file': 'courses/law_intro.json'},
+            ],
+            '300': [
+                {'name': 'Company Law', 'file': 'courses/law_company.json'},
+                {'name': 'Evidence Law', 'file': 'courses/law_evidence.json'},
+                {'name': 'Land Law', 'file': 'courses/law_intro.json'},
+                {'name': 'Family Law', 'file': 'courses/law_intro.json'},
+            ],
+            '400': [
+                {'name': 'Commercial Law', 'file': 'courses/law_contract.json'},
+                {'name': 'Jurisprudence & Legal Theory', 'file': 'courses/law_intro.json'},
+                {'name': 'International Law', 'file': 'courses/law_intro.json'},
+                {'name': 'Labour Law', 'file': 'courses/law_intro.json'},
+            ],
+            '500': [
+                {'name': 'Legal Drafting & Conveyancing', 'file': 'courses/law_intro.json'},
+                {'name': 'Alternative Dispute Resolution', 'file': 'courses/law_intro.json'},
+            ],
+        },
+    },
+    'Faculty of Medicine & Health Sciences': {
+        'Medicine & Surgery (MBBS)': {
+            '100': [
+                {'name': 'Human Anatomy I', 'file': 'courses/med_anatomy1.json'},
+                {'name': 'Human Physiology I', 'file': 'courses/med_physiology1.json'},
+                {'name': 'Biochemistry I', 'file': 'courses/med_biochem1.json'},
+                {'name': 'Introduction to Medical Sciences', 'file': 'courses/med_intro.json'},
+            ],
+            '200': [
+                {'name': 'Human Anatomy II', 'file': 'courses/med_anatomy1.json'},
+                {'name': 'Human Physiology II', 'file': 'courses/med_physiology1.json'},
+                {'name': 'Biochemistry II', 'file': 'courses/med_biochem1.json'},
+                {'name': 'Histology & Embryology', 'file': 'courses/med_anatomy1.json'},
+            ],
+            '300': [
+                {'name': 'Pathology', 'file': 'courses/med_pathology.json'},
+                {'name': 'Microbiology & Parasitology', 'file': 'courses/med_microbiology.json'},
+                {'name': 'Pharmacology I', 'file': 'courses/med_pharmacology.json'},
+                {'name': 'Medical Ethics', 'file': 'courses/med_intro.json'},
+            ],
+            '400': [
+                {'name': 'Medicine & Surgery I', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Paediatrics', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Obstetrics & Gynaecology', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Community Medicine', 'file': 'courses/med_medicine1.json'},
+            ],
+            '500': [
+                {'name': 'Advanced Medicine & Surgery', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Psychiatry', 'file': 'courses/med_medicine1.json'},
+            ],
+        },
+        'Pharmacy': {
+            '100': [
+                {'name': 'General Chemistry', 'file': 'courses/chm_general1.json'},
+                {'name': 'Human Anatomy & Physiology', 'file': 'courses/med_physiology1.json'},
+                {'name': 'Introduction to Pharmacy', 'file': 'courses/med_intro.json'},
+            ],
+            '200': [
+                {'name': 'Pharmaceutical Chemistry I', 'file': 'courses/chm_organic1.json'},
+                {'name': 'Pharmacology I', 'file': 'courses/med_pharmacology.json'},
+                {'name': 'Pharmaceutics I', 'file': 'courses/med_pharmacology.json'},
+            ],
+            '300': [
+                {'name': 'Medicinal Chemistry', 'file': 'courses/chm_organic1.json'},
+                {'name': 'Pharmacology II', 'file': 'courses/med_pharmacology.json'},
+                {'name': 'Clinical Pharmacy', 'file': 'courses/med_medicine1.json'},
+            ],
+            '400': [
+                {'name': 'Pharmacokinetics', 'file': 'courses/med_pharmacology.json'},
+                {'name': 'Hospital & Clinical Pharmacy', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Pharmaceutical Microbiology', 'file': 'courses/med_microbiology.json'},
+            ],
+            '500': [
+                {'name': 'Pharmacy Practice', 'file': 'courses/med_medicine1.json'},
+            ],
+        },
+        'Nursing Science': {
+            '100': [
+                {'name': 'Anatomy & Physiology for Nurses', 'file': 'courses/med_physiology1.json'},
+                {'name': 'Introduction to Nursing', 'file': 'courses/med_intro.json'},
+                {'name': 'Microbiology for Nursing', 'file': 'courses/med_microbiology.json'},
+            ],
+            '200': [
+                {'name': 'Medical-Surgical Nursing I', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Community Health Nursing', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Pharmacology for Nurses', 'file': 'courses/med_pharmacology.json'},
+            ],
+            '300': [
+                {'name': 'Paediatric Nursing', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Psychiatric Nursing', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Midwifery I', 'file': 'courses/med_medicine1.json'},
+            ],
+            '400': [
+                {'name': 'Critical Care Nursing', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Nursing Management', 'file': 'courses/bus_hrm.json'},
+                {'name': 'Research in Nursing', 'file': 'courses/mth_intro_stats.json'},
+            ],
+        },
+        'Medical Laboratory Science': {
+            '100': [
+                {'name': 'General Biology', 'file': 'courses/bio_general1.json'},
+                {'name': 'General Chemistry', 'file': 'courses/chm_general1.json'},
+                {'name': 'Introduction to MLS', 'file': 'courses/med_intro.json'},
+            ],
+            '200': [
+                {'name': 'Clinical Chemistry I', 'file': 'courses/med_biochem1.json'},
+                {'name': 'Haematology I', 'file': 'courses/med_anatomy1.json'},
+                {'name': 'Medical Microbiology', 'file': 'courses/med_microbiology.json'},
+            ],
+            '300': [
+                {'name': 'Clinical Chemistry II', 'file': 'courses/med_biochem1.json'},
+                {'name': 'Blood Banking & Transfusion', 'file': 'courses/med_anatomy1.json'},
+                {'name': 'Histopathology', 'file': 'courses/med_pathology.json'},
+            ],
+            '400': [
+                {'name': 'Molecular Diagnostics', 'file': 'courses/bio_genetics.json'},
+                {'name': 'Parasitology & Entomology', 'file': 'courses/med_microbiology.json'},
+                {'name': 'Quality Control in Laboratory', 'file': 'courses/mth_intro_stats.json'},
+            ],
+        },
+    },
+    'Faculty of Education': {
+        'Education (Computer Science)': {
+            '100': [
+                {'name': 'Introduction to Education', 'file': 'courses/edu_intro.json'},
+                {'name': 'Introduction to Programming', 'file': 'courses/cs_intro_programming.json'},
+                {'name': 'Psychology of Learning', 'file': 'courses/edu_intro.json'},
+            ],
+            '200': [
+                {'name': 'Data Structures', 'file': 'courses/cs_data_structures.json'},
+                {'name': 'Curriculum Studies', 'file': 'courses/edu_intro.json'},
+                {'name': 'Teaching Methods', 'file': 'courses/edu_intro.json'},
+            ],
+            '300': [
+                {'name': 'Database Management', 'file': 'courses/cs_database.json'},
+                {'name': 'Educational Technology', 'file': 'courses/edu_intro.json'},
+            ],
+            '400': [
+                {'name': 'Artificial Intelligence', 'file': 'courses/cs_artificial_intelligence.json'},
+                {'name': 'Educational Administration', 'file': 'courses/edu_intro.json'},
+            ],
+        },
+        'Education (Mathematics)': {
+            '100': [
+                {'name': 'Introduction to Education', 'file': 'courses/edu_intro.json'},
+                {'name': 'Calculus I', 'file': 'courses/mth_calculus1.json'},
+            ],
+            '200': [
+                {'name': 'Linear Algebra', 'file': 'courses/mth_linear_algebra.json'},
+                {'name': 'Teaching Methods in Mathematics', 'file': 'courses/edu_intro.json'},
+            ],
+            '300': [
+                {'name': 'Abstract Algebra', 'file': 'courses/mth_abstract_algebra.json'},
+                {'name': 'Educational Technology', 'file': 'courses/edu_intro.json'},
+            ],
+            '400': [
+                {'name': 'Operations Research', 'file': 'courses/mth_operations_research.json'},
+                {'name': 'Educational Administration', 'file': 'courses/edu_intro.json'},
+            ],
+        },
+        'Education (English)': {
+            '100': [
+                {'name': 'Introduction to Education', 'file': 'courses/edu_intro.json'},
+                {'name': 'Introduction to Linguistics', 'file': 'use_of_english.json'},
+            ],
+            '200': [
+                {'name': 'English Literature I', 'file': 'literature_in_english.json'},
+                {'name': 'Teaching Methods in English', 'file': 'courses/edu_intro.json'},
+            ],
+            '300': [
+                {'name': 'Stylistics & Creative Writing', 'file': 'literature_in_english.json'},
+                {'name': 'Educational Technology', 'file': 'courses/edu_intro.json'},
+            ],
+            '400': [
+                {'name': 'Language Testing & Assessment', 'file': 'use_of_english.json'},
+                {'name': 'Educational Administration', 'file': 'courses/edu_intro.json'},
+            ],
+        },
+    },
+}
+
+
 @app.route('/subject_selection')
 def subject_selection():
     if 'student_info' not in session:
         return redirect(url_for('home'))
-    all_subjects = [
-        "Use of English", "Mathematics", "Literature in English",
-        "Government", "Economics", "Commerce",
-        "Physics", "Chemistry", "Biology",
-        "Principles of Accounts", "Christian Religious Studies"
-    ]
-    return render_template('subject_selection.html', subjects=all_subjects,
+    return render_template('subject_selection.html',
+                           courses_json=json.dumps(UNIVERSITY_COURSES),
                            mode=session.get('mode', 'exam'))
 
 @app.route('/select_subjects', methods=['POST'])
@@ -490,19 +1097,25 @@ def select_subjects():
     if 'student_info' not in session:
         return redirect(url_for('home'))
 
-    all_subjects = [
-        "Use of English", "Mathematics", "Literature in English",
-        "Government", "Economics", "Commerce",
-        "Physics", "Chemistry", "Biology",
-        "Principles of Accounts", "Christian Religious Studies"
-    ]
+    def _render_err(msg):
+        return render_template('subject_selection.html',
+                               courses_json=json.dumps(UNIVERSITY_COURSES),
+                               error=msg, mode=session.get('mode', 'exam'))
 
-    selected_subjects = request.form.getlist('subjects')
-    if len(selected_subjects) < 1:
-        return render_template('subject_selection.html', subjects=all_subjects,
-                               error="Please select at least 1 subject")
+    course_name = request.form.get('course_name', '').strip()
+    course_file = request.form.get('course_file', '').strip()
+    if not course_name or not course_file:
+        return _render_err('Please select a course to begin.')
+    if '..' in course_file or course_file.startswith('/'):
+        return _render_err('Invalid course selection.')
 
-    # Read user selections with safe fallbacks
+    try:
+        num_questions = int(request.form.get('num_questions', 30))
+        if num_questions not in (10, 20, 30, 45, 60):
+            num_questions = 30
+    except (ValueError, TypeError):
+        num_questions = 30
+
     try:
         time_limit_min = int(request.form.get('time_limit', 60))
         if time_limit_min not in (15, 30, 60):
@@ -510,49 +1123,29 @@ def select_subjects():
     except (ValueError, TypeError):
         time_limit_min = 60
 
-    try:
-        num_questions = int(request.form.get('num_questions', 30))
-        if num_questions not in (20, 30, 45, 60):
-            num_questions = 30
-    except (ValueError, TypeError):
-        num_questions = 30
+    if not os.path.exists(course_file):
+        return _render_err(f'Questions for "{course_name}" are not yet available. Please choose another course.')
 
-    subject_files = {
-        "Use of English": "use_of_english.json",
-        "Mathematics": "mathematics.json",
-        "Literature in English": "literature_in_english.json",
-        "Government": "government.json",
-        "Economics": "economics.json",
-        "Commerce": "commerce.json",
-        "Physics": "physics.json",
-        "Chemistry": "chemistry.json",
-        "Biology": "biology.json",
-        "Principles of Accounts": "principles_of_accounts.json",
-        "Christian Religious Studies": "christian_religious_studies.json"
-    }
+    qs = load_questions(course_file)
+    count = min(num_questions, len(qs))
+    if count == 0:
+        return _render_err(f'No questions found for "{course_name}". Please choose another course.')
 
-    subject_questions = {}
-    subject_answers = {}
-    for subj in selected_subjects:
-        file = subject_files.get(subj)
-        if file and os.path.exists(file):
-            qs = load_questions(file)
-            count = min(num_questions, len(qs))
-            subject_questions[subj] = random.sample(qs, count)
-            subject_answers[subj] = [None] * count
+    subject_questions = {course_name: random.sample(qs, count)}
+    subject_answers   = {course_name: [None] * count}
 
     session['subject_questions'] = subject_questions
-    session['subject_answers'] = subject_answers
-    session['start_time'] = time.time()
-    # Practice mode has no timer — set duration to 99 hours
+    session['subject_answers']   = subject_answers
+    session['start_time']        = time.time()
     if session.get('mode') == 'practice':
         session['exam_duration'] = 99 * 3600
     else:
         session['exam_duration'] = time_limit_min * 60
-    session['exam_settings'] = {'time_limit_min': time_limit_min, 'num_questions': num_questions}
-    session['current_subject'] = selected_subjects[0]
-    session['current_question'] = 0
+    session['exam_settings']     = {'time_limit_min': time_limit_min, 'num_questions': num_questions}
+    session['current_subject']   = course_name
+    session['current_question']  = 0
     return redirect(url_for('exam'))
+
 
 @app.route('/exam')
 def exam():
@@ -1343,14 +1936,30 @@ def room_page(code):
 @socketio.on('join')
 def on_join(data):
     code = data.get('code'); name = data.get('name'); email = data.get('email')
+    socket_rooms[request.sid] = {'code': code, 'name': name, 'email': email}
     sio_join(code)
     emit('user_joined', {'name': name, 'email': email}, to=code, include_self=False)
 
 @socketio.on('leave')
 def on_leave(data):
     code = data.get('code'); name = data.get('name')
+    socket_rooms.pop(request.sid, None)
     sio_leave(code)
     emit('user_left', {'name': name}, to=code, include_self=False)
+    _maybe_expire_room(code)
+
+@socketio.on('disconnect')
+def on_disconnect():
+    info = socket_rooms.pop(request.sid, None)
+    if info:
+        code = info.get('code')
+        emit('user_left', {'name': info.get('name', '')}, to=code, include_self=False)
+        _maybe_expire_room(code)
+
+@socketio.on('mark_seen')
+def on_mark_seen(data):
+    code = data.get('code'); msg_id = data.get('msg_id')
+    emit('message_seen', {'msg_id': msg_id}, to=code, include_self=False)
 
 @socketio.on('message')
 def on_message(data):

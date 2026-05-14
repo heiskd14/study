@@ -1,193 +1,323 @@
 {% extends "base.html" %}
-
-{% block title %}Beyond The Classroom — Set Up Your Exam{% endblock %}
+{% block title %}Beyond The Classroom — Course Selection{% endblock %}
 
 {% block content %}
 <div class="registration-container page-wrapper">
-    <div class="registration-box" style="max-width:600px;">
-        <div class="reg-logo">
-            <a href="{{ url_for('home') }}" class="reg-back">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
-                Home
-            </a>
-            <span class="reg-brand" style="display:flex;align-items:center;gap:8px;">
-                <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="BTC Logo" style="width:28px;height:28px;border-radius:6px;object-fit:cover;">
-                Beyond The Classroom
-            </span>
+  <div class="registration-box cs-box">
+    <div class="reg-logo">
+      <a href="{{ url_for('home') }}" class="reg-back">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
+        Home
+      </a>
+      <span class="reg-brand" style="display:flex;align-items:center;gap:8px;">
+        <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="BTC Logo" style="width:28px;height:28px;border-radius:6px;object-fit:cover;">
+        Beyond The Classroom
+      </span>
+    </div>
+
+    <h1 class="registration-title" id="page-title">
+      {% if mode == 'practice' %}Set Up Your Practice{% else %}Set Up Your Exam{% endif %}
+    </h1>
+    <p class="cs-subtitle">Welcome, <strong style="color:var(--accent-light)">{{ session.student_info.name }}</strong>! Choose your course below.</p>
+
+    {% if error %}
+    <div class="error-message">{{ error }}</div>
+    {% endif %}
+
+    <!-- Step indicators -->
+    <div class="steps-bar">
+      <div class="step active" id="si-1"><span>1</span> School</div>
+      <div class="step-sep">›</div>
+      <div class="step" id="si-2"><span>2</span> Level</div>
+      <div class="step-sep">›</div>
+      <div class="step" id="si-3"><span>3</span> Department</div>
+      <div class="step-sep">›</div>
+      <div class="step" id="si-4"><span>4</span> Course</div>
+    </div>
+
+    <!-- STEP 1: School -->
+    <div class="cs-step" id="step-1">
+      <div class="cs-step-label">Choose your school / exam type:</div>
+      <div class="school-grid" id="school-grid"></div>
+    </div>
+
+    <!-- STEP 2: Level -->
+    <div class="cs-step hidden" id="step-2">
+      <div class="cs-step-label">Select your level:</div>
+      <div class="level-grid" id="level-grid"></div>
+      <button class="back-btn" onclick="goBack(1)">← Back</button>
+    </div>
+
+    <!-- STEP 3: Department -->
+    <div class="cs-step hidden" id="step-3">
+      <div class="cs-step-label">Select your department:</div>
+      <div class="dept-grid" id="dept-grid"></div>
+      <button class="back-btn" onclick="goBack(2)">← Back</button>
+    </div>
+
+    <!-- STEP 4: Course + Settings -->
+    <div class="cs-step hidden" id="step-4">
+      <div class="cs-step-label">Select a course:</div>
+      <div class="course-list" id="course-list"></div>
+      <button class="back-btn" onclick="goBack(3)">← Back</button>
+    </div>
+
+    <!-- Settings + Submit (inside step 4) -->
+    <form method="POST" action="{{ url_for('select_subjects') }}" id="submit-form" class="hidden">
+      <input type="hidden" name="course_name" id="f-course-name">
+      <input type="hidden" name="course_file" id="f-course-file">
+      <input type="hidden" name="num_questions" id="f-num-questions" value="30">
+      <input type="hidden" name="time_limit" id="f-time-limit" value="60">
+
+      <div class="settings-panel" id="settings-panel">
+        <div class="selected-course-preview" id="selected-preview"></div>
+
+        {% if mode != 'practice' %}
+        <div class="setup-section">
+          <div class="setup-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Time Limit
+          </div>
+          <div class="option-pills" id="time-pills">
+            <label class="option-pill"><input type="radio" name="_tl" value="15" onchange="setField('f-time-limit',15)"><span>15 min</span></label>
+            <label class="option-pill"><input type="radio" name="_tl" value="30" onchange="setField('f-time-limit',30)"><span>30 min</span></label>
+            <label class="option-pill active"><input type="radio" name="_tl" value="60" checked onchange="setField('f-time-limit',60)"><span>60 min</span></label>
+          </div>
         </div>
-
-        <h1 class="registration-title">{% if mode == 'practice' %}Set Up Your Practice{% else %}Set Up Your Exam{% endif %}</h1>
-        <p style="text-align:center;margin-bottom:28px;color:var(--text-muted);font-size:14px;">
-            Welcome, <strong style="color:var(--accent-light)">{{ session.student_info.name }}</strong>! Customise your session below.
-        </p>
-
-        {% if error %}
-        <div class="error-message">{{ error }}</div>
         {% endif %}
 
-        <form method="POST" action="{{ url_for('select_subjects') }}">
+        <div class="setup-section">
+          <div class="setup-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Number of Questions
+          </div>
+          <div class="option-pills" id="q-pills">
+            <label class="option-pill"><input type="radio" name="_nq" value="10" onchange="setField('f-num-questions',10)"><span>10</span></label>
+            <label class="option-pill"><input type="radio" name="_nq" value="20" onchange="setField('f-num-questions',20)"><span>20</span></label>
+            <label class="option-pill active"><input type="radio" name="_nq" value="30" checked onchange="setField('f-num-questions',30)"><span>30</span></label>
+            <label class="option-pill"><input type="radio" name="_nq" value="45" onchange="setField('f-num-questions',45)"><span>45</span></label>
+            <label class="option-pill"><input type="radio" name="_nq" value="60" onchange="setField('f-num-questions',60)"><span>60</span></label>
+          </div>
+        </div>
 
-            {% if mode != 'practice' %}
-            <!-- ── Time Limit ── -->
-            <div class="setup-section">
-                <div class="setup-label">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Time Limit
-                </div>
-                <div class="option-pills" id="time-pills">
-                    <label class="option-pill">
-                        <input type="radio" name="time_limit" value="15" onchange="syncPills('time-pills')">
-                        <span>15 min</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="time_limit" value="30" onchange="syncPills('time-pills')">
-                        <span>30 min</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="time_limit" value="60" checked onchange="syncPills('time-pills')">
-                        <span>60 min</span>
-                    </label>
-                </div>
-            </div>
-            {% else %}
-            <input type="hidden" name="time_limit" value="60">
-            {% endif %}
-
-            <!-- ── Questions per Subject ── -->
-            <div class="setup-section">
-                <div class="setup-label">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                    Questions per Subject
-                </div>
-                <div class="option-pills" id="q-pills">
-                    <label class="option-pill">
-                        <input type="radio" name="num_questions" value="20" onchange="syncPills('q-pills')">
-                        <span>20 Qs</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="num_questions" value="30" checked onchange="syncPills('q-pills')">
-                        <span>30 Qs</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="num_questions" value="45" onchange="syncPills('q-pills')">
-                        <span>45 Qs</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="num_questions" value="60" onchange="syncPills('q-pills')">
-                        <span>60 Qs</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- ── Subject Selection ── -->
-            <div class="setup-section">
-                <div class="setup-label">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    Subjects
-                    <span class="selection-badge" id="badge">0 selected</span>
-                </div>
-                <div class="subjects-grid">
-                    {% for subject in subjects %}
-                    <div class="subject-checkbox">
-                        <input type="checkbox" id="subj_{{ loop.index }}" name="subjects"
-                               value="{{ subject }}" onchange="updateSelection()">
-                        <label for="subj_{{ loop.index }}">{{ subject }}</label>
-                    </div>
-                    {% endfor %}
-                </div>
-                <p style="font-size:12px;color:var(--text-dim);margin-top:10px;text-align:center;">
-                    Select at least 1 subject to begin.
-                </p>
-            </div>
-
-            <button type="submit" class="btn btn-primary" id="submit-btn" disabled style="width:100%;">
-                {% if mode == 'practice' %}Start Practice{% else %}Start Exam{% endif %}
-            </button>
-        </form>
-    </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:4px;">
+          {% if mode == 'practice' %}Start Practice{% else %}Start Exam{% endif %}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <style>
-.setup-section { margin-bottom: 28px; }
-.setup-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 12px;
-}
-.selection-badge {
-    margin-left: auto;
-    background: rgba(19,122,19,0.15);
-    color: var(--accent-light);
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 50px;
-    border: 1px solid rgba(19,122,19,0.25);
-    text-transform: none;
-    letter-spacing: 0;
-}
+.cs-box { max-width: 640px; }
+.cs-subtitle { text-align:center; color:var(--text-muted); font-size:14px; margin-bottom:24px; }
 
-/* Pill selectors */
-.option-pills { display: flex; gap: 10px; flex-wrap: wrap; }
-.option-pill { flex: 1; min-width: 70px; cursor: pointer; }
-.option-pill input[type="radio"] { display: none; }
-.option-pill span {
-    display: block;
-    text-align: center;
-    padding: 12px 8px;
-    border-radius: var(--radius-xs);
-    border: 1px solid var(--glass-border);
-    background: rgba(255,255,255,0.03);
-    color: var(--text-muted);
-    font-size: 14px;
-    font-weight: 600;
-    font-family: var(--font-display);
-    transition: var(--tr);
-    cursor: pointer;
-    user-select: none;
-}
-.option-pill:hover span { border-color: rgba(19,122,19,0.35); background: rgba(19,122,19,0.06); color: var(--accent-light); }
-.option-pill.active span { background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-color: transparent; color: white; box-shadow: 0 4px 16px var(--accent-glow); }
+/* Step bar */
+.steps-bar { display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:28px; flex-wrap:wrap; }
+.step { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-muted); font-weight:600; padding:5px 10px; border-radius:20px; transition: background 0.2s, color 0.2s; }
+.step span { width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,0.08); display:grid; place-items:center; font-size:11px; font-weight:700; }
+.step.active { color:var(--accent-light); background:rgba(0,168,132,0.12); }
+.step.active span { background:var(--accent); color:white; }
+.step.done { color:var(--text-muted); }
+.step.done span { background:rgba(0,168,132,0.3); color:var(--accent-light); }
+.step-sep { color:var(--text-dim); font-size:14px; }
 
-/* Subjects grid */
-.subjects-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; max-height: 320px; overflow-y: auto; padding-right: 4px; }
-.subjects-grid::-webkit-scrollbar { width: 3px; }
-.subjects-grid::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 2px; }
-.subject-checkbox { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border: 1px solid var(--glass-border); border-radius: var(--radius-xs); background: var(--surface); cursor: pointer; transition: var(--tr); }
-.subject-checkbox:has(input:checked) { border-color: rgba(19,122,19,0.45); background: rgba(19,122,19,0.08); }
-.subject-checkbox:hover { border-color: rgba(19,122,19,0.3); background: rgba(19,122,19,0.05); }
-.subject-checkbox input[type="checkbox"] { width: 17px; height: 17px; min-width: 17px; accent-color: var(--accent-light); cursor: pointer; flex-shrink: 0; }
-.subject-checkbox label { font-size: 13px; color: var(--text-muted); cursor: pointer; flex: 1; margin: 0; text-transform: none; letter-spacing: 0; }
-.subject-checkbox:has(input:checked) label { color: var(--accent-light); font-weight: 600; }
+/* Steps */
+.cs-step { animation: fadeIn 0.2s ease; }
+.cs-step.hidden { display:none; }
+.cs-step-label { font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); font-weight:600; margin-bottom:14px; }
 
-#submit-btn:disabled { background: rgba(255,255,255,0.05) !important; color: var(--text-dim) !important; box-shadow: none !important; cursor: not-allowed; transform: none !important; }
+/* School grid */
+.school-grid { display:flex; flex-direction:column; gap:10px; }
+.school-card { display:flex; align-items:center; gap:14px; padding:14px 16px; border:1.5px solid var(--glass-border); border-radius:12px; background:var(--surface); cursor:pointer; transition:var(--tr); text-align:left; width:100%; }
+.school-card:hover { border-color:rgba(0,168,132,0.4); background:rgba(0,168,132,0.05); }
+.school-card:hover .sc-icon { background:rgba(0,168,132,0.2); color:var(--accent-light); }
+.sc-icon { width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.06); display:grid; place-items:center; font-size:1.2rem; flex-shrink:0; transition:var(--tr); }
+.sc-text { flex:1; }
+.sc-name { font-size:0.95rem; font-weight:600; color:var(--text); }
+.sc-dept-count { font-size:0.78rem; color:var(--text-muted); margin-top:2px; }
+.sc-arrow { color:var(--text-dim); font-size:1rem; }
 
-@media (max-width: 500px) { .subjects-grid { grid-template-columns: 1fr; } .option-pills { gap: 8px; } }
+/* Level grid */
+.level-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; }
+.level-btn { padding:20px 10px; border:1.5px solid var(--glass-border); border-radius:12px; background:var(--surface); cursor:pointer; font-size:1.1rem; font-weight:700; color:var(--text); transition:var(--tr); text-align:center; }
+.level-btn:hover { border-color:rgba(0,168,132,0.5); background:rgba(0,168,132,0.08); color:var(--accent-light); }
+.level-label { font-size:0.7rem; color:var(--text-muted); font-weight:400; display:block; margin-top:3px; }
+
+/* Dept grid */
+.dept-grid { display:flex; flex-direction:column; gap:9px; max-height:340px; overflow-y:auto; padding-right:4px; }
+.dept-grid::-webkit-scrollbar { width:3px; }
+.dept-grid::-webkit-scrollbar-thumb { background:var(--glass-border); border-radius:2px; }
+.dept-btn { display:flex; align-items:center; justify-content:space-between; padding:13px 16px; border:1.5px solid var(--glass-border); border-radius:10px; background:var(--surface); cursor:pointer; font-size:0.93rem; color:var(--text); transition:var(--tr); text-align:left; }
+.dept-btn:hover { border-color:rgba(0,168,132,0.4); background:rgba(0,168,132,0.06); color:var(--accent-light); }
+
+/* Course list */
+.course-list { display:flex; flex-direction:column; gap:8px; max-height:300px; overflow-y:auto; padding-right:4px; margin-bottom:16px; }
+.course-list::-webkit-scrollbar { width:3px; }
+.course-list::-webkit-scrollbar-thumb { background:var(--glass-border); border-radius:2px; }
+.course-item { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border:1.5px solid var(--glass-border); border-radius:10px; background:var(--surface); cursor:pointer; font-size:0.9rem; color:var(--text); transition:var(--tr); }
+.course-item:hover { border-color:rgba(0,168,132,0.45); background:rgba(0,168,132,0.07); }
+.course-item.selected { border-color:var(--accent); background:rgba(0,168,132,0.12); color:var(--accent-light); }
+.course-tag { font-size:0.7rem; background:rgba(255,255,255,0.06); border:1px solid var(--glass-border); border-radius:10px; padding:2px 8px; color:var(--text-muted); }
+
+/* Selected preview */
+.selected-course-preview { background:rgba(0,168,132,0.08); border:1.5px solid rgba(0,168,132,0.25); border-radius:12px; padding:14px 16px; margin-bottom:20px; }
+.scp-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-light); font-weight:700; margin-bottom:4px; }
+.scp-name { font-size:1rem; font-weight:700; color:var(--text); }
+.scp-meta { font-size:0.8rem; color:var(--text-muted); margin-top:2px; }
+
+/* Misc */
+.back-btn { background:none; border:1px solid var(--glass-border); color:var(--text-muted); border-radius:8px; padding:7px 16px; font-size:0.85rem; cursor:pointer; margin-top:16px; transition:var(--tr); }
+.back-btn:hover { border-color:rgba(255,255,255,0.2); color:var(--text); }
+.settings-panel { margin-top:0; }
+.setup-section { margin-bottom:20px; }
+.setup-label { display:flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; }
+.option-pills { display:flex; gap:8px; flex-wrap:wrap; }
+.option-pill { flex:1; min-width:60px; cursor:pointer; }
+.option-pill input { display:none; }
+.option-pill span { display:block; text-align:center; padding:10px 8px; border-radius:8px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.03); color:var(--text-muted); font-size:13px; font-weight:600; transition:var(--tr); cursor:pointer; user-select:none; }
+.option-pill:hover span { border-color:rgba(0,168,132,0.35); background:rgba(0,168,132,0.06); color:var(--accent-light); }
+.option-pill.active span { background:linear-gradient(135deg,var(--accent),var(--accent-light)); border-color:transparent; color:white; }
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+@media (max-width:480px) { .level-grid { grid-template-columns:repeat(2,1fr); } }
 </style>
 
 <script>
-function syncPills(groupId) {
-    document.getElementById(groupId).querySelectorAll('.option-pill').forEach(pill => {
-        pill.classList.toggle('active', pill.querySelector('input').checked);
-    });
+const COURSES = {{ courses_json | safe }};
+const MODE = "{{ mode }}";
+
+const SCHOOL_ICONS = {
+  'JAMB Preparation': '📝',
+  'Faculty of Science': '🔬',
+  'Faculty of Engineering': '⚙️',
+  'Faculty of Social Sciences': '🌍',
+  'Faculty of Management Sciences': '📊',
+  'Faculty of Law': '⚖️',
+  'Faculty of Medicine & Health Sciences': '🩺',
+  'Faculty of Education': '🎓',
+};
+
+let selectedSchool = null, selectedLevel = null, selectedDept = null;
+
+function setStep(n) {
+  for (let i=1;i<=4;i++) {
+    document.getElementById('step-'+i).classList.toggle('hidden', i !== n);
+    const si = document.getElementById('si-'+i);
+    si.classList.toggle('active', i === n);
+    si.classList.toggle('done', i < n);
+  }
+  document.getElementById('submit-form').classList.toggle('hidden', n !== 4);
 }
 
-function updateSelection() {
-    const checked = Array.from(document.querySelectorAll('input[name="subjects"]:checked')).length;
-    document.getElementById('badge').textContent = checked === 1 ? '1 selected' : `${checked} selected`;
-    document.getElementById('submit-btn').disabled = checked < 1;
+function goBack(to) {
+  if (to < 3) { selectedLevel = null; selectedDept = null; }
+  if (to < 2) { selectedSchool = null; }
+  setStep(to);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    updateSelection();
-    ['time-pills','q-pills'].forEach(syncPills);
-    document.querySelectorAll('.option-pill input:checked').forEach(r => r.closest('.option-pill').classList.add('active'));
-});
+// ── Step 1: Schools ─────────────────────────────────────────────────────────────
+function buildSchools() {
+  const grid = document.getElementById('school-grid');
+  grid.innerHTML = '';
+  Object.keys(COURSES).forEach(school => {
+    const depts = Object.keys(COURSES[school]);
+    const card = document.createElement('button');
+    card.className = 'school-card';
+    card.innerHTML = `
+      <div class="sc-icon">${SCHOOL_ICONS[school] || '🏫'}</div>
+      <div class="sc-text">
+        <div class="sc-name">${school}</div>
+        <div class="sc-dept-count">${depts.length} department${depts.length !== 1 ? 's' : ''}</div>
+      </div>
+      <span class="sc-arrow">›</span>`;
+    card.onclick = () => { selectedSchool = school; buildLevels(); setStep(2); };
+    grid.appendChild(card);
+  });
+}
+
+// ── Step 2: Levels ──────────────────────────────────────────────────────────────
+function buildLevels() {
+  const grid = document.getElementById('level-grid');
+  grid.innerHTML = '';
+  // Gather unique levels across all depts in this school
+  const levelSet = new Set();
+  Object.values(COURSES[selectedSchool]).forEach(dept => {
+    Object.keys(dept).forEach(l => levelSet.add(l));
+  });
+  const levels = [...levelSet].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+  levels.forEach(level => {
+    const btn = document.createElement('button');
+    btn.className = 'level-btn';
+    const label = level === 'UTME' ? 'UTME' : `${level}L`;
+    const desc = level === 'UTME' ? 'JAMB' : 'Level';
+    btn.innerHTML = `${label}<span class="level-label">${desc}</span>`;
+    btn.onclick = () => { selectedLevel = level; buildDepts(); setStep(3); };
+    grid.appendChild(btn);
+  });
+}
+
+// ── Step 3: Departments ─────────────────────────────────────────────────────────
+function buildDepts() {
+  const grid = document.getElementById('dept-grid');
+  grid.innerHTML = '';
+  Object.keys(COURSES[selectedSchool]).forEach(dept => {
+    const courses = COURSES[selectedSchool][dept][selectedLevel];
+    if (!courses || courses.length === 0) return;
+    const btn = document.createElement('button');
+    btn.className = 'dept-btn';
+    btn.innerHTML = `<span>${dept}</span><span style="font-size:0.75rem;color:var(--text-muted)">${courses.length} course${courses.length!==1?'s':''} ›</span>`;
+    btn.onclick = () => { selectedDept = dept; buildCourses(); setStep(4); };
+    grid.appendChild(btn);
+  });
+  if (!grid.children.length) {
+    grid.innerHTML = '<div style="color:var(--text-muted);font-size:0.9rem;padding:16px;text-align:center;">No departments have courses at this level yet.</div>';
+  }
+}
+
+// ── Step 4: Courses ─────────────────────────────────────────────────────────────
+function buildCourses() {
+  const list = document.getElementById('course-list');
+  list.innerHTML = '';
+  document.getElementById('settings-panel').classList.add('hidden');
+  const courses = (COURSES[selectedSchool][selectedDept] || {})[selectedLevel] || [];
+  courses.forEach(course => {
+    const item = document.createElement('div');
+    item.className = 'course-item';
+    const tag = course.file.includes('courses/') ? 'University' : 'JAMB';
+    item.innerHTML = `<span>${course.name}</span><span class="course-tag">${tag}</span>`;
+    item.onclick = () => selectCourse(course, item);
+    list.appendChild(item);
+  });
+}
+
+function selectCourse(course, el) {
+  document.querySelectorAll('.course-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('f-course-name').value = course.name;
+  document.getElementById('f-course-file').value = course.file;
+  const panel = document.getElementById('settings-panel');
+  panel.classList.remove('hidden');
+  panel.style.animation = 'fadeIn 0.2s ease';
+  const meta = `${selectedSchool} · ${selectedDept} · ${selectedLevel === 'UTME' ? 'UTME' : selectedLevel + 'L'}`;
+  document.getElementById('selected-preview').innerHTML = `
+    <div class="scp-label">Selected Course</div>
+    <div class="scp-name">${course.name}</div>
+    <div class="scp-meta">${meta}</div>`;
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function setField(id, val) {
+  document.getElementById(id).value = val;
+  const pill = event.target.closest('.option-pill');
+  if (pill) {
+    pill.closest('.option-pills').querySelectorAll('.option-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+  }
+}
+
+// Init
+buildSchools();
+setStep(1);
 </script>
 {% endblock %}
