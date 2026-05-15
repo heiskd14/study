@@ -188,14 +188,12 @@ const COURSES = {{ courses_json | safe }};
 const MODE = "{{ mode }}";
 
 const SCHOOL_ICONS = {
-  'JAMB Preparation': '📝',
-  'Faculty of Science': '🔬',
-  'Faculty of Engineering': '⚙️',
-  'Faculty of Social Sciences': '🌍',
-  'Faculty of Management Sciences': '📊',
-  'Faculty of Law': '⚖️',
-  'Faculty of Medicine & Health Sciences': '🩺',
-  'Faculty of Education': '🎓',
+  'Jambites': '📝',
+  'Thomas Adewunmi University': '🏛️',
+  'Landmark University': '⛪',
+  'Obafemi Awolowo University (OAU)': '🎓',
+  'Veritas University': '📚',
+  'Oxford University': '🏛️',
 };
 
 let selectedSchool = null, selectedLevel = null, selectedDept = null;
@@ -211,8 +209,8 @@ function setStep(n) {
 }
 
 function goBack(to) {
-  if (to < 3) { selectedLevel = null; selectedDept = null; }
-  if (to < 2) { selectedSchool = null; }
+  if (selectedSchool === 'Jambites' && to >= 1) { to = 1; selectedSchool = null; selectedLevel = null; selectedDept = null; }
+  else { if (to < 3) { selectedLevel = null; selectedDept = null; } if (to < 2) { selectedSchool = null; } }
   setStep(to);
 }
 
@@ -231,7 +229,18 @@ function buildSchools() {
         <div class="sc-dept-count">${depts.length} department${depts.length !== 1 ? 's' : ''}</div>
       </div>
       <span class="sc-arrow">›</span>`;
-    card.onclick = () => { selectedSchool = school; buildLevels(); setStep(2); };
+    card.onclick = () => {
+      selectedSchool = school;
+      if (school === 'Jambites') {
+        selectedLevel = 'UTME';
+        selectedDept = Object.keys(COURSES['Jambites'])[0];
+        buildCourses();
+        setStep(4);
+      } else {
+        buildLevels();
+        setStep(2);
+      }
+    };
     grid.appendChild(card);
   });
 }

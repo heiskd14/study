@@ -182,8 +182,13 @@
     .ctx-item.danger i { color: var(--error); }
 
     /* ── Emoji picker (WhatsApp-style) ── */
-    #emoji-picker { position: absolute; bottom: 62px; left: 0.5rem; background: var(--surface); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); z-index: 300; display: none; flex-direction: column; width: 320px; max-height: 400px; }
-    #emoji-picker.open { display: flex; animation: dropIn 0.15s ease; }
+    #emoji-picker { position: fixed; bottom: 56px; left: 0; right: 0; width: 100%; background: var(--surface); border-radius: 16px 16px 0 0; box-shadow: 0 -4px 32px rgba(0,0,0,0.6); z-index: 200; display: none; flex-direction: column; max-height: 48vh; }
+    #emoji-picker.open { display: flex; animation: emojiSlideUp 0.22s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes emojiSlideUp { from { transform: translateY(30px); opacity: 0; } to { transform: none; opacity: 1; } }
+    @media (min-width: 601px) {
+      #emoji-picker { width: 320px; bottom: 62px; left: 0.5rem; right: auto; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); max-height: 400px; }
+      #emoji-picker.open { animation: dropIn 0.15s ease; }
+    }
     .emoji-search-wrap { padding: 0.6rem 0.7rem 0.4rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
     #emoji-search { width: 100%; background: var(--surface2); border: none; border-radius: 8px; padding: 0.45rem 0.9rem; color: var(--text); font-size: 0.88rem; outline: none; }
     #emoji-search::placeholder { color: var(--text-muted); }
@@ -347,6 +352,38 @@
     #scroll-down { position: absolute; bottom: 70px; right: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; width: 40px; height: 40px; display: none; place-items: center; cursor: pointer; font-size: 1rem; color: var(--text-muted); box-shadow: 0 2px 8px rgba(0,0,0,0.4); z-index: 50; }
     #scroll-down.show { display: grid; }
 
+    /* ── Reactive button active states ── */
+    button { -webkit-tap-highlight-color: transparent; }
+    .inp-btn:active { transform: scale(0.88) !important; background: rgba(255,255,255,0.14) !important; }
+    .hdr-btn:active { transform: scale(0.88) !important; background: rgba(255,255,255,0.1) !important; }
+    #send-btn:active { transform: scale(0.90) !important; }
+    .call-ctrl:active { transform: scale(0.88) !important; }
+    .emoji-btn:active { transform: scale(0.82) !important; }
+
+    /* ── Voice note send btn during recording ── */
+    .vn-send-btn { background: var(--accent); border: none; color: white; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 0.85rem; cursor: pointer; flex-shrink: 0; transition: transform 0.18s; }
+    .vn-send-btn:active { transform: scale(0.9); }
+
+    /* ── Mobile send button always visible ── */
+    @media (max-width: 600px) {
+      #send-btn { flex-shrink: 0 !important; min-width: 42px !important; }
+      .input-area { overflow: visible !important; }
+    }
+
+    /* ── Minimized call PIP ── */
+    #call-pip { display: none; position: fixed; bottom: 80px; right: 16px; z-index: 1100; background: #1a2c34; border-radius: 14px; padding: 10px 14px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 6px 24px rgba(0,0,0,0.7); cursor: pointer; align-items: center; gap: 10px; }
+    #call-pip.show { display: flex; animation: pipIn 0.3s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes pipIn { from { opacity:0; transform: scale(0.7) translateY(20px); } to { opacity:1; transform: none; } }
+    .pip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: callPulse 1.2s ease infinite; }
+    .pip-label { font-size: 0.82rem; color: rgba(255,255,255,0.8); font-weight: 500; }
+    .pip-timer { font-size: 0.85rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; min-width: 42px; }
+    .pip-restore { background: rgba(255,255,255,0.12); border: none; border-radius: 8px; color: white; font-size: 0.75rem; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+    .pip-end { background: #f44336; border: none; border-radius: 8px; color: white; font-size: 0.75rem; padding: 4px 10px; cursor: pointer; }
+
+    /* ── WhatsApp-style join/leave notification ── */
+    .join-notification { display: flex; align-items: center; justify-content: center; margin: 6px 0; }
+    .join-notification-inner { background: rgba(0,168,132,0.13); border: 1px solid rgba(0,168,132,0.2); color: var(--text-muted); font-size: 0.76rem; border-radius: 20px; padding: 4px 14px; display: flex; align-items: center; gap: 6px; }
+
     /* ── AI thinking ── */
     .ai-thinking { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0; }
     .ai-thinking-bubble { background: var(--ai-bg); border-radius: 8px 8px 8px 0; padding: 0.6rem 0.9rem; display: flex; gap: 4px; align-items: center; }
@@ -393,9 +430,9 @@
   <!-- Header -->
   <header class="room-header">
     <button class="header-back" onclick="window.location.href='/group-study'"><i class="fa-solid fa-arrow-left"></i></button>
-    <div class="room-avatar" onclick="openGroupInfo()">{{ room.code[:2] }}</div>
+    <div class="room-avatar" onclick="openGroupInfo()">{{ (room.group_name or room.code)[:2].upper() }}</div>
     <div class="room-info" onclick="openGroupInfo()">
-      <div class="room-name">{{ room.code }}</div>
+      <div class="room-name">{{ room.group_name or room.code }}</div>
       <div class="room-status" id="room-status">Group Study Room</div>
     </div>
     <div class="header-actions">
@@ -469,7 +506,8 @@
       <div class="voice-rec-dot"></div>
       <span id="voice-rec-time" style="font-size:0.85rem;color:var(--text-muted);min-width:40px;">0:00</span>
       <span style="flex:1;font-size:0.82rem;color:var(--text-muted);">Recording…</span>
-      <button class="inp-btn" onclick="cancelVoiceNote()" title="Cancel" style="color:var(--error);"><i class="fa-solid fa-xmark"></i></button>
+      <button class="inp-btn" onclick="cancelVoiceNote()" title="Cancel recording" style="color:var(--error);"><i class="fa-solid fa-xmark"></i></button>
+      <button class="vn-send-btn" onclick="stopAndSendVoiceNote()" title="Send voice note"><i class="fa-solid fa-paper-plane"></i></button>
     </div>
     <button id="send-btn" onclick="sendMessage()" title="Send"><i class="fa-solid fa-paper-plane"></i></button>
   </div>
@@ -571,6 +609,15 @@
   <!-- Toast -->
   <div id="toast-container"></div>
 
+  <!-- Minimized call PIP -->
+  <div id="call-pip">
+    <div class="pip-dot"></div>
+    <span class="pip-label">On call</span>
+    <span class="pip-timer" id="pip-timer">0:00</span>
+    <button class="pip-restore" onclick="restoreCall()">Expand</button>
+    <button class="pip-end" onclick="endCall()">End</button>
+  </div>
+
   <!-- Incoming call modal -->
   <div id="incoming-modal">
     <div class="incoming-caller">
@@ -598,7 +645,7 @@
     <div id="voice-screen">
       <div class="call-top-bar">
         <div class="call-top-label" id="call-type-label">Voice Call</div>
-        <button class="call-minimize-btn" onclick="endCall()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="call-minimize-btn" onclick="minimizeCall()" title="Minimize call"><i class="fa-solid fa-minus"></i></button>
       </div>
       <div class="call-center-info">
         <div class="call-avatar-ring" id="call-avatar-initials">{{ room.code[:2] }}</div>
@@ -692,12 +739,12 @@ socket.on('connect', () => {
 });
 
 socket.on('user_joined', data => {
-  appendSysMsg(`${data.name} joined`);
+  appendJoinMsg(data.name, 'joined');
   socket.emit('get_members', { code: ROOM_CODE });
 });
 
 socket.on('user_left', data => {
-  appendSysMsg(`${data.name} left`);
+  appendJoinMsg(data.name, 'left');
   socket.emit('get_members', { code: ROOM_CODE });
 });
 
@@ -1148,6 +1195,21 @@ function appendSysMsg(text) {
   div.innerHTML = `<span>${escHtml(text)}</span>`;
   area.insertBefore(div, typing);
   if (isAtBottom) scrollToBottom();
+}
+
+function appendJoinMsg(name, action) {
+  const area = document.getElementById('chat-area');
+  const typing = document.getElementById('typing-indicator');
+  const isJoin = action === 'joined';
+  const div = document.createElement('div');
+  div.className = 'join-notification';
+  div.innerHTML = `<div class="join-notification-inner">
+    <span style="font-size:0.85rem;">${isJoin ? '👋' : '👋'}</span>
+    <span><strong>${escHtml(name)}</strong> ${isJoin ? 'joined the group' : 'left the group'}</span>
+  </div>`;
+  area.insertBefore(div, typing);
+  if (isAtBottom) scrollToBottom();
+  showToast(`${name} ${isJoin ? 'joined' : 'left'} the room`, 2000);
 }
 
 // ── Typing indicator ────────────────────────────────────────────────────────────
@@ -1737,8 +1799,10 @@ function startCallTimer() {
     const t = formatCallTime(callSeconds);
     const el = document.getElementById('call-timer');
     const el2 = document.getElementById('vid-timer');
+    const el3 = document.getElementById('pip-timer');
     if (el) el.textContent = t;
     if (el2) el2.textContent = t;
+    if (el3) el3.textContent = t;
   }, 1000);
 }
 function stopCallTimer() {
@@ -1778,6 +1842,10 @@ function initPeerConnection() {
   if (callStream) callStream.getTracks().forEach(t => peerConnection.addTrack(t, callStream));
 }
 async function startCall(type) {
+  if (peerConnection || callStream) {
+    showToast('A call is already in progress.');
+    return;
+  }
   if (roomMembers.length < 2) {
     showToast('You need at least one other member in the room to call.');
     return;
@@ -1842,9 +1910,18 @@ async function handleCallAnswer(data) {
 async function handleIceCandidate(data) {
   try { if (peerConnection && data.candidate) await peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate)); } catch(e) {}
 }
+function minimizeCall() {
+  document.getElementById('call-modal').classList.remove('open');
+  document.getElementById('call-pip').classList.add('show');
+}
+function restoreCall() {
+  document.getElementById('call-pip').classList.remove('show');
+  document.getElementById('call-modal').classList.add('open');
+}
 function endCall() {
   socket.emit('call_ended', { code: ROOM_CODE });
   stopCallTimer();
+  document.getElementById('call-pip').classList.remove('show');
   if (callStream) { callStream.getTracks().forEach(t => t.stop()); callStream = null; }
   if (peerConnection) { peerConnection.close(); peerConnection = null; }
   document.getElementById('call-modal').classList.remove('open');
@@ -1896,6 +1973,12 @@ async function flipCamera() {
     callStream = newStream;
   } catch(e) { showToast('Could not flip camera'); }
 }
+
+// ── Keep call alive when screen is off / tab hidden ───────────────────────────
+document.addEventListener('visibilitychange', () => {
+  if (!callStream) return;
+  callStream.getTracks().forEach(t => { t.enabled = true; });
+});
 
 // ── Voice note playback ─────────────────────────────────────────────────────────
 let currentAudio = null;

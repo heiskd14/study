@@ -6,12 +6,12 @@
 <div class="home-page page-wrapper">
 
     <nav class="navbar">
-        <div class="navbar-brand">
+        <a href="/" class="navbar-brand" style="text-decoration:none;">
             <div class="brand-logo">
                 <img src="{{ url_for('static', filename='img/btc_logo.png') }}" alt="BTC Logo" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
             </div>
             <span class="brand-name">Beyond The Classroom</span>
-        </div>
+        </a>
         <div class="navbar-actions">
             {% if user %}
             <div class="user-greeting">
@@ -136,4 +136,50 @@
     </footer>
 
 </div>
+
+{% if user %}
+<!-- AI Briefing Welcome Modal (shows once after signup/first visit) -->
+<div id="btc-welcome-modal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div style="background:linear-gradient(135deg,#0e1420,#111b21);border:1px solid rgba(255,255,255,0.1);border-radius:20px;max-width:460px;width:90%;padding:2rem 1.8rem;box-shadow:0 20px 60px rgba(0,0,0,0.8);animation:welcomeIn 0.4s cubic-bezier(.34,1.56,.64,1);">
+    <div style="text-align:center;margin-bottom:1.4rem;">
+      <div style="width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,#137a13,#1aaa1a);display:grid;place-items:center;margin:0 auto 1rem;font-size:1.8rem;box-shadow:0 8px 24px rgba(19,122,19,0.5);">🎓</div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#f0f0f8;margin-bottom:0.4rem;">Welcome to BTC!</h2>
+      <p style="font-size:0.88rem;color:#8888aa;line-height:1.5;">Here's a quick overview of what you can do on Beyond The Classroom:</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.85rem;margin-bottom:1.6rem;">
+      <div style="display:flex;gap:0.9rem;align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(19,122,19,0.15);display:grid;place-items:center;font-size:1rem;flex-shrink:0;">📝</div>
+        <div><strong style="font-size:0.88rem;color:#f0f0f8;">CBT Exams & Practice</strong><p style="font-size:0.8rem;color:#8888aa;margin-top:2px;">Take timed mock exams in UTME subjects or university courses. Get instant scores with AI explanations.</p></div>
+      </div>
+      <div style="display:flex;gap:0.9rem;align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(19,122,19,0.15);display:grid;place-items:center;font-size:1rem;flex-shrink:0;">👥</div>
+        <div><strong style="font-size:0.88rem;color:#f0f0f8;">Group Study Rooms</strong><p style="font-size:0.8rem;color:#8888aa;margin-top:2px;">Create or join real-time study rooms with voice/video calls, file sharing, and BTC AI assistance.</p></div>
+      </div>
+      <div style="display:flex;gap:0.9rem;align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(19,122,19,0.15);display:grid;place-items:center;font-size:1rem;flex-shrink:0;">🤖</div>
+        <div><strong style="font-size:0.88rem;color:#f0f0f8;">BTC AI Assistant</strong><p style="font-size:0.8rem;color:#8888aa;margin-top:2px;">Ask BTC AI anything in study rooms by typing <code style="background:rgba(255,255,255,0.08);border-radius:4px;padding:1px 5px;">@ai your question</code>. Works 24/7.</p></div>
+      </div>
+    </div>
+    <button onclick="dismissWelcome()" style="width:100%;padding:0.85rem;background:linear-gradient(135deg,#137a13,#1aaa1a);border:none;border-radius:12px;color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:transform 0.2s;box-shadow:0 4px 20px rgba(19,122,19,0.4);">Get Started →</button>
+  </div>
+</div>
+<style>
+@keyframes welcomeIn { from { opacity:0; transform:scale(0.85) translateY(20px); } to { opacity:1; transform:none; } }
+</style>
+<script>
+(function() {
+  var key = 'btc-welcomed-{{ user.email | replace("@","_") | replace(".","_") }}';
+  if (!localStorage.getItem(key)) {
+    var modal = document.getElementById('btc-welcome-modal');
+    if (modal) { modal.style.display = 'flex'; }
+  }
+  window.dismissWelcome = function() {
+    localStorage.setItem(key, '1');
+    var modal = document.getElementById('btc-welcome-modal');
+    if (modal) { modal.style.opacity = '0'; modal.style.transition = 'opacity 0.3s'; setTimeout(() => modal.style.display = 'none', 300); }
+  };
+})();
+</script>
+{% endif %}
+
 {% endblock %}

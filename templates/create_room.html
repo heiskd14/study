@@ -69,6 +69,13 @@
         <p>A 6-digit code will be generated for your room</p>
       </div>
       <div class="form-group">
+        <label>Group Name <span class="optional-label">optional</span></label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-users input-icon"></i>
+          <input type="text" id="group-name" placeholder="e.g. BTC Study Squad, Physics 300L…" maxlength="40"/>
+        </div>
+      </div>
+      <div class="form-group">
         <label>Room Password <span class="optional-label">optional</span></label>
         <div class="input-wrap">
           <i class="fa-solid fa-lock input-icon"></i>
@@ -122,7 +129,8 @@
       const btn=document.getElementById('create-btn');
       btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Creating…';
       try{
-        const res=await fetch('/group-study/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});
+        const group_name=document.getElementById('group-name').value.trim();
+        const res=await fetch('/group-study/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password,group_name})});
         const data=await res.json();
         if(data.success){
           createdRoomCode = data.code;

@@ -15,6 +15,90 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
     <title>{% block title %}Beyond The Classroom{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Hide Replit injected badge/banner */
+        #replit-unfurl-banner,
+        [class*="replit-badge"],
+        [data-replit-badge],
+        iframe[src*="replit.com/badge"] { display: none !important; }
+
+        /* Customer care widget */
+        #care-fab {
+            position: fixed; bottom: 22px; right: 22px; z-index: 9000;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+        }
+        #care-fab-btn {
+            width: 52px; height: 52px; border-radius: 50%;
+            background: linear-gradient(135deg, #137a13, #1aaa1a);
+            border: none; color: white; font-size: 1.3rem; cursor: pointer;
+            box-shadow: 0 4px 20px rgba(19,122,19,0.55);
+            display: grid; place-items: center;
+            transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s;
+        }
+        #care-fab-btn:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(19,122,19,0.7); }
+        #care-fab-btn:active { transform: scale(0.95); }
+        #care-panel {
+            display: none; flex-direction: column;
+            width: 300px; background: rgba(12,14,30,0.97);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.7);
+            animation: careIn 0.3s cubic-bezier(.34,1.56,.64,1);
+        }
+        #care-panel.open { display: flex; }
+        @keyframes careIn { from { opacity:0; transform:scale(0.85) translateY(12px); } to { opacity:1; transform:none; } }
+        .care-header {
+            background: linear-gradient(135deg, #137a13, #1aaa1a);
+            padding: 12px 16px; display: flex; align-items: center; gap: 10px;
+        }
+        .care-header-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,0.2); display: grid; place-items: center; font-size: 1.1rem;
+        }
+        .care-header-text { flex: 1; }
+        .care-header-text b { font-size: 0.9rem; color: white; display: block; }
+        .care-header-text span { font-size: 0.72rem; color: rgba(255,255,255,0.75); }
+        .care-close-btn { background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; font-size: 1rem; padding: 4px; }
+        .care-messages {
+            flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column;
+            gap: 8px; max-height: 220px; min-height: 100px;
+        }
+        .care-bubble {
+            max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 0.82rem; line-height: 1.45;
+        }
+        .care-bubble.bot {
+            background: rgba(255,255,255,0.07); color: #e0e0f0; border-radius: 4px 12px 12px 12px; align-self: flex-start;
+        }
+        .care-bubble.user {
+            background: linear-gradient(135deg, #137a13, #1aaa1a); color: white;
+            border-radius: 12px 4px 12px 12px; align-self: flex-end;
+        }
+        .care-wa-btn {
+            margin: 4px 12px 12px; padding: 9px 14px;
+            background: #25D366; border: none; border-radius: 10px; color: white;
+            font-size: 0.82rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .care-wa-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,211,102,0.4); }
+        .care-wa-btn:active { transform: scale(0.97); }
+        .care-input-row {
+            display: flex; gap: 6px; padding: 8px 10px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+        .care-input {
+            flex: 1; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 7px 12px; color: #e0e0f0; font-size: 0.82rem; outline: none;
+        }
+        .care-input::placeholder { color: rgba(255,255,255,0.35); }
+        .care-send-btn {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: #137a13; border: none; color: white; font-size: 0.8rem;
+            cursor: pointer; display: grid; place-items: center;
+            transition: transform 0.2s;
+        }
+        .care-send-btn:active { transform: scale(0.9); }
+        .care-typing { font-size: 0.75rem; color: rgba(255,255,255,0.4); padding: 0 12px 6px; }
+    </style>
     {% block extra_head %}{% endblock %}
 </head>
 <body>
@@ -26,8 +110,8 @@
         <div class="grid-overlay"></div>
     </div>
 
-    <!-- Theme Toggle -->
-    <div class="theme-toggle-wrap">
+    <!-- Theme Toggle (draggable) -->
+    <div class="theme-toggle-wrap" id="theme-toggle-wrap">
         <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle theme" title="Change theme">
             <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -47,6 +131,35 @@
                 Dark
             </button>
         </div>
+    </div>
+
+    <!-- Customer Care FAB -->
+    <div id="care-fab">
+        <div id="care-panel">
+            <div class="care-header">
+                <div class="care-header-avatar">🤖</div>
+                <div class="care-header-text">
+                    <b>BTC Support</b>
+                    <span>Typically replies instantly</span>
+                </div>
+                <button class="care-close-btn" onclick="closeCare()" title="Close">✕</button>
+            </div>
+            <div class="care-messages" id="care-messages">
+                <div class="care-bubble bot">Hi! 👋 I'm BTC's support assistant. How can I help you today?</div>
+            </div>
+            <div class="care-typing" id="care-typing" style="display:none">BTC AI is typing…</div>
+            <button class="care-wa-btn" onclick="openWhatsApp()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Chat with a Human Agent
+            </button>
+            <div class="care-input-row">
+                <input class="care-input" id="care-input" placeholder="Type your question…" onkeydown="if(event.key==='Enter')sendCareMsg()">
+                <button class="care-send-btn" onclick="sendCareMsg()" title="Send">➤</button>
+            </div>
+        </div>
+        <button id="care-fab-btn" onclick="toggleCare()" title="Help & Support">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
     </div>
 
     {% block content %}{% endblock %}
@@ -100,8 +213,85 @@
                     dd.classList.remove('open');
                 });
             });
+
+            // ── Draggable theme toggle ────────────────────────────────────────────
+            var wrap = document.getElementById('theme-toggle-wrap');
+            if (!wrap) return;
+            var pos = JSON.parse(localStorage.getItem('btc-theme-pos') || 'null');
+            if (pos) { wrap.style.top = pos.y + 'px'; wrap.style.right = 'auto'; wrap.style.left = pos.x + 'px'; }
+            var dragging = false, ox = 0, oy = 0;
+            wrap.addEventListener('pointerdown', function(e){
+                if (e.target === btn || btn.contains(e.target)) return;
+                dragging = true; ox = e.clientX - wrap.getBoundingClientRect().left;
+                oy = e.clientY - wrap.getBoundingClientRect().top;
+                wrap.setPointerCapture(e.pointerId);
+                wrap.style.transition = 'none';
+            });
+            wrap.addEventListener('pointermove', function(e){
+                if (!dragging) return;
+                var nx = e.clientX - ox, ny = e.clientY - oy;
+                nx = Math.max(0, Math.min(nx, window.innerWidth - wrap.offsetWidth));
+                ny = Math.max(0, Math.min(ny, window.innerHeight - wrap.offsetHeight));
+                wrap.style.left = nx + 'px'; wrap.style.right = 'auto'; wrap.style.top = ny + 'px';
+            });
+            wrap.addEventListener('pointerup', function(e){
+                if (!dragging) return; dragging = false;
+                wrap.style.transition = '';
+                localStorage.setItem('btc-theme-pos', JSON.stringify({ x: wrap.getBoundingClientRect().left, y: wrap.getBoundingClientRect().top }));
+            });
         });
     })();
+    </script>
+    <script>
+    // ── Customer Care Widget ─────────────────────────────────────────────────────
+    function toggleCare() {
+        var p = document.getElementById('care-panel');
+        p.classList.toggle('open');
+        if (p.classList.contains('open')) {
+            document.getElementById('care-input').focus();
+        }
+    }
+    function closeCare() {
+        document.getElementById('care-panel').classList.remove('open');
+    }
+    function openWhatsApp() {
+        var phone = '2347046319576';
+        var msg = encodeURIComponent('Hi BTC Support, I need help with Beyond The Classroom.');
+        window.open('https://wa.me/' + phone + '?text=' + msg, '_blank');
+    }
+    async function sendCareMsg() {
+        var inp = document.getElementById('care-input');
+        var text = inp.value.trim();
+        if (!text) return;
+        inp.value = '';
+        appendCareMsg(text, 'user');
+        document.getElementById('care-typing').style.display = 'block';
+        try {
+            var res = await fetch('/api/ai-chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text, context: 'support' })
+            });
+            var data = await res.json();
+            document.getElementById('care-typing').style.display = 'none';
+            if (data.reply) {
+                appendCareMsg(data.reply, 'bot');
+            } else {
+                appendCareMsg("I'm having trouble responding right now. You can chat with our agent on WhatsApp!", 'bot');
+            }
+        } catch(e) {
+            document.getElementById('care-typing').style.display = 'none';
+            appendCareMsg("Sorry, I couldn't connect. Tap the WhatsApp button to reach a human agent!", 'bot');
+        }
+    }
+    function appendCareMsg(text, who) {
+        var msgs = document.getElementById('care-messages');
+        var b = document.createElement('div');
+        b.className = 'care-bubble ' + who;
+        b.textContent = text;
+        msgs.appendChild(b);
+        msgs.scrollTop = msgs.scrollHeight;
+    }
     </script>
     {% endblock %}
 </body>
