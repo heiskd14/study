@@ -44,6 +44,10 @@ Thumbs.db
 scores.json
 results.csv
 
+# Environment secrets — never commit these
+hackaton/.env
+.env
+
 # Flask session files
 /tmp/flask_session/
 flask_session/
