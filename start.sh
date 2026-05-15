@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Get the project root directory
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Start the Node.js auth backend on port 8000
