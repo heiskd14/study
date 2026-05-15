@@ -250,7 +250,7 @@ function buildLevels() {
     const btn = document.createElement('button');
     btn.className = 'level-btn';
     const label = level === 'UTME' ? 'UTME' : `${level}L`;
-    const desc = level === 'UTME' ? 'JAMB' : 'Level';
+    const desc = level === 'UTME' ? 'UTME' : 'Level';
     btn.innerHTML = `${label}<span class="level-label">${desc}</span>`;
     btn.onclick = () => { selectedLevel = level; buildDepts(); setStep(3); };
     grid.appendChild(btn);
@@ -284,7 +284,7 @@ function buildCourses() {
   courses.forEach(course => {
     const item = document.createElement('div');
     item.className = 'course-item';
-    const tag = course.file.includes('courses/') ? 'University' : 'JAMB';
+    const tag = course.file.includes('courses/') ? 'University' : 'UTME';
     item.innerHTML = `<span>${course.name}</span><span class="course-tag">${tag}</span>`;
     item.onclick = () => selectCourse(course, item);
     list.appendChild(item);

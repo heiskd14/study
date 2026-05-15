@@ -61,7 +61,8 @@
     <a href="/group-study" class="nav-back"><i class="fa-solid fa-arrow-left" style="margin-right:0.3rem;"></i>Back</a>
   </nav>
   <main>
-    <div class="card">
+    <!-- Create form -->
+    <div class="card" id="create-card">
       <div class="card-header">
         <div class="card-icon"><i class="fa-solid fa-door-open"></i></div>
         <h1>Create a Room</h1>
@@ -79,8 +80,37 @@
         <i class="fa-solid fa-plus"></i> Create Room
       </button>
     </div>
+
+    <!-- Success panel (hidden until room is created) -->
+    <div class="card" id="success-card" style="display:none;">
+      <div class="card-header">
+        <div class="card-icon" style="background:linear-gradient(135deg,#137a13,#3effa0);"><i class="fa-solid fa-check"></i></div>
+        <h1>Room Created!</h1>
+        <p>Share this link or code with your study group</p>
+      </div>
+      <div style="margin-bottom:1.2rem;">
+        <label style="display:block;font-size:0.78rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.45rem;">Room Code</label>
+        <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div id="room-code-display" style="font-family:var(--font-display);font-size:2.2rem;font-weight:800;letter-spacing:0.15em;color:var(--accent-light);flex:1;text-align:center;background:rgba(19,122,19,0.08);border:1px solid rgba(19,122,19,0.2);border-radius:12px;padding:0.6rem 1rem;"></div>
+          <button onclick="copyCode()" style="background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:10px;color:var(--text-muted);padding:0.6rem 0.9rem;cursor:pointer;font-size:0.9rem;transition:0.2s;" title="Copy code"><i class="fa-regular fa-copy"></i></button>
+        </div>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:block;font-size:0.78rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.45rem;">Shareable Link</label>
+        <div style="display:flex;align-items:center;gap:0.6rem;">
+          <input type="text" id="room-link-input" readonly style="flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:10px;padding:0.7rem 1rem;color:var(--text-muted);font-size:0.82rem;outline:none;"/>
+          <button onclick="copyLink()" style="background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:10px;color:var(--text-muted);padding:0.6rem 0.9rem;cursor:pointer;font-size:0.9rem;transition:0.2s;" title="Copy link"><i class="fa-solid fa-link"></i></button>
+        </div>
+      </div>
+      <button class="btn" onclick="enterRoom()">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> Enter Room
+      </button>
+      <a href="/group-study" style="display:block;text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted);text-decoration:none;">← Back to Group Study</a>
+    </div>
   </main>
   <script>
+    let createdRoomCode = '';
+
     function togglePw(){
       const inp=document.getElementById('room-password');
       const eye=document.getElementById('pw-eye');
@@ -94,13 +124,34 @@
       try{
         const res=await fetch('/group-study/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});
         const data=await res.json();
-        if(data.success){window.location.href='/group-study/room/'+data.code;}
-        else{showToast(data.message||'Failed to create room');btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-plus"></i> Create Room';}
+        if(data.success){
+          createdRoomCode = data.code;
+          const link = window.location.origin + '/group-study/room/' + data.code;
+          document.getElementById('create-card').style.display='none';
+          document.getElementById('success-card').style.display='';
+          document.getElementById('room-code-display').textContent = data.code;
+          document.getElementById('room-link-input').value = link;
+        } else {
+          showToast(data.message||'Failed to create room');
+          btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-plus"></i> Create Room';
+        }
       }catch(e){showToast('Server error. Please try again.');btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-plus"></i> Create Room';}
     }
-    function showToast(msg){
-      const t=document.createElement('div');t.className='tau-toast error';
-      t.innerHTML='<i class="fa-solid fa-circle-xmark"></i> '+msg;
+    function enterRoom(){
+      if(createdRoomCode) window.location.href='/group-study/room/'+createdRoomCode;
+    }
+    function copyCode(){
+      navigator.clipboard.writeText(createdRoomCode).then(()=>showToast('Room code copied!','success'));
+    }
+    function copyLink(){
+      const link=document.getElementById('room-link-input').value;
+      navigator.clipboard.writeText(link).then(()=>showToast('Link copied!','success'));
+    }
+    function showToast(msg,type='error'){
+      const t=document.createElement('div');
+      t.className='tau-toast '+(type==='success'?'':'error');
+      t.style.cssText=type==='success'?'background:rgba(62,255,160,0.12);border-color:rgba(62,255,160,0.3);color:#3effa0;':'';
+      t.innerHTML=(type==='success'?'<i class="fa-solid fa-circle-check"></i> ':'<i class="fa-solid fa-circle-xmark"></i> ')+msg;
       document.getElementById('toast-container').appendChild(t);
       setTimeout(()=>t.remove(),4000);
     }

@@ -1419,10 +1419,12 @@ html[data-theme="light"] body { background: var(--bg); color: var(--text); }
    RESPONSIVE
    ============================================================== */
 @media (max-width: 768px) {
-  .navbar { padding: 0 16px; height: 60px; }
-  .brand-name { font-size: 16px; }
+  .navbar { padding: 0 12px; height: 60px; overflow: hidden; }
+  .brand-name { font-size: 15px; }
+  .navbar-actions { gap: 6px; flex-shrink: 0; min-width: 0; }
   .auth-btn span { display: none; }
-  .auth-btn { padding: 8px 12px; }
+  .auth-btn { padding: 8px 10px; min-width: 36px; justify-content: center; }
+  .user-greeting span { display: none; }
 
   .hero { padding: 48px 20px 40px; flex-direction: column; text-align: center; }
   .hero-title { font-size: 32px; }

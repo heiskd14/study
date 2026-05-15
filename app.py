@@ -1081,6 +1081,295 @@ UNIVERSITY_COURSES = {
             ],
         },
     },
+    'Landmark University': {
+        'Computer Science': {
+            '100': [
+                {'name': 'Introduction to Computing', 'file': 'courses/cs_intro_programming.json'},
+                {'name': 'Mathematics I', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Logic & Problem Solving', 'file': 'courses/cs_logic.json'},
+            ],
+            '200': [
+                {'name': 'Data Structures & Algorithms', 'file': 'courses/cs_data_structures.json'},
+                {'name': 'Database Systems', 'file': 'courses/cs_database.json'},
+                {'name': 'Object-Oriented Programming', 'file': 'courses/cs_oop.json'},
+            ],
+            '300': [
+                {'name': 'Operating Systems', 'file': 'courses/cs_operating_systems.json'},
+                {'name': 'Computer Networks', 'file': 'courses/cs_networks.json'},
+                {'name': 'Software Engineering', 'file': 'courses/cs_software_engineering.json'},
+            ],
+            '400': [
+                {'name': 'Artificial Intelligence', 'file': 'courses/cs_artificial_intelligence.json'},
+                {'name': 'Cybersecurity', 'file': 'courses/cs_cybersecurity.json'},
+                {'name': 'Final Year Project', 'file': 'courses/cs_software_engineering.json'},
+            ],
+        },
+        'Agricultural Science': {
+            '100': [
+                {'name': 'Introduction to Agriculture', 'file': 'courses/bio_general1.json'},
+                {'name': 'General Chemistry', 'file': 'courses/chm_general1.json'},
+                {'name': 'General Biology', 'file': 'courses/bio_general1.json'},
+            ],
+            '200': [
+                {'name': 'Soil Science', 'file': 'courses/bio_ecology.json'},
+                {'name': 'Crop Physiology', 'file': 'courses/bio_genetics.json'},
+                {'name': 'Agricultural Economics', 'file': 'courses/eco_micro1.json'},
+            ],
+            '300': [
+                {'name': 'Crop Production', 'file': 'courses/bio_genetics.json'},
+                {'name': 'Animal Production', 'file': 'courses/med_physiology.json'},
+                {'name': 'Farm Management', 'file': 'courses/bus_management.json'},
+            ],
+            '400': [
+                {'name': 'Agricultural Extension', 'file': 'courses/edu_intro.json'},
+                {'name': 'Research Methods', 'file': 'courses/mth_intro_stats.json'},
+            ],
+        },
+        'Chemical Engineering': {
+            '100': [
+                {'name': 'Engineering Mathematics', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'General Chemistry', 'file': 'courses/chm_general1.json'},
+                {'name': 'Introduction to Engineering', 'file': 'courses/eng_electrical1.json'},
+            ],
+            '200': [
+                {'name': 'Physical Chemistry', 'file': 'courses/chm_physical.json'},
+                {'name': 'Organic Chemistry', 'file': 'courses/chm_organic1.json'},
+                {'name': 'Fluid Mechanics', 'file': 'courses/eng_fluid.json'},
+            ],
+            '300': [
+                {'name': 'Heat & Mass Transfer', 'file': 'courses/phy_thermodynamics.json'},
+                {'name': 'Chemical Reaction Engineering', 'file': 'courses/chm_physical.json'},
+                {'name': 'Process Control', 'file': 'courses/eng_instrumentation.json'},
+            ],
+            '400': [
+                {'name': 'Plant Design', 'file': 'courses/eng_fluid.json'},
+                {'name': 'Petroleum Refining', 'file': 'courses/eng_electrical1.json'},
+            ],
+        },
+    },
+    'Obafemi Awolowo University (OAU)': {
+        'Medicine & Surgery': {
+            '100': [
+                {'name': 'General Biology', 'file': 'courses/bio_general1.json'},
+                {'name': 'General Chemistry', 'file': 'courses/chm_general1.json'},
+                {'name': 'Physics', 'file': 'courses/phy_mechanics.json'},
+            ],
+            '200': [
+                {'name': 'Anatomy I', 'file': 'courses/med_anatomy1.json'},
+                {'name': 'Biochemistry', 'file': 'courses/med_biochem1.json'},
+                {'name': 'Physiology', 'file': 'courses/med_physiology.json'},
+            ],
+            '300': [
+                {'name': 'Pathology', 'file': 'courses/med_pathology.json'},
+                {'name': 'Medical Microbiology', 'file': 'courses/med_microbiology.json'},
+                {'name': 'Pharmacology', 'file': 'courses/med_pharmacology.json'},
+            ],
+            '400': [
+                {'name': 'Internal Medicine', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Surgery', 'file': 'courses/med_medicine1.json'},
+                {'name': 'Obstetrics & Gynaecology', 'file': 'courses/med_medicine1.json'},
+            ],
+        },
+        'Law': {
+            '100': [
+                {'name': 'Nigerian Legal System', 'file': 'courses/law_legal_system.json'},
+                {'name': 'Law of Contract', 'file': 'courses/law_contract.json'},
+            ],
+            '200': [
+                {'name': 'Constitutional Law', 'file': 'courses/law_constitutional.json'},
+                {'name': 'Criminal Law', 'file': 'courses/law_criminal.json'},
+                {'name': 'Law of Tort', 'file': 'courses/law_contract.json'},
+            ],
+            '300': [
+                {'name': 'Commercial Law', 'file': 'courses/law_legal_system.json'},
+                {'name': 'Land Law', 'file': 'courses/law_legal_system.json'},
+                {'name': 'Equity & Trusts', 'file': 'courses/law_constitutional.json'},
+            ],
+            '400': [
+                {'name': 'International Law', 'file': 'courses/law_constitutional.json'},
+                {'name': 'Human Rights Law', 'file': 'courses/law_constitutional.json'},
+            ],
+            '500': [
+                {'name': 'Legal Drafting', 'file': 'courses/law_legal_system.json'},
+                {'name': 'Clinical Legal Education', 'file': 'courses/law_contract.json'},
+            ],
+        },
+        'Economics': {
+            '100': [
+                {'name': 'Principles of Economics', 'file': 'courses/eco_micro1.json'},
+                {'name': 'Mathematics for Economists', 'file': 'courses/mth_calculus1.json'},
+            ],
+            '200': [
+                {'name': 'Microeconomics I', 'file': 'courses/eco_micro1.json'},
+                {'name': 'Macroeconomics I', 'file': 'courses/eco_macro1.json'},
+                {'name': 'Statistics for Economists', 'file': 'courses/mth_intro_stats.json'},
+            ],
+            '300': [
+                {'name': 'Econometrics', 'file': 'courses/eco_econometrics.json'},
+                {'name': 'Development Economics', 'file': 'courses/eco_development.json'},
+                {'name': 'Public Finance', 'file': 'courses/eco_development.json'},
+            ],
+            '400': [
+                {'name': 'International Economics', 'file': 'courses/eco_macro1.json'},
+                {'name': 'Research Project', 'file': 'courses/mth_intro_stats.json'},
+            ],
+        },
+        'Computer Science & Engineering': {
+            '100': [
+                {'name': 'Introduction to Programming', 'file': 'courses/cs_intro_programming.json'},
+                {'name': 'Engineering Mathematics I', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Digital Logic', 'file': 'courses/cs_computer_architecture.json'},
+            ],
+            '200': [
+                {'name': 'Data Structures', 'file': 'courses/cs_data_structures.json'},
+                {'name': 'Computer Organization', 'file': 'courses/cs_computer_architecture.json'},
+                {'name': 'Discrete Structures', 'file': 'courses/cs_discrete_math.json'},
+            ],
+            '300': [
+                {'name': 'Operating Systems', 'file': 'courses/cs_operating_systems.json'},
+                {'name': 'Computer Networks', 'file': 'courses/cs_networks.json'},
+                {'name': 'Software Engineering', 'file': 'courses/cs_software_engineering.json'},
+            ],
+            '400': [
+                {'name': 'Artificial Intelligence', 'file': 'courses/cs_artificial_intelligence.json'},
+                {'name': 'Distributed Systems', 'file': 'courses/cs_distributed_systems.json'},
+                {'name': 'Final Year Project', 'file': 'courses/cs_software_engineering.json'},
+            ],
+        },
+    },
+    'Veritas University': {
+        'Philosophy': {
+            '100': [
+                {'name': 'Introduction to Philosophy', 'file': 'courses/edu_intro.json'},
+                {'name': 'Logic & Critical Thinking', 'file': 'courses/cs_logic.json'},
+                {'name': 'Use of English', 'file': 'use_of_english.json'},
+            ],
+            '200': [
+                {'name': 'Ethics & Moral Philosophy', 'file': 'courses/edu_intro.json'},
+                {'name': 'Epistemology', 'file': 'courses/edu_intro.json'},
+                {'name': 'African Philosophy', 'file': 'courses/edu_intro.json'},
+            ],
+            '300': [
+                {'name': 'Metaphysics', 'file': 'courses/edu_intro.json'},
+                {'name': 'Philosophy of Religion', 'file': 'courses/edu_intro.json'},
+                {'name': 'Social & Political Philosophy', 'file': 'courses/law_constitutional.json'},
+            ],
+            '400': [
+                {'name': 'Research Methods in Philosophy', 'file': 'courses/mth_intro_stats.json'},
+                {'name': 'Contemporary Philosophy', 'file': 'courses/edu_intro.json'},
+            ],
+        },
+        'Accounting': {
+            '100': [
+                {'name': 'Principles of Accounting', 'file': 'courses/bus_accounting.json'},
+                {'name': 'Business Mathematics', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Introduction to Business', 'file': 'courses/bus_management.json'},
+            ],
+            '200': [
+                {'name': 'Financial Accounting', 'file': 'courses/bus_accounting.json'},
+                {'name': 'Cost Accounting', 'file': 'courses/bus_accounting.json'},
+                {'name': 'Business Law', 'file': 'courses/law_contract.json'},
+            ],
+            '300': [
+                {'name': 'Management Accounting', 'file': 'courses/bus_management.json'},
+                {'name': 'Auditing & Assurance', 'file': 'courses/bus_accounting.json'},
+                {'name': 'Taxation', 'file': 'courses/bus_accounting.json'},
+            ],
+            '400': [
+                {'name': 'Advanced Financial Accounting', 'file': 'courses/bus_accounting.json'},
+                {'name': 'Corporate Governance', 'file': 'courses/bus_management.json'},
+            ],
+        },
+        'Mass Communication': {
+            '100': [
+                {'name': 'Introduction to Mass Communication', 'file': 'courses/edu_intro.json'},
+                {'name': 'Communication Theory', 'file': 'courses/edu_intro.json'},
+            ],
+            '200': [
+                {'name': 'Print Journalism', 'file': 'courses/edu_intro.json'},
+                {'name': 'Broadcast Journalism', 'file': 'courses/edu_intro.json'},
+                {'name': 'Media Writing', 'file': 'use_of_english.json'},
+            ],
+            '300': [
+                {'name': 'Public Relations', 'file': 'courses/bus_management.json'},
+                {'name': 'Advertising', 'file': 'courses/bus_management.json'},
+                {'name': 'Digital Media', 'file': 'courses/cs_intro_programming.json'},
+            ],
+            '400': [
+                {'name': 'Media Law & Ethics', 'file': 'courses/law_constitutional.json'},
+                {'name': 'Research Project', 'file': 'courses/mth_intro_stats.json'},
+            ],
+        },
+    },
+    'Oxford University': {
+        'Computer Science': {
+            '1st Year': [
+                {'name': 'Introduction to Programming (Python & Java)', 'file': 'courses/cs_intro_programming.json'},
+                {'name': 'Discrete Mathematics', 'file': 'courses/cs_discrete_math.json'},
+                {'name': 'Digital Systems', 'file': 'courses/cs_computer_architecture.json'},
+                {'name': 'Linear Algebra', 'file': 'courses/mth_linear_algebra.json'},
+            ],
+            '2nd Year': [
+                {'name': 'Algorithms', 'file': 'courses/cs_data_structures.json'},
+                {'name': 'Computer Architecture', 'file': 'courses/cs_computer_architecture.json'},
+                {'name': 'Models of Computation', 'file': 'courses/cs_theory_computation.json'},
+                {'name': 'Probability & Statistics', 'file': 'courses/mth_intro_stats.json'},
+            ],
+            '3rd Year': [
+                {'name': 'Machine Learning', 'file': 'courses/cs_machine_learning.json'},
+                {'name': 'Computer Security', 'file': 'courses/cs_cybersecurity.json'},
+                {'name': 'Compilers', 'file': 'courses/cs_compiler_design.json'},
+                {'name': 'Distributed Systems', 'file': 'courses/cs_distributed_systems.json'},
+            ],
+            '4th Year': [
+                {'name': 'Advanced Machine Learning', 'file': 'courses/cs_machine_learning.json'},
+                {'name': 'Computer Vision', 'file': 'courses/cs_artificial_intelligence.json'},
+                {'name': 'Research Project', 'file': 'courses/cs_software_engineering.json'},
+            ],
+        },
+        'Physics': {
+            '1st Year': [
+                {'name': 'Classical Mechanics', 'file': 'courses/phy_mechanics.json'},
+                {'name': 'Electricity & Magnetism', 'file': 'courses/phy_electricity.json'},
+                {'name': 'Mathematics for Physics I', 'file': 'courses/mth_calculus1.json'},
+            ],
+            '2nd Year': [
+                {'name': 'Quantum Mechanics', 'file': 'courses/phy_modern.json'},
+                {'name': 'Statistical Mechanics', 'file': 'courses/phy_waves.json'},
+                {'name': 'Mathematical Methods II', 'file': 'courses/mth_linear_algebra.json'},
+            ],
+            '3rd Year': [
+                {'name': 'Particle Physics', 'file': 'courses/phy_modern.json'},
+                {'name': 'Condensed Matter Physics', 'file': 'courses/phy_waves.json'},
+                {'name': 'Astrophysics', 'file': 'courses/phy_mechanics.json'},
+            ],
+            '4th Year': [
+                {'name': 'Advanced Quantum Field Theory', 'file': 'courses/phy_modern.json'},
+                {'name': 'Research Project', 'file': 'courses/cs_software_engineering.json'},
+            ],
+        },
+        'Mathematics': {
+            '1st Year': [
+                {'name': 'Analysis I', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Linear Algebra', 'file': 'courses/mth_linear_algebra.json'},
+                {'name': 'Abstract Algebra', 'file': 'courses/mth_abstract_algebra.json'},
+            ],
+            '2nd Year': [
+                {'name': 'Real Analysis', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Differential Equations', 'file': 'courses/mth_calculus1.json'},
+                {'name': 'Topology', 'file': 'courses/mth_abstract_algebra.json'},
+            ],
+            '3rd Year': [
+                {'name': 'Number Theory', 'file': 'courses/mth_abstract_algebra.json'},
+                {'name': 'Probability Theory', 'file': 'courses/mth_intro_stats.json'},
+                {'name': 'Numerical Analysis', 'file': 'courses/mth_operations_research.json'},
+            ],
+            '4th Year': [
+                {'name': 'Mathematical Research', 'file': 'courses/mth_operations_research.json'},
+                {'name': 'Algebraic Geometry', 'file': 'courses/mth_abstract_algebra.json'},
+            ],
+        },
+    },
 }
 
 
@@ -1763,9 +2052,9 @@ def ai_chat():
     system_msg = {
         'role': 'system',
         'content': (
-            'You are a helpful AI study assistant for TAU (Thomas Adewunmi University) students. '
+            'You are a helpful AI study assistant for Beyond The Classroom (BTC), a Nigerian educational platform. '
             'You answer academic questions clearly and thoroughly, help explain concepts, '
-            'solve problems step by step, and assist with JAMB practice questions. '
+            'solve problems step by step, and assist with exam practice questions for UTME, university courses, and more. '
             'Be concise yet thorough, and use a friendly, encouraging tone.'
         )
     }
@@ -1782,6 +2071,110 @@ def ai_chat():
         if 'FREE_CLOUD_BUDGET_EXCEEDED' in err:
             return jsonify({'error': 'FREE_CLOUD_BUDGET_EXCEEDED'}), 429
         return jsonify({'error': 'AI service error. Please try again.'}), 500
+
+
+# ── Direct Messages ─────────────────────────────────────────────────────────────
+def save_dm(from_email, from_name, to_email, to_name, text):
+    msg_id = str(uuid.uuid4())
+    db = get_mongo()
+    if db is not None:
+        db.direct_messages.insert_one({
+            'id': msg_id,
+            'from_email': from_email,
+            'from_name': from_name,
+            'to_email': to_email,
+            'to_name': to_name,
+            'text': text,
+            'timestamp': datetime.utcnow().isoformat(),
+            'read': False
+        })
+    return msg_id
+
+def get_dms_between(user1, user2):
+    db = get_mongo()
+    if db is not None:
+        msgs = list(db.direct_messages.find({
+            '$or': [
+                {'from_email': user1, 'to_email': user2},
+                {'from_email': user2, 'to_email': user1},
+            ]
+        }).sort('timestamp', 1).limit(300))
+        for m in msgs:
+            m['_id'] = str(m.get('_id', ''))
+        db.direct_messages.update_many(
+            {'to_email': user1, 'from_email': user2, 'read': False},
+            {'$set': {'read': True}}
+        )
+        return msgs
+    return []
+
+def get_inbox_conversations(user_email):
+    db = get_mongo()
+    if db is not None:
+        all_msgs = list(db.direct_messages.find({
+            '$or': [{'from_email': user_email}, {'to_email': user_email}]
+        }).sort('timestamp', -1).limit(500))
+        seen = {}
+        for m in all_msgs:
+            partner = m['to_email'] if m['from_email'] == user_email else m['from_email']
+            partner_name = m['to_name'] if m['from_email'] == user_email else m['from_name']
+            if partner not in seen:
+                unread = m.get('to_email') == user_email and not m.get('read', True)
+                seen[partner] = {
+                    'email': partner,
+                    'name': partner_name,
+                    'last_msg': m.get('text', ''),
+                    'timestamp': m.get('timestamp', ''),
+                    'unread': unread
+                }
+        return list(seen.values())
+    return []
+
+@app.route('/messages')
+@login_required
+def inbox():
+    user = session.get('user', {})
+    conversations = get_inbox_conversations(user.get('email', ''))
+    return render_template('inbox.html', conversations=conversations, user=user)
+
+@app.route('/messages/<path:partner_email>')
+@login_required
+def direct_message_page(partner_email):
+    user = session.get('user', {})
+    msgs = get_dms_between(user.get('email', ''), partner_email)
+    partner_name = request.args.get('name', '').strip() or partner_email
+    for m in msgs:
+        if m.get('from_email') == partner_email:
+            partner_name = m.get('from_name', partner_email)
+            break
+        if m.get('to_email') == partner_email:
+            partner_name = m.get('to_name', partner_email)
+            break
+    return render_template('direct_message.html', messages=msgs,
+                           partner_email=partner_email, partner_name=partner_name, user=user)
+
+@app.route('/messages/send', methods=['POST'])
+@login_required
+def send_dm():
+    user = session.get('user', {})
+    data = request.get_json(silent=True) or {}
+    to_email = data.get('to_email', '').strip()
+    to_name = data.get('to_name', '').strip()
+    text = data.get('text', '').strip()
+    if not to_email or not text:
+        return jsonify({'success': False, 'error': 'Missing fields'}), 400
+    msg_id = save_dm(user.get('email', ''), user.get('full_name', 'Unknown'), to_email, to_name or to_email, text)
+    return jsonify({'success': True, 'id': msg_id, 'timestamp': datetime.utcnow().isoformat()})
+
+@app.route('/messages/unread-count')
+@login_required
+def dm_unread_count():
+    user = session.get('user', {})
+    db = get_mongo()
+    count = 0
+    if db is not None:
+        count = db.direct_messages.count_documents({'to_email': user.get('email', ''), 'read': False})
+    return jsonify({'count': count})
 
 
 init_db()

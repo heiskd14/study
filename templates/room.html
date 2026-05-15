@@ -152,6 +152,9 @@
     /* ── Remove member button ── */
     .remove-member-btn { background: none; border: none; color: var(--error); cursor: pointer; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 0.85rem; flex-shrink: 0; transition: background var(--transition); }
     .remove-member-btn:hover { background: rgba(255,80,104,0.15); }
+    /* ── DM member button ── */
+    .dm-member-btn { background: none; border: none; color: var(--accent-light, #1aaa1a); cursor: pointer; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 0.82rem; flex-shrink: 0; transition: background 0.2s; }
+    .dm-member-btn:hover { background: rgba(19,122,19,0.18); }
     /* ── Input area ── */
     .input-area { background: var(--surface); padding: 0.5rem 0.8rem; padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px)); display: flex; align-items: flex-end; gap: 0.4rem; border-top: 1px solid var(--border); flex-shrink: 0; position: relative; z-index: 10; }
     .inp-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 1.1rem; transition: background var(--transition), color var(--transition); flex-shrink: 0; }
@@ -1453,6 +1456,7 @@ function updateMembersList(members) {
         <div class="member-name">${escHtml(m.name || '')}</div>
         ${m.email === room_creator_email ? '<div class="member-badge">Admin</div>' : ''}
       </div>
+      ${m.email !== USER.email ? `<button class="dm-member-btn" onclick="openDM('${escHtml(m.email)}','${escHtml(m.name || '')}')" title="Message ${escHtml(m.name || '')}"><i class="fa-solid fa-envelope"></i></button>` : ''}
       ${isCreator && m.email !== USER.email ? `<button class="remove-member-btn" onclick="removeMember('${escHtml(m.email)}','${escHtml(m.name || '')}')" title="Remove from group"><i class="fa-solid fa-user-minus"></i></button>` : ''}
     </div>
   `).join('');
@@ -1462,6 +1466,9 @@ function updateMembersList(members) {
 function removeMember(email, name) {
   if (!confirm(`Remove ${name} from this room?`)) return;
   socket.emit('remove_member', { code: ROOM_CODE, email, requester_email: USER.email });
+}
+function openDM(email, name) {
+  window.open('/messages/' + encodeURIComponent(email) + '?name=' + encodeURIComponent(name), '_blank');
 }
 
 // ── Dropdown ───────────────────────────────────────────────────────────────────

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inbox — BTC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg:#05060f; --glass:rgba(255,255,255,0.06); --glass-border:rgba(255,255,255,0.10);
+      --surface:rgba(255,255,255,0.04); --surface-hover:rgba(255,255,255,0.07);
+      --accent:#137a13; --accent-light:#1aaa1a; --accent-glow:rgba(19,122,19,0.35);
+      --text:#f0f0f8; --text-muted:#8888aa; --text-dim:#4a4a6a;
+      --radius:20px; --radius-sm:12px;
+      --font-display:'Syne',sans-serif; --font-body:'DM Sans',sans-serif;
+      --tr:0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;}
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.35;}
+    .orb-1{width:500px;height:500px;background:radial-gradient(circle,#137a1388,transparent 70%);top:-150px;left:-100px;}
+    .orb-2{width:400px;height:400px;background:radial-gradient(circle,#0a5c0a66,transparent 70%);bottom:-100px;right:-80px;}
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:62px;background:rgba(5,6,15,0.75);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);}
+    .nav-left{display:flex;align-items:center;gap:0.8rem;}
+    .nav-back{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--glass-border);color:var(--text-muted);text-decoration:none;transition:var(--tr);}
+    .nav-back:hover{background:var(--surface-hover);color:var(--text);}
+    .nav-title{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text);}
+    .nav-logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none;}
+    .nav-logo img{width:28px;height:28px;border-radius:7px;}
+    .page-wrap{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:1.5rem 1rem 4rem;}
+    .page-head{margin-bottom:1.5rem;}
+    .page-head h1{font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--text);}
+    .page-head p{color:var(--text-muted);font-size:0.88rem;margin-top:0.25rem;}
+    .convo-list{display:flex;flex-direction:column;gap:0.5rem;}
+    .convo-item{display:flex;align-items:center;gap:1rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);padding:1rem 1.2rem;text-decoration:none;color:var(--text);transition:var(--tr);cursor:pointer;}
+    .convo-item:hover{background:var(--surface-hover);border-color:rgba(19,122,19,0.25);transform:translateX(3px);}
+    .convo-item.unread{border-color:rgba(19,122,19,0.35);background:rgba(19,122,19,0.07);}
+    .convo-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-light));display:grid;place-items:center;font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:white;flex-shrink:0;}
+    .convo-body{flex:1;min-width:0;}
+    .convo-name{font-weight:600;font-size:0.95rem;color:var(--text);margin-bottom:0.2rem;display:flex;align-items:center;gap:0.5rem;}
+    .convo-name .unread-dot{width:8px;height:8px;border-radius:50%;background:var(--accent-light);flex-shrink:0;}
+    .convo-last{font-size:0.82rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .convo-time{font-size:0.75rem;color:var(--text-dim);flex-shrink:0;align-self:flex-start;padding-top:2px;}
+    .empty-state{text-align:center;padding:4rem 1rem;color:var(--text-muted);}
+    .empty-icon{font-size:3rem;margin-bottom:1rem;opacity:0.5;}
+    .empty-state h3{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+    .empty-state p{font-size:0.88rem;line-height:1.6;}
+    .cta-btn{display:inline-flex;align-items:center;gap:0.5rem;margin-top:1.5rem;padding:0.8rem 1.5rem;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:white;border-radius:50px;text-decoration:none;font-family:var(--font-display);font-weight:700;font-size:0.9rem;transition:var(--tr);}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--accent-glow);}
+  </style>
+</head>
+<body>
+  <div class="bg-canvas"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+  <nav>
+    <div class="nav-left">
+      <a href="/" class="nav-back" title="Home"><i class="fa-solid fa-arrow-left"></i></a>
+      <a href="/" class="nav-logo">
+        <img src="/static/img/btc_logo.png" alt="BTC">
+        <span class="nav-title">Messages</span>
+      </a>
+    </div>
+  </nav>
+  <div class="page-wrap">
+    <div class="page-head">
+      <h1>Inbox</h1>
+      <p>Your direct conversations</p>
+    </div>
+
+    {% if conversations %}
+    <div class="convo-list">
+      {% for c in conversations %}
+      <a href="/messages/{{ c.email | urlencode }}?name={{ c.name | urlencode }}" class="convo-item {% if c.unread %}unread{% endif %}">
+        <div class="convo-avatar">{{ (c.name or c.email)[:1].upper() }}</div>
+        <div class="convo-body">
+          <div class="convo-name">
+            {{ c.name or c.email }}
+            {% if c.unread %}<span class="unread-dot"></span>{% endif %}
+          </div>
+          <div class="convo-last">{{ c.last_msg[:80] if c.last_msg else 'No messages yet' }}</div>
+        </div>
+        <div class="convo-time">
+          {% if c.timestamp %}
+            {{ c.timestamp[:10] }}
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <div class="empty-icon"><i class="fa-regular fa-envelope"></i></div>
+      <h3>No messages yet</h3>
+      <p>Join a group study room and tap the envelope icon next to a member's name to start a private conversation.</p>
+      <a href="/group-study" class="cta-btn"><i class="fa-solid fa-users"></i> Go to Group Study</a>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>

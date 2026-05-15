@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat — BTC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg:#05060f; --glass:rgba(255,255,255,0.06); --glass-border:rgba(255,255,255,0.10);
+      --surface:rgba(255,255,255,0.04); --surface-hover:rgba(255,255,255,0.07);
+      --accent:#137a13; --accent-light:#1aaa1a; --accent-glow:rgba(19,122,19,0.35);
+      --text:#f0f0f8; --text-muted:#8888aa; --text-dim:#4a4a6a;
+      --error:#ff5068; --success:#3effa0;
+      --radius:20px; --radius-sm:12px;
+      --font-display:'Syne',sans-serif; --font-body:'DM Sans',sans-serif;
+      --tr:0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{font-family:var(--font-body);background:var(--bg);color:var(--text);height:100%;overflow:hidden;}
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.3;}
+    .orb-1{width:500px;height:500px;background:radial-gradient(circle,#137a1388,transparent 70%);top:-150px;left:-100px;}
+    .orb-2{width:400px;height:400px;background:radial-gradient(circle,#0a5c0a66,transparent 70%);bottom:-100px;right:-80px;}
+    .chat-shell{position:relative;z-index:1;display:flex;flex-direction:column;height:100vh;max-width:700px;margin:0 auto;}
+    /* Header */
+    .chat-header{display:flex;align-items:center;gap:0.9rem;padding:0 1rem;height:62px;background:rgba(5,6,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);flex-shrink:0;}
+    .header-back{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--glass-border);color:var(--text-muted);text-decoration:none;transition:var(--tr);flex-shrink:0;}
+    .header-back:hover{background:var(--surface-hover);color:var(--text);}
+    .header-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-light));display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:1rem;color:white;flex-shrink:0;}
+    .header-info{flex:1;min-width:0;}
+    .header-name{font-family:var(--font-display);font-weight:700;font-size:0.95rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .header-sub{font-size:0.75rem;color:var(--text-muted);}
+    /* Messages area */
+    .messages-area{flex:1;overflow-y:auto;padding:1rem 1rem 0.5rem;display:flex;flex-direction:column;gap:0.5rem;scroll-behavior:smooth;}
+    .messages-area::-webkit-scrollbar{width:4px;}
+    .messages-area::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:4px;}
+    .msg-row{display:flex;flex-direction:column;max-width:72%;gap:0.15rem;}
+    .msg-row.mine{align-self:flex-end;align-items:flex-end;}
+    .msg-row.theirs{align-self:flex-start;align-items:flex-start;}
+    .msg-bubble{padding:0.65rem 0.9rem;border-radius:18px;font-size:0.9rem;line-height:1.5;word-break:break-word;}
+    .msg-row.mine .msg-bubble{background:linear-gradient(135deg,var(--accent),var(--accent-light));color:white;border-bottom-right-radius:5px;}
+    .msg-row.theirs .msg-bubble{background:var(--glass);border:1px solid var(--glass-border);color:var(--text);border-bottom-left-radius:5px;}
+    .msg-time{font-size:0.7rem;color:var(--text-dim);padding:0 0.3rem;}
+    .date-divider{align-self:center;font-size:0.72rem;color:var(--text-dim);background:var(--surface);border:1px solid var(--glass-border);border-radius:20px;padding:0.25rem 0.9rem;margin:0.5rem 0;}
+    .empty-chat{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-muted);gap:0.5rem;}
+    .empty-chat-icon{font-size:2.5rem;opacity:0.4;}
+    .empty-chat p{font-size:0.88rem;}
+    /* Input */
+    .input-area{padding:0.7rem 1rem;padding-bottom:calc(0.7rem + env(safe-area-inset-bottom,0px));background:rgba(5,6,15,0.85);backdrop-filter:blur(20px);border-top:1px solid var(--glass-border);display:flex;align-items:flex-end;gap:0.6rem;flex-shrink:0;}
+    .input-wrap{flex:1;background:var(--surface);border:1px solid var(--glass-border);border-radius:22px;padding:0.55rem 1rem;display:flex;align-items:flex-end;gap:0.5rem;transition:border-color 0.2s;}
+    .input-wrap:focus-within{border-color:rgba(19,122,19,0.4);}
+    #dm-input{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:var(--font-body);font-size:0.93rem;resize:none;max-height:100px;line-height:1.5;}
+    #dm-input::placeholder{color:var(--text-dim);}
+    .send-btn{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-light));border:none;color:white;font-size:0.95rem;cursor:pointer;display:grid;place-items:center;transition:var(--tr);flex-shrink:0;}
+    .send-btn:hover{transform:scale(1.08);box-shadow:0 4px 16px var(--accent-glow);}
+    .send-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+    /* Toast */
+    #toast{position:fixed;top:1rem;left:50%;transform:translateX(-50%);background:rgba(19,122,19,0.15);border:1px solid rgba(19,122,19,0.3);color:var(--success);padding:0.6rem 1.2rem;border-radius:20px;font-size:0.85rem;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;}
+    #toast.show{opacity:1;}
+  </style>
+</head>
+<body>
+  <div class="bg-canvas"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+  <div class="chat-shell">
+    <div class="chat-header">
+      <a href="/messages" class="header-back" title="Back to inbox"><i class="fa-solid fa-arrow-left"></i></a>
+      <div class="header-avatar">{{ partner_name[:1].upper() }}</div>
+      <div class="header-info">
+        <div class="header-name">{{ partner_name }}</div>
+        <div class="header-sub">{{ partner_email }}</div>
+      </div>
+    </div>
+
+    <div class="messages-area" id="messages-area">
+      {% if messages %}
+        {% set ns = namespace(last_date='') %}
+        {% for m in messages %}
+          {% set msg_date = m.timestamp[:10] if m.timestamp else '' %}
+          {% if msg_date != ns.last_date %}
+            <div class="date-divider">{{ msg_date }}</div>
+            {% set ns.last_date = msg_date %}
+          {% endif %}
+          <div class="msg-row {% if m.from_email == user.email %}mine{% else %}theirs{% endif %}">
+            <div class="msg-bubble">{{ m.text }}</div>
+            <div class="msg-time">{{ m.timestamp[11:16] if m.timestamp else '' }}</div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="empty-chat">
+          <div class="empty-chat-icon"><i class="fa-regular fa-comment-dots"></i></div>
+          <p>No messages yet. Say hi!</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrap">
+        <textarea id="dm-input" rows="1" placeholder="Message {{ partner_name }}…"></textarea>
+      </div>
+      <button class="send-btn" id="send-btn" onclick="sendMsg()" title="Send">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+    const PARTNER_EMAIL = {{ partner_email | tojson }};
+    const PARTNER_NAME  = {{ partner_name  | tojson }};
+    const MY_EMAIL      = {{ user.email    | tojson }};
+
+    const area = document.getElementById('messages-area');
+    const inp  = document.getElementById('dm-input');
+    const btn  = document.getElementById('send-btn');
+    let lastCount = area.querySelectorAll('.msg-row').length;
+
+    function scrollBottom(smooth) {
+      area.scrollTo({ top: area.scrollHeight, behavior: smooth ? 'smooth' : 'instant' });
+    }
+    scrollBottom(false);
+
+    inp.addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+    });
+    inp.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+    });
+
+    async function sendMsg() {
+      const text = inp.value.trim();
+      if (!text) return;
+      inp.value = ''; inp.style.height = 'auto';
+      btn.disabled = true;
+      try {
+        const res = await fetch('/messages/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ to_email: PARTNER_EMAIL, to_name: PARTNER_NAME, text })
+        });
+        const data = await res.json();
+        if (data.success) {
+          appendMsg(text, data.timestamp, true);
+          scrollBottom(true);
+        } else {
+          showToast('Failed to send message');
+        }
+      } catch (e) {
+        showToast('Connection error');
+      } finally {
+        btn.disabled = false;
+        inp.focus();
+      }
+    }
+
+    function appendMsg(text, timestamp, mine) {
+      const emptyState = area.querySelector('.empty-chat');
+      if (emptyState) emptyState.remove();
+      const row = document.createElement('div');
+      row.className = 'msg-row ' + (mine ? 'mine' : 'theirs');
+      const timeStr = timestamp ? timestamp.substring(11, 16) : '';
+      row.innerHTML = `<div class="msg-bubble">${escHtml(text)}</div><div class="msg-time">${timeStr}</div>`;
+      area.appendChild(row);
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    async function pollMessages() {
+      try {
+        const res = await fetch(window.location.href, { headers: { 'X-Poll': '1' } });
+        if (!res.ok) return;
+      } catch(e) {}
+    }
+
+    setInterval(async () => {
+      try {
+        const res = await fetch('/messages/' + encodeURIComponent(PARTNER_EMAIL) + '?name=' + encodeURIComponent(PARTNER_NAME));
+        if (!res.ok) return;
+        const html = await res.text();
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        const newArea = tmp.querySelector('#messages-area');
+        if (!newArea) return;
+        const newRows = newArea.querySelectorAll('.msg-row');
+        if (newRows.length > lastCount) {
+          const isAtBottom = area.scrollHeight - area.scrollTop - area.clientHeight < 80;
+          for (let i = lastCount; i < newRows.length; i++) {
+            area.appendChild(newRows[i].cloneNode(true));
+          }
+          lastCount = newRows.length;
+          if (isAtBottom) scrollBottom(true);
+        }
+      } catch(e) {}
+    }, 4000);
+  </script>
+</body>
+</html>

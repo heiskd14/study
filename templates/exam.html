@@ -548,10 +548,13 @@
     const sendBtn = document.getElementById('ai-send-btn');
     const msgBox = document.getElementById('ai-messages');
 
-    let chatOpen = false;
+    let chatOpen = true;
     let chatHistory = [];
     let aiThinking = false;
     let fabDragged = false;
+
+    win.classList.add('open');
+    setTimeout(() => input.focus(), 400);
 
     /* ── Toggle chat open/close ── */
     window.toggleAIChat = function () {
