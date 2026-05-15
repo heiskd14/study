@@ -13,7 +13,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
-import sqlite3
+import psycopg2
+import psycopg2.extras
 import bcrypt
 import urllib.request
 import urllib.error
@@ -90,41 +91,86 @@ def get_mongo():
         print(f"⚠️  MongoDB unavailable: {e}")
         return None
 
-# ── SQLite fallback ────────────────────────────────────────────────────────────
-DB_PATH = 'exam_results.db'
+# ── PostgreSQL database ────────────────────────────────────────────────────────
+def _pg_sql(sql):
+    return sql.replace('?', '%s')
+
+class _Row(dict):
+    def __init__(self, data):
+        super().__init__(data)
+        self._vals = list(data.values())
+    def __getitem__(self, key):
+        if isinstance(key, int):
+            return self._vals[key]
+        return super().__getitem__(key)
+
+class _PgCursor:
+    def __init__(self, raw):
+        self._raw = raw
+    def execute(self, sql, params=None):
+        self._raw.execute(_pg_sql(sql), params or ())
+        return self
+    def fetchone(self):
+        row = self._raw.fetchone()
+        return _Row(row) if row else None
+    def fetchall(self):
+        return [_Row(r) for r in (self._raw.fetchall() or [])]
+
+class _PgConn:
+    def __init__(self, conn):
+        self._conn = conn
+        self._cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    def execute(self, sql, params=None):
+        self._cur.execute(_pg_sql(sql), params or ())
+        return self
+    def fetchone(self):
+        row = self._cur.fetchone()
+        return _Row(row) if row else None
+    def fetchall(self):
+        return [_Row(r) for r in (self._cur.fetchall() or [])]
+    def cursor(self):
+        raw = self._conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        return _PgCursor(raw)
+    def commit(self):
+        self._conn.commit()
+    def close(self):
+        try:
+            self._conn.close()
+        except Exception:
+            pass
+
+def get_db():
+    conn = psycopg2.connect(os.environ.get('DATABASE_URL', ''))
+    return _PgConn(conn)
 
 def init_db():
-    conn = sqlite3.connect(DB_PATH)
+    conn = psycopg2.connect(os.environ.get('DATABASE_URL', ''))
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS students
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 (id SERIAL PRIMARY KEY,
                   name TEXT NOT NULL,
                   regno TEXT NOT NULL UNIQUE)''')
     c.execute('''CREATE TABLE IF NOT EXISTS exam_attempts
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  student_id INTEGER NOT NULL,
+                 (id SERIAL PRIMARY KEY,
+                  student_id INTEGER NOT NULL REFERENCES students(id),
                   exam_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                   total_score REAL,
                   total_questions INTEGER,
-                  percentage REAL,
-                  FOREIGN KEY(student_id) REFERENCES students(id))''')
+                  percentage REAL)''')
     c.execute('''CREATE TABLE IF NOT EXISTS subject_scores
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  attempt_id INTEGER NOT NULL,
+                 (id SERIAL PRIMARY KEY,
+                  attempt_id INTEGER NOT NULL REFERENCES exam_attempts(id),
                   subject TEXT,
                   score INTEGER,
-                  total INTEGER,
-                  FOREIGN KEY(attempt_id) REFERENCES exam_attempts(id))''')
-    # Local users table (fallback when MongoDB is unavailable)
+                  total INTEGER)''')
     c.execute('''CREATE TABLE IF NOT EXISTS users
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 (id SERIAL PRIMARY KEY,
                   full_name TEXT NOT NULL,
                   email TEXT NOT NULL UNIQUE,
                   password_hash TEXT NOT NULL,
                   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
-    # Group study rooms
     c.execute('''CREATE TABLE IF NOT EXISTS rooms
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 (id SERIAL PRIMARY KEY,
                   code TEXT NOT NULL UNIQUE,
                   creator_email TEXT,
                   creator_name TEXT,
@@ -133,14 +179,13 @@ def init_db():
                   members TEXT DEFAULT '[]',
                   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     c.execute('''CREATE TABLE IF NOT EXISTS room_messages
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 (id SERIAL PRIMARY KEY,
                   msg_id TEXT NOT NULL UNIQUE,
                   room_code TEXT NOT NULL,
                   data TEXT NOT NULL,
                   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
-    # Password reset tokens
     c.execute('''CREATE TABLE IF NOT EXISTS password_reset_tokens
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 (id SERIAL PRIMARY KEY,
                   email TEXT NOT NULL,
                   token TEXT NOT NULL UNIQUE,
                   expires_at TEXT NOT NULL,
@@ -148,11 +193,6 @@ def init_db():
                   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     conn.commit()
     conn.close()
-
-def get_db():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
 
 # ── Auth helpers ───────────────────────────────────────────────────────────────
 def hash_password(password):
@@ -232,7 +272,7 @@ def create_user(full_name, email, password):
             conn.commit()
             conn.close()
             return True, None
-        except sqlite3.IntegrityError:
+        except psycopg2.IntegrityError:
             return False, 'An account with this email already exists.'
 
 def find_user_by_email(email):
@@ -1128,15 +1168,15 @@ def submit():
         init_db()
         conn = get_db()
         c = conn.cursor()
-        c.execute('INSERT OR IGNORE INTO students (name, regno) VALUES (?, ?)', (name, regno))
-        c.execute('SELECT id FROM students WHERE regno = ?', (regno,))
+        c.execute('INSERT INTO students (name, regno) VALUES (%s, %s) ON CONFLICT (regno) DO NOTHING', (name, regno))
+        c.execute('SELECT id FROM students WHERE regno = %s', (regno,))
         student_id = c.fetchone()[0]
-        c.execute('INSERT INTO exam_attempts (student_id) VALUES (?)', (student_id,))
-        attempt_id = c.lastrowid
+        c.execute('INSERT INTO exam_attempts (student_id) VALUES (%s) RETURNING id', (student_id,))
+        attempt_id = c.fetchone()[0]
         for subj, score, total, percent in [(r[0], r[1], r[2], r[3]) for r in results]:
-            c.execute('INSERT INTO subject_scores (attempt_id, subject, score, total) VALUES (?, ?, ?, ?)',
+            c.execute('INSERT INTO subject_scores (attempt_id, subject, score, total) VALUES (%s, %s, %s, %s)',
                       (attempt_id, subj, score, total))
-        c.execute('UPDATE exam_attempts SET total_score=?, total_questions=?, percentage=? WHERE id=?',
+        c.execute('UPDATE exam_attempts SET total_score=%s, total_questions=%s, percentage=%s WHERE id=%s',
                   (total_score, total_questions, percentage, attempt_id))
         conn.commit()
         conn.close()
@@ -1764,7 +1804,7 @@ def save_room_message(msg):
         db.messages.insert_one({**msg})
     else:
         conn = get_db()
-        conn.execute('INSERT OR IGNORE INTO room_messages (msg_id, room_code, data) VALUES (?,?,?)',
+        conn.execute('INSERT INTO room_messages (msg_id, room_code, data) VALUES (%s,%s,%s) ON CONFLICT (msg_id) DO NOTHING',
                      (msg['id'], msg['room_code'], json.dumps(msg)))
         conn.commit(); conn.close()
 

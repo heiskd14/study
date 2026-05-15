@@ -39,11 +39,53 @@ async function connectMongo() {
   };
 }
 
+async function connectPostgres() {
+  const { Pool } = require('pg');
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  });
+  await pool.query('SELECT 1');
+  await pool.query(`CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    full_name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )`);
+  console.log('Using PostgreSQL database');
+  return {
+    findUserByEmail: async (email) => {
+      const res = await pool.query('SELECT * FROM users WHERE email = $1 LIMIT 1', [email]);
+      if (!res.rows[0]) return null;
+      const row = res.rows[0];
+      return { id: String(row.id), name: row.full_name, email: row.email, password: row.password_hash, created_at: row.created_at };
+    },
+    findUserById: async (id) => {
+      const res = await pool.query('SELECT * FROM users WHERE id = $1 LIMIT 1', [Number(id)]);
+      if (!res.rows[0]) return null;
+      const row = res.rows[0];
+      return { id: String(row.id), name: row.full_name, email: row.email, password: row.password_hash, created_at: row.created_at };
+    },
+    createUser: async ({ name, email, password }) => {
+      const res = await pool.query(
+        'INSERT INTO users (full_name, email, password_hash) VALUES ($1, $2, $3) RETURNING *',
+        [name, email, password]
+      );
+      const row = res.rows[0];
+      return { id: String(row.id), name: row.full_name, email: row.email, password: row.password_hash, created_at: row.created_at };
+    },
+    getAllUsers: async () => {
+      const res = await pool.query('SELECT id, password_hash AS password FROM users');
+      return res.rows;
+    },
+  };
+}
+
 async function connectSQLite() {
   const Database = require('better-sqlite3');
   const path = require('path');
   const db = new Database(path.join(__dirname, '../..', 'exam_results.db'));
-  // Create table using existing schema (full_name, password_hash) if it doesn't exist
   db.prepare(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     full_name TEXT NOT NULL,
@@ -75,7 +117,14 @@ async function connectSQLite() {
 
 async function connectDb() {
   try {
-    if (DB_TYPE === 'sqlite') {
+    if (process.env.DATABASE_URL) {
+      try {
+        dbInstance = await connectPostgres();
+      } catch (pgErr) {
+        console.warn('PostgreSQL unavailable, falling back to SQLite:', pgErr.message);
+        dbInstance = await connectSQLite();
+      }
+    } else if (DB_TYPE === 'sqlite') {
       dbInstance = await connectSQLite();
     } else {
       try {
