@@ -19,15 +19,15 @@ import urllib.request
 import urllib.error
 from openai import OpenAI
 
-# the newest OpenAI model is "gpt-5" which was released August 7, 2025.
-# do not change this unless explicitly requested by the user
+# Using Groq — free, fast AI inference (llama models)
 _ai_client = None
 
 def get_ai_client():
     global _ai_client
     if _ai_client is None:
         _ai_client = OpenAI(
-            api_key=os.environ.get("OPENAI_API_KEY"),
+            api_key=os.environ.get("GROQ_API_KEY"),
+            base_url="https://api.groq.com/openai/v1",
         )
     return _ai_client
 
