@@ -1,10 +1,14 @@
 services:
   - type: web
-    name: cbt-exam
+    name: btc-app
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    buildCommand: pip install -r requirements.txt && cd hackaton && npm install
+    startCommand: bash start.sh
     envVars:
       - key: FLASK_ENV
         value: production
+      - key: GROQ_API_KEY
+        sync: false
+      - key: JWT_SECRET
+        sync: false
