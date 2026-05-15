@@ -1047,7 +1047,7 @@ def practice_feedback():
             f"In 2-3 short sentences, explain why \"{correct_answer}\" is correct. Be concise and educational."
         )
         resp = client_obj.chat.completions.create(
-            model='gpt-4o-mini',
+            model='llama-3.1-8b-instant',
             messages=[{'role': 'user', 'content': prompt}],
             max_tokens=200
         )
@@ -1585,7 +1585,7 @@ def support_chat():
     }
     try:
         response = get_ai_client().chat.completions.create(
-            model='gpt-4o-mini',
+            model='llama-3.1-8b-instant',
             messages=[system_msg, {'role': 'user', 'content': message}],
             max_tokens=300,
         )
@@ -1620,9 +1620,9 @@ def ai_chat():
     }
     try:
         response = get_ai_client().chat.completions.create(
-            model='gpt-5',
+            model='llama-3.3-70b-versatile',
             messages=[system_msg] + safe_messages,
-            max_completion_tokens=8192,
+            max_tokens=8192,
         )
         reply = response.choices[0].message.content or ''
         return jsonify({'reply': reply})
@@ -1940,7 +1940,7 @@ def on_message(data):
         question = text[4:].strip()
         try:
             ai_resp = get_ai_client().chat.completions.create(
-                model='gpt-4o-mini',
+                model='llama-3.1-8b-instant',
                 messages=[{'role':'system','content':'You are BTC AI, a helpful study assistant in a group study room. Be concise and helpful.'},
                           {'role':'user','content': question}],
                 max_tokens=1024)
