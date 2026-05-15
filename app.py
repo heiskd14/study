@@ -1921,16 +1921,16 @@ def on_message(data):
     code = data.get('code', '')
     text = data.get('text', '').strip()
     msg_type = data.get('type', 'text')
-    # File messages may have empty text — allow them through
-    if not text and msg_type != 'file': return
+    # File and voice note messages may have empty text — allow them through
+    if not text and msg_type not in ('file', 'voice_note'): return
     msg = {'id': str(uuid.uuid4()), 'room_code': code, 'text': text,
            'sender': data.get('sender'), 'sender_email': data.get('sender_email'),
            'timestamp': datetime.utcnow().isoformat(), 'type': msg_type,
            'reply_to': data.get('reply_to'), 'reactions': {}, 'pinned': False,
            'starred_by': [], 'deleted': False, 'forwarded': data.get('forwarded', False)}
-    # Pass through file metadata if present
-    if msg_type == 'file':
-        for field in ('file_url', 'file_name', 'file_size', 'file_kind', 'ext'):
+    # Pass through file/voice metadata if present
+    if msg_type in ('file', 'voice_note'):
+        for field in ('file_url', 'file_name', 'file_size', 'file_kind', 'ext', 'voice_duration'):
             if field in data: msg[field] = data[field]
     save_room_message(msg)
     emit('message', msg, to=code)
