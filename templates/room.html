@@ -141,6 +141,17 @@
     .reply-cancel { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; padding: 0.3rem; border-radius: 50%; transition: background var(--transition); }
     .reply-cancel:hover { background: rgba(255,255,255,0.08); }
 
+    /* ── Voice recording ── */
+    .voice-rec-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--error); animation: recPulse 1s ease infinite; flex-shrink: 0; }
+    @keyframes recPulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.7); } }
+    .voice-note-bubble { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.2rem; }
+    .voice-play-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); border: none; color: white; cursor: pointer; display: grid; place-items: center; font-size: 0.8rem; flex-shrink: 0; }
+    .voice-waveform { flex: 1; height: 28px; display: flex; align-items: center; gap: 1.5px; }
+    .voice-waveform-bar { width: 2.5px; border-radius: 2px; background: var(--text-muted); }
+    .voice-duration { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
+    /* ── Remove member button ── */
+    .remove-member-btn { background: none; border: none; color: var(--error); cursor: pointer; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 0.85rem; flex-shrink: 0; transition: background var(--transition); }
+    .remove-member-btn:hover { background: rgba(255,80,104,0.15); }
     /* ── Input area ── */
     .input-area { background: var(--surface); padding: 0.5rem 0.8rem; padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px)); display: flex; align-items: flex-end; gap: 0.4rem; border-top: 1px solid var(--border); flex-shrink: 0; position: relative; z-index: 10; }
     .inp-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 1.1rem; transition: background var(--transition), color var(--transition); flex-shrink: 0; }
@@ -445,10 +456,17 @@
   <div class="input-area" id="input-area">
     <button class="inp-btn" id="emoji-toggle" title="Emoji" onclick="toggleEmojiPicker()"><i class="fa-regular fa-face-smile"></i></button>
     <button class="inp-btn" id="attach-btn" title="Attach file" onclick="toggleAttachMenu()"><i class="fa-solid fa-paperclip"></i></button>
+    <button class="inp-btn" id="voice-note-btn" title="Voice Note" onclick="toggleVoiceNote()"><i class="fa-solid fa-microphone"></i></button>
     <input type="file" id="file-input-media" style="display:none" accept="image/*,video/*" onchange="uploadFile(this)">
     <input type="file" id="file-input-doc" style="display:none" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" onchange="uploadFile(this)">
-    <div class="input-wrapper">
+    <div class="input-wrapper" id="input-wrapper">
       <textarea id="msg-input" placeholder="Message" rows="1"></textarea>
+    </div>
+    <div class="voice-recording-ui" id="voice-recording-ui" style="display:none;flex:1;align-items:center;gap:0.6rem;padding:0 0.4rem;">
+      <div class="voice-rec-dot"></div>
+      <span id="voice-rec-time" style="font-size:0.85rem;color:var(--text-muted);min-width:40px;">0:00</span>
+      <span style="flex:1;font-size:0.82rem;color:var(--text-muted);">Recording…</span>
+      <button class="inp-btn" onclick="cancelVoiceNote()" title="Cancel" style="color:var(--error);"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <button id="send-btn" onclick="sendMessage()" title="Send"><i class="fa-solid fa-paper-plane"></i></button>
   </div>
@@ -680,6 +698,16 @@ socket.on('user_left', data => {
   socket.emit('get_members', { code: ROOM_CODE });
 });
 
+socket.on('member_removed', data => {
+  if (data.email === USER.email) {
+    showToast('You have been removed from this room by the admin.');
+    setTimeout(() => { window.location.href = '/group-study'; }, 2000);
+  } else {
+    socket.emit('get_members', { code: ROOM_CODE });
+    showToast(`A member was removed from the group.`);
+  }
+});
+
 socket.on('room_members', data => {
   updateMembersList(data.members || []);
 });
@@ -809,7 +837,21 @@ function renderMessage(msg) {
   const checkHtml = `<div class="select-check" onclick="toggleSelect('${msg.id}')"><i class="fa-solid fa-check" style="display:none;font-size:0.6rem;"></i></div>`;
 
   let bodyHtml = '';
-  if (msg.type === 'file' && msg.file_url) {
+  if (msg.type === 'voice_note' && msg.file_url) {
+    const dur = msg.voice_duration || 0;
+    const durMin = Math.floor(dur / 60);
+    const durSec = (dur % 60).toString().padStart(2, '0');
+    const bars = Array.from({length: 20}, (_, i) => {
+      const h = 8 + Math.floor(Math.random() * 16);
+      return `<div class="voice-waveform-bar" style="height:${h}px;opacity:${0.5 + Math.random()*0.5};"></div>`;
+    }).join('');
+    bodyHtml = `<div class="voice-note-bubble">
+      <button class="voice-play-btn" onclick="playVoiceNote(this,'${escHtml(msg.file_url)}')"><i class="fa-solid fa-play"></i></button>
+      <div class="voice-waveform">${bars}</div>
+      <span class="voice-duration">${durMin}:${durSec}</span>
+      <audio id="va-${msg.id}" src="${escHtml(msg.file_url)}" preload="none"></audio>
+    </div>`;
+  } else if (msg.type === 'file' && msg.file_url) {
     if (msg.file_kind === 'image') {
       bodyHtml = `<img class="file-bubble-img" src="${escHtml(msg.file_url)}" alt="${escHtml(msg.file_name || 'image')}" onclick="openLightbox('${escHtml(msg.file_url)}','${escHtml(msg.file_name||'')}'); event.stopPropagation();" loading="lazy">`;
     } else {
@@ -1307,13 +1349,11 @@ function enterSelectMode() {
   isSelectMode = true;
   document.getElementById('room-wrap').classList.add('select-mode');
   document.getElementById('select-bar').classList.add('show');
-  document.getElementById('input-area').style.display = 'none';
 }
 function exitSelectMode() {
   isSelectMode = false; selectedMsgs.clear();
   document.getElementById('room-wrap').classList.remove('select-mode');
   document.getElementById('select-bar').classList.remove('show');
-  document.getElementById('input-area').style.display = '';
   document.querySelectorAll('.msg-row.selected').forEach(r => r.classList.remove('selected'));
   document.querySelectorAll('.select-check i').forEach(i => i.style.display = 'none');
 }
@@ -1405,17 +1445,23 @@ function updateMembersList(members) {
   const label = document.getElementById('members-count-label');
   if (label) label.textContent = `${members.length} Member${members.length !== 1 ? 's' : ''}`;
   if (!list) return;
+  const isCreator = USER.email === room_creator_email;
   list.innerHTML = members.map(m => `
     <div class="member-row">
       <div class="member-avatar">${(m.name || '?')[0].toUpperCase()}</div>
-      <div>
+      <div style="flex:1;">
         <div class="member-name">${escHtml(m.name || '')}</div>
         ${m.email === room_creator_email ? '<div class="member-badge">Admin</div>' : ''}
       </div>
+      ${isCreator && m.email !== USER.email ? `<button class="remove-member-btn" onclick="removeMember('${escHtml(m.email)}','${escHtml(m.name || '')}')" title="Remove from group"><i class="fa-solid fa-user-minus"></i></button>` : ''}
     </div>
   `).join('');
   const status = document.getElementById('room-status');
   if (status) status.textContent = `${members.length} member${members.length !== 1 ? 's' : ''}`;
+}
+function removeMember(email, name) {
+  if (!confirm(`Remove ${name} from this room?`)) return;
+  socket.emit('remove_member', { code: ROOM_CODE, email, requester_email: USER.email });
 }
 
 // ── Dropdown ───────────────────────────────────────────────────────────────────
@@ -1438,6 +1484,111 @@ function clearChat() {
   document.querySelectorAll('.msg-row').forEach(r => r.remove());
   messages = [];
   showToast('Chat cleared locally');
+}
+
+// ── Voice Note ─────────────────────────────────────────────────────────────────
+let voiceMediaRecorder = null;
+let voiceChunks = [];
+let voiceRecTimer = null;
+let voiceRecSeconds = 0;
+let isRecording = false;
+
+function toggleVoiceNote() {
+  if (!isRecording) {
+    startVoiceNote();
+  } else {
+    stopAndSendVoiceNote();
+  }
+}
+
+async function startVoiceNote() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    showToast('Microphone not supported on this browser.');
+    return;
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    voiceChunks = [];
+    voiceMediaRecorder = new MediaRecorder(stream);
+    voiceMediaRecorder.ondataavailable = e => { if (e.data.size > 0) voiceChunks.push(e.data); };
+    voiceMediaRecorder.onstop = () => {
+      stream.getTracks().forEach(t => t.stop());
+      sendVoiceNote();
+    };
+    voiceMediaRecorder.start();
+    isRecording = true;
+    voiceRecSeconds = 0;
+    document.getElementById('input-wrapper').style.display = 'none';
+    document.getElementById('voice-recording-ui').style.display = 'flex';
+    document.getElementById('voice-note-btn').innerHTML = '<i class="fa-solid fa-stop" style="color:var(--error);"></i>';
+    document.getElementById('send-btn').style.display = 'none';
+    voiceRecTimer = setInterval(() => {
+      voiceRecSeconds++;
+      const m = Math.floor(voiceRecSeconds / 60);
+      const s = (voiceRecSeconds % 60).toString().padStart(2, '0');
+      document.getElementById('voice-rec-time').textContent = `${m}:${s}`;
+    }, 1000);
+  } catch (e) {
+    showToast('Could not access microphone. Please check permissions.');
+  }
+}
+
+function stopAndSendVoiceNote() {
+  if (voiceMediaRecorder && voiceMediaRecorder.state !== 'inactive') {
+    voiceMediaRecorder.stop();
+  }
+  clearInterval(voiceRecTimer);
+  isRecording = false;
+  document.getElementById('input-wrapper').style.display = '';
+  document.getElementById('voice-recording-ui').style.display = 'none';
+  document.getElementById('voice-note-btn').innerHTML = '<i class="fa-solid fa-microphone"></i>';
+  document.getElementById('send-btn').style.display = '';
+}
+
+function cancelVoiceNote() {
+  if (voiceMediaRecorder && voiceMediaRecorder.state !== 'inactive') {
+    voiceMediaRecorder.onstop = null;
+    voiceMediaRecorder.stop();
+  }
+  voiceChunks = [];
+  clearInterval(voiceRecTimer);
+  isRecording = false;
+  document.getElementById('input-wrapper').style.display = '';
+  document.getElementById('voice-recording-ui').style.display = 'none';
+  document.getElementById('voice-note-btn').innerHTML = '<i class="fa-solid fa-microphone"></i>';
+  document.getElementById('send-btn').style.display = '';
+  showToast('Voice note cancelled.');
+}
+
+function sendVoiceNote() {
+  if (!voiceChunks.length) return;
+  const mimeType = voiceMediaRecorder.mimeType || 'audio/webm';
+  const blob = new Blob(voiceChunks, { type: mimeType });
+  const ext = mimeType.includes('ogg') ? 'ogg' : mimeType.includes('mp4') ? 'mp4' : 'webm';
+  const duration = voiceRecSeconds;
+  const fd = new FormData();
+  fd.append('file', blob, `voice_note.${ext}`);
+  fd.append('room_code', ROOM_CODE);
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `/group-study/room/${ROOM_CODE}/upload`);
+  xhr.onload = () => {
+    try {
+      const res = JSON.parse(xhr.responseText);
+      if (res.success) {
+        socket.emit('message', {
+          code: ROOM_CODE, text: '', sender: USER.name, sender_email: USER.email,
+          type: 'voice_note', file_url: res.file_url, file_name: res.file_name,
+          file_size: res.file_size, file_kind: 'audio', ext, voice_duration: duration,
+          reply_to: replyTo
+        });
+        cancelReply();
+      } else {
+        showToast('Failed to send voice note.');
+      }
+    } catch(e) { showToast('Voice note upload error.'); }
+  };
+  xhr.onerror = () => showToast('Voice note upload failed.');
+  xhr.send(fd);
 }
 
 // ── Leave room ─────────────────────────────────────────────────────────────────
@@ -1620,18 +1771,33 @@ function initPeerConnection() {
   if (callStream) callStream.getTracks().forEach(t => peerConnection.addTrack(t, callStream));
 }
 async function startCall(type) {
+  if (roomMembers.length < 2) {
+    showToast('You need at least one other member in the room to call.');
+    return;
+  }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    showToast('Camera/microphone not supported in this browser.');
+    return;
+  }
   callType = type;
   document.getElementById('call-status').textContent = 'Calling…';
   try {
-    callStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: type === 'video' ? { facingMode } : false });
+    callStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: type === 'video' ? { facingMode: facingMode } : false });
     document.getElementById('local-video').srcObject = callStream;
     showCallScreen(type);
     initPeerConnection();
     const offer = await peerConnection.createOffer();
     await peerConnection.setLocalDescription(offer);
     socket.emit('call_offer', { code: ROOM_CODE, offer, type, caller: USER.name });
+    document.getElementById('call-status').textContent = 'Ringing…';
   } catch (err) {
-    showToast('Could not access camera/microphone. Check permissions.');
+    if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+      showToast('Permission denied. Please allow camera/microphone access.');
+    } else if (err.name === 'NotFoundError') {
+      showToast(type === 'video' ? 'No camera found on this device.' : 'No microphone found on this device.');
+    } else {
+      showToast('Could not start call. Check your device permissions.');
+    }
   }
 }
 async function handleCallOffer(data) {
@@ -1722,6 +1888,20 @@ async function flipCamera() {
     document.getElementById('local-video').srcObject = newStream;
     callStream = newStream;
   } catch(e) { showToast('Could not flip camera'); }
+}
+
+// ── Voice note playback ─────────────────────────────────────────────────────────
+let currentAudio = null;
+function playVoiceNote(btn, url) {
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    document.querySelectorAll('.voice-play-btn').forEach(b => b.innerHTML = '<i class="fa-solid fa-play"></i>');
+    if (currentAudio.src.endsWith(url) || currentAudio.currentSrc === url) { currentAudio = null; return; }
+  }
+  currentAudio = new Audio(url);
+  btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+  currentAudio.play().catch(() => showToast('Could not play voice note.'));
+  currentAudio.onended = () => { btn.innerHTML = '<i class="fa-solid fa-play"></i>'; currentAudio = null; };
 }
 
 // ── Toast ─────────────────────────────────────────────────────────────────────

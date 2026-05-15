@@ -1879,8 +1879,9 @@ def join_room_api():
             return jsonify({'success': False, 'message': 'Incorrect password.'}), 401
     return jsonify({'success': True, 'code': code})
 
-ROOM_ALLOWED_EXT = {'jpg','jpeg','png','gif','webp','pdf','doc','docx','ppt','pptx','xls','xlsx','txt','zip'}
+ROOM_ALLOWED_EXT = {'jpg','jpeg','png','gif','webp','pdf','doc','docx','ppt','pptx','xls','xlsx','txt','zip','webm','ogg','mp4','mp3','m4a'}
 ROOM_IMAGE_EXT   = {'jpg','jpeg','png','gif','webp'}
+ROOM_AUDIO_EXT   = {'webm','ogg','mp4','mp3','m4a'}
 
 @app.route('/group-study/room/<code>/upload', methods=['POST'])
 @login_required
@@ -1905,7 +1906,7 @@ def room_upload(code):
     save_path = os.path.join(upload_dir, unique_name)
     f.save(save_path)
     file_size = os.path.getsize(save_path)
-    file_kind = 'image' if ext in ROOM_IMAGE_EXT else 'pdf' if ext == 'pdf' else 'doc'
+    file_kind = 'image' if ext in ROOM_IMAGE_EXT else 'audio' if ext in ROOM_AUDIO_EXT else 'pdf' if ext == 'pdf' else 'doc'
     file_url = url_for('static', filename=f'uploads/rooms/{code}/{unique_name}')
     return jsonify({
         'success': True,
@@ -2081,6 +2082,30 @@ def on_ice_candidate(data):
 @socketio.on('call_ended')
 def on_call_ended(data):
     emit('call_ended', data, to=data.get('code'), include_self=False)
+
+@socketio.on('remove_member')
+def on_remove_member(data):
+    code = data.get('code', '')
+    target_email = data.get('email', '')
+    requester_email = data.get('requester_email', '')
+    room = get_room(code)
+    if not room:
+        return
+    if room.get('creator_email') != requester_email:
+        return
+    db = get_mongo()
+    if db is not None:
+        db.rooms.update_one({'code': code}, {'$pull': {'members': {'email': target_email}}})
+    else:
+        conn = get_db()
+        row = conn.execute('SELECT members FROM rooms WHERE code = ?', (code,)).fetchone()
+        if row:
+            members = json.loads(row['members'])
+            members = [m for m in members if m.get('email') != target_email]
+            conn.execute('UPDATE rooms SET members = ? WHERE code = ?', (json.dumps(members), code))
+            conn.commit()
+        conn.close()
+    emit('member_removed', {'email': target_email, 'by': requester_email}, to=code)
 
 
 init_db()
