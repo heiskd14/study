@@ -267,10 +267,10 @@
         appendCareMsg(text, 'user');
         document.getElementById('care-typing').style.display = 'block';
         try {
-            var res = await fetch('/api/ai-chat', {
+            var res = await fetch('/api/support-chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: text, context: 'support' })
+                body: JSON.stringify({ message: text })
             });
             var data = await res.json();
             document.getElementById('care-typing').style.display = 'none';

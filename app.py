@@ -1568,6 +1568,35 @@ def admin_delete_file():
     return redirect(url_for('admin_dashboard'))
 
 
+@app.route('/api/support-chat', methods=['POST'])
+def support_chat():
+    data = request.get_json(silent=True) or {}
+    message = data.get('message', '').strip()
+    if not message:
+        return jsonify({'error': 'No message provided'}), 400
+    system_msg = {
+        'role': 'system',
+        'content': (
+            'You are BTC Support, a friendly customer support assistant for Beyond The Classroom (BTC), '
+            'a Nigerian exam prep and study platform. Help users with account issues, platform features, '
+            'exam practice, and general questions. Be concise, warm, and helpful. '
+            'If you cannot resolve an issue, suggest they tap the WhatsApp button to reach a human agent.'
+        )
+    }
+    try:
+        response = get_ai_client().chat.completions.create(
+            model='gpt-4o-mini',
+            messages=[system_msg, {'role': 'user', 'content': message}],
+            max_tokens=300,
+        )
+        reply = response.choices[0].message.content or ''
+        return jsonify({'reply': reply})
+    except Exception as e:
+        err = str(e)
+        print(f'[Support Chat Error] {err}')
+        return jsonify({'error': 'AI service error'}), 500
+
+
 @app.route('/api/ai-chat', methods=['POST'])
 @login_required
 def ai_chat():
