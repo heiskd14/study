@@ -19,3 +19,13 @@ pymongo
 requests
 werkzeug
 openai
+bcrypt
+eventlet
+flask
+flask-session
+flask-socketio
+gunicorn
+openai
+pymongo
+requests
+werkzeug
