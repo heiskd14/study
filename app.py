@@ -444,6 +444,27 @@ def forgot_password():
     return jsonify({'success': True, 'message': 'If that email is registered, a reset link has been sent.'})
 
 
+@app.route('/verify-email/<token>')
+def verify_email(token):
+    try:
+        import urllib.request, urllib.error, json as _json
+        req = urllib.request.Request(
+            f'http://localhost:8000/api/auth/verify-email/{token}',
+            method='GET'
+        )
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = _json.loads(resp.read())
+        return render_template('verify_email.html', success=True)
+    except urllib.error.HTTPError as e:
+        try:
+            data = _json.loads(e.read())
+            msg = data.get('message', 'Verification failed.')
+        except Exception:
+            msg = 'This link is invalid or has already been used.'
+        return render_template('verify_email.html', success=False, message=msg)
+    except Exception as e:
+        return render_template('verify_email.html', success=False, message='Could not process verification. Please try again.')
+
 @app.route('/reset-password/<token>', methods=['GET'])
 def reset_password_page(token):
     return render_template('reset_password.html', token=token)

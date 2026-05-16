@@ -51,8 +51,12 @@ async function connectPostgres() {
     full_name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
+    email_verified BOOLEAN DEFAULT FALSE,
+    verification_token TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS email_verified BOOLEAN DEFAULT FALSE`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS verification_token TEXT`);
   console.log('Using PostgreSQL database');
   return {
     findUserByEmail: async (email) => {
@@ -78,6 +82,16 @@ async function connectPostgres() {
     getAllUsers: async () => {
       const res = await pool.query('SELECT id, password_hash AS password FROM users');
       return res.rows;
+    },
+    setVerificationToken: async (email, token) => {
+      await pool.query('UPDATE users SET verification_token = $1 WHERE email = $2', [token, email]);
+    },
+    verifyEmail: async (token) => {
+      const res = await pool.query(
+        'UPDATE users SET email_verified = TRUE, verification_token = NULL WHERE verification_token = $1 RETURNING id, full_name, email',
+        [token]
+      );
+      return res.rows[0] || null;
     },
   };
 }
