@@ -204,25 +204,9 @@ $('signup-form')?.addEventListener('submit', async e => {
 
   setLoading(btn, true);
   try {
-    const { ok, status, data } = await apiRequest('/auth/register', { name, email, password });
-    if (ok && data.needsVerification) {
-      const form = $('signup-form');
-      const card = form.closest('.tau-card');
-      card.innerHTML = `
-        <div style="text-align:center;padding:1rem 0;">
-          <div style="width:72px;height:72px;margin:0 auto 1.2rem;background:linear-gradient(135deg,#137a13,#1aaa1a);border-radius:18px;display:grid;place-items:center;font-size:2rem;box-shadow:0 8px 24px rgba(19,122,19,0.4);">
-            <i class="fa-solid fa-envelope-circle-check" style="color:white;"></i>
-          </div>
-          <h2 style="font-family:var(--font-display);font-size:1.7rem;margin-bottom:0.6rem;">Check Your Email</h2>
-          <p style="color:var(--text-muted);margin-bottom:1.5rem;">We sent a verification link to <strong style="color:var(--text);">${email}</strong>. Click the link in the email to activate your account.</p>
-          <p style="font-size:0.85rem;color:var(--text-muted);">Didn't receive it? Check your spam folder, or <a href="/login?tab=signup" style="color:var(--accent-light);">try signing up again</a>.</p>
-          <div style="margin-top:2rem;">
-            <a href="/login" class="tau-btn" style="display:inline-flex;text-decoration:none;max-width:220px;margin:auto;"><i class="fa-solid fa-right-to-bracket" style="margin-right:0.4rem;"></i>Go to Login</a>
-          </div>
-        </div>
-      `;
-    } else if (ok) {
-      showToast(`Account created! Welcome, ${data.user?.name || name}`, 'success', 4000);
+    const { ok, data } = await apiRequest('/auth/register', { name, email, password });
+    if (ok) {
+      showToast(`Account created! Welcome, ${data.user.name}`, 'success', 4000);
       await syncFlaskSession(data.token, data.user);
       setTimeout(() => { window.location.href = '/'; }, 800);
     } else {
@@ -273,13 +257,8 @@ $('login-form')?.addEventListener('submit', async e => {
       setTimeout(() => { window.location.href = '/'; }, 600);
     } else {
       const msg = data.message || 'Login failed.';
-      if (data.needsVerification) {
-        showToast(msg, 'warning', 6000);
-        showError('login-email-err', 'Email not verified — check your inbox.');
-      } else {
-        showToast(msg, 'error');
-        showError('login-pw-err', msg);
-      }
+      showToast(msg, 'error');
+      showError('login-pw-err', msg);
     }
   } catch (err) {
     showToast('Cannot reach server. Please try again.', 'error');
