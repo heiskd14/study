@@ -3,7 +3,7 @@
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Start the Node.js auth backend on port 8000
-cd "$ROOT_DIR/hackaton" && node server.js &
+cd "$ROOT_DIR/hackaton" && PORT=8000 node server.js &
 NODE_PID=$!
 
 # Wait for the auth service to start
