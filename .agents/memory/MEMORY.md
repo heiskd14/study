@@ -1,1 +1,2 @@
 - [Exam result separation](exam-result-separation.md) — keep each student's exam attempt as an individual result; never combine different students' scores.
+- [Post-merge dependencies](post-merge-dependencies.md) — install Python packages into ignored `.pythonlibs` under Nix; update blocked vulnerable npm pins to safe versions.
