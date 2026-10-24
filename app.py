@@ -1699,14 +1699,35 @@ def admin_dashboard():
         files = raw
         file_count = len(files)
     conn = get_db()
-    schools = conn.execute('SELECT id, name FROM admin_schools ORDER BY name').fetchall()
+    schools = conn.execute('''
+        SELECT s.id, s.name,
+               (SELECT COUNT(*) FROM admin_levels l WHERE l.school_id = s.id) AS level_count,
+               (SELECT COUNT(*) FROM admin_departments d WHERE d.school_id = s.id) AS department_count,
+               (SELECT COUNT(*) FROM admin_courses c
+                LEFT JOIN admin_departments d ON d.id = c.department_id
+                LEFT JOIN admin_levels l ON l.id = c.level_id
+                WHERE d.school_id = s.id OR l.school_id = s.id) AS course_count,
+               (SELECT COUNT(*) FROM admin_questions q
+                JOIN admin_courses c ON c.id = q.course_id
+                LEFT JOIN admin_departments d ON d.id = c.department_id
+                LEFT JOIN admin_levels l ON l.id = c.level_id
+                WHERE d.school_id = s.id OR l.school_id = s.id) AS question_count
+        FROM admin_schools s
+        ORDER BY s.name
+    ''').fetchall()
     levels = conn.execute('''
-        SELECT l.id, l.name, l.sort_order, l.school_id, s.name AS school
+        SELECT l.id, l.name, l.sort_order, l.school_id, s.name AS school,
+               (SELECT COUNT(*) FROM admin_courses c WHERE c.level_id = l.id) AS course_count,
+               (SELECT COUNT(*) FROM admin_questions q
+                JOIN admin_courses c ON c.id = q.course_id WHERE c.level_id = l.id) AS question_count
         FROM admin_levels l JOIN admin_schools s ON s.id = l.school_id
         ORDER BY s.name, l.sort_order, l.name
     ''').fetchall()
     departments = conn.execute('''
-        SELECT d.id, d.name, d.school_id, s.name AS school
+        SELECT d.id, d.name, d.school_id, s.name AS school,
+               (SELECT COUNT(*) FROM admin_courses c WHERE c.department_id = d.id) AS course_count,
+               (SELECT COUNT(*) FROM admin_questions q
+                JOIN admin_courses c ON c.id = q.course_id WHERE c.department_id = d.id) AS question_count
         FROM admin_departments d JOIN admin_schools s ON s.id = d.school_id
         ORDER BY s.name, d.name
     ''').fetchall()
@@ -1813,6 +1834,188 @@ def admin_catalog_add():
     finally:
         conn.close()
     return redirect(url_for('admin_dashboard', tab='catalog'))
+
+
+def _catalog_item_impact(conn, item_type, item_id):
+    """Return the item and its dependent catalogue/question counts."""
+    if item_type == 'school':
+        item = conn.execute(
+            'SELECT id, name FROM admin_schools WHERE id = ?', (item_id,)
+        ).fetchone()
+        if not item:
+            return None
+        levels = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_levels WHERE school_id = ?', (item_id,)
+        ).fetchone()['total']
+        departments = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_departments WHERE school_id = ?', (item_id,)
+        ).fetchone()['total']
+        courses = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_courses c '
+            'LEFT JOIN admin_departments d ON d.id = c.department_id '
+            'LEFT JOIN admin_levels l ON l.id = c.level_id '
+            'WHERE d.school_id = ? OR l.school_id = ?', (item_id, item_id)
+        ).fetchone()['total']
+        questions = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_questions q '
+            'JOIN admin_courses c ON c.id = q.course_id '
+            'LEFT JOIN admin_departments d ON d.id = c.department_id '
+            'LEFT JOIN admin_levels l ON l.id = c.level_id '
+            'WHERE d.school_id = ? OR l.school_id = ?', (item_id, item_id)
+        ).fetchone()['total']
+        return {
+            'item': item, 'level_count': levels, 'department_count': departments,
+            'course_count': courses, 'question_count': questions,
+        }
+
+    if item_type == 'level':
+        item = conn.execute(
+            'SELECT id, name FROM admin_levels WHERE id = ?', (item_id,)
+        ).fetchone()
+        if not item:
+            return None
+        courses = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_courses WHERE level_id = ?', (item_id,)
+        ).fetchone()['total']
+        questions = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_questions q '
+            'JOIN admin_courses c ON c.id = q.course_id WHERE c.level_id = ?', (item_id,)
+        ).fetchone()['total']
+    elif item_type == 'department':
+        item = conn.execute(
+            'SELECT id, name FROM admin_departments WHERE id = ?', (item_id,)
+        ).fetchone()
+        if not item:
+            return None
+        courses = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_courses WHERE department_id = ?', (item_id,)
+        ).fetchone()['total']
+        questions = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_questions q '
+            'JOIN admin_courses c ON c.id = q.course_id WHERE c.department_id = ?', (item_id,)
+        ).fetchone()['total']
+    elif item_type == 'course':
+        item = conn.execute(
+            'SELECT id, name FROM admin_courses WHERE id = ?', (item_id,)
+        ).fetchone()
+        if not item:
+            return None
+        courses = 0
+        questions = conn.execute(
+            'SELECT COUNT(*) AS total FROM admin_questions WHERE course_id = ?', (item_id,)
+        ).fetchone()['total']
+    else:
+        return None
+    return {
+        'item': item, 'level_count': 0, 'department_count': 0,
+        'course_count': courses, 'question_count': questions,
+    }
+
+
+def _delete_catalog_item(conn, item_type, item_id):
+    """Delete questions and courses before removing their parent catalogue rows."""
+    if item_type == 'school':
+        conn.execute(
+            'DELETE FROM admin_questions WHERE course_id IN ('
+            'SELECT c.id FROM admin_courses c '
+            'LEFT JOIN admin_departments d ON d.id = c.department_id '
+            'LEFT JOIN admin_levels l ON l.id = c.level_id '
+            'WHERE d.school_id = ? OR l.school_id = ?)', (item_id, item_id)
+        )
+        conn.execute(
+            'DELETE FROM admin_courses WHERE department_id IN '
+            '(SELECT id FROM admin_departments WHERE school_id = ?) OR level_id IN '
+            '(SELECT id FROM admin_levels WHERE school_id = ?)', (item_id, item_id)
+        )
+        conn.execute('DELETE FROM admin_departments WHERE school_id = ?', (item_id,))
+        conn.execute('DELETE FROM admin_levels WHERE school_id = ?', (item_id,))
+        conn.execute('DELETE FROM admin_schools WHERE id = ?', (item_id,))
+    elif item_type == 'level':
+        conn.execute(
+            'DELETE FROM admin_questions WHERE course_id IN '
+            '(SELECT id FROM admin_courses WHERE level_id = ?)', (item_id,)
+        )
+        conn.execute('DELETE FROM admin_courses WHERE level_id = ?', (item_id,))
+        conn.execute('DELETE FROM admin_levels WHERE id = ?', (item_id,))
+    elif item_type == 'department':
+        conn.execute(
+            'DELETE FROM admin_questions WHERE course_id IN '
+            '(SELECT id FROM admin_courses WHERE department_id = ?)', (item_id,)
+        )
+        conn.execute('DELETE FROM admin_courses WHERE department_id = ?', (item_id,))
+        conn.execute('DELETE FROM admin_departments WHERE id = ?', (item_id,))
+    elif item_type == 'course':
+        conn.execute('DELETE FROM admin_questions WHERE course_id = ?', (item_id,))
+        conn.execute('DELETE FROM admin_courses WHERE id = ?', (item_id,))
+
+
+@app.route('/admin/catalog/<item_type>/<int:item_id>/edit', methods=['POST'])
+@admin_required
+def admin_catalog_edit(item_type, item_id):
+    name = request.form.get('name', '').strip()
+    if item_type not in {'school', 'level', 'department', 'course'}:
+        flash('Choose a valid catalogue item.', 'error')
+        return redirect(url_for('admin_dashboard', tab='catalog'))
+    if not name or len(name) > 160:
+        flash('Enter a name of 1–160 characters.', 'error')
+        return redirect(url_for('admin_dashboard', tab='catalog'))
+
+    conn = get_db()
+    try:
+        impact = _catalog_item_impact(conn, item_type, item_id)
+        if not impact:
+            flash('Catalogue item not found.', 'error')
+        else:
+            if item_type == 'school':
+                conn.execute('UPDATE admin_schools SET name = ? WHERE id = ?', (name, item_id))
+            elif item_type == 'level':
+                order_match = re.search(r'\d+', name)
+                sort_order = int(order_match.group()) if order_match else 0
+                conn.execute(
+                    'UPDATE admin_levels SET name = ?, sort_order = ? WHERE id = ?',
+                    (name, sort_order, item_id)
+                )
+            elif item_type == 'department':
+                conn.execute('UPDATE admin_departments SET name = ? WHERE id = ?', (name, item_id))
+            else:
+                conn.execute('UPDATE admin_courses SET name = ? WHERE id = ?', (name, item_id))
+            conn.commit()
+            flash(f'{item_type.title()} renamed.', 'success')
+    except psycopg2.IntegrityError:
+        flash('That name already exists in this school or department.', 'error')
+    finally:
+        conn.close()
+    return redirect(url_for('admin_dashboard', tab='catalog'))
+
+
+@app.route('/admin/catalog/<item_type>/<int:item_id>/delete', methods=['POST'])
+@admin_required
+def admin_catalog_delete(item_type, item_id):
+    if item_type not in {'school', 'level', 'department', 'course'}:
+        flash('Choose a valid catalogue item.', 'error')
+        return redirect(url_for('admin_dashboard', tab='catalog'))
+
+    conn = get_db()
+    try:
+        impact = _catalog_item_impact(conn, item_type, item_id)
+        if not impact:
+            flash('Catalogue item not found.', 'error')
+            return redirect(url_for('admin_dashboard', tab='catalog'))
+
+        has_dependents = any(impact[key] for key in (
+            'level_count', 'department_count', 'course_count', 'question_count'
+        ))
+        if has_dependents and request.form.get('confirm_delete') != 'yes':
+            flash('Confirm the removal of dependent catalogue entries and questions before deleting.', 'error')
+            return redirect(url_for('admin_dashboard', tab='catalog'))
+
+        _delete_catalog_item(conn, item_type, item_id)
+        conn.commit()
+        flash(f'{item_type.title()} and its dependent catalogue entries were deleted.', 'success')
+    finally:
+        conn.close()
+    return redirect(url_for('admin_dashboard', tab='catalog'))
+
 
 def _question_form_values(form):
     options = [option.strip() for option in form.get('options', '').splitlines() if option.strip()]
