@@ -1,220 +1,221 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Dashboard — Beyond The Classroom</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: #07080f; color: #e8e8f0; min-height: 100vh; }
-    a { text-decoration: none; }
-
-    /* Header */
-    .adm-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
-    .adm-logo { display: flex; align-items: center; gap: 0.7rem; }
-    .adm-logo img { width: 34px; height: 34px; border-radius: 8px; }
-    .adm-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; }
-    .adm-badge { font-size: 0.7rem; font-weight: 700; background: rgba(21,101,192,0.2); color: #64b5f6; border: 1px solid rgba(21,101,192,0.3); padding: 2px 8px; border-radius: 20px; }
-    .adm-header-right { display: flex; align-items: center; gap: 1rem; }
-    .adm-email { font-size: 0.82rem; color: #8888aa; }
-    .adm-logout { font-size: 0.82rem; background: rgba(255,80,104,0.12); color: #ff8095; border: 1px solid rgba(255,80,104,0.25); padding: 0.35rem 0.8rem; border-radius: 8px; transition: background 0.15s; }
-    .adm-logout:hover { background: rgba(255,80,104,0.2); }
-    .adm-home-link { font-size: 0.82rem; color: #8888aa; border: 1px solid rgba(255,255,255,0.1); padding: 0.35rem 0.8rem; border-radius: 8px; transition: color 0.15s, border-color 0.15s; }
-    .adm-home-link:hover { color: #e8e8f0; border-color: rgba(255,255,255,0.2); }
-
-    /* Main */
-    .adm-main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
-    .adm-page-title { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.3rem; }
-    .adm-page-sub { color: #8888aa; font-size: 0.88rem; margin-bottom: 2rem; }
-
-    /* Stats */
-    .adm-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
-    .adm-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.3rem 1.5rem; }
-    .adm-stat-val { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; }
-    .adm-stat-label { font-size: 0.8rem; color: #8888aa; margin-top: 0.2rem; }
-    .adm-stat-val.green { color: #81c784; }
-    .adm-stat-val.blue { color: #64b5f6; }
-
-    /* Flash */
-    .adm-flash { display: flex; align-items: center; gap: 8px; padding: 0.8rem 1rem; border-radius: 10px; font-size: 0.88rem; margin-bottom: 1.5rem; }
-    .adm-flash-success { background: rgba(62,255,160,0.08); border: 1px solid rgba(62,255,160,0.2); color: #3effa0; }
-
-    /* Section */
-    .adm-section-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-    .adm-count-pill { font-size: 0.75rem; background: rgba(255,255,255,0.08); color: #8888aa; padding: 2px 8px; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
-
-    /* Filter bar */
-    .adm-filters { display: flex; gap: 0.7rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .adm-filter-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); border-radius: 8px; padding: 0.5rem 0.8rem; color: #e8e8f0; font-family: inherit; font-size: 0.85rem; outline: none; min-width: 160px; }
-    .adm-filter-input:focus { border-color: #1565c0; }
-    .adm-filter-input::placeholder { color: #4a4a6a; }
-
-    /* Table */
-    .adm-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); }
-    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
-    thead { background: rgba(255,255,255,0.04); }
-    th { padding: 0.8rem 1rem; text-align: left; font-weight: 600; color: #8888aa; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
-    td { padding: 0.85rem 1rem; border-top: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
-    tbody tr:hover { background: rgba(255,255,255,0.025); }
-    .adm-fname { font-weight: 500; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
-    .adm-tag { display: inline-block; font-size: 0.72rem; padding: 2px 7px; border-radius: 6px; font-weight: 500; }
-    .adm-tag-school { background: rgba(19,122,19,0.15); color: #81c784; }
-    .adm-tag-level  { background: rgba(21,101,192,0.15); color: #64b5f6; }
-    .adm-date { color: #8888aa; font-size: 0.78rem; white-space: nowrap; }
-    .adm-del-btn { display: inline-flex; align-items: center; gap: 4px; padding: 0.35rem 0.7rem; background: rgba(255,80,104,0.10); color: #ff8095; border: 1px solid rgba(255,80,104,0.2); border-radius: 7px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
-    .adm-del-btn:hover { background: rgba(255,80,104,0.2); }
-    .adm-view-btn { display: inline-flex; align-items: center; gap: 4px; padding: 0.35rem 0.7rem; background: rgba(21,101,192,0.10); color: #64b5f6; border: 1px solid rgba(21,101,192,0.2); border-radius: 7px; font-size: 0.78rem; font-weight: 600; text-decoration: none; transition: background 0.15s; margin-right: 4px; }
-    .adm-view-btn:hover { background: rgba(21,101,192,0.2); }
-    .adm-empty { text-align: center; padding: 3rem; color: #8888aa; font-size: 0.9rem; }
-
-    /* Confirm modal */
-    .adm-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); display: none; place-items: center; z-index: 100; padding: 1rem; }
-    .adm-modal.open { display: grid; }
-    .adm-modal-card { background: #0e0f1f; border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 2rem; max-width: 380px; width: 100%; text-align: center; }
-    .adm-modal-card h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .adm-modal-card p { color: #8888aa; font-size: 0.88rem; margin-bottom: 1.5rem; }
-    .adm-modal-actions { display: flex; gap: 0.8rem; }
-    .adm-modal-cancel { flex: 1; padding: 0.7rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #e8e8f0; font-family: inherit; font-size: 0.9rem; cursor: pointer; }
-    .adm-modal-confirm { flex: 1; padding: 0.7rem; border-radius: 10px; background: rgba(255,80,104,0.15); border: 1px solid rgba(255,80,104,0.3); color: #ff8095; font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
-    .adm-modal-confirm:hover { background: rgba(255,80,104,0.25); }
-
-    @media (max-width: 700px) {
-      .adm-header { padding: 0.8rem 1rem; }
-      .adm-email { display: none; }
-      .adm-main { padding: 1.2rem 1rem; }
+    :root { color-scheme: dark; --bg:#080b12; --panel:#111722; --line:#263241; --muted:#9aa8b8; --text:#eef4f8; --green:#16a34a; --red:#f87171; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(ellipse at 5% 0%,#10251e 0,transparent 34%),var(--bg); color:var(--text); font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    .top { position:sticky; top:0; z-index:4; background:#0a0e15ed; border-bottom:1px solid var(--line); backdrop-filter:blur(16px); }
+    .top-inner { max-width:1440px; margin:auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+    .brand { font-weight:800; letter-spacing:.02em; }
+    .brand small { color:#65d98a; margin-left:8px; font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
+    .top-actions,.tabs { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+    .top-actions { color:var(--muted); font-size:13px; }
+    .tabs { max-width:1440px; margin:auto; padding:0 24px 12px; }
+    .tab { color:var(--muted); padding:8px 13px; border:1px solid transparent; border-radius:9px; font-size:13px; }
+    .tab:hover,.tab.active { color:white; background:#18212d; border-color:#2e3c4c; }
+    .main { max-width:1440px; padding:28px 24px 64px; margin:auto; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { font-size:27px; margin-bottom:5px; }
+    h2 { font-size:19px; margin-bottom:5px; }
+    h3 { font-size:15px; margin:0 0 13px; }
+    .muted,.subtitle { color:var(--muted); }
+    .subtitle { margin-bottom:24px; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin:22px 0 28px; }
+    .card,.panel { background:linear-gradient(155deg,#141c28,#0e141d); border:1px solid var(--line); border-radius:15px; }
+    .card { padding:18px; }
+    .card strong { display:block; color:#77e39a; font-size:27px; }
+    .card span { color:var(--muted); font-size:13px; }
+    .panel { padding:20px; margin:16px 0; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(235px,1fr)); gap:13px; }
+    .field { display:grid; gap:6px; margin-bottom:12px; }
+    label { font-size:12px; color:#bdc9d5; font-weight:650; }
+    input,select,textarea { width:100%; border:1px solid #334153; border-radius:9px; background:#0b111a; color:var(--text); padding:10px 11px; font:inherit; outline:none; }
+    input:focus,select:focus,textarea:focus { border-color:#39b96a; box-shadow:0 0 0 3px #16a34a22; }
+    button,.button { display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:9px; background:var(--green); color:white; padding:9px 13px; font:650 13px system-ui,sans-serif; cursor:pointer; }
+    button:hover,.button:hover { filter:brightness(1.1); }
+    .button.secondary { color:#dce6ee; background:#202c3a; border:1px solid #344355; }
+    .button.danger,button.danger { background:#54252b; color:#ffd2d2; border:1px solid #75323b; }
+    .flash { border:1px solid #2b6441; color:#b9f5c9; background:#102719; padding:11px 14px; border-radius:10px; margin:10px 0; }
+    .flash.error { color:#ffc6c6; border-color:#704047; background:#30191e; }
+    .table-wrap { overflow:auto; border:1px solid var(--line); border-radius:12px; }
+    table { width:100%; min-width:760px; border-collapse:collapse; font-size:13px; }
+    th,td { padding:11px 12px; border-bottom:1px solid #222d39; text-align:left; vertical-align:top; }
+    th { color:#aab8c7; background:#141c27; font-size:11px; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
+    tr:last-child td { border-bottom:0; }
+    .pill { display:inline-block; padding:3px 8px; background:#1d3428; border:1px solid #28513a; border-radius:20px; color:#a6ebbb; font-size:11px; white-space:nowrap; }
+    .actions { display:flex; gap:6px; align-items:center; white-space:nowrap; }
+    .actions form { margin:0; }
+    .question-text { max-width:430px; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .small { font-size:12px; color:var(--muted); }
+    .empty { text-align:center; padding:32px; color:var(--muted); }
+    .section-head { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+    .search { max-width:320px; }
+    @media(max-width:650px) {
+      .top-inner { padding:12px 15px; align-items:flex-start; flex-direction:column; }
+      .tabs { padding:0 12px 10px; gap:4px; }
+      .tab { padding:7px 9px; }
+      .main { padding:20px 13px 48px; }
+      .panel { padding:15px; }
     }
   </style>
 </head>
 <body>
-
-<header class="adm-header">
-  <div class="adm-logo">
-    <img src="/static/img/btc_logo.png" alt="Logo">
-    <div>
-      <div class="adm-logo-text">Beyond The Classroom</div>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">Beyond The Classroom <small>Admin</small></div>
+    <div class="top-actions">
+      <span>{{ admin_email }}</span>
+      <a class="button secondary" href="/">Site</a>
+      <a class="button danger" href="{{ url_for('admin_logout') }}">Log out</a>
     </div>
-    <span class="adm-badge">Admin</span>
   </div>
-  <div class="adm-header-right">
-    <span class="adm-email">{{ admin_email }}</span>
-    <a href="/" class="adm-home-link">← Site</a>
-    <a href="{{ url_for('admin_logout') }}" class="adm-logout">Logout</a>
-  </div>
+  <nav class="tabs">
+    {% for key,label in [('overview','Overview'),('catalog','Schools & Courses'),('questions','Question Bank'),('results','Results'),('files','Uploaded Files')] %}
+    <a class="tab {% if tab == key %}active{% endif %}" href="{{ url_for('admin_dashboard', tab=key) }}">{{ label }}</a>
+    {% endfor %}
+  </nav>
 </header>
 
-<main class="adm-main">
-  <div class="adm-page-title">Admin Dashboard</div>
-  <div class="adm-page-sub">Manage past questions and platform content.</div>
-
+<main class="main">
   {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for cat, msg in messages %}
-    <div class="adm-flash adm-flash-{{ cat }}">✓ {{ msg }}</div>
+    {% for category,message in messages %}
+      <div class="flash {% if category == 'error' %}error{% endif %}">{{ message }}</div>
     {% endfor %}
-  {% endif %}
   {% endwith %}
 
-  <div class="adm-stats">
-    <div class="adm-stat">
-      <div class="adm-stat-val green">{{ file_count }}</div>
-      <div class="adm-stat-label">Past Questions Uploaded</div>
+  {% if tab == 'overview' %}
+    <h1>Admin dashboard</h1>
+    <p class="subtitle">Manage exam content, the school catalogue, and student results.</p>
+    <div class="cards">
+      <div class="card"><strong>{{ schools|length }}</strong><span>Schools</span></div>
+      <div class="card"><strong>{{ departments|length }}</strong><span>Departments</span></div>
+      <div class="card"><strong>{{ courses|length }}</strong><span>Courses</span></div>
+      <div class="card"><strong>{{ questions|length }}</strong><span>Questions in the database</span></div>
+      <div class="card"><strong>{{ attempts|length }}</strong><span>Individual exam attempts</span></div>
+      <div class="card"><strong>{{ user_count }}</strong><span>Registered platform accounts</span></div>
     </div>
-    <div class="adm-stat">
-      <div class="adm-stat-val blue">{{ user_count }}</div>
-      <div class="adm-stat-label">Registered Users</div>
+    <div class="grid">
+      <section class="panel"><h2>Schools & courses</h2><p class="muted">Add a school, its levels and departments, then add courses. Each course appears in both exam and practice.</p><a class="button" href="{{ url_for('admin_dashboard', tab='catalog') }}">Manage catalogue</a></section>
+      <section class="panel"><h2>Question bank</h2><p class="muted">Add questions one at a time or import a JSON list. Questions can be edited or deleted later.</p><a class="button" href="{{ url_for('admin_dashboard', tab='questions') }}">Manage questions</a></section>
+      <section class="panel"><h2>Results</h2><p class="muted">Every submitted exam attempt is shown on its own row with the student's name, email, and score.</p><a class="button" href="{{ url_for('admin_dashboard', tab='results') }}">View results</a></section>
     </div>
-  </div>
-
-  <div class="adm-section-title">
-    Past Questions
-    <span class="adm-count-pill">{{ file_count }} total</span>
-  </div>
-
-  <div class="adm-filters">
-    <input class="adm-filter-input" type="text" id="filter-school" placeholder="Filter by school…" oninput="applyFilter()">
-    <input class="adm-filter-input" type="text" id="filter-level"  placeholder="Filter by level…"  oninput="applyFilter()">
-    <input class="adm-filter-input" type="text" id="filter-course" placeholder="Filter by course…" oninput="applyFilter()">
-  </div>
-
-  <div class="adm-table-wrap">
-    {% if files %}
-    <table id="files-table">
-      <thead>
-        <tr>
-          <th>File Name</th>
-          <th>School</th>
-          <th>Level</th>
-          <th>Faculty</th>
-          <th>Course</th>
-          <th>Uploaded</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for f in files %}
-        <tr data-school="{{ f.school|lower }}" data-level="{{ f.level|lower }}" data-course="{{ f.course|lower }}">
-          <td><span class="adm-fname" title="{{ f.original_name }}">{{ f.original_name }}</span></td>
-          <td><span class="adm-tag adm-tag-school">{{ f.school }}</span></td>
-          <td><span class="adm-tag adm-tag-level">{{ f.level }}</span></td>
-          <td style="max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ f.department }}</td>
-          <td>{{ f.course }}</td>
-          <td class="adm-date">{{ f.upload_date[:10] if f.upload_date else '—' }}</td>
-          <td style="white-space:nowrap;">
-            <a href="/past-questions/files/{{ f.filename }}" target="_blank" class="adm-view-btn">↗ View</a>
-            <button class="adm-del-btn" onclick="confirmDelete(this);" data-id="{{ f._id }}" data-filename="{{ f.filename }}" data-name="{{ f.original_name }}">✕ Delete</button>
-          </td>
+  {% elif tab == 'catalog' %}
+    <h1>Schools & courses</h1>
+    <p class="subtitle">Create the school structure used to organize questions for exams and practice.</p>
+    <div class="grid">
+      <section class="panel">
+        <h3>Add school</h3>
+        <form method="post" action="{{ url_for('admin_catalog_add') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="item_type" value="school">
+          <div class="field"><label>School name</label><input name="name" maxlength="160" required></div><button>Add school</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h3>Add level</h3>
+        <form method="post" action="{{ url_for('admin_catalog_add') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="item_type" value="level">
+          <div class="field"><label>School</label><select name="school_id" required><option value="">Select a school</option>{% for school in schools %}<option value="{{ school.id }}">{{ school.name }}</option>{% endfor %}</select></div>
+          <div class="field"><label>Level name</label><input name="name" placeholder="100 Level" maxlength="160" required></div><button>Add level</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h3>Add department</h3>
+        <form method="post" action="{{ url_for('admin_catalog_add') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="item_type" value="department">
+          <div class="field"><label>School</label><select name="school_id" required><option value="">Select a school</option>{% for school in schools %}<option value="{{ school.id }}">{{ school.name }}</option>{% endfor %}</select></div>
+          <div class="field"><label>Department / faculty</label><input name="name" maxlength="160" required></div><button>Add department</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h3>Add course</h3>
+        <form method="post" action="{{ url_for('admin_catalog_add') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="item_type" value="course">
+          <div class="field"><label>Department</label><select name="department_id" required><option value="">Select a department</option>{% for department in departments %}<option value="{{ department.id }}">{{ department.school }} — {{ department.name }}</option>{% endfor %}</select></div>
+          <div class="field"><label>Level</label><select name="level_id" required><option value="">Select a level</option>{% for level in levels %}<option value="{{ level.id }}">{{ level.school }} — {{ level.name }}</option>{% endfor %}</select></div>
+          <div class="field"><label>Course name</label><input name="name" maxlength="160" required></div><button>Add course</button>
+        </form>
+      </section>
+    </div>
+    <section class="panel">
+      <div class="section-head"><div><h2>Course catalogue</h2><span class="small">Courses are available to exam and practice; question count shows what is ready.</span></div><span class="pill">{{ courses|length }} courses</span></div>
+      {% if courses %}
+      <div class="table-wrap"><table><thead><tr><th>School</th><th>Level</th><th>Department</th><th>Course</th><th>Questions</th></tr></thead><tbody>
+        {% for course in courses %}<tr><td>{{ course.school }}</td><td>{{ course.level }}</td><td>{{ course.department }}</td><td>{{ course.name }}</td><td>{{ course.question_count }}</td></tr>{% endfor %}
+      </tbody></table></div>
+      {% else %}<div class="empty">No courses yet. Add a school, level, department and course above.</div>{% endif %}
+    </section>
+  {% elif tab == 'questions' %}
+    <div class="section-head"><div><h1>Question bank</h1><p class="subtitle" style="margin-bottom:0">Questions saved here are shared by exam and practice.</p></div>
+      <a class="button" href="{{ url_for('admin_question_new') }}">Add a question</a></div>
+    <section class="panel">
+      <h2>Import a JSON file</h2>
+      <p class="small">Use a JSON array or an object with a “questions” list. Each question needs Question, Options, and Answer; Explanation is optional. Answers may be the option text or a letter such as A.</p>
+      <form method="post" enctype="multipart/form-data" action="{{ url_for('admin_question_import') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="grid">
+          <div class="field"><label>School / level / department / course</label><select name="course_id" required><option value="">Select course</option>{% for c in courses %}<option value="{{ c.id }}">{{ c.school }} · {{ c.level }} · {{ c.department }} · {{ c.name }}</option>{% endfor %}</select></div>
+          <div class="field"><label>JSON file</label><input type="file" name="questions_file" accept=".json,application/json" required></div>
+        </div><button {% if not courses %}disabled{% endif %}>Import questions</button>
+      </form>
+    </section>
+    <section class="panel">
+      <div class="section-head"><h2>{{ questions|length }} saved question{% if questions|length != 1 %}s{% endif %}</h2><input class="search" id="question-search" placeholder="Filter questions…" oninput="filterRows('question-search','question-row')"></div>
+      {% if questions %}
+      <div class="table-wrap"><table><thead><tr><th>Question</th><th>School / course</th><th>Options</th><th>Correct answer</th><th>Actions</th></tr></thead><tbody>
+        {% for q in questions %}
+        <tr class="question-row" data-search="{{ (q.question ~ ' ' ~ q.school ~ ' ' ~ q.level ~ ' ' ~ q.department ~ ' ' ~ q.course)|lower }}">
+          <td class="question-text">{{ q.question }}</td>
+          <td>{{ q.school }}<br><span class="small">{{ q.level }} · {{ q.department }} · {{ q.course }}</span></td>
+          <td>{% for option in q.options %}<div>{{ loop.index }}. {{ option }}</div>{% endfor %}</td>
+          <td><span class="pill">{{ q.answer }}</span></td>
+          <td><div class="actions"><a class="button secondary" href="{{ url_for('admin_question_edit', question_id=q.id) }}">Edit</a>
+            <form method="post" action="{{ url_for('admin_question_delete', question_id=q.id) }}" onsubmit="return confirm('Delete this question?')">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="danger">Delete</button>
+            </form></div></td>
         </tr>
         {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <div class="adm-empty">No past questions have been uploaded yet.</div>
-    {% endif %}
-  </div>
+      </tbody></table></div>
+      {% else %}<div class="empty">No questions yet. Add a question or import a JSON file after setting up a course.</div>{% endif %}
+    </section>
+  {% elif tab == 'results' %}
+    <div class="section-head"><div><h1>Exam results</h1><p class="subtitle" style="margin-bottom:0">Each submitted exam attempt is a separate result. Repeat attempts are not combined.</p></div>
+      <input class="search" id="results-search" placeholder="Search name, email or course…" oninput="filterRows('results-search','result-row')"></div>
+    <section class="panel">
+      <div class="section-head"><h2>{{ attempts|length }} individual result{% if attempts|length != 1 %}s{% endif %}</h2></div>
+      {% if attempts %}
+      <div class="table-wrap"><table><thead><tr><th>Student</th><th>Gmail</th><th>Course</th><th>Score</th><th>Percentage</th><th>Date</th><th>Attempt</th></tr></thead><tbody>
+        {% for result in attempts %}
+        <tr class="result-row" data-search="{{ (result.full_name ~ ' ' ~ (result.email or '') ~ ' ' ~ result.courses)|lower }}">
+          <td>{{ result.full_name }}</td><td>{{ result.email or '—' }}</td><td>{{ result.courses }}</td>
+          <td>{{ result.total_score|int if result.total_score is not none else 0 }} / {{ result.total_questions or 0 }}</td>
+          <td>{{ "%.1f"|format(result.percentage or 0) }}%</td><td>{{ result.exam_date }}</td><td>#{{ result.id }}</td>
+        </tr>
+        {% endfor %}
+      </tbody></table></div>
+      {% else %}<div class="empty">No completed exam attempts are recorded yet.</div>{% endif %}
+    </section>
+  {% elif tab == 'files' %}
+    <h1>Uploaded files</h1><p class="subtitle">Previously uploaded past-question documents.</p>
+    <section class="panel">
+      {% if files %}
+      <div class="table-wrap"><table><thead><tr><th>File</th><th>School</th><th>Level</th><th>Department</th><th>Course</th><th>Date</th><th>Actions</th></tr></thead><tbody>
+      {% for f in files %}<tr><td>{{ f.original_name }}</td><td>{{ f.school }}</td><td>{{ f.level }}</td><td>{{ f.department }}</td><td>{{ f.course }}</td><td>{{ f.upload_date[:10] if f.upload_date else '—' }}</td>
+        <td><div class="actions"><a class="button secondary" href="/past-questions/files/{{ f.filename }}" target="_blank" rel="noopener">View</a>
+          <form method="post" action="{{ url_for('admin_delete_file') }}" onsubmit="return confirm('Delete this file?')"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="file_id" value="{{ f._id }}"><input type="hidden" name="filename" value="{{ f.filename }}"><button class="danger">Delete</button></form></div></td></tr>{% endfor %}
+      </tbody></table></div>
+      {% else %}<div class="empty">No uploaded files are available.</div>{% endif %}
+    </section>
+  {% endif %}
 </main>
-
-<!-- Delete confirm modal -->
-<div class="adm-modal" id="del-modal">
-  <div class="adm-modal-card">
-    <h3>Delete File?</h3>
-    <p id="del-modal-name" style="word-break:break-all;"></p>
-    <p>This action cannot be undone.</p>
-    <form method="POST" action="{{ url_for('admin_delete_file') }}" id="del-form">
-      <input type="hidden" name="file_id" id="del-file-id">
-      <input type="hidden" name="filename" id="del-filename">
-      <div class="adm-modal-actions">
-        <button type="button" class="adm-modal-cancel" onclick="closeModal()">Cancel</button>
-        <button type="submit" class="adm-modal-confirm">Delete</button>
-      </div>
-    </form>
-  </div>
-</div>
-
 <script>
-function confirmDelete(btn) {
-  document.getElementById('del-file-id').value = btn.dataset.id;
-  document.getElementById('del-filename').value = btn.dataset.filename;
-  document.getElementById('del-modal-name').textContent = '"' + btn.dataset.name + '"';
-  document.getElementById('del-modal').classList.add('open');
-}
-function closeModal() {
-  document.getElementById('del-modal').classList.remove('open');
-}
-document.getElementById('del-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-
-function applyFilter() {
-  var school = document.getElementById('filter-school').value.toLowerCase();
-  var level  = document.getElementById('filter-level').value.toLowerCase();
-  var course = document.getElementById('filter-course').value.toLowerCase();
-  document.querySelectorAll('#files-table tbody tr').forEach(function(row) {
-    var show = row.dataset.school.includes(school) &&
-               row.dataset.level.includes(level) &&
-               row.dataset.course.includes(course);
-    row.style.display = show ? '' : 'none';
-  });
+function filterRows(inputId,rowClass){
+  const query=document.getElementById(inputId).value.toLowerCase();
+  document.querySelectorAll('.'+rowClass).forEach(row=>{row.hidden=!row.dataset.search.includes(query)});
 }
 </script>
 </body>

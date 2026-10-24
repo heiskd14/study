@@ -1,0 +1,1 @@
+- [Exam result separation](exam-result-separation.md) — keep each student's exam attempt as an individual result; never combine different students' scores.

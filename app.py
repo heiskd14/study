@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash, send_from_directory, Response, make_response
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash, send_from_directory, Response, make_response, abort
 from werkzeug.utils import secure_filename
 from functools import wraps
 import uuid
@@ -8,6 +8,9 @@ import json
 import random
 import time
 import os
+import re
+import hmac
+import copy
 import secrets
 import smtplib
 from email.mime.text import MIMEText
@@ -33,7 +36,7 @@ def get_ai_client():
     return _ai_client
 
 app = Flask(__name__)
-app.secret_key = 'tau-online-study-secret-key-2025'
+app.secret_key = os.environ.get('SESSION_SECRET') or secrets.token_hex(32)
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = '/tmp/flask_session'
 app.config['SESSION_PERMANENT'] = False
@@ -149,10 +152,13 @@ def init_db():
     c.execute('''CREATE TABLE IF NOT EXISTS students
                  (id SERIAL PRIMARY KEY,
                   name TEXT NOT NULL,
-                  regno TEXT NOT NULL UNIQUE)''')
+                  email TEXT UNIQUE,
+                  regno TEXT UNIQUE)''')
     c.execute('''CREATE TABLE IF NOT EXISTS exam_attempts
                  (id SERIAL PRIMARY KEY,
                   student_id INTEGER NOT NULL REFERENCES students(id),
+                  student_name TEXT,
+                  student_email TEXT,
                   exam_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                   total_score REAL,
                   total_questions INTEGER,
@@ -292,6 +298,80 @@ def load_questions(filename):
     with open(filename, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def load_database_questions(course_id):
+    conn = get_db()
+    rows = conn.execute(
+        'SELECT question, options, answer, explanation FROM admin_questions WHERE course_id = ? ORDER BY id',
+        (course_id,)
+    ).fetchall()
+    conn.close()
+    return [{
+        'Question': row['question'],
+        'Options': row['options'],
+        'Answer': row['answer'],
+        'Explanation': row['explanation'],
+    } for row in rows]
+
+def database_course_catalog():
+    conn = get_db()
+    rows = conn.execute('''
+        SELECT s.name AS school, l.name AS level, d.name AS department,
+               c.id AS course_id, c.name AS course
+        FROM admin_courses c
+        JOIN admin_departments d ON d.id = c.department_id
+        JOIN admin_schools s ON s.id = d.school_id
+        JOIN admin_levels l ON l.id = c.level_id AND l.school_id = s.id
+        ORDER BY s.name, l.sort_order, l.name, d.name, c.name
+    ''').fetchall()
+    conn.close()
+    return rows
+
+def exam_course_catalog():
+    courses = copy.deepcopy(UNIVERSITY_COURSES)
+    for row in database_course_catalog():
+        school = row['school']
+        department = row['department']
+        level = row['level']
+        courses.setdefault(school, {}).setdefault(department, {}).setdefault(level, [])
+        courses[school][department][level].append({
+            'name': row['course'],
+            'file': f"db:{row['course_id']}",
+        })
+    return courses
+
+def script_safe_json(value):
+    return (json.dumps(value)
+            .replace('&', '\\u0026')
+            .replace('<', '\\u003c')
+            .replace('>', '\\u003e'))
+
+def normalize_question_payload(item):
+    if not isinstance(item, dict):
+        raise ValueError('Each question must be a JSON object.')
+    question = str(item.get('Question', item.get('question', ''))).strip()
+    options = item.get('Options', item.get('options', []))
+    if isinstance(options, str):
+        options = [option.strip() for option in options.splitlines() if option.strip()]
+    if not isinstance(options, list):
+        raise ValueError('Question options must be a list or newline-separated text.')
+    options = [str(option).strip() for option in options if str(option).strip()]
+    answer = str(item.get('Answer', item.get('answer', ''))).strip()
+    explanation = str(item.get('Explanation', item.get('explanation', ''))).strip()
+    if not question:
+        raise ValueError('Every question needs question text.')
+    if len(options) < 2:
+        raise ValueError('Every question needs at least two answer options.')
+    if not answer:
+        raise ValueError('Every question needs a correct answer.')
+    if len(answer) == 1 and answer.upper() in 'ABCDE':
+        index = ord(answer.upper()) - ord('A')
+        if index < len(options):
+            answer = options[index]
+    matching = next((option for option in options if option.casefold() == answer.casefold()), None)
+    if matching is None:
+        raise ValueError('The correct answer must match one of the answer options or use its letter (A, B, C...).')
+    return question, options, matching, explanation
+
 def float_safe(val):
     try:
         return float(str(val).strip())
@@ -309,16 +389,16 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated
 
-ADMIN_CREDENTIALS = {
-    'okeyodekingdavid@gmail.com': '@King2024',
-    'calebodusolu@gmail.com': 'qFVj8nvsaZfTFa6@@'
-}
-
 def admin_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if not session.get('admin_logged_in'):
             return redirect(url_for('admin_login'))
+        if request.method in ('POST', 'PUT', 'PATCH', 'DELETE'):
+            expected = session.get('admin_csrf_token', '')
+            supplied = request.form.get('csrf_token', '') or request.headers.get('X-CSRF-Token', '')
+            if not expected or not hmac.compare_digest(expected, supplied):
+                abort(400)
         return f(*args, **kwargs)
     return decorated
 
@@ -504,9 +584,6 @@ def auth_sync():
             'full_name': user.get('name', ''),
             'email': email
         }
-        if email.lower() in ADMIN_CREDENTIALS:
-            session['admin_logged_in'] = True
-            session['admin_email'] = email.lower()
         return jsonify({'success': True})
     return jsonify({'success': False, 'message': 'No user data'}), 400
 
@@ -525,15 +602,17 @@ def subject_selection_home():
 def practice_register():
     session.pop('student_info', None)
     session['mode'] = 'practice'
-    return render_template('registration.html')
+    session['student_info'] = {'name': 'Practice session', 'email': ''}
+    return redirect(url_for('subject_selection'))
 
 @app.route('/register', methods=['POST'])
 def register():
     name = request.form.get('name', '').strip()
-    regno = request.form.get('regno', '').strip()
-    if not name or not regno:
-        return render_template('registration.html', error="Please enter both Name and Registration Number")
-    session['student_info'] = {'name': name, 'regno': regno}
+    email = request.form.get('email', '').strip().lower()
+    if not name or not email or not re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', email):
+        return render_template('registration.html', error="Please enter your full name and a valid email address.")
+    session['student_info'] = {'name': name, 'email': email}
+    session['mode'] = 'exam'
     return redirect(url_for('subject_selection'))
 
 # ── University Course Catalogue ─────────────────────────────────────────────────
@@ -946,27 +1025,52 @@ UNIVERSITY_COURSES = {
 
 @app.route('/subject_selection')
 def subject_selection():
-    if 'student_info' not in session:
+    if 'student_info' not in session and session.get('mode') != 'practice':
         return redirect(url_for('home'))
     return render_template('subject_selection.html',
-                           courses_json=json.dumps(UNIVERSITY_COURSES),
+                           courses_json=script_safe_json(exam_course_catalog()),
                            mode=session.get('mode', 'exam'))
 
 @app.route('/select_subjects', methods=['POST'])
 def select_subjects():
-    if 'student_info' not in session:
+    if 'student_info' not in session and session.get('mode') != 'practice':
         return redirect(url_for('home'))
+    if session.get('mode') == 'practice' and 'student_info' not in session:
+        session['student_info'] = {'name': 'Practice session', 'email': ''}
+    session.pop('exam_course_context', None)
 
     def _render_err(msg):
         return render_template('subject_selection.html',
-                               courses_json=json.dumps(UNIVERSITY_COURSES),
+                               courses_json=script_safe_json(exam_course_catalog()),
                                error=msg, mode=session.get('mode', 'exam'))
 
     course_name = request.form.get('course_name', '').strip()
     course_file = request.form.get('course_file', '').strip()
     if not course_name or not course_file:
         return _render_err('Please select a course to begin.')
-    if '..' in course_file or course_file.startswith('/'):
+    if course_file.startswith('db:'):
+        try:
+            course_id = int(course_file[3:])
+        except ValueError:
+            return _render_err('Invalid course selection.')
+        conn = get_db()
+        course = conn.execute(
+            'SELECT c.name, s.name AS school, l.name AS level, d.name AS department '
+            'FROM admin_courses c JOIN admin_departments d ON d.id = c.department_id '
+            'JOIN admin_schools s ON s.id = d.school_id '
+            'JOIN admin_levels l ON l.id = c.level_id WHERE c.id = ?',
+            (course_id,)
+        ).fetchone()
+        conn.close()
+        if not course:
+            return _render_err('That course is no longer available.')
+        course_name = course['name']
+        course_file = f'db:{course_id}'
+        session['exam_course_context'] = {
+            'school': course['school'], 'level': course['level'],
+            'department': course['department'], 'course': course['name'],
+        }
+    elif '..' in course_file or course_file.startswith('/'):
         return _render_err('Invalid course selection.')
 
     try:
@@ -983,10 +1087,12 @@ def select_subjects():
     except (ValueError, TypeError):
         time_limit_min = 60
 
-    if not os.path.exists(course_file):
-        return _render_err(f'Questions for "{course_name}" are not yet available. Please choose another course.')
-
-    qs = load_questions(course_file)
+    if course_file.startswith('db:'):
+        qs = load_database_questions(int(course_file[3:]))
+    else:
+        if not os.path.exists(course_file):
+            return _render_err(f'Questions for "{course_name}" are not yet available. Please choose another course.')
+        qs = load_questions(course_file)
     count = min(num_questions, len(qs))
     if count == 0:
         return _render_err(f'No questions found for "{course_name}". Please choose another course.')
@@ -1164,14 +1270,20 @@ def submit():
     # Only persist results for exam mode (not practice)
     if session.get('mode') != 'practice':
         name = session['student_info']['name']
-        regno = session['student_info']['regno']
+        email = session['student_info']['email']
         init_db()
         conn = get_db()
         c = conn.cursor()
-        c.execute('INSERT INTO students (name, regno) VALUES (%s, %s) ON CONFLICT (regno) DO NOTHING', (name, regno))
-        c.execute('SELECT id FROM students WHERE regno = %s', (regno,))
+        c.execute(
+            'INSERT INTO students (name, email) VALUES (%s, %s) '
+            'ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name RETURNING id',
+            (name, email)
+        )
         student_id = c.fetchone()[0]
-        c.execute('INSERT INTO exam_attempts (student_id) VALUES (%s) RETURNING id', (student_id,))
+        c.execute(
+            'INSERT INTO exam_attempts (student_id, student_name, student_email) VALUES (%s, %s, %s) RETURNING id',
+            (student_id, name, email)
+        )
         attempt_id = c.fetchone()[0]
         for subj, score, total, percent in [(r[0], r[1], r[2], r[3]) for r in results]:
             c.execute('INSERT INTO subject_scores (attempt_id, subject, score, total) VALUES (%s, %s, %s, %s)',
@@ -1181,10 +1293,10 @@ def submit():
         conn.commit()
         conn.close()
         db = get_mongo()
-        if db:
+        if db is not None:
             try:
                 db.exam_results.insert_one({
-                    'name': name, 'regno': regno,
+                    'name': name, 'email': email,
                     'results': [{'subject': s, 'score': sc, 'total': t, 'percent': p}
                                  for s, sc, t, p in results],
                     'total_score': total_score, 'total_questions': total_questions,
@@ -1252,8 +1364,8 @@ def my_results():
     init_db()
     conn = get_db()
     c = conn.cursor()
-    regno = session['student_info']['regno']
-    c.execute('SELECT id FROM students WHERE regno = ?', (regno,))
+    email = session['student_info']['email']
+    c.execute('SELECT id FROM students WHERE email = ?', (email,))
     student = c.fetchone()
     if not student:
         conn.close()
@@ -1551,13 +1663,17 @@ def admin_login():
         return redirect(url_for('admin_dashboard'))
     error = None
     if request.method == 'POST':
-        email = request.form.get('email', '').strip().lower()
+        username = request.form.get('username', '').strip()
         password = request.form.get('password', '')
-        if email in ADMIN_CREDENTIALS and ADMIN_CREDENTIALS[email] == password:
+        expected_username = os.environ.get('ADMIN_USERNAME', 'heiskd14')
+        expected_password = os.environ.get('ADMIN_PASSWORD', '')
+        if expected_password and hmac.compare_digest(username, expected_username) and hmac.compare_digest(password, expected_password):
+            session.clear()
             session['admin_logged_in'] = True
-            session['admin_email'] = email
+            session['admin_email'] = expected_username
+            session['admin_csrf_token'] = secrets.token_urlsafe(32)
             return redirect(url_for('admin_dashboard'))
-        error = 'Invalid email or password. Please try again.'
+        error = 'Invalid username or password. Please try again.'
     return render_template('admin_login.html', error=error)
 
 
@@ -1565,6 +1681,7 @@ def admin_login():
 def admin_logout():
     session.pop('admin_logged_in', None)
     session.pop('admin_email', None)
+    session.pop('admin_csrf_token', None)
     return redirect(url_for('admin_login'))
 
 
@@ -1581,11 +1698,255 @@ def admin_dashboard():
             f['_id'] = str(f['_id'])
         files = raw
         file_count = len(files)
-        user_count = db['users'].count_documents({})
-    return render_template('admin_dashboard.html',
-                           files=files, file_count=file_count,
-                           user_count=user_count,
-                           admin_email=session.get('admin_email', ''))
+    conn = get_db()
+    schools = conn.execute('SELECT id, name FROM admin_schools ORDER BY name').fetchall()
+    levels = conn.execute('''
+        SELECT l.id, l.name, l.sort_order, l.school_id, s.name AS school
+        FROM admin_levels l JOIN admin_schools s ON s.id = l.school_id
+        ORDER BY s.name, l.sort_order, l.name
+    ''').fetchall()
+    departments = conn.execute('''
+        SELECT d.id, d.name, d.school_id, s.name AS school
+        FROM admin_departments d JOIN admin_schools s ON s.id = d.school_id
+        ORDER BY s.name, d.name
+    ''').fetchall()
+    courses = conn.execute('''
+        SELECT c.id, c.name, c.department_id, c.level_id,
+               d.name AS department, s.name AS school, l.name AS level,
+               (SELECT COUNT(*) FROM admin_questions q WHERE q.course_id = c.id) AS question_count
+        FROM admin_courses c
+        JOIN admin_departments d ON d.id = c.department_id
+        JOIN admin_schools s ON s.id = d.school_id
+        JOIN admin_levels l ON l.id = c.level_id
+        ORDER BY s.name, l.sort_order, l.name, d.name, c.name
+    ''').fetchall()
+    questions = conn.execute('''
+        SELECT q.id, q.question, q.options, q.answer, q.explanation,
+               c.name AS course, l.name AS level, d.name AS department,
+               s.name AS school
+        FROM admin_questions q
+        JOIN admin_courses c ON c.id = q.course_id
+        JOIN admin_departments d ON d.id = c.department_id
+        JOIN admin_schools s ON s.id = d.school_id
+        JOIN admin_levels l ON l.id = c.level_id
+        ORDER BY q.updated_at DESC, q.id DESC
+    ''').fetchall()
+    attempts = conn.execute('''
+        SELECT ea.id, ea.exam_date,
+               COALESCE(ea.student_name, s.name) AS full_name,
+               COALESCE(ea.student_email, s.email) AS email,
+               ea.total_score, ea.total_questions, ea.percentage,
+               COALESCE(string_agg(DISTINCT ss.subject, ', ' ORDER BY ss.subject), '—') AS courses
+        FROM exam_attempts ea
+        JOIN students s ON s.id = ea.student_id
+        LEFT JOIN subject_scores ss ON ss.attempt_id = ea.id
+        GROUP BY ea.id, s.name, s.email
+        ORDER BY ea.exam_date DESC, ea.id DESC
+    ''').fetchall()
+    try:
+        count_row = conn.execute('SELECT COUNT(*) AS total FROM users').fetchone()
+        user_count = count_row['total'] if count_row else 0
+    except Exception:
+        user_count = 0
+    conn.close()
+    token = session.setdefault('admin_csrf_token', secrets.token_urlsafe(32))
+    tab = request.args.get('tab', 'overview')
+    if tab not in {'overview', 'catalog', 'questions', 'results', 'files'}:
+        tab = 'overview'
+    response = make_response(render_template(
+        'admin_dashboard.html',
+        files=files, file_count=file_count, user_count=user_count,
+        schools=schools, levels=levels, departments=departments,
+        courses=courses, questions=questions, attempts=attempts,
+        tab=tab, csrf_token=token,
+        admin_email=session.get('admin_email', '')
+    ))
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    return response
+
+@app.route('/admin/catalog', methods=['POST'])
+@admin_required
+def admin_catalog_add():
+    item_type = request.form.get('item_type', '').strip()
+    name = request.form.get('name', '').strip()
+    if not name or len(name) > 160:
+        flash('Enter a name of 1–160 characters.', 'error')
+        return redirect(url_for('admin_dashboard', tab='catalog'))
+    conn = get_db()
+    try:
+        if item_type == 'school':
+            conn.execute('INSERT INTO admin_schools (name) VALUES (?)', (name,))
+        elif item_type == 'level':
+            school_id = int(request.form.get('school_id', ''))
+            order_match = re.search(r'\d+', name)
+            sort_order = int(order_match.group()) if order_match else 0
+            conn.execute(
+                'INSERT INTO admin_levels (school_id, name, sort_order) VALUES (?, ?, ?)',
+                (school_id, name, sort_order)
+            )
+        elif item_type == 'department':
+            school_id = int(request.form.get('school_id', ''))
+            conn.execute('INSERT INTO admin_departments (school_id, name) VALUES (?, ?)', (school_id, name))
+        elif item_type == 'course':
+            department_id = int(request.form.get('department_id', ''))
+            level_id = int(request.form.get('level_id', ''))
+            valid = conn.execute(
+                'SELECT 1 FROM admin_departments d JOIN admin_levels l ON l.school_id = d.school_id '
+                'WHERE d.id = ? AND l.id = ?',
+                (department_id, level_id)
+            ).fetchone()
+            if not valid:
+                raise ValueError('Choose a department and level from the same school.')
+            conn.execute(
+                'INSERT INTO admin_courses (department_id, level_id, name) VALUES (?, ?, ?)',
+                (department_id, level_id, name)
+            )
+        else:
+            raise ValueError('Choose a valid catalogue item type.')
+        conn.commit()
+        flash(f'{item_type.title()} added.', 'success')
+    except (ValueError, TypeError):
+        flash('Please choose valid school, level and department options.', 'error')
+    except psycopg2.IntegrityError:
+        flash('That item already exists in this school or department.', 'error')
+    finally:
+        conn.close()
+    return redirect(url_for('admin_dashboard', tab='catalog'))
+
+def _question_form_values(form):
+    options = [option.strip() for option in form.get('options', '').splitlines() if option.strip()]
+    payload = {
+        'Question': form.get('question', ''),
+        'Options': options,
+        'Answer': form.get('answer', ''),
+        'Explanation': form.get('explanation', ''),
+    }
+    return normalize_question_payload(payload)
+
+@app.route('/admin/questions/new', methods=['GET', 'POST'])
+@admin_required
+def admin_question_new():
+    conn = get_db()
+    courses = conn.execute('''
+        SELECT c.id, c.name, s.name AS school, l.name AS level, d.name AS department
+        FROM admin_courses c JOIN admin_departments d ON d.id = c.department_id
+        JOIN admin_schools s ON s.id = d.school_id
+        JOIN admin_levels l ON l.id = c.level_id
+        ORDER BY s.name, l.sort_order, l.name, d.name, c.name
+    ''').fetchall()
+    conn.close()
+    selected_course = request.values.get('course_id', '')
+    if request.method == 'POST':
+        try:
+            course_id = int(request.form.get('course_id', ''))
+            question, options, answer, explanation = _question_form_values(request.form)
+            conn = get_db()
+            exists = conn.execute('SELECT 1 FROM admin_courses WHERE id = ?', (course_id,)).fetchone()
+            if not exists:
+                conn.close()
+                raise ValueError('Choose a valid course.')
+            conn.execute(
+                'INSERT INTO admin_questions (course_id, question, options, answer, explanation) '
+                'VALUES (?, ?, ?::jsonb, ?, ?)',
+                (course_id, question, json.dumps(options), answer, explanation)
+            )
+            conn.commit()
+            conn.close()
+            flash('Question added to the database.', 'success')
+            return redirect(url_for('admin_dashboard', tab='questions'))
+        except (ValueError, TypeError) as error:
+            flash(str(error) or 'Check the question details and try again.', 'error')
+        except Exception as error:
+            flash(f'Could not save question: {error}', 'error')
+    return render_template(
+        'admin_question_form.html', question=None, courses=courses,
+        selected_course=selected_course, csrf_token=session.get('admin_csrf_token', '')
+    )
+
+@app.route('/admin/questions/<int:question_id>/edit', methods=['GET', 'POST'])
+@admin_required
+def admin_question_edit(question_id):
+    conn = get_db()
+    question = conn.execute('SELECT * FROM admin_questions WHERE id = ?', (question_id,)).fetchone()
+    courses = conn.execute('''
+        SELECT c.id, c.name, s.name AS school, l.name AS level, d.name AS department
+        FROM admin_courses c JOIN admin_departments d ON d.id = c.department_id
+        JOIN admin_schools s ON s.id = d.school_id
+        JOIN admin_levels l ON l.id = c.level_id
+        ORDER BY s.name, l.sort_order, l.name, d.name, c.name
+    ''').fetchall()
+    conn.close()
+    if not question:
+        flash('Question not found.', 'error')
+        return redirect(url_for('admin_dashboard', tab='questions'))
+    if request.method == 'POST':
+        try:
+            course_id = int(request.form.get('course_id', ''))
+            text, options, answer, explanation = _question_form_values(request.form)
+            conn = get_db()
+            conn.execute(
+                'UPDATE admin_questions SET course_id = ?, question = ?, options = ?::jsonb, '
+                'answer = ?, explanation = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+                (course_id, text, json.dumps(options), answer, explanation, question_id)
+            )
+            conn.commit()
+            conn.close()
+            flash('Question updated.', 'success')
+            return redirect(url_for('admin_dashboard', tab='questions'))
+        except (ValueError, TypeError):
+            flash('Check the question, answer options and course, then try again.', 'error')
+        except Exception as error:
+            flash(f'Could not update question: {error}', 'error')
+    return render_template(
+        'admin_question_form.html', question=question, courses=courses,
+        selected_course=request.form.get('course_id', question['course_id']),
+        csrf_token=session.get('admin_csrf_token', '')
+    )
+
+@app.route('/admin/questions/import', methods=['POST'])
+@admin_required
+def admin_question_import():
+    upload = request.files.get('questions_file')
+    try:
+        course_id = int(request.form.get('course_id', ''))
+        if not upload or not upload.filename or not upload.filename.lower().endswith('.json'):
+            raise ValueError('Choose a .json question file.')
+        payload = json.load(upload.stream)
+        items = payload.get('questions') if isinstance(payload, dict) else payload
+        if not isinstance(items, list) or not items:
+            raise ValueError('The JSON must contain a non-empty question list.')
+        if len(items) > 1000:
+            raise ValueError('Import is limited to 1,000 questions at a time.')
+        normalized = [normalize_question_payload(item) for item in items]
+        conn = get_db()
+        if not conn.execute('SELECT 1 FROM admin_courses WHERE id = ?', (course_id,)).fetchone():
+            conn.close()
+            raise ValueError('Choose a valid course.')
+        for text, options, answer, explanation in normalized:
+            conn.execute(
+                'INSERT INTO admin_questions (course_id, question, options, answer, explanation) '
+                'VALUES (?, ?, ?::jsonb, ?, ?)',
+                (course_id, text, json.dumps(options), answer, explanation)
+            )
+        conn.commit()
+        conn.close()
+        flash(f'{len(normalized)} questions added to the database.', 'success')
+    except (ValueError, TypeError, json.JSONDecodeError) as error:
+        flash(str(error) or 'The question file is not valid JSON.', 'error')
+    except Exception as error:
+        flash(f'Import failed: {error}', 'error')
+    return redirect(url_for('admin_dashboard', tab='questions'))
+
+@app.route('/admin/questions/<int:question_id>/delete', methods=['POST'])
+@admin_required
+def admin_question_delete(question_id):
+    conn = get_db()
+    conn.execute('DELETE FROM admin_questions WHERE id = ?', (question_id,))
+    conn.commit()
+    conn.close()
+    flash('Question deleted.', 'success')
+    return redirect(url_for('admin_dashboard', tab='questions'))
 
 
 @app.route('/admin/delete-file', methods=['POST'])

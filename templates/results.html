@@ -10,7 +10,7 @@
 
 <div class="results-body">
     <h2 class="results-title">{% if mode == 'practice' %}Practice Results{% else %}Examination Results{% endif %}</h2>
-    <p class="student-name">{{ student_info.name }} &nbsp;·&nbsp; {{ student_info.regno }}</p>
+    <p class="student-name">{{ student_info.name }}{% if mode != 'practice' %} &nbsp;·&nbsp; {{ student_info.email }}{% endif %}</p>
 
     <div class="results-list">
         {% for subject, score, total, percent in results %}
@@ -24,7 +24,7 @@
 
     <div class="results-actions">
         {% if mode == 'practice' %}
-        <a href="{{ url_for('practice_register') }}" class="btn btn-primary">Back to Registration</a>
+        <a href="{{ url_for('subject_selection_home') }}" class="btn btn-primary">Back to Practice</a>
         {% else %}
         <a href="{{ url_for('correction', subject=results[0][0] if results else 'Use of English') }}" class="btn btn-secondary">View Correction</a>
         <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
